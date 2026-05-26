@@ -7,8 +7,7 @@ export default function ActivityList({ activities }) {
       {activities.map((activity) => (
         <li key={activity._id}>
           <ActivityCard
-            // for later instead of placeholder
-            // src={activity.imageUrl}
+            image={activity.imageUrl}
             title={activity.title}
             categories={activity.categories}
             id={activity._id}
@@ -22,7 +21,10 @@ export default function ActivityList({ activities }) {
 const StyledActivityList = styled.ul`
   list-style: none;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
   padding: 0;
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `;

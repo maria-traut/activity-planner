@@ -1,44 +1,55 @@
 import Image from "next/image";
+import Link from "next/link";
 import styled from "styled-components";
 
-export default function ActivityCard({ title, categories }) {
+export default function ActivityCard({ title, categories, image, id }) {
   return (
-    <StyledFigure>
-      <StyledImageWrapper>
-        <Image
-          src="/placeholder.jpg"
-          alt={title}
-          fill
-          // sizes for better image component performance, from next.js/docs
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          style={{ objectFit: "cover" }}
-          priority
-        />
-      </StyledImageWrapper>
-      <StyledFigcaption>
-        <h2>{title}</h2>
-        <StyledCategoryList>
-          {categories.map((category) => (
-            <StyledCategoryTag key={category._id}>
-              {category.name}
-            </StyledCategoryTag>
-          ))}
-        </StyledCategoryList>
-      </StyledFigcaption>
-    </StyledFigure>
+    <StyledLink href={`/${id}`}>
+      <StyledFigure>
+        <StyledImageWrapper>
+          <Image
+            src={image ? image : "/placeholder.jpg"}
+            alt={title}
+            fill
+            // sizes for better image component performance, from next.js/docs
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            style={{ objectFit: "cover" }}
+            priority
+          />
+        </StyledImageWrapper>
+        <StyledFigcaption>
+          <StyledActivityHeadline>{title}</StyledActivityHeadline>
+          <StyledCategoryList>
+            {categories.map((category) => (
+              <StyledCategoryTag key={category._id}>
+                {category.name}
+              </StyledCategoryTag>
+            ))}
+          </StyledCategoryList>
+        </StyledFigcaption>
+      </StyledFigure>
+    </StyledLink>
   );
 }
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+
+  &:visited {
+    color: inherit;
+  }
+`;
+
 const StyledFigure = styled.figure`
-  border-radius: 8px;
+  border-radius: 5px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
-  width: 400px;
+  width: 250px;
 `;
 
 const StyledImageWrapper = styled.div`
   position: relative;
-  width: 100 %;
+  width: 100%;
   aspect-ratio: 16 / 9;
 `;
 
@@ -51,12 +62,19 @@ const StyledFigcaption = styled.figcaption`
   padding: 1rem;
 `;
 
+const StyledActivityHeadline = styled.h2`
+  font-size: 1.25rem;
+  line-height: 1.3;
+  text-align: center;
+`;
+
 const StyledCategoryList = styled.ul`
   list-style: none;
   display: flex;
   justify-content: center;
   gap: 8px;
   padding: 0;
+  flex-wrap: wrap;
 `;
 
 const StyledCategoryTag = styled.li`
