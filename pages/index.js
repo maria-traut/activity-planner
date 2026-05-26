@@ -1,4 +1,5 @@
 import useSWR from "swr";
+import ActivityList from "@/components/ActivityList";
 
 export default function HomePage() {
   const { data, isLoading, error } = useSWR("/api/activities");
@@ -22,6 +23,7 @@ export default function HomePage() {
   return (
     <div>
       <h1>Activity Planner</h1>
+      <ActivityList activities={data} />
     </div>
   );
 }
