@@ -25,7 +25,6 @@ export default function ActivityList() {
       <div>
         <h1>Activity Planner</h1>
         <p>
-          {" "}
           Sorry, we could not retrieve the latest activities at the moment.
           Please try again later.
         </p>
@@ -38,7 +37,7 @@ export default function ActivityList() {
         {data.map((activity) => (
           <li key={activity._id}>
             <ActivityCard
-              src="/placeholder.jpg"
+              image="/placeholder.jpg"
               title={activity.title}
               categories={activity.categories}
               id={activity._id}
