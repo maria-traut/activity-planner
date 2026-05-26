@@ -7,7 +7,7 @@ export default async function handler(request, response) {
   try {
     const { id } = request.query;
     if (request.method === "GET") {
-      const activity = await Activity.findById(id);
+      const activity = await Activity.findById(id).populate("categories");
       if (!activity) {
         return response.status(404).json({ status: "Activity not found" });
       }
