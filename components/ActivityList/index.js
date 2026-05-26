@@ -1,18 +1,28 @@
 import ActivityCard from "components/ActivityCard";
+import styled from "styled-components";
 
 export default function ActivityList({ activities }) {
   return (
-    <ul>
+    <StyledActivityList>
       {activities.map((activity) => (
         <li key={activity._id}>
           <ActivityCard
-            image={activity.imageUrl}
+            // for later instead of placeholder
+            // src={activity.imageUrl}
             title={activity.title}
             categories={activity.categories}
             id={activity._id}
           />
         </li>
       ))}
-    </ul>
+    </StyledActivityList>
   );
 }
+
+const StyledActivityList = styled.ul`
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 0;
+`;
