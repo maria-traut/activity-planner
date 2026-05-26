@@ -11,19 +11,11 @@ export default function HomePage() {
       </div>
     );
 
-  if (error)
+  if (!data || error)
     return (
       <div>
         <h1>Activity Planner</h1>
-        <p>An error occured while fetching data.</p>
-      </div>
-    );
-
-  if (!data)
-    return (
-      <div>
-        <h1>Activity Planner</h1>
-        <p>There is no activities yet.</p>
+        <p>An error occured while fetching the activities.</p>
       </div>
     );
 
