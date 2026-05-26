@@ -1,27 +1,31 @@
 import useSWR from "swr";
+import ActivityForm from "@/components/ActivityForm";
 
 export default function HomePage() {
   const { data, isLoading, error } = useSWR("/api/activities");
 
-  if (isLoading)
+  if (isLoading) {
     return (
       <div>
         <h1>Activity Planner</h1>
         <p>Loading activities...</p>
       </div>
     );
+  }
 
-  if (!data || error)
+  if (!data || error) {
     return (
       <div>
         <h1>Activity Planner</h1>
         <p>An error occured while fetching the activities.</p>
       </div>
     );
+  }
 
   return (
     <div>
       <h1>Activity Planner</h1>
+      <ActivityForm data={data} />
       {console.log(data)}
     </div>
   );
