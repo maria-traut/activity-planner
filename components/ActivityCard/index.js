@@ -1,13 +1,20 @@
 import Image from "next/image";
-import Link from "next/link";
 import styled from "styled-components";
 
-export default function ActivityCard({ image, title, categories, id }) {
+export default function ActivityCard({ title, categories }) {
   return (
     <StyledFigure>
-      <Link href={`/activities/${id}`}>
-        <Image src={image} alt={title} width={500} height={500} />
-      </Link>
+      <StyledImageWrapper>
+        <Image
+          src="/placeholder.jpg"
+          alt={title}
+          fill
+          // sizes for better image component performance, from next.js/docs
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          style={{ objectFit: "cover" }}
+          priority
+        />
+      </StyledImageWrapper>
       <StyledFigcaption>
         <h2>{title}</h2>
         <StyledCategoryList>
@@ -26,20 +33,30 @@ const StyledFigure = styled.figure`
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  width: 500px;
+  width: 400px;
+`;
+
+const StyledImageWrapper = styled.div`
+  position: relative;
+  width: 100 %;
+  aspect-ratio: 16 / 9;
 `;
 
 const StyledFigcaption = styled.figcaption`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  gap: 0.5rem;
   padding: 1rem;
 `;
 
 const StyledCategoryList = styled.ul`
   list-style: none;
   display: flex;
+  justify-content: center;
   gap: 8px;
+  padding: 0;
 `;
 
 const StyledCategoryTag = styled.li`
