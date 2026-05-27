@@ -28,7 +28,7 @@ export default function ActivityInfo({ activity }) {
   );
 }
 
-const StyledActivityInfoContainer = styled.div`
+const StyledActivityInfoContainer = styled.section`
   max-width: 600px;
   display: flex;
   flex-direction: column;
@@ -38,7 +38,7 @@ const StyledActivityInfoContainer = styled.div`
 
 const StyledImageContainer = styled.div`
   position: relative;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 `;
 
 const StyledLocations = styled.ul`
@@ -70,7 +70,7 @@ const StyledCategories = styled.ul`
   display: flex;
   gap: 0.5rem;
 
-  margin-top: 20px;
+  margin-top: 2rem;
 
   li {
     text-align: center;

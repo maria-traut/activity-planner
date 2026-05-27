@@ -22,7 +22,6 @@ export default function HomePage() {
   return (
     <div>
       <h1>Activity Planner</h1>
-      {console.log(data)}
     </div>
   );
 }
