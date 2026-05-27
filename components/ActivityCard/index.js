@@ -13,7 +13,7 @@ export default function ActivityCard({ title, categories, image, id }) {
             fill
             // sizes for better image component performance, from next.js/docs
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            style={{ objectFit: "cover" }}
+            objectFit:"cover"
             priority
           />
         </StyledImageWrapper>
