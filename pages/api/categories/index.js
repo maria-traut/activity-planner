@@ -6,7 +6,7 @@ export default async function handler(request, response) {
 
   try {
     if (request.method === "GET") {
-      const category = await Category.find();
+      const category = await Category.find().sort({ name: 1 });
 
       return response.status(200).json(category);
     }
