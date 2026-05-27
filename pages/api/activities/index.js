@@ -6,7 +6,7 @@ export default async function handler(request, response) {
 
   try {
     if (request.method === "GET") {
-      const activities = await Activity.find();
+      const activities = await Activity.find().populate("categories");
 
       return response.status(200).json(activities);
     }
