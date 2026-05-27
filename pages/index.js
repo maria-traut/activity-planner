@@ -3,7 +3,7 @@ import ActivityForm from "@/components/ActivityForm";
 import { useState, useEffect } from "react";
 
 export default function HomePage() {
-  const { data, isLoading, error, mutate } = useSWR("/api/activities");
+  const { data: activities, isLoading, error, mutate } = useSWR("/api/activities");
   const [activityFormStatus, setActivityFormStatus] = useState({
     type: "",
     message: "",
@@ -63,7 +63,7 @@ export default function HomePage() {
     );
   }
 
-  if (!data || error) {
+  if (!activities || error) {
     return (
       <div>
         <h1>Activity Planner</h1>
