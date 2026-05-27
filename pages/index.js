@@ -1,6 +1,8 @@
 import useSWR from "swr";
-import ActivityForm from "@/components/ActivityForm";
+import styled from "styled-components";
 import { useState, useEffect } from "react";
+import ActivityForm from "@/components/ActivityForm";
+import ActivityList from "@/components/ActivityList";
 
 export default function HomePage() {
   const { data: activities, isLoading, error, mutate } = useSWR("/api/activities");
@@ -57,7 +59,7 @@ export default function HomePage() {
   if (isLoading) {
     return (
       <div>
-        <h1>Activity Planner</h1>
+        <StyledHeading>Activity Planner</StyledHeading>
         <p>Loading activities...</p>
       </div>
     );
@@ -66,7 +68,7 @@ export default function HomePage() {
   if (!activities || error) {
     return (
       <div>
-        <h1>Activity Planner</h1>
+        <StyledHeading>Activity Planner</StyledHeading>
         <p>An error occured while fetching the activities.</p>
       </div>
     );
@@ -74,11 +76,19 @@ export default function HomePage() {
 
   return (
     <div>
-      <h1>Activity Planner</h1>
+      <StyledHeading>Activity Planner</StyledHeading>
       <ActivityForm
         onSubmit={handleActivityCreate}
         status={activityFormStatus}
       />
+      <ActivityList activities={activities} />
     </div>
   );
 }
+
+const StyledHeading = styled.h1`
+  font-size: 1.75rem;
+  line-height: 1.5;
+  text-align: center;
+  width: 100%;
+`;
