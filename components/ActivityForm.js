@@ -1,7 +1,8 @@
 import useSWR from "swr";
+import styled, { keyframes } from "styled-components";
 import { countries } from "@/lib/countries";
 
-export default function ActivityForm() {
+export default function ActivityForm({ onSubmit, status }) {
   const { data, isLoading, error } = useSWR("/api/categories");
 
   if (isLoading) {
@@ -20,67 +21,153 @@ export default function ActivityForm() {
       <form>
         <fieldset>
           <legend>Add Activity</legend>
-          <p>An error occured while fetching the activities.</p>
+          <p>An error occured while fetching categories.</p>
         </fieldset>
       </form>
     );
   }
 
-  console.log(data);
-
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <fieldset>
         <legend>Add Activity</legend>
-        <section>
-          <label htmlFor="title">
-            Title<span aria-hidden>*</span>
-          </label>
-          <br />
-          <input type="text" id="title" name="title" required />
-        </section>
-        <section>
-          <label htmlFor="description">Description</label>
-          <br />
-          <textarea id="description" name="description"></textarea>
-        </section>
-        <section>
-          <label htmlFor="categories">
-            Categories<span aria-hidden>*</span>
-          </label>
-          <br />
-          <select id="categories" name="categories" multiple required>
-            <option value="" disabled>
-              Please select at least one category
-            </option>
-            {data.map((category) => (
-              <option key={category._id} value={category._id}>
-                {category.name}
+        <FormFlex>
+          <FormSection>
+            <label htmlFor="title">
+              Title<span aria-hidden>*</span>
+            </label>
+            <input type="text" id="title" name="title" required />
+          </FormSection>
+          <FormSection>
+            <label htmlFor="description">Description</label>
+            <textarea id="description" name="description"></textarea>
+          </FormSection>
+          <FormSection>
+            <label htmlFor="categories">
+              Categories<span aria-hidden>*</span>
+            </label>
+            <select
+              id="categories"
+              name="categories"
+              multiple
+              required
+              size="5"
+            >
+              <option value="" disabled>
+                Please select at least one category
               </option>
-            ))}
-          </select>
-        </section>
-        <section>
-          <label htmlFor="country">Country</label>
-          <br />
-          <select id="country" name="country">
-            <option value="">Please select a country</option>
-            {countries.map((country) => (
-              <option key={country.code} value={country.code}>
-                {country.name}
-              </option>
-            ))}
-          </select>
-        </section>
-        <section>
-          <label htmlFor="area">Area</label>
-          <br />
-          <input type="text" id="area" name="area" />
-        </section>
-        <section>
-          <button type="submit">Submit</button>
-        </section>
+              {data.map((category) => (
+                <option key={category._id} value={category._id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          </FormSection>
+          <FormSection>
+            <label htmlFor="country">Country</label>
+            <select id="country" name="country">
+              <option value="">Please select a country</option>
+              {countries.map((country) => (
+                <option key={country.code} value={country.code}>
+                  {country.name}
+                </option>
+              ))}
+            </select>
+          </FormSection>
+          <FormSection>
+            <label htmlFor="area">Area</label>
+            <input type="text" id="area" name="area" />
+          </FormSection>
+          <FormButtonWrap>
+            <FormButton type="submit">Submit</FormButton>
+            {status.type === "error" && <FormError>Error</FormError>}
+            {status.type === "success" && <FormSuccess>Success!</FormSuccess>}
+          </FormButtonWrap>
+          {status.type !== "" && (
+            <FormSection>
+              {status.type === "error" && (
+                <TextError>{status.message}</TextError>
+              )}
+              {status.type === "success" && (
+                <TextSuccess>{status.message}</TextSuccess>
+              )}
+            </FormSection>
+          )}
+        </FormFlex>
       </fieldset>
     </form>
   );
 }
+
+const FormButton = styled.button`
+  all: unset;
+  border-radius: 10px;
+  border: 1px solid black;
+  background: white;
+  padding: 0.5em 1em;
+`;
+
+const fadeOut = keyframes`
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    display:none;
+  }
+`;
+
+const FormStatus = styled.div`
+  all: unset;
+  border-radius: 10px;
+  color: black;
+  border: 1px solid black;
+  background: white;
+  padding: 0.5em 1em;
+`;
+
+const FormError = styled(FormStatus)`
+  border-color: red;
+  color: red;
+`;
+
+const FormSuccess = styled(FormStatus)`
+  border-color: green;
+  color: green;
+
+  opacity: 1;
+  animation: ${fadeOut} 1s ease forwards;
+  animation-delay: 2s;
+`;
+
+const TextError = styled.p`
+  color: red;
+`;
+
+const TextSuccess = styled.p`
+  color: green;
+
+  opacity: 1;
+  animation: ${fadeOut} 1s ease forwards;
+  animation-delay: 2s;
+`;
+
+const FormSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+`;
+
+const FormButtonWrap = styled.section`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5em;
+`;
+
+const FormFlex = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+`;
