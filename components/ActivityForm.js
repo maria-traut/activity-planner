@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 import { countries } from "@/lib/countries";
 
 export default function ActivityForm({ onSubmit, status }) {
-  const { data, isLoading, error } = useSWR("/api/categories");
+  const { data: categories, isLoading, error } = useSWR("/api/categories");
 
   if (isLoading) {
     return (
@@ -16,7 +16,7 @@ export default function ActivityForm({ onSubmit, status }) {
     );
   }
 
-  if (!data || error) {
+  if (!categories || error) {
     return (
       <form>
         <fieldset>
@@ -56,7 +56,7 @@ export default function ActivityForm({ onSubmit, status }) {
               <option value="" disabled>
                 Please select at least one category
               </option>
-              {data.map((category) => (
+              {categories.map((category) => (
                 <option key={category._id} value={category._id}>
                   {category.name}
                 </option>
