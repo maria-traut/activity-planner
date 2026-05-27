@@ -3,9 +3,9 @@ import Activity from "@/db/models/Activity";
 
 export default async function handler(request, response) {
   await dbConnect();
+  const { id } = request.query;
 
   try {
-    const { id } = request.query;
     if (request.method === "GET") {
       const activity = await Activity.findById(id).populate("categories");
       if (!activity) {
