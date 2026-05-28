@@ -17,7 +17,7 @@ export default function HomePage() {
   });
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const successMessageTimer = setTimeout(() => {
       if (activityFormStatus.type === "success") {
         setActivityFormStatus({
           type: "",
@@ -26,7 +26,7 @@ export default function HomePage() {
       }
     }, 3000);
 
-    return () => clearTimeout(timer);
+    return () => clearTimeout(successMessageTimer);
   }, [activityFormStatus]);
 
   async function handleActivityCreate(event) {

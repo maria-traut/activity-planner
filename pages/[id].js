@@ -46,7 +46,6 @@ export default function ActivityDetails() {
       ...Object.fromEntries(formData),
       categories: formData.getAll("categories"),
     };
-    console.log("handleActivityEdit", formData, activityData);
 
     const response = await fetch(`/api/activities/${id}`, {
       method: "PUT",
