@@ -151,7 +151,7 @@ const fadeOut = keyframes`
   }
 `;
 
-const FormStatus = styled.div`
+export const FormStatus = styled.div`
   all: unset;
   border-radius: 10px;
   color: black;
@@ -160,13 +160,13 @@ const FormStatus = styled.div`
   padding: 0.5em 1em;
 `;
 
-const FormError = styled(FormStatus)`
-  border-color: red;
+export const FormError = styled(FormStatus)`
+  border-color: transparent;
   color: red;
 `;
 
-const FormSuccess = styled(FormStatus)`
-  border-color: green;
+export const FormSuccess = styled(FormStatus)`
+  border-color: transparent;
   color: green;
 
   opacity: 1;
@@ -174,11 +174,11 @@ const FormSuccess = styled(FormStatus)`
   animation-delay: 2s;
 `;
 
-const TextError = styled.p`
+export const TextError = styled.p`
   color: red;
 `;
 
-const TextSuccess = styled.p`
+export const TextSuccess = styled.p`
   color: green;
 
   opacity: 1;
@@ -186,7 +186,7 @@ const TextSuccess = styled.p`
   animation-delay: 2s;
 `;
 
-const FormSection = styled.section`
+export const FormSection = styled.section`
   display: flex;
   flex-direction: column;
   gap: 0.5em;
@@ -196,6 +196,7 @@ export const FormButtonWrap = styled.section`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  align-items: center;
   gap: 0.5em;
 `;
 
