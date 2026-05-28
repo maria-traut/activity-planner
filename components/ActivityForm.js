@@ -107,6 +107,7 @@ export default function ActivityForm({ onSubmit, status, heading, ...props }) {
             <FormButton type="submit">Submit</FormButton>
             {isEditActivityMode && (
               <FormButton
+                type="button"
                 onClick={() => setIsEditActivityMode(!isEditActivityMode)}
               >
                 Cancel
