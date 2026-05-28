@@ -11,8 +11,13 @@ export default function ActivityDetails() {
   const router = useRouter();
   const { id } = router.query;
 
-  const { data: activity, isLoading, error } = useSWR(`/api/activities/${id}`);
-  const [isEditFormVisible, setIsEditFormVisible] = useState(false);
+  const {
+    data: activity,
+    isLoading,
+    error,
+    mutate,
+  } = useSWR(`/api/activities/${id}`);
+  const [isEditActivityMode, setIsEditActivityMode] = useState(false);
   const [activityFormStatus, setActivityFormStatus] = useState({
     type: "",
     message: "",
@@ -40,6 +45,20 @@ export default function ActivityDetails() {
       categories: formData.getAll("categories"),
     };
     console.log("handleActivityEdit", formData, activityData);
+
+    const response = await fetch(`/api/activities/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(activityData),
+    });
+
+    if (response.ok) {
+      mutate();
+      setIsEditActivityMode(!isEditActivityMode);
+    }
+
     /*
 
     const response = await fetch(`/api/activities`, {
@@ -87,16 +106,20 @@ export default function ActivityDetails() {
     <div>
       <BackButton />
       <FormButtonWrap>
-        <Button onClick={() => setIsEditFormVisible(!isEditFormVisible)}>
-          Edit
-        </Button>
+        {!isEditActivityMode && (
+          <Button onClick={() => setIsEditActivityMode(!isEditActivityMode)}>
+            Edit
+          </Button>
+        )}
       </FormButtonWrap>
-      {isEditFormVisible && (
+      {isEditActivityMode && (
         <ActivityForm
           activity={activity}
           onSubmit={handleActivityEdit}
           status={activityFormStatus}
           heading="Edit Activity"
+          setIsEditActivityMode={setIsEditActivityMode}
+          isEditActivityMode={isEditActivityMode}
         />
       )}
       <ActivityInfo activity={activity} />

@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 import { countries } from "@/lib/countries";
 
 export default function ActivityForm({ onSubmit, status, heading, ...props }) {
-  const { activity } = props;
+  const { activity, setIsEditActivityMode, isEditActivityMode } = props;
   console.log("props", activity);
   const { data: categories, isLoading, error } = useSWR("/api/categories");
 
@@ -109,6 +109,13 @@ export default function ActivityForm({ onSubmit, status, heading, ...props }) {
           </FormSection>
           <FormButtonWrap>
             <FormButton type="submit">Submit</FormButton>
+            {isEditActivityMode && (
+              <FormButton
+                onClick={() => setIsEditActivityMode(!isEditActivityMode)}
+              >
+                Cancel
+              </FormButton>
+            )}
             {status.type === "error" && <FormError>Error</FormError>}
             {status.type === "success" && <FormSuccess>Success!</FormSuccess>}
           </FormButtonWrap>
