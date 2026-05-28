@@ -1,13 +1,73 @@
 import useSWR from "swr";
 import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
+import styled from "styled-components";
 import BackButton from "@/components/BackButton";
 import ActivityInfo from "@/components/ActivityInfo";
+import { FormButtonWrap } from "@/components/ActivityForm";
+import ActivityForm from "@/components/ActivityForm";
 
 export default function ActivityDetails() {
   const router = useRouter();
   const { id } = router.query;
 
-  const { data: activity, isLoading, error } = useSWR(`/api/activities/${id}`);
+  const {
+    data: activity,
+    isLoading,
+    error,
+    mutate,
+  } = useSWR(`/api/activities/${id}`);
+
+  const [isEditActivityMode, setIsEditActivityMode] = useState(false);
+  const [activityFormStatus, setActivityFormStatus] = useState({
+    type: "",
+    message: "",
+  });
+
+  useEffect(() => {
+    const successMessageTimer = setTimeout(() => {
+      if (activityFormStatus.type === "success") {
+        setActivityFormStatus({
+          type: "",
+          message: "",
+        });
+        setIsEditActivityMode(false);
+      }
+    }, 3000);
+
+    return () => clearTimeout(successMessageTimer);
+  }, [activityFormStatus]);
+
+  async function handleActivityEdit(event) {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const activityData = {
+      ...Object.fromEntries(formData),
+      categories: formData.getAll("categories"),
+    };
+
+    const response = await fetch(`/api/activities/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(activityData),
+    });
+
+    if (response.ok) {
+      mutate();
+      setActivityFormStatus({
+        type: "success",
+        message: "Activity has successfully been edited!",
+      });
+    } else {
+      setActivityFormStatus({
+        type: "error",
+        message: "Form could not be sent. Please try again.",
+      });
+    }
+  }
 
   if (isLoading)
     return (
@@ -27,9 +87,43 @@ export default function ActivityDetails() {
     );
 
   return (
-    <>
+    <div>
       <BackButton />
+      <FormButtonWrap>
+        {!isEditActivityMode && (
+          <Button
+            onClick={() => {
+              setIsEditActivityMode(!isEditActivityMode);
+              setActivityFormStatus({
+                type: "",
+                message: "",
+              });
+            }}
+          >
+            Edit
+          </Button>
+        )}
+      </FormButtonWrap>
+      {isEditActivityMode && (
+        <ActivityForm
+          activity={activity}
+          onSubmit={handleActivityEdit}
+          status={activityFormStatus}
+          heading="Edit Activity"
+          setIsEditActivityMode={setIsEditActivityMode}
+          isEditActivityMode={isEditActivityMode}
+        />
+      )}
       <ActivityInfo activity={activity} />
-    </>
+    </div>
   );
 }
+
+export const Button = styled.button`
+  all: unset;
+  border-radius: 10px;
+  color: black;
+  border: 1px solid black;
+  background: white;
+  padding: 0.5em 1em;
+`;

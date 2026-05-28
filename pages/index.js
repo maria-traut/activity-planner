@@ -5,14 +5,19 @@ import ActivityForm from "@/components/ActivityForm";
 import ActivityList from "@/components/ActivityList";
 
 export default function HomePage() {
-  const { data: activities, isLoading, error, mutate } = useSWR("/api/activities");
+  const {
+    data: activities,
+    isLoading,
+    error,
+    mutate,
+  } = useSWR("/api/activities");
   const [activityFormStatus, setActivityFormStatus] = useState({
     type: "",
     message: "",
   });
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const successMessageTimer = setTimeout(() => {
       if (activityFormStatus.type === "success") {
         setActivityFormStatus({
           type: "",
@@ -21,7 +26,7 @@ export default function HomePage() {
       }
     }, 3000);
 
-    return () => clearTimeout(timer);
+    return () => clearTimeout(successMessageTimer);
   }, [activityFormStatus]);
 
   async function handleActivityCreate(event) {
@@ -80,6 +85,7 @@ export default function HomePage() {
       <ActivityForm
         onSubmit={handleActivityCreate}
         status={activityFormStatus}
+        heading="Add Activity"
       />
       <ActivityList activities={activities} />
     </div>

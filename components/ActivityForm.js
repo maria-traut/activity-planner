@@ -2,14 +2,15 @@ import useSWR from "swr";
 import styled, { keyframes } from "styled-components";
 import { countries } from "@/lib/countries";
 
-export default function ActivityForm({ onSubmit, status }) {
+export default function ActivityForm({ onSubmit, status, heading, ...props }) {
+  const { activity, setIsEditActivityMode, isEditActivityMode } = props;
   const { data: categories, isLoading, error } = useSWR("/api/categories");
 
   if (isLoading) {
     return (
       <form>
         <fieldset>
-          <legend>Add Activity</legend>
+          <legend>{heading}</legend>
           <p>Loading categories...</p>
         </fieldset>
       </form>
@@ -20,7 +21,7 @@ export default function ActivityForm({ onSubmit, status }) {
     return (
       <form>
         <fieldset>
-          <legend>Add Activity</legend>
+          <legend>{heading}</legend>
           <p>An error occured while fetching categories.</p>
         </fieldset>
       </form>
@@ -30,17 +31,27 @@ export default function ActivityForm({ onSubmit, status }) {
   return (
     <form onSubmit={onSubmit}>
       <fieldset>
-        <legend>Add Activity</legend>
+        <legend>{heading}</legend>
         <FormFlex>
           <FormSection>
             <label htmlFor="title">
               Title<span aria-hidden>*</span>
             </label>
-            <input type="text" id="title" name="title" required />
+            <input
+              type="text"
+              id="title"
+              name="title"
+              defaultValue={activity?.title}
+              required
+            />
           </FormSection>
           <FormSection>
             <label htmlFor="description">Description</label>
-            <textarea id="description" name="description"></textarea>
+            <textarea
+              id="description"
+              name="description"
+              defaultValue={activity?.description}
+            ></textarea>
           </FormSection>
           <FormSection>
             <label htmlFor="categories">
@@ -51,7 +62,12 @@ export default function ActivityForm({ onSubmit, status }) {
               name="categories"
               multiple
               required
-              size="5"
+              size={5}
+              defaultValue={
+                activity?.categories
+                  ? activity.categories.map((category) => category._id)
+                  : []
+              }
             >
               <option value="" disabled>
                 Please select at least one category
@@ -65,7 +81,11 @@ export default function ActivityForm({ onSubmit, status }) {
           </FormSection>
           <FormSection>
             <label htmlFor="country">Country</label>
-            <select id="country" name="country">
+            <select
+              id="country"
+              name="country"
+              defaultValue={activity?.country || ""}
+            >
               <option value="">Please select a country</option>
               {countries.map((country) => (
                 <option key={country.code} value={country.code}>
@@ -76,10 +96,23 @@ export default function ActivityForm({ onSubmit, status }) {
           </FormSection>
           <FormSection>
             <label htmlFor="area">Area</label>
-            <input type="text" id="area" name="area" />
+            <input
+              type="text"
+              id="area"
+              name="area"
+              defaultValue={activity?.area}
+            />
           </FormSection>
           <FormButtonWrap>
             <FormButton type="submit">Submit</FormButton>
+            {isEditActivityMode && (
+              <FormButton
+                type="button"
+                onClick={() => setIsEditActivityMode(!isEditActivityMode)}
+              >
+                Cancel
+              </FormButton>
+            )}
             {status.type === "error" && <FormError>Error</FormError>}
             {status.type === "success" && <FormSuccess>Success!</FormSuccess>}
           </FormButtonWrap>
@@ -159,7 +192,7 @@ const FormSection = styled.section`
   gap: 0.5em;
 `;
 
-const FormButtonWrap = styled.section`
+export const FormButtonWrap = styled.section`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
