@@ -1,4 +1,4 @@
-import ActivityCard from "components/ActivityCard";
+import ActivityCard from "@/components/ActivityCard";
 import styled from "styled-components";
 
 export default function ActivityList({ activities }) {

@@ -7,7 +7,7 @@ export default function ActivityInfo({ activity }) {
         <h1> {activity.title}</h1>
         <StyledImageContainer>
           <StyledImage
-            src={activity.imageUrl}
+            src={activity.imageUrl ? activity.imageUrl : "/placeholder.jpg"}
             width={600}
             height={400}
             alt={`Picture showing ${activity.title}`}
