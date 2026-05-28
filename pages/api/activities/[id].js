@@ -21,6 +21,11 @@ export default async function handler(request, response) {
         .status(200)
         .json({ status: "Activity successfully updated." });
     }
+
+    if (request.method === "DELETE") {
+      await Activity.findByIdAndDelete(id);
+      response.status(200).json({ status: "Activity deleted." });
+    }
   } catch (error) {
     return response.status(500).json({ status: "Internal Server Error" });
   }
