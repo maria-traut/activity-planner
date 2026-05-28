@@ -4,11 +4,7 @@ import { countries } from "@/lib/countries";
 
 export default function ActivityForm({ onSubmit, status, heading, ...props }) {
   const { activity, setIsEditActivityMode, isEditActivityMode } = props;
-  console.log("props", activity);
   const { data: categories, isLoading, error } = useSWR("/api/categories");
-
-  console.log("activity", activity);
-  console.log("categories", activity?.categories);
 
   if (isLoading) {
     return (
