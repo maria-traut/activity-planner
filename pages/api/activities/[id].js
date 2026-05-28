@@ -13,6 +13,14 @@ export default async function handler(request, response) {
       }
       return response.status(200).json(activity);
     }
+
+    if (request.method === "PUT") {
+      const updatedActivityData = request.body;
+      await Activity.findByIdAndUpdate(id, updatedActivityData);
+      return response
+        .status(200)
+        .json({ status: "Activity successfully updated." });
+    }
   } catch (error) {
     return response.status(500).json({ status: "Internal Server Error" });
   }
