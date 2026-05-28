@@ -17,6 +17,7 @@ export default function ActivityDetails() {
     error,
     mutate,
   } = useSWR(`/api/activities/${id}`);
+
   const [isEditActivityMode, setIsEditActivityMode] = useState(false);
   const [activityFormStatus, setActivityFormStatus] = useState({
     type: "",
@@ -24,16 +25,17 @@ export default function ActivityDetails() {
   });
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const successMessageTimer = setTimeout(() => {
       if (activityFormStatus.type === "success") {
         setActivityFormStatus({
           type: "",
           message: "",
         });
+        setIsEditActivityMode(false);
       }
     }, 3000);
 
-    return () => clearTimeout(timer);
+    return () => clearTimeout(successMessageTimer);
   }, [activityFormStatus]);
 
   async function handleActivityEdit(event) {
@@ -56,25 +58,9 @@ export default function ActivityDetails() {
 
     if (response.ok) {
       mutate();
-      setIsEditActivityMode(!isEditActivityMode);
-    }
-
-    /*
-
-    const response = await fetch(`/api/activities`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(activityData),
-    });
-
-    if (response.ok) {
-      mutate();
-      event.target.reset();
       setActivityFormStatus({
         type: "success",
-        message: "Activity has successfully been created!",
+        message: "Activity has successfully been edited!",
       });
     } else {
       setActivityFormStatus({
@@ -82,7 +68,6 @@ export default function ActivityDetails() {
         message: "Form could not be sent. Please try again.",
       });
     }
-    */
   }
 
   if (isLoading)
@@ -107,7 +92,15 @@ export default function ActivityDetails() {
       <BackButton />
       <FormButtonWrap>
         {!isEditActivityMode && (
-          <Button onClick={() => setIsEditActivityMode(!isEditActivityMode)}>
+          <Button
+            onClick={() => {
+              setIsEditActivityMode(!isEditActivityMode);
+              setActivityFormStatus({
+                type: "",
+                message: "",
+              });
+            }}
+          >
             Edit
           </Button>
         )}
