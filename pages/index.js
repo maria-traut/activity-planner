@@ -5,7 +5,12 @@ import ActivityForm from "@/components/ActivityForm";
 import ActivityList from "@/components/ActivityList";
 
 export default function HomePage() {
-  const { data: activities, isLoading, error, mutate } = useSWR("/api/activities");
+  const {
+    data: activities,
+    isLoading,
+    error,
+    mutate,
+  } = useSWR("/api/activities");
   const [activityFormStatus, setActivityFormStatus] = useState({
     type: "",
     message: "",
@@ -80,6 +85,7 @@ export default function HomePage() {
       <ActivityForm
         onSubmit={handleActivityCreate}
         status={activityFormStatus}
+        heading="Add Activity"
       />
       <ActivityList activities={activities} />
     </div>
