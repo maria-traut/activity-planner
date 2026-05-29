@@ -6,6 +6,7 @@ import BackButton from "@/components/BackButton";
 import ActivityInfo from "@/components/ActivityInfo";
 import { FormButtonWrap } from "@/components/ActivityForm";
 import ActivityForm from "@/components/ActivityForm";
+import Head from "next/head";
 import {
   FormError,
   FormSuccess,
@@ -14,7 +15,7 @@ import {
   FormSection,
 } from "@/components/ActivityForm";
 
-export default function ActivityDetails() {
+export default function Activity() {
   const router = useRouter();
   const { id } = router.query;
 
@@ -101,114 +102,131 @@ export default function ActivityDetails() {
 
   if (isLoading)
     return (
-      <div>
-        <p>Loading activity...</p>
-      </div>
+      <>
+        <Head>
+          <title>{activity?.title} | Activity Planner</title>
+        </Head>
+        <div>
+          <p>Loading activity...</p>
+        </div>
+      </>
     );
 
   if (!activity || error)
     return (
-      <div>
-        <p>
-          Sorry, we could not load this item. <br />
-          Please try again later
-        </p>
-      </div>
+      <>
+        <Head>
+          <title>{activity?.title} | Activity Planner</title>
+        </Head>
+        <div>
+          <p>
+            Sorry, we could not load this item. <br />
+            Please try again later
+          </p>
+        </div>
+      </>
     );
 
   return (
-    <div>
-      <BackButton />
-      <FormButtonWrap>
-        {!isEditActivityMode && !isDeleteActivityMode && (
-          <Button
-            onClick={() => {
-              setIsEditActivityMode(!isEditActivityMode);
-              setActivityFormStatus({
-                type: "",
-                message: "",
-              });
-            }}
-          >
-            Edit
-          </Button>
-        )}
-        {!isDeleteActivityMode && !isEditActivityMode && (
-          <StyledDeleteButton
-            type="button"
-            aria-label="delete button"
-            onClick={() => {
-              setIsDeleteActivityMode(!isDeleteActivityMode);
-              setActivityFormStatus({
-                type: "",
-                message: "",
-              });
-            }}
-          >
-            Delete
-          </StyledDeleteButton>
-        )}
-        {isDeleteActivityMode && (
-          <>
-            {activityFormStatus.type !== "success" && (
-              <>
-                <span>Delete?</span>
-                <StyledConfirmButton
-                  type="button"
-                  aria-label="confirm button"
-                  onClick={handleActivityDelete}
-                >
-                  Confirm
-                </StyledConfirmButton>
-                <StyledBaseButton
-                  type="button"
-                  onClick={() => setIsDeleteActivityMode(!isDeleteActivityMode)}
-                >
-                  Cancel
-                </StyledBaseButton>
-              </>
-            )}
-            {activityFormStatus.type === "success" && (
-              <>
-                <StyledBaseButton type="button" disabled>
-                  Confirm
-                </StyledBaseButton>
-                <StyledBaseButton type="button" disabled>
-                  Cancel
-                </StyledBaseButton>
-              </>
-            )}
+    <>
+      <Head>
+        <title>{activity?.title} | Activity Planner</title>
+      </Head>
+      <div>
+        <BackButton />
+        <FormButtonWrap>
+          {!isEditActivityMode && !isDeleteActivityMode && (
+            <Button
+              onClick={() => {
+                setIsEditActivityMode(!isEditActivityMode);
+                setActivityFormStatus({
+                  type: "",
+                  message: "",
+                });
+              }}
+            >
+              Edit
+            </Button>
+          )}
+          {!isDeleteActivityMode && !isEditActivityMode && (
+            <StyledDeleteButton
+              type="button"
+              aria-label="delete button"
+              onClick={() => {
+                setIsDeleteActivityMode(!isDeleteActivityMode);
+                setActivityFormStatus({
+                  type: "",
+                  message: "",
+                });
+              }}
+            >
+              Delete
+            </StyledDeleteButton>
+          )}
+          {isDeleteActivityMode && (
+            <>
+              {activityFormStatus.type !== "success" && (
+                <>
+                  <span>Delete?</span>
+                  <StyledConfirmButton
+                    type="button"
+                    aria-label="confirm button"
+                    onClick={handleActivityDelete}
+                  >
+                    Confirm
+                  </StyledConfirmButton>
+                  <StyledBaseButton
+                    type="button"
+                    onClick={() =>
+                      setIsDeleteActivityMode(!isDeleteActivityMode)
+                    }
+                  >
+                    Cancel
+                  </StyledBaseButton>
+                </>
+              )}
+              {activityFormStatus.type === "success" && (
+                <>
+                  <StyledBaseButton type="button" disabled>
+                    Confirm
+                  </StyledBaseButton>
+                  <StyledBaseButton type="button" disabled>
+                    Cancel
+                  </StyledBaseButton>
+                </>
+              )}
+              {activityFormStatus.type === "error" && (
+                <FormError>Error</FormError>
+              )}
+              {activityFormStatus.type === "success" && (
+                <FormSuccess>Success!</FormSuccess>
+              )}
+            </>
+          )}
+        </FormButtonWrap>
+        {activityFormStatus.type !== "" && (
+          <FormSection>
             {activityFormStatus.type === "error" && (
-              <FormError>Error</FormError>
+              <TextError>{activityFormStatus.message}</TextError>
             )}
             {activityFormStatus.type === "success" && (
-              <FormSuccess>Success!</FormSuccess>
+              <TextSuccess>{activityFormStatus.message}</TextSuccess>
             )}
-          </>
+          </FormSection>
         )}
-      </FormButtonWrap>
-      {activityFormStatus.type !== "" && (
-        <FormSection>
-          {activityFormStatus.type === "error" && (
-            <TextError>{activityFormStatus.message}</TextError>
-          )}
-          {activityFormStatus.type === "success" && (
-            <TextSuccess>{activityFormStatus.message}</TextSuccess>
-          )}
-        </FormSection>
-      )}
-      {isEditActivityMode && (
-        <ActivityForm
-          activity={activity}
-          onSubmit={handleActivityEdit}
-          status={activityFormStatus}
-          heading="Edit Activity"
-          setIsEditActivityMode={setIsEditActivityMode}
-          isEditActivityMode={isEditActivityMode}
-        />
-      )}
-      <ActivityInfo activity={activity} />
-    </div>
+        {isEditActivityMode && (
+          <ActivityForm
+            activity={activity}
+            onSubmit={handleActivityEdit}
+            status={activityFormStatus}
+            heading="Edit Activity"
+            setIsEditActivityMode={setIsEditActivityMode}
+            isEditActivityMode={isEditActivityMode}
+          />
+        )}
+        <ActivityInfo activity={activity} />
+      </div>
+    </>
   );
 }
 
