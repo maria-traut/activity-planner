@@ -44,13 +44,14 @@ const StyledLink = styled(Link)`
 const StyledFigure = styled.figure`
   border-radius: 5px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  width: 250px;
+  width: 270px;
+  overflow: hidden;
 `;
 
 const StyledImageWrapper = styled.div`
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: 220px;
 `;
 
 const StyledFigcaption = styled.figcaption`
@@ -58,14 +59,16 @@ const StyledFigcaption = styled.figcaption`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  gap: 0.5rem;
-  padding: 1rem;
+  gap: 0.1rem;
+  padding: 0.5rem 1rem 1rem 1rem;
 `;
 
 const StyledActivityHeadline = styled.h2`
   font-size: 1.25rem;
   line-height: 1.3;
   text-align: center;
+  padding: 0;
+  margin: 0.7rem;
 `;
 
 const StyledCategoryList = styled.ul`
