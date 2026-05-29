@@ -4,13 +4,15 @@ export default function ActivityInfo({ activity }) {
   return (
     <>
       <StyledActivityInfoContainer>
-        <h1> {activity.title}</h1>
+        <h1>{activity.title}</h1>
         <StyledImageContainer>
           <StyledImage
             src={activity.imageUrl ? activity.imageUrl : "/placeholder.jpg"}
             width={600}
             height={400}
             alt={`Picture showing ${activity.title}`}
+            objectFit="cover"
+            priority
           />
           <StyledLocations>
             <li>{activity.area}</li>
