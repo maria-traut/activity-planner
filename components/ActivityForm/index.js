@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { countries } from "@/lib/countries";
+import { getCountries } from "@/lib/countries";
 import {
   StyledFormFlex,
   StyledFormSection,
@@ -104,7 +104,7 @@ export default function ActivityForm({ onSubmit, status, heading, ...props }) {
               <option value="" disabled>
                 Please select a country
               </option>
-              {countries.map((country) => (
+              {getCountries().map((country) => (
                 <option key={country.code} value={country.code}>
                   {country.name}
                 </option>

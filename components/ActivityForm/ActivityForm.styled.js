@@ -66,14 +66,6 @@ export const StyledFormSection = styled.section`
   gap: 0.5em;
 `;
 
-export const StyledFormButtonWrap = styled.section`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5em;
-`;
-
 export const StyledFormFlex = styled.div`
   display: flex;
   flex-direction: column;
