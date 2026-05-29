@@ -160,19 +160,24 @@ export default function ActivityDetails() {
                 >
                   Confirm
                 </StyledConfirmButton>
+                <StyledBaseButton
+                  type="button"
+                  onClick={() => setIsDeleteActivityMode(!isDeleteActivityMode)}
+                >
+                  Cancel
+                </StyledBaseButton>
               </>
             )}
             {activityFormStatus.type === "success" && (
-              <StyledBaseButton type="button" disabled>
-                Confirm
-              </StyledBaseButton>
+              <>
+                <StyledBaseButton type="button" disabled>
+                  Confirm
+                </StyledBaseButton>
+                <StyledBaseButton type="button" disabled>
+                  Cancel
+                </StyledBaseButton>
+              </>
             )}
-            <StyledBaseButton
-              type="button"
-              onClick={() => setIsDeleteActivityMode(!isDeleteActivityMode)}
-            >
-              Cancel
-            </StyledBaseButton>
             {activityFormStatus.type === "error" && (
               <FormError>Error</FormError>
             )}
@@ -225,6 +230,8 @@ const StyledBaseButton = styled.button`
   cursor: pointer;
   &:disabled {
     cursor: not-allowed;
+    border-color: gray;
+    color: gray;
   }
 `;
 
