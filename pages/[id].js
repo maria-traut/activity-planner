@@ -4,16 +4,16 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import BackButton from "@/components/BackButton";
 import ActivityInfo from "@/components/ActivityInfo";
-import { FormButtonWrap } from "@/components/ActivityForm";
+import { StyledFormButtonWrap } from "@/components/ActivityForm/ActivityForm.styled";
 import ActivityForm from "@/components/ActivityForm";
 import Head from "next/head";
 import {
-  FormError,
-  FormSuccess,
-  TextError,
-  TextSuccess,
-  FormSection,
-} from "@/components/ActivityForm";
+  StyledFormError,
+  StyledFormSuccess,
+  StyledTextError,
+  StyledTextSuccess,
+  StyledFormSection,
+} from "@/components/ActivityForm/ActivityForm.styled";
 
 export default function Activity() {
   const router = useRouter();
@@ -134,7 +134,7 @@ export default function Activity() {
       </Head>
       <div>
         <BackButton />
-        <FormButtonWrap>
+        <StyledFormButtonWrap>
           {!isEditActivityMode && !isDeleteActivityMode && (
             <Button
               onClick={() => {
@@ -196,23 +196,25 @@ export default function Activity() {
                 </>
               )}
               {activityFormStatus.type === "error" && (
-                <FormError>Error</FormError>
+                <StyledFormError>Error</StyledFormError>
               )}
               {activityFormStatus.type === "success" && (
-                <FormSuccess>Success!</FormSuccess>
+                <StyledFormSuccess>Success!</StyledFormSuccess>
               )}
             </>
           )}
-        </FormButtonWrap>
+        </StyledFormButtonWrap>
         {activityFormStatus.type !== "" && (
-          <FormSection>
+          <StyledFormSection>
             {activityFormStatus.type === "error" && (
-              <TextError>{activityFormStatus.message}</TextError>
+              <StyledTextError>{activityFormStatus.message}</StyledTextError>
             )}
             {activityFormStatus.type === "success" && (
-              <TextSuccess>{activityFormStatus.message}</TextSuccess>
+              <StyledTextSuccess>
+                {activityFormStatus.message}
+              </StyledTextSuccess>
             )}
-          </FormSection>
+          </StyledFormSection>
         )}
         {isEditActivityMode && (
           <ActivityForm
