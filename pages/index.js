@@ -3,8 +3,10 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import ActivityForm from "@/components/ActivityForm";
 import ActivityList from "@/components/ActivityList";
+import { Button } from "./[id]";
 
 export default function HomePage() {
+  const [isCreateActivityMode, setIsCreateActivityMode] = useState(false);
   const {
     data: activities,
     isLoading,
@@ -23,6 +25,7 @@ export default function HomePage() {
           type: "",
           message: "",
         });
+        setIsCreateActivityMode(false);
       }
     }, 3000);
 
@@ -82,11 +85,28 @@ export default function HomePage() {
   return (
     <div>
       <StyledHeading>Activity Planner</StyledHeading>
-      <ActivityForm
-        onSubmit={handleActivityCreate}
-        status={activityFormStatus}
-        heading="Add Activity"
-      />
+      {!isCreateActivityMode && (
+        <Button
+          onClick={() => {
+            setIsCreateActivityMode(!isCreateActivityMode);
+            setActivityFormStatus({
+              type: "",
+              message: "",
+            });
+          }}
+        >
+          Create Activity
+        </Button>
+      )}
+      {isCreateActivityMode && (
+        <ActivityForm
+          onSubmit={handleActivityCreate}
+          status={activityFormStatus}
+          heading="Add Activity"
+          setIsCreateActivityMode={setIsCreateActivityMode}
+          isCreateActivityMode={isCreateActivityMode}
+        />
+      )}
       <ActivityList activities={activities} />
     </div>
   );
