@@ -1,7 +1,6 @@
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import styled from "styled-components";
 import BackButton from "@/components/BackButton";
 import ActivityInfo from "@/components/ActivityInfo";
 import { StyledFormButtonWrap } from "@/components/ActivityForm/ActivityForm.styled";
@@ -14,6 +13,12 @@ import {
   StyledTextSuccess,
   StyledFormSection,
 } from "@/components/ActivityForm/ActivityForm.styled";
+import {
+  StyledBaseButton,
+  StyledButton,
+  StyledConfirmButton,
+  StyledDeleteButton,
+} from "@/components/Global/Global.styled";
 
 export default function Activity() {
   const router = useRouter();
@@ -100,7 +105,7 @@ export default function Activity() {
     }
   }
 
-  if (isLoading)
+  if (isLoading) {
     return (
       <>
         <Head>
@@ -111,8 +116,9 @@ export default function Activity() {
         </div>
       </>
     );
+  }
 
-  if (!activity || error)
+  if (!activity || error) {
     return (
       <>
         <Head>
@@ -126,6 +132,7 @@ export default function Activity() {
         </div>
       </>
     );
+  }
 
   return (
     <>
@@ -136,7 +143,7 @@ export default function Activity() {
         <BackButton />
         <StyledFormButtonWrap>
           {!isEditActivityMode && !isDeleteActivityMode && (
-            <Button
+            <StyledButton
               onClick={() => {
                 setIsEditActivityMode(!isEditActivityMode);
                 setActivityFormStatus({
@@ -146,7 +153,7 @@ export default function Activity() {
               }}
             >
               Edit
-            </Button>
+            </StyledButton>
           )}
           {!isDeleteActivityMode && !isEditActivityMode && (
             <StyledDeleteButton
@@ -231,40 +238,3 @@ export default function Activity() {
     </>
   );
 }
-
-export const Button = styled.button`
-  all: unset;
-  border-radius: 10px;
-  color: black;
-  border: 1px solid black;
-  background: white;
-  padding: 0.5em 1em;
-`;
-
-const StyledBaseButton = styled.button`
-  all: unset;
-  border-radius: 10px;
-  border: 1px solid black;
-  background: white;
-  padding: 0.5em 1em;
-  cursor: pointer;
-  &:disabled {
-    cursor: not-allowed;
-    border-color: gray;
-    color: gray;
-  }
-`;
-
-const StyledDeleteButton = styled(StyledBaseButton)`
-  color: red;
-  border-color: red;
-`;
-
-const StyledConfirmButton = styled(StyledBaseButton)`
-  color: red;
-  border-color: red;
-  &:disabled {
-    color: black;
-    border: 1px solid black;
-  }
-`;

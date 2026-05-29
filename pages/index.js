@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import ActivityForm from "@/components/ActivityForm";
 import ActivityList from "@/components/ActivityList";
-import { Button } from "./[id]";
+import { StyledButton } from "@/components/Global/Global.styled";
 import Head from "next/head";
 
 export default function HomePage() {
@@ -101,7 +101,7 @@ export default function HomePage() {
       <div>
         <StyledHeading>Activity Planner</StyledHeading>
         {!isCreateActivityMode && (
-          <Button
+          <StyledButton
             onClick={() => {
               setIsCreateActivityMode(!isCreateActivityMode);
               setActivityFormStatus({
@@ -111,7 +111,7 @@ export default function HomePage() {
             }}
           >
             Create Activity
-          </Button>
+          </StyledButton>
         )}
         {isCreateActivityMode && (
           <ActivityForm
