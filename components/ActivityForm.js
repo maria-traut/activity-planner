@@ -110,19 +110,18 @@ export default function ActivityForm({ onSubmit, status, heading, ...props }) {
             />
           </FormSection>
           <FormButtonWrap>
-            <FormButton type="submit">Submit</FormButton>
-            {isCreateActivityMode && (
+            <FormButton type="submit" disabled={status.type === "success"}>
+              Submit
+            </FormButton>
+            {(isCreateActivityMode || isEditActivityMode) && (
               <FormButton
                 type="button"
-                onClick={() => setIsCreateActivityMode(false)}
-              >
-                Cancel
-              </FormButton>
-            )}
-            {isEditActivityMode && (
-              <FormButton
-                type="button"
-                onClick={() => setIsEditActivityMode(false)}
+                onClick={() =>
+                  isCreateActivityMode
+                    ? setIsCreateActivityMode(false)
+                    : setIsEditActivityMode(false)
+                }
+                disabled={status.type === "success"}
               >
                 Cancel
               </FormButton>
@@ -152,6 +151,12 @@ const FormButton = styled.button`
   border: 1px solid black;
   background: white;
   padding: 0.5em 1em;
+  cursor: pointer;
+  &:disabled {
+    cursor: not-allowed;
+    border-color: gray;
+    color: gray;
+  }
 `;
 
 const fadeOut = keyframes`
