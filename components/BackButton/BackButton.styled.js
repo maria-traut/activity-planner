@@ -2,10 +2,18 @@ import styled from "styled-components";
 import Link from "next/link";
 
 export const StyledLink = styled(Link)`
-  margin: 1rem;
-  text-decoration: none;
+    text-decoration: none;
+    border-radius: 10px;
+    border: 1px solid #0000ee;
+    color: #0000ee;
+    background: white;
+    padding: 0.5em 1em;
+    cursor: pointer;
 
-  &:hover {
-    text-decoration: underline;
-  }
+    &:hover {
+        background: #eee;
+    }
+    &:active {
+        color: #0000ee;
+    }
 `;

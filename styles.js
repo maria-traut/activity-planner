@@ -30,4 +30,48 @@ export default createGlobalStyle`
   footer {
     
   }
+
+
+input[type="text"], input[type="password"], textarea {
+  all:unset;
+  box-shadow: none;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: 1px solid black;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+textarea {
+  resize: vertical;
+  min-height:4rem;
+  max-height:12rem;
+}
+
+select {
+  box-shadow: none;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: 1px solid black;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+select[multiple] {
+  padding: 0.2rem 0rem;
+
+  option:hover {
+    background-color:#eee;
+  }
+}
+
+option {
+  padding: 0.3rem 1rem;
+  max-width:100%;
+}
+
+label {
+  cursor:pointer;
+}
+
 `;
