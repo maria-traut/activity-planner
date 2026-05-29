@@ -11,7 +11,6 @@ export default function ActivityCard({ title, categories, image, id }) {
             src={image ? image : "/placeholder.jpg"}
             alt={title}
             fill
-            // sizes for better image component performance, from next.js/docs
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             objectFit="cover"
             priority

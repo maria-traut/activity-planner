@@ -92,7 +92,9 @@ export default function ActivityForm({ onSubmit, status, heading, ...props }) {
               name="country"
               defaultValue={activity?.country || ""}
             >
-              <option value="">Please select a country</option>
+              <option value="" disabled>
+                Please select a country
+              </option>
               {countries.map((country) => (
                 <option key={country.code} value={country.code}>
                   {country.name}
