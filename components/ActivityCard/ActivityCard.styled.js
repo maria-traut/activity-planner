@@ -12,8 +12,10 @@ export const StyledLink = styled(Link)`
 
 export const StyledFigure = styled.figure`
   border-radius: 5px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  width: 250px;
+  box-shadow: 0px 0px 5px 0px hsla(0, 0%, 0%, 0.3);
+  width: 100%;
+  margin: 0;
+  height: 100%;
 `;
 
 export const StyledImageWrapper = styled.div`
@@ -27,7 +29,7 @@ export const StyledFigcaption = styled.figcaption`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
   padding: 1rem;
 `;
 
@@ -35,6 +37,7 @@ export const StyledActivityHeadline = styled.h2`
   font-size: 1.25rem;
   line-height: 1.3;
   text-align: center;
+  margin: 0;
 `;
 
 export const StyledCategoryList = styled.ul`

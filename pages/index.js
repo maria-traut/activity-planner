@@ -1,10 +1,11 @@
 import useSWR from "swr";
-import styled from "styled-components";
 import { useState, useEffect } from "react";
 import ActivityForm from "@/components/ActivityForm";
 import ActivityList from "@/components/ActivityList";
 import { StyledButton } from "@/components/Global/Global.styled";
 import Head from "next/head";
+import Header from "@/components/Header";
+import { StyledToolbarWrap } from "@/components/Global/Global.styled";
 
 export default function HomePage() {
   const [isCreateActivityMode, setIsCreateActivityMode] = useState(false);
@@ -71,10 +72,10 @@ export default function HomePage() {
         <Head>
           <title>Home | Activity Planner</title>
         </Head>
-        <div>
-          <StyledHeading>Activity Planner</StyledHeading>
+        <Header />
+        <main>
           <p>Loading activities...</p>
-        </div>
+        </main>
       </>
     );
   }
@@ -85,10 +86,10 @@ export default function HomePage() {
         <Head>
           <title>Home | Activity Planner</title>
         </Head>
-        <div>
-          <StyledHeading>Activity Planner</StyledHeading>
+        <Header />
+        <main>
           <p>An error occured while fetching the activities.</p>
-        </div>
+        </main>
       </>
     );
   }
@@ -98,20 +99,22 @@ export default function HomePage() {
       <Head>
         <title>Home | Activity Planner</title>
       </Head>
-      <div>
-        <StyledHeading>Activity Planner</StyledHeading>
+      <Header />
+      <main>
         {!isCreateActivityMode && (
-          <StyledButton
-            onClick={() => {
-              setIsCreateActivityMode(!isCreateActivityMode);
-              setActivityFormStatus({
-                type: "",
-                message: "",
-              });
-            }}
-          >
-            Create Activity
-          </StyledButton>
+          <StyledToolbarWrap>
+            <StyledButton
+              onClick={() => {
+                setIsCreateActivityMode(!isCreateActivityMode);
+                setActivityFormStatus({
+                  type: "",
+                  message: "",
+                });
+              }}
+            >
+              Create Activity
+            </StyledButton>
+          </StyledToolbarWrap>
         )}
         {isCreateActivityMode && (
           <ActivityForm
@@ -123,14 +126,7 @@ export default function HomePage() {
           />
         )}
         <ActivityList activities={activities} />
-      </div>
+      </main>
     </>
   );
 }
-
-const StyledHeading = styled.h1`
-  font-size: 1.75rem;
-  line-height: 1.5;
-  text-align: center;
-  width: 100%;
-`;
