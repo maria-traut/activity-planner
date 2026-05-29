@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import ActivityForm from "@/components/ActivityForm";
 import ActivityList from "@/components/ActivityList";
 import { Button } from "./[id]";
+import Head from "next/head";
 
 export default function HomePage() {
   const [isCreateActivityMode, setIsCreateActivityMode] = useState(false);
@@ -66,49 +67,64 @@ export default function HomePage() {
 
   if (isLoading) {
     return (
-      <div>
-        <StyledHeading>Activity Planner</StyledHeading>
-        <p>Loading activities...</p>
-      </div>
+      <>
+        <Head>
+          <title>Home | Activity Planner</title>
+        </Head>
+        <div>
+          <StyledHeading>Activity Planner</StyledHeading>
+          <p>Loading activities...</p>
+        </div>
+      </>
     );
   }
 
   if (!activities || error) {
     return (
-      <div>
-        <StyledHeading>Activity Planner</StyledHeading>
-        <p>An error occured while fetching the activities.</p>
-      </div>
+      <>
+        <Head>
+          <title>Home | Activity Planner</title>
+        </Head>
+        <div>
+          <StyledHeading>Activity Planner</StyledHeading>
+          <p>An error occured while fetching the activities.</p>
+        </div>
+      </>
     );
   }
 
   return (
-    <div>
-      <StyledHeading>Activity Planner</StyledHeading>
-      {!isCreateActivityMode && (
-        <Button
-          onClick={() => {
-            setIsCreateActivityMode(!isCreateActivityMode);
-            setActivityFormStatus({
-              type: "",
-              message: "",
-            });
-          }}
-        >
-          Create Activity
-        </Button>
-      )}
-      {isCreateActivityMode && (
-        <ActivityForm
-          onSubmit={handleActivityCreate}
-          status={activityFormStatus}
-          heading="Add Activity"
-          setIsCreateActivityMode={setIsCreateActivityMode}
-          isCreateActivityMode={isCreateActivityMode}
-        />
-      )}
-      <ActivityList activities={activities} />
-    </div>
+    <>
+      <Head>
+        <title>Home | Activity Planner</title>
+      </Head>
+      <div>
+        <StyledHeading>Activity Planner</StyledHeading>
+        {!isCreateActivityMode && (
+          <Button
+            onClick={() => {
+              setIsCreateActivityMode(!isCreateActivityMode);
+              setActivityFormStatus({
+                type: "",
+                message: "",
+              });
+            }}
+          >
+            Create Activity
+          </Button>
+        )}
+        {isCreateActivityMode && (
+          <ActivityForm
+            onSubmit={handleActivityCreate}
+            status={activityFormStatus}
+            heading="Add Activity"
+            setIsCreateActivityMode={setIsCreateActivityMode}
+            isCreateActivityMode={isCreateActivityMode}
+          />
+        )}
+        <ActivityList activities={activities} />
+      </div>
+    </>
   );
 }
 
