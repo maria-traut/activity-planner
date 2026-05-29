@@ -1,6 +1,6 @@
 import styled, { keyframes } from "styled-components";
 
-export const FormButton = styled.button`
+export const StyledFormButton = styled.button`
   all: unset;
   border-radius: 10px;
   border: 1px solid black;
@@ -14,7 +14,7 @@ export const FormButton = styled.button`
   }
 `;
 
-export const fadeOut = keyframes`
+export const KeyframesFadeOut = keyframes`
   from {
     opacity: 1;
   }
@@ -25,7 +25,7 @@ export const fadeOut = keyframes`
   }
 `;
 
-export const FormStatus = styled.div`
+export const StyledFormStatus = styled.div`
   all: unset;
   border-radius: 10px;
   color: black;
@@ -34,39 +34,39 @@ export const FormStatus = styled.div`
   padding: 0.5em 1em;
 `;
 
-export const FormError = styled(FormStatus)`
+export const StyledFormError = styled(StyledFormStatus)`
   border-color: transparent;
   color: red;
 `;
 
-export const FormSuccess = styled(FormStatus)`
+export const StyledFormSuccess = styled(StyledFormStatus)`
   border-color: transparent;
   color: green;
 
   opacity: 1;
-  animation: ${fadeOut} 1s ease forwards;
+  animation: ${KeyframesFadeOut} 1s ease forwards;
   animation-delay: 2s;
 `;
 
-export const TextError = styled.p`
+export const StyledTextError = styled.p`
   color: red;
 `;
 
-export const TextSuccess = styled.p`
+export const StyledTextSuccess = styled.p`
   color: green;
 
   opacity: 1;
-  animation: ${fadeOut} 1s ease forwards;
+  animation: ${KeyframesFadeOut} 1s ease forwards;
   animation-delay: 2s;
 `;
 
-export const FormSection = styled.section`
+export const StyledFormSection = styled.section`
   display: flex;
   flex-direction: column;
   gap: 0.5em;
 `;
 
-export const FormButtonWrap = styled.section`
+export const StyledFormButtonWrap = styled.section`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -74,7 +74,7 @@ export const FormButtonWrap = styled.section`
   gap: 0.5em;
 `;
 
-export const FormFlex = styled.div`
+export const StyledFormFlex = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1em;

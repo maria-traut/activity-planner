@@ -1,14 +1,14 @@
 import useSWR from "swr";
 import { countries } from "@/lib/countries";
 import {
-  FormFlex,
-  FormSection,
-  FormButtonWrap,
-  FormButton,
-  FormError,
-  FormSuccess,
-  TextError,
-  TextSuccess,
+  StyledFormFlex,
+  StyledFormSection,
+  StyledFormButtonWrap,
+  StyledFormButton,
+  StyledFormError,
+  StyledFormSuccess,
+  StyledTextError,
+  StyledTextSuccess,
 } from "./ActivityForm.styled";
 
 export default function ActivityForm({ onSubmit, status, heading, ...props }) {
@@ -47,8 +47,8 @@ export default function ActivityForm({ onSubmit, status, heading, ...props }) {
     <form onSubmit={onSubmit}>
       <fieldset>
         <legend>{heading}</legend>
-        <FormFlex>
-          <FormSection>
+        <StyledFormFlex>
+          <StyledFormSection>
             <label htmlFor="title">
               Title<span aria-hidden>*</span>
             </label>
@@ -59,16 +59,16 @@ export default function ActivityForm({ onSubmit, status, heading, ...props }) {
               defaultValue={activity?.title}
               required
             />
-          </FormSection>
-          <FormSection>
+          </StyledFormSection>
+          <StyledFormSection>
             <label htmlFor="description">Description</label>
             <textarea
               id="description"
               name="description"
               defaultValue={activity?.description}
             ></textarea>
-          </FormSection>
-          <FormSection>
+          </StyledFormSection>
+          <StyledFormSection>
             <label htmlFor="categories">
               Categories<span aria-hidden>*</span>
             </label>
@@ -93,8 +93,8 @@ export default function ActivityForm({ onSubmit, status, heading, ...props }) {
                 </option>
               ))}
             </select>
-          </FormSection>
-          <FormSection>
+          </StyledFormSection>
+          <StyledFormSection>
             <label htmlFor="country">Country</label>
             <select
               id="country"
@@ -110,8 +110,8 @@ export default function ActivityForm({ onSubmit, status, heading, ...props }) {
                 </option>
               ))}
             </select>
-          </FormSection>
-          <FormSection>
+          </StyledFormSection>
+          <StyledFormSection>
             <label htmlFor="area">Area</label>
             <input
               type="text"
@@ -119,13 +119,16 @@ export default function ActivityForm({ onSubmit, status, heading, ...props }) {
               name="area"
               defaultValue={activity?.area}
             />
-          </FormSection>
-          <FormButtonWrap>
-            <FormButton type="submit" disabled={status.type === "success"}>
+          </StyledFormSection>
+          <StyledFormButtonWrap>
+            <StyledFormButton
+              type="submit"
+              disabled={status.type === "success"}
+            >
               Submit
-            </FormButton>
+            </StyledFormButton>
             {(isCreateActivityMode || isEditActivityMode) && (
-              <FormButton
+              <StyledFormButton
                 type="button"
                 onClick={() =>
                   isCreateActivityMode
@@ -135,22 +138,26 @@ export default function ActivityForm({ onSubmit, status, heading, ...props }) {
                 disabled={status.type === "success"}
               >
                 Cancel
-              </FormButton>
+              </StyledFormButton>
             )}
-            {status.type === "error" && <FormError>Error</FormError>}
-            {status.type === "success" && <FormSuccess>Success!</FormSuccess>}
-          </FormButtonWrap>
+            {status.type === "error" && (
+              <StyledFormError>Error</StyledFormError>
+            )}
+            {status.type === "success" && (
+              <StyledFormSuccess>Success!</StyledFormSuccess>
+            )}
+          </StyledFormButtonWrap>
           {status.type !== "" && (
-            <FormSection>
+            <StyledFormSection>
               {status.type === "error" && (
-                <TextError>{status.message}</TextError>
+                <StyledTextError>{status.message}</StyledTextError>
               )}
               {status.type === "success" && (
-                <TextSuccess>{status.message}</TextSuccess>
+                <StyledTextSuccess>{status.message}</StyledTextSuccess>
               )}
-            </FormSection>
+            </StyledFormSection>
           )}
-        </FormFlex>
+        </StyledFormFlex>
       </fieldset>
     </form>
   );
