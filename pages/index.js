@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import ActivityForm from "@/components/ActivityForm";
 import ActivityList from "@/components/ActivityList";
+import SortButton from "@/components/SortButton";
 
 export default function HomePage() {
   const {
@@ -90,6 +91,7 @@ export default function HomePage() {
         status={activityFormStatus}
         heading="Add Activity"
       />
+      <SortButton />
       <ActivityList activities={activities} />
     </div>
   );
