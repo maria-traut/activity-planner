@@ -11,6 +11,9 @@ export default function HomePage() {
     error,
     mutate,
   } = useSWR("/api/activities");
+
+  // console.log("activities with timestamp", activities);
+
   const [activityFormStatus, setActivityFormStatus] = useState({
     type: "",
     message: "",
