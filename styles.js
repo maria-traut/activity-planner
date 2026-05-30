@@ -55,7 +55,7 @@ export default createGlobalStyle`
   select[multiple] {
     padding: 0.2rem 0rem;
 
-    option:hover {
+    option:not(:checked):hover {
       background-color:#eee;
     }
   }
