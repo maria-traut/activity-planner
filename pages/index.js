@@ -2,10 +2,10 @@ import useSWR from "swr";
 import { useState, useEffect } from "react";
 import ActivityForm from "@/components/ActivityForm";
 import ActivityList from "@/components/ActivityList";
-import { StyledButton } from "@/components/Global/Global.styled";
 import Head from "next/head";
 import Header from "@/components/Header";
 import {
+    StyledButton,
     StyledToolbarWrap,
     StyledToolbar,
     StyledStatusMessageWrap,
