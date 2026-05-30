@@ -1,8 +1,8 @@
-import Image from "next/image";
 import {
     StyledLink,
     StyledFigure,
-    StyledImageWrapper,
+    StyledCardImageWrapper,
+    StyledCardImage,
     StyledFigcaption,
     StyledActivityHeadline,
     StyledCategoryList,
@@ -13,16 +13,15 @@ export default function ActivityCard({ title, categories, image, id }) {
     return (
         <StyledLink href={`/${id}`}>
             <StyledFigure>
-                <StyledImageWrapper>
-                    <Image
+                <StyledCardImageWrapper>
+                    <StyledCardImage
                         src={image ? image : "/placeholder.jpg"}
                         alt={title}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        objectFit="cover"
                         priority
                     />
-                </StyledImageWrapper>
+                </StyledCardImageWrapper>
                 <StyledFigcaption>
                     <StyledActivityHeadline>{title}</StyledActivityHeadline>
                     <StyledCategoryList>
