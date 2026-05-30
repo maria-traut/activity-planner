@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
+import Image from "next/image";
 
 export const StyledLink = styled(Link)`
     text-decoration: none;
@@ -18,10 +19,14 @@ export const StyledFigure = styled.figure`
     height: 100%;
 `;
 
-export const StyledImageWrapper = styled.div`
+export const StyledCardImageWrapper = styled.div`
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
+`;
+
+export const StyledCardImage = styled(Image)`
+    object-fit: cover;
 `;
 
 export const StyledFigcaption = styled.figcaption`
