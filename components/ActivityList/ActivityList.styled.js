@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledActivityList = styled.ul`
     list-style: none;
     display: grid;
-    gap: 2rem;
+    gap: 1rem;
     padding: 0 1rem;
     margin: 0;
     grid-template-columns: repeat(2, 1fr);
