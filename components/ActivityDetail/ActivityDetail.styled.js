@@ -36,7 +36,7 @@ export const StyledActivityDetailTitle = styled.h2`
     border-radius: 999px;
 `;
 
-export const StyledLocations = styled.ul`
+const StyledTagList = styled.ul`
     list-style: none;
     padding: 0;
     margin: 0;
@@ -52,22 +52,9 @@ export const StyledLocations = styled.ul`
     }
 `;
 
-export const StyledCategories = styled.ul`
-    list-style: none;
-    padding: 0;
-    margin: 0;
+export const StyledLocations = styled(StyledTagList)``;
 
-    display: flex;
-    gap: 0.8rem;
-
-    li {
-        text-align: center;
-        background-color: #e0f0ff;
-        border-radius: 999px;
-        padding: 0.4rem 0.8rem;
-        font-size: 0.8rem;
-    }
-`;
+export const StyledCategories = styled(StyledTagList)``;
 
 export const StyledImage = styled(Image)`
     border-radius: 0px;
