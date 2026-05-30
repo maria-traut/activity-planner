@@ -3,8 +3,6 @@ import { getCountries } from "@/lib/countries";
 import {
     StyledToolbar,
     StyledButton,
-    StyledButtonRed,
-    StyledButtonGreen,
     StyledStatusMessageError,
     StyledStatusMessageSuccess,
 } from "../Global/Global.styled";
