@@ -22,7 +22,7 @@ export const StyledFigure = styled.figure`
 export const StyledCardImageWrapper = styled.div`
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 9;
+    height: 220px;
 `;
 
 export const StyledCardImage = styled(Image)`
