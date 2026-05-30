@@ -50,8 +50,7 @@ export default function ActivityDetail({ activity }) {
                                 {activity.categories.map((category) => {
                                     return (
                                         <li key={category._id}>
-                                            {" "}
-                                            {category.name}{" "}
+                                            {category.name}
                                         </li>
                                     );
                                 })}
