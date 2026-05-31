@@ -62,23 +62,6 @@ export default function Bookmarks({
         );
     }
 
-    // if (!bookmarkedActivities.length) {
-    //     <div>
-    //         <Head>
-    //             <title> Activity Planner</title>
-    //         </Head>
-    //         <Header />
-    //         <main>
-    //             <StyledToolbarWrap>
-    //                 <StyledToolbar>
-    //                     <BackButton />
-    //                 </StyledToolbar>
-    //             </StyledToolbarWrap>
-    //             <p>Add new activities to the list to see them here.</p>
-    //         </main>
-    //     </div>;
-    // }
-
     return (
         <>
             <Head>
