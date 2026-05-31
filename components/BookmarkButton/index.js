@@ -1,4 +1,5 @@
 import { StyledBookmarkButton } from "./BookmarkButton.styled";
+import BeeIcon from "../BeeIcon";
 export default function BookmarkButton({
     onHandleToggleBookmark,
     id,
@@ -13,21 +14,15 @@ export default function BookmarkButton({
                 <StyledBookmarkButton
                     onClick={() => onHandleToggleBookmark(id)}
                 >
-                    🐝
+                    <BeeIcon />
                 </StyledBookmarkButton>
             ) : (
                 <StyledBookmarkButton
                     onClick={() => onHandleToggleBookmark(id)}
                 >
-                    ⭕
+                    <BeeIcon bodyColor="transparent" />
                 </StyledBookmarkButton>
             )}
         </>
     );
-}
-
-{
-    /* <StyledBookmarkButton onClick={() => onHandleToggleBookmark(id)}>
-            ⭕
-        </StyledBookmarkButton> */
 }

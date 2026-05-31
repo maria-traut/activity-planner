@@ -1,6 +1,10 @@
 import Link from "next/link";
-import { StyledNavbarLink } from "./Navigation.styled";
+import { StyledNavbarLink, StyledNavbarContainer } from "./Navigation.styled";
 
 export default function Navbar() {
-    return <StyledNavbarLink href="/bookmarks">BOOKMARKS</StyledNavbarLink>;
+    return (
+        <StyledNavbarContainer>
+            <StyledNavbarLink href="/bookmarks">BOOKMARKS</StyledNavbarLink>
+        </StyledNavbarContainer>
+    );
 }
