@@ -11,7 +11,10 @@ import {
     StyledStatusMessageWrap,
 } from "@/components/Global/Global.styled";
 
-export default function HomePage({ onHandleToggleBookmark }) {
+export default function HomePage({
+    onHandleToggleBookmark,
+    bookmarkedActivities,
+}) {
     const [isCreateActivityMode, setIsCreateActivityMode] = useState(false);
     const {
         data: activities,
@@ -140,6 +143,7 @@ export default function HomePage({ onHandleToggleBookmark }) {
                 <ActivityList
                     activities={activities}
                     onHandleToggleBookmark={onHandleToggleBookmark}
+                    bookmarkedActivities={bookmarkedActivities}
                 />
             </main>
         </>
