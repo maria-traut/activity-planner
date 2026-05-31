@@ -2,9 +2,18 @@ export default function BeeIcon({
     size = 30,
     bodyColor = "#ffcb1e",
     outlineColor = "#000",
+    rotation = 0,
 }) {
     return (
-        <svg viewBox="0 0 117.47 122.88" width={size} height={size}>
+        <svg
+            viewBox="0 0 117.47 122.88"
+            width={size}
+            height={size}
+            style={{
+                transform: `rotate(${rotation}deg)`,
+                transformOrigin: "center",
+            }}
+        >
             <path
                 stroke={outlineColor}
                 fillRule="evenodd"
