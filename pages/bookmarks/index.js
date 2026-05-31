@@ -30,7 +30,7 @@ export default function Bookmarks({
                 <Head>
                     <title> Activity Planner</title>
                 </Head>
-                <Header />
+                <Header title="Bookmarks" />
                 <main>
                     <StyledToolbarWrap>
                         <StyledToolbar>
@@ -49,7 +49,7 @@ export default function Bookmarks({
                 <Head>
                     <title> Activity Planner</title>
                 </Head>
-                <Header />
+                <Header title="Bookmarks" />
                 <main>
                     <StyledToolbarWrap>
                         <StyledToolbar>
@@ -67,7 +67,7 @@ export default function Bookmarks({
             <Head>
                 <title>My Bookmarks | Activity Planner</title>
             </Head>
-            <Header />
+            <Header title="Bookmarks" />
             <StyledToolbarWrap>
                 <StyledToolbar>
                     <BackButton />
@@ -85,10 +85,3 @@ export default function Bookmarks({
         </>
     );
 }
-
-// const StyledHeading = styled.h1`
-//     font-size: 1.75rem;
-//     line-height: 1.5;
-//     text-align: center;
-//     width: 100%;
-// `;
