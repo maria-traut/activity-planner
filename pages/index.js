@@ -13,12 +13,32 @@ export default function HomePage() {
     mutate,
   } = useSWR("/api/activities");
 
-  // console.log("activities with timestamp", activities);
+  console.log("activities with timestamp", activities);
 
   const [activityFormStatus, setActivityFormStatus] = useState({
     type: "",
     message: "",
   });
+
+  const [activitySortOrder, setActivitySortOrder] = useState("newest");
+
+  const sortedByDateActivities = activities
+    ? [...activities].sort((a, b) => {
+        if (activitySortOrder === "newest") {
+          return (
+            new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+          );
+        } else {
+          return (
+            new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime()
+          );
+        }
+      })
+    : [];
+
+  function handleActivityDateSort(order) {
+    setActivitySortOrder(order);
+  }
 
   useEffect(() => {
     const successMessageTimer = setTimeout(() => {
@@ -91,8 +111,11 @@ export default function HomePage() {
         status={activityFormStatus}
         heading="Add Activity"
       />
-      <SortButton />
-      <ActivityList activities={activities} />
+      <SortButton
+        onActivityDateSort={handleActivityDateSort}
+        activitySortOrder={activitySortOrder}
+      />
+      <ActivityList activities={sortedByDateActivities} />
     </div>
   );
 }
