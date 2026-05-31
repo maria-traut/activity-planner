@@ -13,7 +13,6 @@ export default function Bookmarks({
     bookmarkedActivities,
     onHandleToggleBookmark,
 }) {
-    console.log("bookmarked:", bookmarkedActivities);
     const {
         data: activities,
         isLoading,
@@ -63,6 +62,23 @@ export default function Bookmarks({
         );
     }
 
+    // if (!bookmarkedActivities.length) {
+    //     <div>
+    //         <Head>
+    //             <title> Activity Planner</title>
+    //         </Head>
+    //         <Header />
+    //         <main>
+    //             <StyledToolbarWrap>
+    //                 <StyledToolbar>
+    //                     <BackButton />
+    //                 </StyledToolbar>
+    //             </StyledToolbarWrap>
+    //             <p>Add new activities to the list to see them here.</p>
+    //         </main>
+    //     </div>;
+    // }
+
     return (
         <>
             <Head>
@@ -80,7 +96,7 @@ export default function Bookmarks({
                     onHandleToggleBookmark={onHandleToggleBookmark}
                 />
             ) : (
-                "Add new activities to the list to see them here."
+                <p>Add new activities to the list to see them here.</p>
             )}
         </>
     );

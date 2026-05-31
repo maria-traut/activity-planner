@@ -6,8 +6,14 @@ export const StyledActivityList = styled.ul`
     gap: 1rem;
     padding: 0 1rem;
     margin: 0;
+
     grid-template-columns: repeat(2, 1fr);
     @media (min-width: 768px) {
         grid-template-columns: repeat(3, 1fr);
     }
+`;
+
+export const StyledActivityCardContainer = styled.div`
+    background-color: aliceblue;
+    position: relative;
 `;

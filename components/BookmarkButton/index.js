@@ -1,3 +1,8 @@
+import { StyledBookmarkButton } from "./BookmarkButton.styled";
 export default function BookmarkButton({ onHandleToggleBookmark, id }) {
-    return <button onClick={() => onHandleToggleBookmark(id)}>🐝</button>;
+    return (
+        <StyledBookmarkButton onClick={() => onHandleToggleBookmark(id)}>
+            🐝
+        </StyledBookmarkButton>
+    );
 }
