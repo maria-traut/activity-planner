@@ -1,10 +1,13 @@
 import Link from "next/link";
 import { StyledNavbarLink, StyledNavbarContainer } from "./Navigation.styled";
+import BeeIcon from "../BeeIcon";
 
 export default function Navbar() {
     return (
         <StyledNavbarContainer>
-            <StyledNavbarLink href="/bookmarks">BOOKMARKS</StyledNavbarLink>
+            <StyledNavbarLink href="/bookmarks">
+                <BeeIcon size="50" rotation="30" />
+            </StyledNavbarLink>
         </StyledNavbarContainer>
     );
 }
