@@ -1,8 +1,33 @@
 import { StyledBookmarkButton } from "./BookmarkButton.styled";
-export default function BookmarkButton({ onHandleToggleBookmark, id }) {
+export default function BookmarkButton({
+    onHandleToggleBookmark,
+    id,
+    bookmarkedActivities,
+}) {
+    //is favorite const here. compares id to the ids passed saved in state
+    const isFavorite = bookmarkedActivities.includes(id);
+
     return (
-        <StyledBookmarkButton onClick={() => onHandleToggleBookmark(id)}>
-            🐝
-        </StyledBookmarkButton>
+        <>
+            {isFavorite ? (
+                <StyledBookmarkButton
+                    onClick={() => onHandleToggleBookmark(id)}
+                >
+                    🐝
+                </StyledBookmarkButton>
+            ) : (
+                <StyledBookmarkButton
+                    onClick={() => onHandleToggleBookmark(id)}
+                >
+                    ⭕
+                </StyledBookmarkButton>
+            )}
+        </>
     );
+}
+
+{
+    /* <StyledBookmarkButton onClick={() => onHandleToggleBookmark(id)}>
+            ⭕
+        </StyledBookmarkButton> */
 }

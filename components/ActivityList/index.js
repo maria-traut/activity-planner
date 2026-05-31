@@ -5,7 +5,11 @@ import {
     StyledActivityCardContainer,
 } from "./ActivityList.styled";
 
-export default function ActivityList({ activities, onHandleToggleBookmark }) {
+export default function ActivityList({
+    activities,
+    onHandleToggleBookmark,
+    bookmarkedActivities,
+}) {
     return (
         <StyledActivityList>
             {activities.map((activity) => (
@@ -20,6 +24,7 @@ export default function ActivityList({ activities, onHandleToggleBookmark }) {
                         <BookmarkButton
                             onHandleToggleBookmark={onHandleToggleBookmark}
                             id={activity._id}
+                            bookmarkedActivities={bookmarkedActivities}
                         />
                     </StyledActivityCardContainer>
                 </li>

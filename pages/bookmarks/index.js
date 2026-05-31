@@ -94,6 +94,7 @@ export default function Bookmarks({
                 <ActivityList
                     activities={bookmarkedActivityData}
                     onHandleToggleBookmark={onHandleToggleBookmark}
+                    bookmarkedActivities={bookmarkedActivities}
                 />
             ) : (
                 <p>Add new activities to the list to see them here.</p>
