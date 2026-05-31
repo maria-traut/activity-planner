@@ -24,9 +24,7 @@ export default function App({ Component, pageProps }) {
         });
     function handleToggleBookmark(id) {
         setBookmarkedActivities((prevBookmarkedActivities) => {
-            const isAdded = prevBookmarkedActivities.find(
-                (toggledId) => toggledId === id
-            ); //.includes(id) besser?
+            const isAdded = prevBookmarkedActivities.includes(id);
             if (isAdded) {
                 return prevBookmarkedActivities.filter(
                     (bookmarkId) => bookmarkId !== id
