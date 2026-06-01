@@ -13,8 +13,6 @@ export default function HomePage() {
     mutate,
   } = useSWR("/api/activities");
 
-  console.log("activities with timestamp", activities);
-
   const [activityFormStatus, setActivityFormStatus] = useState({
     type: "",
     message: "",
@@ -22,21 +20,34 @@ export default function HomePage() {
 
   const [activitySortOrder, setActivitySortOrder] = useState("newest");
 
-  const sortedByDateActivities = activities
+  const sortedActivities = activities
     ? [...activities].sort((a, b) => {
+        if (activitySortOrder === "az") {
+          if (a.title.toUpperCase() > b.title.toUpperCase()) return 1;
+          if (a.title.toUpperCase() < b.title.toUpperCase()) return -1;
+          return 0;
+        }
+        if (activitySortOrder === "za") {
+          if (b.title.toUpperCase() > a.title.toUpperCase()) return 1;
+          if (b.title.toUpperCase() < a.title.toUpperCase()) return -1;
+          return 0;
+        }
         if (activitySortOrder === "newest") {
           return (
             new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
           );
-        } else {
+        }
+        if (activitySortOrder === "oldest") {
           return (
             new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime()
           );
         }
+        return 0;
       })
     : [];
 
-  function handleActivityDateSort(order) {
+  function handleActivitySort(order) {
+    console.log(order);
     setActivitySortOrder(order);
   }
 
@@ -111,11 +122,8 @@ export default function HomePage() {
         status={activityFormStatus}
         heading="Add Activity"
       />
-      <SortButton
-        onActivityDateSort={handleActivityDateSort}
-        activitySortOrder={activitySortOrder}
-      />
-      <ActivityList activities={sortedByDateActivities} />
+      <SortButton onActivitySort={handleActivitySort} />
+      <ActivityList activities={sortedActivities} />
     </div>
   );
 }
