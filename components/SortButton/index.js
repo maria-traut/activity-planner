@@ -1,64 +1,114 @@
 import { useState } from "react";
-import styled from "styled-components";
+import {
+  StyledToolbarWrap,
+  StyledToolbar,
+  StyledButton,
+} from "../Global/Global.styled";
+import {
+  StyledFormFieldset,
+  StyledFormWrap,
+  StyledFormSection,
+} from "./SortButton.styled";
 
-export default function SortButton({ onActivityDateSort, activitySortOrder }) {
+export default function SortButton({ onActivitySort }) {
   const [isSortActivityMode, setIsSortActivityMode] = useState(false);
+  const [selectedSort, setSelectedSort] = useState("newest");
 
   function handleSubmit(event) {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const dateOrder = formData.get("sort-date");
-    onActivityDateSort(dateOrder);
+    onActivitySort(selectedSort);
     setIsSortActivityMode(false);
   }
 
   function handleReset() {
-    onActivityDateSort("newest");
+    setSelectedSort("newest");
+    onActivitySort("newest");
     setIsSortActivityMode(false);
   }
 
   return (
     <>
-      <button
-        type="button"
-        onClick={() => setIsSortActivityMode(!isSortActivityMode)}
-      >
-        Sort{isSortActivityMode ? " ▲" : " ▼"}
-      </button>
+      <StyledToolbarWrap>
+        <StyledToolbar>
+          <StyledButton
+            type="button"
+            onClick={() => setIsSortActivityMode(!isSortActivityMode)}
+          >
+            Sort{isSortActivityMode ? " ▲" : " ▼"}
+          </StyledButton>
+        </StyledToolbar>
+      </StyledToolbarWrap>
       {isSortActivityMode && (
-        <form onSubmit={handleSubmit}>
-          <fieldset>
-            <StyledSortWrapper>
+        <StyledFormWrap>
+          <form onSubmit={handleSubmit}>
+            <StyledFormFieldset>
               <div>
-                <label htmlFor="sort-title">Title </label>
-                <select id="sort-title" name="sort-title">
-                  <option value="az">A to Z</option>
-                  <option value="za">Z to A</option>
-                </select>
+                <p>Date</p>
+                <StyledFormSection>
+                  <label htmlFor="sort-newest">
+                    <input
+                      type="radio"
+                      id="sort-newest"
+                      name="sort"
+                      value="newest"
+                      checked={selectedSort === "newest"}
+                      onChange={() => setSelectedSort("newest")}
+                    />
+                    New to Old
+                  </label>
+
+                  <label htmlFor="sort-oldest">
+                    <input
+                      type="radio"
+                      id="sort-oldest"
+                      name="sort"
+                      value="oldest"
+                      checked={selectedSort === "oldest"}
+                      onChange={() => setSelectedSort("oldest")}
+                    />
+                    Old to New
+                  </label>
+                </StyledFormSection>
               </div>
               <div>
-                <label htmlFor="sort-date">Date </label>
-                <select
-                  id="sort-date"
-                  name="sort-date"
-                  defaultValue={activitySortOrder}
-                >
-                  <option value="newest">New to Old</option>
-                  <option value="oldest">Old to New</option>
-                </select>
+                <p>Title</p>
+                <StyledFormSection>
+                  <label htmlFor="sort-az">
+                    <input
+                      type="radio"
+                      id="sort-az"
+                      name="sort"
+                      value="az"
+                      checked={selectedSort === "az"}
+                      onChange={() => setSelectedSort("az")}
+                    />
+                    A to Z
+                  </label>
+
+                  <label htmlFor="sort-za">
+                    <input
+                      type="radio"
+                      id="sort-za"
+                      name="sort"
+                      value="za"
+                      checked={selectedSort === "za"}
+                      onChange={() => setSelectedSort("za")}
+                    />
+                    Z to A
+                  </label>
+                </StyledFormSection>
               </div>
-            </StyledSortWrapper>
-            <button type="submit">Apply</button>
-            <button type="button" onClick={handleReset}>
-              Reset
-            </button>
-          </fieldset>
-        </form>
+
+              <StyledToolbar>
+                <StyledButton type="submit">Apply</StyledButton>
+                <StyledButton type="button" onClick={handleReset}>
+                  Reset
+                </StyledButton>
+              </StyledToolbar>
+            </StyledFormFieldset>
+          </form>
+        </StyledFormWrap>
       )}
     </>
   );
 }
-
-const StyledSortWrapper = styled.div`
-  display: flex;
-`;
