@@ -75,7 +75,10 @@ export default function Bookmarks({
                         bookmarkedActivityIds={bookmarkedActivityIds}
                     />
                 ) : (
-                    <p>Add new activities to the list to see them here.</p>
+                    <p>
+                        No bookmarks yet. Tap the bee on any activity to save it
+                        here.
+                    </p>
                 )}
             </main>
         </>
