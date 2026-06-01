@@ -12,7 +12,10 @@ import {
     StyledStatusMessageWrap,
 } from "@/components/Global/Global.styled";
 
-export default function HomePage() {
+export default function HomePage({
+    handleBookmarkToggle,
+    bookmarkedActivityIds,
+}) {
     const [isCreateActivityMode, setIsCreateActivityMode] = useState(false);
 
     const {
@@ -175,7 +178,11 @@ export default function HomePage() {
                     />
                 )}
                 <SortButton onActivitySort={handleActivitySort} />
-                <ActivityList activities={sortedActivities} />
+                <ActivityList
+                    activities={sortedActivities}
+                    handleBookmarkToggle={handleBookmarkToggle}
+                    bookmarkedActivityIds={bookmarkedActivityIds}
+                />
             </main>
         </>
     );
