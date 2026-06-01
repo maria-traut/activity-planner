@@ -1,5 +1,8 @@
 import { SWRConfig } from "swr";
 import GlobalStyle from "../styles";
+import useLocalStorageState from "use-local-storage-state";
+
+import Navbar from "@/components/Navigation";
 
 const fetcher = async (resource, init) => {
     const result = await fetch(resource, init);
@@ -15,11 +18,40 @@ const fetcher = async (resource, init) => {
 };
 
 export default function App({ Component, pageProps }) {
+    const [bookmarkedActivityIds, setBookmarkedActivityIds] =
+        useLocalStorageState("bookmarkedActivityIds", {
+            defaultValue: [],
+        });
+    function handleBookmarkToggle(id) {
+        setBookmarkedActivityIds((prevBookmarkedActivityIds) => {
+            const isAdded = prevBookmarkedActivityIds.includes(id);
+            if (isAdded) {
+                return prevBookmarkedActivityIds.filter(
+                    (bookmarkId) => bookmarkId !== id
+                );
+            }
+
+            return [...prevBookmarkedActivityIds, id];
+        });
+    }
+    function handleBookmarkedActivityIdsDelete(id) {
+        setBookmarkedActivityIds((prevBookmarkedActivityIds) =>
+            prevBookmarkedActivityIds.filter((bookmarkId) => bookmarkId !== id)
+        );
+    }
     return (
         <>
             <GlobalStyle />
             <SWRConfig value={{ fetcher }}>
-                <Component {...pageProps} />
+                <Component
+                    {...pageProps}
+                    bookmarkedActivityIds={bookmarkedActivityIds}
+                    handleBookmarkToggle={handleBookmarkToggle}
+                    onBookmarkedActivityIdsDelete={
+                        handleBookmarkedActivityIdsDelete
+                    }
+                />
+                <Navbar />
             </SWRConfig>
         </>
     );
