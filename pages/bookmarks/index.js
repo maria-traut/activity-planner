@@ -13,7 +13,7 @@ export default function Bookmarks({
     bookmarkedActivities,
     handleBookmarkToggle,
 }) {
-    const { data: activities, isLoading, error } = useSWR("/api/activities");
+    const { data: activities, isLoading, errorgit } = useSWR("/api/activities");
 
     const bookmarkedActivityData = activities?.filter((activity) =>
         bookmarkedActivities.includes(activity._id)

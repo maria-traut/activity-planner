@@ -9,9 +9,14 @@ import {
     StyledActivityDetailTitle,
     StyledActivityDetailDescriptionWrap,
 } from "./ActivityDetail.styled";
+import BookmarkButton from "../BookmarkButton";
 import { getCountryName } from "@/lib/countries";
 
-export default function ActivityDetail({ activity }) {
+export default function ActivityDetail({
+    activity,
+    handleBookmarkToggle,
+    bookmarkedActivities,
+}) {
     return (
         <>
             <StyledActivityInfoContainer>
@@ -43,6 +48,11 @@ export default function ActivityDetail({ activity }) {
                                 {activity.title}
                             </StyledActivityDetailTitle>
                         )}
+                        <BookmarkButton
+                            onBookmarkToggle={handleBookmarkToggle}
+                            id={activity._id}
+                            bookmarkedActivities={bookmarkedActivities}
+                        />
                     </StyledImageLayerTop>
                     <StyledImageLayerBottom>
                         {activity.categories && (
