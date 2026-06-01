@@ -8,7 +8,7 @@ import {
 export default function ActivityList({
     activities,
     handleBookmarkToggle,
-    bookmarkedActivities,
+    bookmarkedActivityIds,
 }) {
     return (
         <StyledActivityList>
@@ -24,7 +24,7 @@ export default function ActivityList({
                         <BookmarkButton
                             onBookmarkToggle={handleBookmarkToggle}
                             id={activity._id}
-                            bookmarkedActivities={bookmarkedActivities}
+                            bookmarkedActivityIds={bookmarkedActivityIds}
                         />
                     </StyledActivityCardContainer>
                 </li>

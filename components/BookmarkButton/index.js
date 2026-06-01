@@ -3,10 +3,9 @@ import BeeIcon from "../BeeIcon";
 export default function BookmarkButton({
     onBookmarkToggle,
     id,
-    bookmarkedActivities,
+    bookmarkedActivityIds,
 }) {
-    //is favorite const here. compares id to the ids passed saved in state
-    const isFavorite = bookmarkedActivities.includes(id);
+    const isFavorite = bookmarkedActivityIds?.includes(id);
 
     return (
         <StyledBookmarkButton

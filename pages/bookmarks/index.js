@@ -1,5 +1,4 @@
 import useSWR from "swr";
-import styled from "styled-components";
 import Head from "next/head";
 import Header from "@/components/Header";
 import BackButton from "@/components/BackButton";
@@ -10,13 +9,13 @@ import {
 import ActivityList from "@/components/ActivityList";
 
 export default function Bookmarks({
-    bookmarkedActivities,
     handleBookmarkToggle,
+    bookmarkedActivityIds,
 }) {
-    const { data: activities, isLoading, errorgit } = useSWR("/api/activities");
+    const { data: activities, isLoading, error } = useSWR("/api/activities");
 
-    const bookmarkedActivityData = activities?.filter((activity) =>
-        bookmarkedActivities.includes(activity._id)
+    const bookmarkedActivities = activities?.filter((activity) =>
+        bookmarkedActivityIds.includes(activity._id)
     );
 
     if (isLoading) {
@@ -68,11 +67,11 @@ export default function Bookmarks({
                     <BackButton />
                 </StyledToolbar>
             </StyledToolbarWrap>
-            {bookmarkedActivities.length > 0 ? (
+            {bookmarkedActivityIds.length > 0 ? (
                 <ActivityList
-                    activities={bookmarkedActivityData}
+                    activities={bookmarkedActivities}
                     handleBookmarkToggle={handleBookmarkToggle}
-                    bookmarkedActivities={bookmarkedActivities}
+                    bookmarkedActivityIds={bookmarkedActivityIds}
                 />
             ) : (
                 <p>Add new activities to the list to see them here.</p>

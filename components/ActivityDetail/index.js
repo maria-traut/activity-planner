@@ -15,7 +15,7 @@ import { getCountryName } from "@/lib/countries";
 export default function ActivityDetail({
     activity,
     handleBookmarkToggle,
-    bookmarkedActivities,
+    bookmarkedActivityIds,
 }) {
     return (
         <>
@@ -65,7 +65,7 @@ export default function ActivityDetail({
                     <BookmarkButton
                         onBookmarkToggle={handleBookmarkToggle}
                         id={activity._id}
-                        bookmarkedActivities={bookmarkedActivities}
+                        bookmarkedActivityIds={bookmarkedActivityIds}
                     />
                 </StyledImageContainer>
                 <StyledActivityDetailDescriptionWrap>
