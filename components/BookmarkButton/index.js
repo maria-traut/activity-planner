@@ -1,7 +1,7 @@
 import { StyledBookmarkButton } from "./BookmarkButton.styled";
 import BeeIcon from "../BeeIcon";
 export default function BookmarkButton({
-    onHandleToggleBookmark,
+    onBookmarkToggle,
     id,
     bookmarkedActivities,
 }) {
@@ -11,7 +11,7 @@ export default function BookmarkButton({
     return (
         <StyledBookmarkButton
             aria-label={isFavorite ? "Remove bookmark" : "Add bookmark"}
-            onClick={() => onHandleToggleBookmark(id)}
+            onClick={() => onBookmarkToggle(id)}
         >
             <BeeIcon bodyColor={isFavorite ? "#ffcb1e" : "transparent"} />
         </StyledBookmarkButton>

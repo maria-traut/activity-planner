@@ -7,7 +7,7 @@ import {
 
 export default function ActivityList({
     activities,
-    onHandleToggleBookmark,
+    handleBookmarkToggle,
     bookmarkedActivities,
 }) {
     return (
@@ -22,7 +22,7 @@ export default function ActivityList({
                             id={activity._id}
                         />
                         <BookmarkButton
-                            onHandleToggleBookmark={onHandleToggleBookmark}
+                            onBookmarkToggle={handleBookmarkToggle}
                             id={activity._id}
                             bookmarkedActivities={bookmarkedActivities}
                         />

@@ -12,7 +12,7 @@ import {
 } from "@/components/Global/Global.styled";
 
 export default function HomePage({
-    onHandleToggleBookmark,
+    handleBookmarkToggle,
     bookmarkedActivities,
 }) {
     const [isCreateActivityMode, setIsCreateActivityMode] = useState(false);
@@ -142,7 +142,7 @@ export default function HomePage({
                 )}
                 <ActivityList
                     activities={activities}
-                    onHandleToggleBookmark={onHandleToggleBookmark}
+                    handleBookmarkToggle={handleBookmarkToggle}
                     bookmarkedActivities={bookmarkedActivities}
                 />
             </main>
