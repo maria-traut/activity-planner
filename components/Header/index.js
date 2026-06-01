@@ -1,9 +1,9 @@
 import { StyledHeading } from "./Header.styled";
 
-export default function Header() {
+export default function Header({ title = "Activity Planner" }) {
     return (
         <header>
-            <StyledHeading>Activity Planner</StyledHeading>
+            <StyledHeading>{title}</StyledHeading>
         </header>
     );
 }

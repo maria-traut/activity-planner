@@ -25,6 +25,7 @@ export default createGlobalStyle`
     flex-direction:column;
     gap:2rem;
     padding: 2rem 0;
+
   }
 
   input[type="text"], input[type="password"], textarea {
