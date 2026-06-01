@@ -18,7 +18,10 @@ import {
 } from "@/components/Global/Global.styled";
 import Header from "@/components/Header";
 
-export default function Activity() {
+export default function Activity({
+    handleBookmarkToggle,
+    bookmarkedActivities,
+}) {
     const router = useRouter();
     const { id } = router.query;
 
@@ -252,7 +255,11 @@ export default function Activity() {
                         isEditActivityMode={isEditActivityMode}
                     />
                 )}
-                <ActivityDetail activity={activity} />
+                <ActivityDetail
+                    activity={activity}
+                    handleBookmarkToggle={handleBookmarkToggle}
+                    bookmarkedActivities={bookmarkedActivities}
+                />
             </main>
         </>
     );
