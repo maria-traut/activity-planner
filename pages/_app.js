@@ -22,7 +22,7 @@ export default function App({ Component, pageProps }) {
         useLocalStorageState("bookmarkedActivities", {
             defaultValue: [],
         });
-    function handleToggleBookmark(id) {
+    function handleBookmarkToggle(id) {
         setBookmarkedActivities((prevBookmarkedActivities) => {
             const isAdded = prevBookmarkedActivities.includes(id);
             if (isAdded) {
@@ -41,7 +41,7 @@ export default function App({ Component, pageProps }) {
                 <Component
                     {...pageProps}
                     bookmarkedActivities={bookmarkedActivities}
-                    onHandleToggleBookmark={handleToggleBookmark}
+                    handleBookmarkToggle={handleBookmarkToggle}
                 />
                 <Navbar />
             </SWRConfig>

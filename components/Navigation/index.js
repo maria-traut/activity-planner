@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { StyledNavbarLink, StyledNavbarContainer } from "./Navigation.styled";
 import BeeIcon from "../BeeIcon";
 

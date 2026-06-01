@@ -11,14 +11,9 @@ import ActivityList from "@/components/ActivityList";
 
 export default function Bookmarks({
     bookmarkedActivities,
-    onHandleToggleBookmark,
+    handleBookmarkToggle,
 }) {
-    const {
-        data: activities,
-        isLoading,
-        error,
-        mutate,
-    } = useSWR("/api/activities");
+    const { data: activities, isLoading, error } = useSWR("/api/activities");
 
     const bookmarkedActivityData = activities?.filter((activity) =>
         bookmarkedActivities.includes(activity._id)
@@ -76,7 +71,7 @@ export default function Bookmarks({
             {bookmarkedActivities.length > 0 ? (
                 <ActivityList
                     activities={bookmarkedActivityData}
-                    onHandleToggleBookmark={onHandleToggleBookmark}
+                    handleBookmarkToggle={handleBookmarkToggle}
                     bookmarkedActivities={bookmarkedActivities}
                 />
             ) : (
