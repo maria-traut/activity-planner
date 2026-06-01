@@ -31,7 +31,7 @@ export default function App({ Component, pageProps }) {
                 );
             }
 
-            return [...prevBookmarkedActivities, id];
+            return [...prevBookmarkedActivityIds, id];
         });
     }
     function handleBookmarkedActivityIdsDelete(id) {
