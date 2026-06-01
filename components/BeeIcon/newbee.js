@@ -1,3 +1,5 @@
+import { renderToStaticMarkup } from "react-dom/server";
+import { StyledSVG } from "./BeeIcon.styled";
 export default function NewBeeIcon({
     size = 30,
     bodyColor = "#ffcb1e",
@@ -5,18 +7,18 @@ export default function NewBeeIcon({
     rotation = 0,
 }) {
     return (
-        <svg
-            width={size}
-            height={size}
+        <StyledSVG
+            size={size}
+            rotation={rotation}
             viewBox="0 0 202 267"
-            style={{
-                fillRule: "evenodd",
-                clipRule: "evenodd",
-                strokeLinejoin: "round",
-                strokeMiterlimit: 2,
-                transform: `rotate(${rotation}deg)`,
-                transformOrigin: "center",
-            }}
+            // style={{
+            //     fillRule: "evenodd",
+            //     clipRule: "evenodd",
+            //     strokeLinejoin: "round",
+            //     strokeMiterlimit: 2,
+            //     transform: `rotate(${rotation}deg)`,
+            //     transformOrigin: "center",
+            // }}
         >
             <g id="Main">
                 <g id="Body">
@@ -42,7 +44,8 @@ export default function NewBeeIcon({
                         d="M176,153c0,0 0,3 -1,5c-1,1 -1,1 -2,2c-1,0 -2,1 -3,1c-0,0 -0,0 -1,0c-0,0 -6,2 -22,4c-3,1 -15,2 -24,3c-7,1 -9,1 -16,1c-1,0 -8,0 -10,-0c-6,-0 -26,-1 -58,-7c-0,-0 -3,-1 -5,-3c-0,-0 -3,-4 -1,-8c1,-2 4,-3 4,-3c2,-1 2,-0 4,-0c23,0 47,-1 60,-1c4,-0 4,-0 8,-0c4,0 4,-0 9,0c3,0 11,0 12,0c1,0 16,0 25,-0c1,-0 1,-0 11,-0c1,-0 1,0 2,-0c0,-0 3,-0 5,1c2,2 3,4 3,5Z"
                     />
                 </g>
-                {/* <g id="WingsClosed">
+                {/* ANIMATED WING ELEMENTS START HERE */}
+                <g className="WingsClosed">
                     <path
                         fill={bodyColor}
                         id="WingCLosedR"
@@ -61,8 +64,8 @@ export default function NewBeeIcon({
                         fill={outlineColor}
                         d="M30,181c4,-21 16,-67 31,-86c1,-1 1,-1 1,-1c1,-0 1,-1 2,-1c0,-0 2,1 2,1c0,1 1,1 1,2c0,1 -0,1 -1,2c-2,2 -12,16 -23,70c-2,10 -3,16 -3,16c-0,0 -1,2 0,7c3,14 18,36 31,39c1,0 3,0 3,0c2,-1 7,-6 12,-29c0,-0 2,-9 5,-26c3,-21 5,-39 6,-43c1,-6 1,-6 1,-8c0,-1 1,-6 1,-12c0,-2 -0,-3 -0,-3c0,-1 0,-1 1,-2c0,-0 2,-1 2,-1c2,1 3,0 3,3c1,6 0,14 0,15c-0,1 0,36 -5,69c-5,34 -13,48 -23,50c-0,0 -5,1 -12,-2c-20,-9 -35,-41 -34,-55c0,-2 1,-3 1,-4Z"
                     />
-                </g> */}
-                <g id="WingsOpen">
+                </g>
+                <g className="WingsOpen">
                     <path
                         fill={bodyColor}
                         id="WingOpenL"
@@ -82,6 +85,8 @@ export default function NewBeeIcon({
                         d="M193,151c1,1 6,7 6,23c0,18 -6,44 -23,51c-12,5 -25,-11 -34,-23c-2,-3 -10,-15 -22,-37c-3,-5 -10,-20 -16,-35c-1,-2 -1,-2 -1,-3c-3,-6 -5,-13 -5,-13c0,-1 -0,-1 0,-2c0,-0 1,-1 1,-1c1,0 1,-0 2,0c1,1 1,1 2,2c1,3 4,8 6,11c1,1 1,1 4,7c1,2 8,16 20,34c18,30 31,45 38,48c2,1 2,0 2,0c10,-4 16,-25 16,-42c-0,-9 -2,-13 -3,-13c-0,-0 -0,-0 -1,-1c-0,-0 -7,-11 -17,-26c-23,-33 -36,-41 -39,-43c-1,-1 -1,-1 -2,-2c-0,-0 0,-2 0,-2c1,-0 1,-1 2,-1c1,-0 1,-0 3,1c19,10 47,46 62,68Z"
                     />
                 </g>
+                {/* ANIMATED WING ELEMENTS END HERE */}
+
                 <g id="Head">
                     <path
                         fill={outlineColor}
@@ -114,6 +119,6 @@ export default function NewBeeIcon({
                     />
                 </g>
             </g>
-        </svg>
+        </StyledSVG>
     );
 }
