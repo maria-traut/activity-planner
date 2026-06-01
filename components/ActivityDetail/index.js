@@ -48,11 +48,6 @@ export default function ActivityDetail({
                                 {activity.title}
                             </StyledActivityDetailTitle>
                         )}
-                        <BookmarkButton
-                            onBookmarkToggle={handleBookmarkToggle}
-                            id={activity._id}
-                            bookmarkedActivities={bookmarkedActivities}
-                        />
                     </StyledImageLayerTop>
                     <StyledImageLayerBottom>
                         {activity.categories && (
@@ -67,6 +62,11 @@ export default function ActivityDetail({
                             </StyledCategories>
                         )}
                     </StyledImageLayerBottom>
+                    <BookmarkButton
+                        onBookmarkToggle={handleBookmarkToggle}
+                        id={activity._id}
+                        bookmarkedActivities={bookmarkedActivities}
+                    />
                 </StyledImageContainer>
                 <StyledActivityDetailDescriptionWrap>
                     {activity.description && (
