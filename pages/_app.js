@@ -23,16 +23,21 @@ export default function App({ Component, pageProps }) {
             defaultValue: [],
         });
     function handleBookmarkToggle(id) {
-        setBookmarkedActivityIds((prevBookmarkedActivities) => {
-            const isAdded = prevBookmarkedActivities.includes(id);
+        setBookmarkedActivityIds((prevBookmarkedActivityIds) => {
+            const isAdded = prevBookmarkedActivityIds.includes(id);
             if (isAdded) {
-                return prevBookmarkedActivities.filter(
+                return prevBookmarkedActivityIds.filter(
                     (bookmarkId) => bookmarkId !== id
                 );
             }
 
             return [...prevBookmarkedActivities, id];
         });
+    }
+    function handleBookmarkedActivityIdsDelete(id) {
+        setBookmarkedActivityIds((prevBookmarkedActivityIds) =>
+            prevBookmarkedActivityIds.filter((bookmarkId) => bookmarkId !== id)
+        );
     }
     return (
         <>
@@ -42,7 +47,9 @@ export default function App({ Component, pageProps }) {
                     {...pageProps}
                     bookmarkedActivityIds={bookmarkedActivityIds}
                     handleBookmarkToggle={handleBookmarkToggle}
-                    setBookmarkedActivityIds={setBookmarkedActivityIds}
+                    onBookmarkedActivityIdsDelete={
+                        handleBookmarkedActivityIdsDelete
+                    }
                 />
                 <Navbar />
             </SWRConfig>

@@ -21,7 +21,7 @@ import Header from "@/components/Header";
 export default function Activity({
     handleBookmarkToggle,
     bookmarkedActivityIds,
-    setBookmarkedActivityIds,
+    onBookmarkedActivityIdsDelete,
 }) {
     const router = useRouter();
     const { id } = router.query;
@@ -99,11 +99,7 @@ export default function Activity({
                 type: "success",
                 message: "Activity has successfully been deleted!",
             });
-            setBookmarkedActivityIds((prevBookmarkedActivityIds) =>
-                prevBookmarkedActivityIds.filter(
-                    (bookmarkId) => bookmarkId !== id
-                )
-            );
+            onBookmarkedActivityIdsDelete(id);
         } else {
             setActivityFormStatus({
                 type: "error",

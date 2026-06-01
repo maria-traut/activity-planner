@@ -67,7 +67,7 @@ export default function Bookmarks({
                     <BackButton />
                 </StyledToolbar>
             </StyledToolbarWrap>
-            {bookmarkedActivityIds.length > 0 ? (
+            {bookmarkedActivities.length > 0 ? (
                 <ActivityList
                     activities={bookmarkedActivities}
                     handleBookmarkToggle={handleBookmarkToggle}
