@@ -18,7 +18,11 @@ import {
 } from "@/components/Global/Global.styled";
 import Header from "@/components/Header";
 
-export default function Activity() {
+export default function Activity({
+    handleBookmarkToggle,
+    bookmarkedActivityIds,
+    onBookmarkedActivityIdsDelete,
+}) {
     const router = useRouter();
     const { id } = router.query;
 
@@ -95,6 +99,7 @@ export default function Activity() {
                 type: "success",
                 message: "Activity has successfully been deleted!",
             });
+            onBookmarkedActivityIdsDelete(id);
         } else {
             setActivityFormStatus({
                 type: "error",
@@ -252,7 +257,11 @@ export default function Activity() {
                         isEditActivityMode={isEditActivityMode}
                     />
                 )}
-                <ActivityDetail activity={activity} />
+                <ActivityDetail
+                    activity={activity}
+                    handleBookmarkToggle={handleBookmarkToggle}
+                    bookmarkedActivityIds={bookmarkedActivityIds}
+                />
             </main>
         </>
     );
