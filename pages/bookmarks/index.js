@@ -62,20 +62,22 @@ export default function Bookmarks({
                 <title>My Bookmarks | Activity Planner</title>
             </Head>
             <Header title="Bookmarks" />
-            <StyledToolbarWrap>
-                <StyledToolbar>
-                    <BackButton />
-                </StyledToolbar>
-            </StyledToolbarWrap>
-            {bookmarkedActivities.length > 0 ? (
-                <ActivityList
-                    activities={bookmarkedActivities}
-                    handleBookmarkToggle={handleBookmarkToggle}
-                    bookmarkedActivityIds={bookmarkedActivityIds}
-                />
-            ) : (
-                <p>Add new activities to the list to see them here.</p>
-            )}
+            <main>
+                <StyledToolbarWrap>
+                    <StyledToolbar>
+                        <BackButton />
+                    </StyledToolbar>
+                </StyledToolbarWrap>
+                {bookmarkedActivities.length > 0 ? (
+                    <ActivityList
+                        activities={bookmarkedActivities}
+                        handleBookmarkToggle={handleBookmarkToggle}
+                        bookmarkedActivityIds={bookmarkedActivityIds}
+                    />
+                ) : (
+                    <p>Add new activities to the list to see them here.</p>
+                )}
+            </main>
         </>
     );
 }
