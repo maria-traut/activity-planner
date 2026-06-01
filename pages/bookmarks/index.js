@@ -62,6 +62,7 @@ export default function Bookmarks({
                 <title>My Bookmarks | Activity Planner</title>
             </Head>
             <Header title="Bookmarks" />
+            <main>
             <StyledToolbarWrap>
                 <StyledToolbar>
                     <BackButton />
@@ -76,6 +77,7 @@ export default function Bookmarks({
             ) : (
                 <p>Add new activities to the list to see them here.</p>
             )}
+            </main>
         </>
     );
 }
