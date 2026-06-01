@@ -1,22 +1,22 @@
 import styled from "styled-components";
 
 export const StyledFormWrap = styled.section`
-    padding: 0 1rem;
+    padding: 0 var(--spacing-normal);
 `;
 
 export const StyledFormSection = styled.section`
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: var(--spacing-small);
 `;
 
 export const StyledFormFlex = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: var(--spacing-normal);
 `;
 
 export const StyledFormFieldset = styled.fieldset`
-    padding: 1rem;
-    border-radius: 10px;
+    padding: var(--spacing-normal);
+    border-radius: var(--border-radius-normal);
 `;

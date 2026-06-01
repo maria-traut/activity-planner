@@ -5,18 +5,25 @@ export const StyledActivityInfoContainer = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 1rem;
+    gap: var(--spacing-normal);
 `;
 
 export const StyledImageContainer = styled.div`
     position: relative;
+    width: 100%;
+    height: var(--detail-image-height);
+`;
+
+export const StyledImage = styled(Image)`
+    height: auto;
+    object-fit: cover;
 `;
 
 export const StyledImageLayerTop = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    padding: 1rem;
+    padding: var(--spacing-normal);
     z-index: 2;
 `;
 
@@ -24,15 +31,15 @@ export const StyledImageLayerBottom = styled.div`
     position: absolute;
     bottom: 0;
     left: 0;
-    padding: 1rem;
+    padding: var(--spacing-normal);
     z-index: 1;
 `;
 
 export const StyledActivityDetailTitle = styled.h2`
-    box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.5);
-    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: var(--detail-headline-box-shadow-large);
+    background-color: var(--detail-headline-background-color);
     display: table;
-    padding: 0.5rem 1rem;
+    padding: var(--spacing-small) var(--spacing-normal);
     border-radius: 999px;
 `;
 
@@ -41,14 +48,21 @@ const StyledTagList = styled.ul`
     padding: 0;
     margin: 0;
     display: flex;
-    gap: 0.8rem;
+
+    font-size: var(--text-font-size-small);
+    gap: var(--spacing-local-normal);
 
     li {
         text-align: center;
-        background-color: #e0f0ff;
+        background-color: var(--gray-200);
         border-radius: 999px;
-        padding: 0.4rem 0.8rem;
-        font-size: 0.8rem;
+        padding: var(--spacing-local-small) var(--spacing-local-normal);
+    }
+
+    @media (prefers-color-scheme: dark) {
+        li {
+            background-color: var(--gray-800);
+        }
     }
 `;
 
@@ -56,17 +70,13 @@ export const StyledLocations = styled(StyledTagList)``;
 
 export const StyledCategories = styled(StyledTagList)``;
 
-export const StyledImage = styled(Image)`
-    border-radius: 0px;
-    max-width: 100%;
-    width: 100%;
-    height: auto;
-`;
-
 export const StyledActivityDetailDescriptionWrap = styled.div`
-    padding: 0 1rem;
+    padding: 0 var(--spacing-normal);
 
     article {
         max-width: 80ch;
+        p {
+            white-space: pre-line;
+        }
     }
 `;
