@@ -31,7 +31,7 @@ export default function HomePage({
     });
 
     const [activitySortOrder, setActivitySortOrder] = useState("newest");
-
+    console.log("sortOrder: ", activitySortOrder);
     const sortedActivities = activities
         ? [...activities].sort((a, b) => {
               if (activitySortOrder === "az") {
@@ -44,16 +44,22 @@ export default function HomePage({
                   if (b.title.toUpperCase() < a.title.toUpperCase()) return -1;
                   return 0;
               }
-              if (activitySortOrder === "newest") {
+              if (activitySortOrder === "lastModified") {
                   return (
                       new Date(b.updatedAt).getTime() -
                       new Date(a.updatedAt).getTime()
                   );
               }
+              if (activitySortOrder === "newest") {
+                  return (
+                      new Date(b.createdAt).getTime() -
+                      new Date(a.createdAt).getTime()
+                  );
+              }
               if (activitySortOrder === "oldest") {
                   return (
-                      new Date(a.updatedAt).getTime() -
-                      new Date(b.updatedAt).getTime()
+                      new Date(a.createdAt).getTime() -
+                      new Date(b.createdAt).getTime()
                   );
               }
               return 0;

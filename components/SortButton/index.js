@@ -75,6 +75,21 @@ export default function SortButton({ onActivitySort }) {
                                         />
                                         Old to New
                                     </label>
+                                    <label htmlFor="sort-lastModified">
+                                        <input
+                                            type="radio"
+                                            id="sort-lastModified"
+                                            name="sort"
+                                            value="lastModified"
+                                            checked={
+                                                selectedSort === "lastModified"
+                                            }
+                                            onChange={() =>
+                                                setSelectedSort("lastModified")
+                                            }
+                                        />
+                                        Last Modified
+                                    </label>
                                 </StyledFormSection>
                             </div>
                             <div>
