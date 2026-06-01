@@ -13,7 +13,7 @@ import {
 
 export default function HomePage({
     handleBookmarkToggle,
-    bookmarkedActivities,
+    bookmarkedActivityIds,
 }) {
     const [isCreateActivityMode, setIsCreateActivityMode] = useState(false);
     const {
@@ -143,7 +143,7 @@ export default function HomePage({
                 <ActivityList
                     activities={activities}
                     handleBookmarkToggle={handleBookmarkToggle}
-                    bookmarkedActivities={bookmarkedActivities}
+                    bookmarkedActivityIds={bookmarkedActivityIds}
                 />
             </main>
         </>

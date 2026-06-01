@@ -18,17 +18,17 @@ const fetcher = async (resource, init) => {
 };
 
 export default function App({ Component, pageProps }) {
-    const [bookmarkedActivities, setBookmarkedActivities] =
-        useLocalStorageState("bookmarkedActivities", {
+    const [bookmarkedActivityIds, setBookmarkedActivityIds] =
+        useLocalStorageState("bookmarkedActivityIds", {
             defaultValue: [],
         });
     function handleBookmarkToggle(id) {
-        setBookmarkedActivities((prevBookmarkedActivities) => {
+        setBookmarkedActivityIds((prevBookmarkedActivities) => {
             const isAdded = prevBookmarkedActivities.includes(id);
             if (isAdded) {
                 return prevBookmarkedActivities.filter(
                     (bookmarkId) => bookmarkId !== id
-                ); //removes the bookmark id from the list
+                );
             }
 
             return [...prevBookmarkedActivities, id];
@@ -40,8 +40,9 @@ export default function App({ Component, pageProps }) {
             <SWRConfig value={{ fetcher }}>
                 <Component
                     {...pageProps}
-                    bookmarkedActivities={bookmarkedActivities}
+                    bookmarkedActivityIds={bookmarkedActivityIds}
                     handleBookmarkToggle={handleBookmarkToggle}
+                    setBookmarkedActivityIds={setBookmarkedActivityIds}
                 />
                 <Navbar />
             </SWRConfig>
