@@ -9,20 +9,11 @@ export default function BookmarkButton({
     const isFavorite = bookmarkedActivities.includes(id);
 
     return (
-        <>
-            {isFavorite ? (
-                <StyledBookmarkButton
-                    onClick={() => onHandleToggleBookmark(id)}
-                >
-                    <BeeIcon />
-                </StyledBookmarkButton>
-            ) : (
-                <StyledBookmarkButton
-                    onClick={() => onHandleToggleBookmark(id)}
-                >
-                    <BeeIcon bodyColor="transparent" />
-                </StyledBookmarkButton>
-            )}
-        </>
+        <StyledBookmarkButton
+            aria-label={isFavorite ? "Remove bookmark" : "Add bookmark"}
+            onClick={() => onHandleToggleBookmark(id)}
+        >
+            <BeeIcon bodyColor={isFavorite ? "#ffcb1e" : "transparent"} />
+        </StyledBookmarkButton>
     );
 }
