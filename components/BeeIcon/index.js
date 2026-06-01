@@ -1,5 +1,5 @@
 export default function BeeIcon({
-    size = 30,
+    size = 50,
     bodyColor = "#ffcb1e",
     outlineColor = "#000",
     rotation = 0,
