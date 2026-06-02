@@ -155,7 +155,7 @@ export default function HomePage({
             </Head>
             <Header />
             <main>
-                {!isCreateActivityMode && (
+                {/* {!isCreateActivityMode && (
                     <StyledToolbarWrap>
                         <StyledToolbar>
                             <StyledButton
@@ -173,6 +173,19 @@ export default function HomePage({
                             </StyledButton>
                         </StyledToolbar>
                     </StyledToolbarWrap>
+                )} */}
+                {!isCreateActivityMode && (
+                    <StyledButton
+                        onClick={() => {
+                            setIsCreateActivityMode(!isCreateActivityMode);
+                            setActivityFormStatus({
+                                type: "",
+                                message: "",
+                            });
+                        }}
+                    >
+                        ➕{" "}
+                    </StyledButton>
                 )}
                 {isCreateActivityMode && (
                     <ActivityForm
@@ -189,25 +202,6 @@ export default function HomePage({
                     handleBookmarkToggle={handleBookmarkToggle}
                     bookmarkedActivityIds={bookmarkedActivityIds}
                 />
-                {!isCreateActivityMode && (
-                    <StyledToolbarWrap>
-                        <StyledToolbar>
-                            <StyledButton
-                                onClick={() => {
-                                    setIsCreateActivityMode(
-                                        !isCreateActivityMode
-                                    );
-                                    setActivityFormStatus({
-                                        type: "",
-                                        message: "",
-                                    });
-                                }}
-                            >
-                                ➕{" "}
-                            </StyledButton>
-                        </StyledToolbar>
-                    </StyledToolbarWrap>
-                )}
             </main>
         </>
     );
