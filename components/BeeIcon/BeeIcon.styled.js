@@ -34,11 +34,11 @@ export const StyledSVG = styled.svg`
     transform-origin: center;
 
     .wingsOpen {
-        opacity: 0;
+        opacity: ${(props) => (props.isFavorite ? 1 : 0)};
     }
 
     .wingsClosed {
-        opacity: 1;
+        opacity: ${(props) => (props.isFavorite ? 0 : 1)};
     }
 
     &.isAnimating {
