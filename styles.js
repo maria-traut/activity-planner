@@ -112,6 +112,9 @@ textarea:not([rows]) {
 	--accent-warning-500: hsl(45, 85%, 50%);
 	--accent-warning-800: hsl(45, 15%, 20%);
 
+	--bookmark-button-color1:hsl(208, 100%, 95%);
+	--bookmark-button-color2:hsl(208, 100%, 85%);
+
 	--text-font-family: ${inter.style.fontFamily};
 	--text-font-size-normal:16px;
 	--text-font-size-small:13px;
