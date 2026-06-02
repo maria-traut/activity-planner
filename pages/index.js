@@ -189,6 +189,25 @@ export default function HomePage({
                     handleBookmarkToggle={handleBookmarkToggle}
                     bookmarkedActivityIds={bookmarkedActivityIds}
                 />
+                {!isCreateActivityMode && (
+                    <StyledToolbarWrap>
+                        <StyledToolbar>
+                            <StyledButton
+                                onClick={() => {
+                                    setIsCreateActivityMode(
+                                        !isCreateActivityMode
+                                    );
+                                    setActivityFormStatus({
+                                        type: "",
+                                        message: "",
+                                    });
+                                }}
+                            >
+                                ➕{" "}
+                            </StyledButton>
+                        </StyledToolbar>
+                    </StyledToolbarWrap>
+                )}
             </main>
         </>
     );
