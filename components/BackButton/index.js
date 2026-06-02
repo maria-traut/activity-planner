@@ -1,5 +1,10 @@
-import { StyledLink } from "./BackButton.styled";
+import { StyledButtonBlue } from "../Global/Global.styled";
+import Link from "next/link";
 
 export default function BackButton() {
-    return <StyledLink href="/">&#8619; Back</StyledLink>;
+    return (
+        <StyledButtonBlue as={Link} href="/">
+            &#8619; Back
+        </StyledButtonBlue>
+    );
 }

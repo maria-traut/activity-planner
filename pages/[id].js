@@ -9,7 +9,6 @@ import { StyledFormSection } from "@/components/ActivityForm/ActivityForm.styled
 import {
     StyledButton,
     StyledButtonRed,
-    StyledButtonGreen,
     StyledToolbar,
     StyledToolbarWrap,
     StyledStatusMessageError,
@@ -152,7 +151,7 @@ export default function Activity({
             <main>
                 <StyledToolbarWrap>
                     <StyledToolbar>
-                        <BackButton />
+                        {!isDeleteActivityMode && <BackButton />}
                         {!isEditActivityMode && !isDeleteActivityMode && (
                             <StyledButton
                                 onClick={() => {
