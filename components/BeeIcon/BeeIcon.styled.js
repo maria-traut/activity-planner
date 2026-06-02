@@ -1,4 +1,19 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const flap = keyframes`
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+  `;
+
 export const StyledSVG = styled.svg`
     width: ${(props) => props.size}px;
     height: ${(props) => props.size}px;
@@ -10,23 +25,21 @@ export const StyledSVG = styled.svg`
     transform: rotate(${(props) => props.rotation}deg);
     transform-origin: center;
 
-    .WingsOpen {
+    .wingsOpen {
         opacity: 0;
-        transition: opacity 0.15s ease-in-out;
     }
 
-    .WingsClosed {
+    .wingsClosed {
         opacity: 1;
-        transition: opacity 0.15s ease-in-out;
     }
 
-    &:hover {
-        .WingsOpen {
-            opacity: 1;
+    &.isAnimating {
+        .wingsOpen {
+            animation: ${flap} 0.2s linear infinite;
         }
 
-        .WingsClosed {
-            opacity: 0;
+        .wingsClosed {
+            animation: ${flap} 0.2s linear infinite reverse;
         }
     }
 `;

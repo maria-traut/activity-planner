@@ -1,6 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { StyledSVG } from "./BeeIcon.styled";
 export default function NewBeeIcon({
+    className,
     size = 30,
     bodyColor = "#ffcb1e",
     outlineColor = "#000",
@@ -8,17 +9,10 @@ export default function NewBeeIcon({
 }) {
     return (
         <StyledSVG
+            className={className}
             size={size}
             rotation={rotation}
             viewBox="0 0 202 267"
-            // style={{
-            //     fillRule: "evenodd",
-            //     clipRule: "evenodd",
-            //     strokeLinejoin: "round",
-            //     strokeMiterlimit: 2,
-            //     transform: `rotate(${rotation}deg)`,
-            //     transformOrigin: "center",
-            // }}
         >
             <g id="Main">
                 <g id="Body">
@@ -45,10 +39,10 @@ export default function NewBeeIcon({
                     />
                 </g>
                 {/* ANIMATED WING ELEMENTS START HERE */}
-                <g className="WingsClosed">
+                <g className="wingsClosed">
                     <path
                         fill={bodyColor}
-                        id="WingCLosedR"
+                        id="wingCLosedR"
                         d="M100,112c-0,5 -1,1 -1,5c0,0 7,120 28,120c22,0 46,-45 41,-56c0,0 -15,-67 -32,-89"
                     />
                     <path
@@ -57,7 +51,7 @@ export default function NewBeeIcon({
                     />
                     <path
                         fill={bodyColor}
-                        id="WingClosedL"
+                        id="wingClosedL"
                         d="M100,109c0,5 0,11 -0,15c0,0 -5,112 -26,112c-22,0 -44,-42 -39,-54c0,0 12,-65 29,-87"
                     />
                     <path
@@ -65,7 +59,7 @@ export default function NewBeeIcon({
                         d="M30,181c4,-21 16,-67 31,-86c1,-1 1,-1 1,-1c1,-0 1,-1 2,-1c0,-0 2,1 2,1c0,1 1,1 1,2c0,1 -0,1 -1,2c-2,2 -12,16 -23,70c-2,10 -3,16 -3,16c-0,0 -1,2 0,7c3,14 18,36 31,39c1,0 3,0 3,0c2,-1 7,-6 12,-29c0,-0 2,-9 5,-26c3,-21 5,-39 6,-43c1,-6 1,-6 1,-8c0,-1 1,-6 1,-12c0,-2 -0,-3 -0,-3c0,-1 0,-1 1,-2c0,-0 2,-1 2,-1c2,1 3,0 3,3c1,6 0,14 0,15c-0,1 0,36 -5,69c-5,34 -13,48 -23,50c-0,0 -5,1 -12,-2c-20,-9 -35,-41 -34,-55c0,-2 1,-3 1,-4Z"
                     />
                 </g>
-                <g className="WingsOpen">
+                <g className="wingsOpen">
                     <path
                         fill={bodyColor}
                         id="WingOpenL"
