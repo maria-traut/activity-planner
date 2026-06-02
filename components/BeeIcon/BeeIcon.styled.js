@@ -14,6 +14,14 @@ const flap = keyframes`
   }
   `;
 
+const shake = keyframes`
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(5deg); }
+  50% { transform: rotate(0eg); }
+  75% { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+`;
+
 export const StyledSVG = styled.svg`
     width: ${(props) => props.size}px;
     height: ${(props) => props.size}px;
@@ -34,12 +42,13 @@ export const StyledSVG = styled.svg`
     }
 
     &.isAnimating {
+        animation: ${shake} 0.15s linear infinite;
         .wingsOpen {
-            animation: ${flap} 0.2s linear infinite;
+            animation: ${flap} 0.3s linear infinite;
         }
 
         .wingsClosed {
-            animation: ${flap} 0.2s linear infinite reverse;
+            animation: ${flap} 0.3s linear infinite reverse;
         }
     }
 `;

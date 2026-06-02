@@ -15,7 +15,7 @@ export default function BookmarkButton({
         setIsAnimating(true);
         setTimeout(() => {
             setIsAnimating(false);
-        }, 2000);
+        }, 500);
     }
 
     return (
@@ -26,6 +26,7 @@ export default function BookmarkButton({
             <NewBeeIcon
                 className={isAnimating ? "isAnimating" : ""}
                 bodyColor={isFavorite ? "#ffcb1e" : "transparent"}
+                size="50"
             />
         </StyledBookmarkButton>
     );
