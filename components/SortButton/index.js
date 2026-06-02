@@ -44,7 +44,7 @@ export default function SortButton({ onActivitySort }) {
                 <StyledFormWrap>
                     <form onSubmit={handleSubmit}>
                         <StyledFormFieldset>
-                            <legend>Sort Activities</legend>
+                            <legend>Sort Activities by</legend>
                             <div>
                                 <p>Date</p>
                                 <StyledFormSection>
@@ -59,7 +59,7 @@ export default function SortButton({ onActivitySort }) {
                                                 setSelectedSort("newest")
                                             }
                                         />
-                                        New to Old
+                                        Newest
                                     </label>
 
                                     <label htmlFor="sort-oldest">
@@ -73,7 +73,7 @@ export default function SortButton({ onActivitySort }) {
                                                 setSelectedSort("oldest")
                                             }
                                         />
-                                        Old to New
+                                        Oldest
                                     </label>
                                     <label htmlFor="sort-lastModified">
                                         <input
@@ -88,7 +88,7 @@ export default function SortButton({ onActivitySort }) {
                                                 setSelectedSort("lastModified")
                                             }
                                         />
-                                        Last Modified
+                                        Recently Updated
                                     </label>
                                 </StyledFormSection>
                             </div>
