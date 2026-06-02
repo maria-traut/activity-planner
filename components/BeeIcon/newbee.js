@@ -5,12 +5,14 @@ export default function NewBeeIcon({
     bodyColor = "#ffcb1e",
     outlineColor = "#000",
     rotation = 25,
+    isFavorite,
 }) {
     return (
         <StyledSVG
             className={className}
             size={size}
             rotation={rotation}
+            isFavorite={isFavorite}
             viewBox="0 0 202 267"
         >
             <g id="Main">

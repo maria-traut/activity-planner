@@ -26,6 +26,7 @@ export default function BookmarkButton({
                 className={isAnimating ? "isAnimating" : ""}
                 bodyColor={isFavorite ? "#ffcb1e" : "grey"}
                 size="50"
+                isFavorite={isFavorite}
             />
         </StyledBookmarkButton>
     );
