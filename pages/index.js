@@ -2,6 +2,7 @@ import useSWR from "swr";
 import { useState, useEffect } from "react";
 import ActivityForm from "@/components/ActivityForm";
 import ActivityList from "@/components/ActivityList";
+import SortButton from "@/components/SortButton";
 import Head from "next/head";
 import Header from "@/components/Header";
 import {
@@ -16,16 +17,54 @@ export default function HomePage({
     bookmarkedActivityIds,
 }) {
     const [isCreateActivityMode, setIsCreateActivityMode] = useState(false);
+
     const {
         data: activities,
         isLoading,
         error,
         mutate,
     } = useSWR("/api/activities");
+
     const [activityFormStatus, setActivityFormStatus] = useState({
         type: "",
         message: "",
     });
+
+    const [activitySortOrder, setActivitySortOrder] = useState("newest");
+
+    const sortedActivities = activities
+        ? [...activities].sort((a, b) => {
+              if (activitySortOrder === "az") {
+                  if (a.title.toUpperCase() > b.title.toUpperCase()) return 1;
+                  if (a.title.toUpperCase() < b.title.toUpperCase()) return -1;
+                  return 0;
+              }
+              if (activitySortOrder === "za") {
+                  if (b.title.toUpperCase() > a.title.toUpperCase()) return 1;
+                  if (b.title.toUpperCase() < a.title.toUpperCase()) return -1;
+                  return 0;
+              }
+              if (activitySortOrder === "lastModified") {
+                  return (
+                      new Date(b.updatedAt).getTime() -
+                      new Date(a.updatedAt).getTime()
+                  );
+              }
+              if (activitySortOrder === "newest") {
+                  return (
+                      new Date(b.createdAt).getTime() -
+                      new Date(a.createdAt).getTime()
+                  );
+              }
+              if (activitySortOrder === "oldest") {
+                  return (
+                      new Date(a.createdAt).getTime() -
+                      new Date(b.createdAt).getTime()
+                  );
+              }
+              return 0;
+          })
+        : [];
 
     useEffect(() => {
         const successMessageTimer = setTimeout(() => {
@@ -40,6 +79,10 @@ export default function HomePage({
 
         return () => clearTimeout(successMessageTimer);
     }, [activityFormStatus]);
+
+    function handleActivitySort(order) {
+        setActivitySortOrder(order);
+    }
 
     async function handleActivityCreate(event) {
         event.preventDefault();
@@ -140,8 +183,9 @@ export default function HomePage({
                         isCreateActivityMode={isCreateActivityMode}
                     />
                 )}
+                <SortButton onActivitySort={handleActivitySort} />
                 <ActivityList
-                    activities={activities}
+                    activities={sortedActivities}
                     handleBookmarkToggle={handleBookmarkToggle}
                     bookmarkedActivityIds={bookmarkedActivityIds}
                 />

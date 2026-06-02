@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const StyledActivityList = styled.ul`
     list-style: none;
     display: grid;
-    gap: 1rem;
-    padding: 0 1rem;
+    gap: var(--spacing-normal);
+    padding: 0 var(--spacing-normal);
     margin: 0;
 
     grid-template-columns: repeat(2, 1fr);
@@ -14,6 +14,6 @@ export const StyledActivityList = styled.ul`
 `;
 
 export const StyledActivityCardContainer = styled.div`
-    background-color: aliceblue;
     position: relative;
+    height: 100%;
 `;

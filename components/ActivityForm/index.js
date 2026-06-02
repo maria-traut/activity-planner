@@ -68,6 +68,8 @@ export default function ActivityForm({ onSubmit, status, heading, ...props }) {
                             <textarea
                                 id="description"
                                 name="description"
+                                rows={5}
+                                maxLength={5000}
                                 defaultValue={activity?.description}
                             ></textarea>
                         </StyledFormSection>

@@ -27,11 +27,9 @@ export default function ActivityDetail({
                                 ? activity.imageUrl
                                 : "/placeholder.jpg"
                         }
-                        width={1200}
-                        height={800}
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
                         alt={`Picture showing ${activity.title}`}
-                        objectFit="cover"
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
                         priority
                     />
                     <StyledImageLayerTop>
@@ -70,7 +68,9 @@ export default function ActivityDetail({
                 </StyledImageContainer>
                 <StyledActivityDetailDescriptionWrap>
                     {activity.description && (
-                        <article>{activity.description}</article>
+                        <article>
+                            <p>{activity.description}</p>
+                        </article>
                     )}
                 </StyledActivityDetailDescriptionWrap>
             </StyledActivityInfoContainer>
