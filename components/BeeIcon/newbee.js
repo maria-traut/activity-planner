@@ -1,11 +1,10 @@
-import { renderToStaticMarkup } from "react-dom/server";
 import { StyledSVG } from "./BeeIcon.styled";
 export default function NewBeeIcon({
     className,
     size = 30,
     bodyColor = "#ffcb1e",
     outlineColor = "#000",
-    rotation = 0,
+    rotation = 25,
 }) {
     return (
         <StyledSVG
