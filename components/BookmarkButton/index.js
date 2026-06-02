@@ -1,5 +1,4 @@
 import { StyledBookmarkButton } from "./BookmarkButton.styled";
-import BeeIcon from "../BeeIcon";
 import NewBeeIcon from "../BeeIcon/newbee";
 import { useState } from "react";
 export default function BookmarkButton({
@@ -25,7 +24,7 @@ export default function BookmarkButton({
         >
             <NewBeeIcon
                 className={isAnimating ? "isAnimating" : ""}
-                bodyColor={isFavorite ? "#ffcb1e" : "transparent"}
+                bodyColor={isFavorite ? "#ffcb1e" : "grey"}
                 size="50"
             />
         </StyledBookmarkButton>

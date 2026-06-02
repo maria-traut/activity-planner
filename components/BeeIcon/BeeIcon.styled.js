@@ -15,11 +15,11 @@ const flap = keyframes`
   `;
 
 const shake = keyframes`
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(5deg); }
-  50% { transform: rotate(0eg); }
-  75% { transform: rotate(-5deg); }
-  100% { transform: rotate(0deg); }
+  0% { transform: rotate(25deg); }
+  25% { transform: rotate(30deg); }
+  50% { transform: rotate(25deg); }
+  75% { transform: rotate(20deg); }
+  100% { transform: rotate(25deg); }
 `;
 
 export const StyledSVG = styled.svg`

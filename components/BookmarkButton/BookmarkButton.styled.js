@@ -7,9 +7,7 @@ export const StyledBookmarkButton = styled.button`
     top: 10px;
     right: 10px;
     z-index: 2;
-    background: var(--bookmark-button-color1);
 
     &:hover {
-        background-color: var(--bookmark-button-color2);
     }
 `;

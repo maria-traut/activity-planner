@@ -2,7 +2,7 @@ export default function BeeIcon({
     size = 50,
     bodyColor = "#ffcb1e",
     outlineColor = "#000",
-    rotation = 0,
+    rotation = 25,
 }) {
     return (
         <svg
