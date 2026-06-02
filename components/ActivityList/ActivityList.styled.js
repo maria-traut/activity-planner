@@ -14,6 +14,6 @@ export const StyledActivityList = styled.ul`
 `;
 
 export const StyledActivityCardContainer = styled.div`
-    background-color: aliceblue;
     position: relative;
+    height: 100%;
 `;
