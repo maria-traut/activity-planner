@@ -31,7 +31,7 @@ export default function HomePage({
     });
 
     const [activitySortOrder, setActivitySortOrder] = useState("newest");
-    console.log("sortOrder: ", activitySortOrder);
+
     const sortedActivities = activities
         ? [...activities].sort((a, b) => {
               if (activitySortOrder === "az") {
