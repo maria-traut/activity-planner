@@ -1,9 +1,9 @@
 import { StyledHeading } from "./Header.styled";
 
-export default function Header() {
+export default function Header({ title = "ActiviBee" }) {
     return (
         <header>
-            <StyledHeading>ActiviBee</StyledHeading>
+            <StyledHeading>{title}</StyledHeading>
         </header>
     );
 }
