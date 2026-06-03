@@ -8,7 +8,9 @@ import {
     StyledFormFieldset,
     StyledFormWrap,
     StyledFormSection,
+    StyledSortButton,
 } from "./SortButton.styled";
+import { scrollToTop } from "../Global";
 
 export default function SortButton({ onActivitySort }) {
     const [isSortActivityMode, setIsSortActivityMode] = useState(false);
@@ -28,18 +30,16 @@ export default function SortButton({ onActivitySort }) {
 
     return (
         <>
-            <StyledToolbarWrap>
-                <StyledToolbar>
-                    <StyledButton
-                        type="button"
-                        onClick={() =>
-                            setIsSortActivityMode(!isSortActivityMode)
-                        }
-                    >
-                        Sort{isSortActivityMode ? " ▲" : " ▼"}
-                    </StyledButton>
-                </StyledToolbar>
-            </StyledToolbarWrap>
+            <StyledSortButton
+                type="button"
+                onClick={() => {
+                    setIsSortActivityMode(!isSortActivityMode);
+                    scrollToTop();
+                }}
+            >
+                Sort{isSortActivityMode ? " ▲" : " ▼"}
+            </StyledSortButton>
+
             {isSortActivityMode && (
                 <StyledFormWrap>
                     <form onSubmit={handleSubmit}>

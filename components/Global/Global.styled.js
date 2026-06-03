@@ -13,11 +13,13 @@ export const KeyframesFadeOut = keyframes`
 
 export const StyledToolbarWrap = styled.section`
     padding: 0 var(--spacing-normal);
+    background-color: var(--gray-200);
 `;
 
 export const StyledToolbar = styled.div`
     display: flex;
     flex-direction: row;
+    justify-content: flex-end;
     flex-wrap: wrap;
     gap: var(--spacing-normal);
     align-items: center;

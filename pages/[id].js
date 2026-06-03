@@ -147,7 +147,7 @@ export default function Activity({
             <Head>
                 <title>{activity?.title} | Activity Planner</title>
             </Head>
-            <Header />
+            <Header title={activity.title} />
             <main>
                 <StyledToolbarWrap>
                     <StyledToolbar>

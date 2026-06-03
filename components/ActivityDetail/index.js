@@ -41,11 +41,11 @@ export default function ActivityDetail({
                                 )}
                             </StyledLocations>
                         )}
-                        {activity.title && (
+                        {/* {activity.title && (
                             <StyledActivityDetailTitle>
                                 {activity.title}
                             </StyledActivityDetailTitle>
-                        )}
+                        )} */}
                     </StyledImageLayerTop>
                     <StyledImageLayerBottom>
                         {activity.categories && (

@@ -13,18 +13,17 @@ export const StyledNavbarContainer = styled.nav`
 
     gap: 15px;
     padding: 0 15px;
-
+    bottom: 0;
     position: fixed;
-    bottom: 1em;
-    z-index: 2;
+    z-index: 3;
 `;
 
 export const StyledBookmarkLink = styled(Link)`
     width: 80px;
-    height: 60px;
+    height: 40px;
 
-    background-color: lightgoldenrodyellow;
-    border: 2px solid black;
+    background-color: var(--gray-100);
+    border: 1px solid black;
     border-radius: 10px;
 
     grid-column: 2;
@@ -40,10 +39,11 @@ export const StyledBookmarkLink = styled(Link)`
 
 export const StyledHomeLink = styled(Link)`
     width: 80px;
-    height: 60px;
+    height: 40px;
+    text-transform: uppercase;
 
-    background-color: lightgoldenrodyellow;
-    border: 2px solid black;
+    background-color: var(--gray-100);
+    border: 1px solid black;
     border-radius: 10px;
 
     grid-column: 1;

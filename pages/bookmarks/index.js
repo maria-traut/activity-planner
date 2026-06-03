@@ -27,9 +27,7 @@ export default function Bookmarks({
                 <Header title="Bookmarks" />
                 <main>
                     <StyledToolbarWrap>
-                        <StyledToolbar>
-                            <BackButton />
-                        </StyledToolbar>
+                        <StyledToolbar></StyledToolbar>
                     </StyledToolbarWrap>
                     <p>Loading activities...</p>
                 </main>
@@ -46,9 +44,7 @@ export default function Bookmarks({
                 <Header title="Bookmarks" />
                 <main>
                     <StyledToolbarWrap>
-                        <StyledToolbar>
-                            <BackButton />
-                        </StyledToolbar>
+                        <StyledToolbar></StyledToolbar>
                     </StyledToolbarWrap>
                     <p>An error occurred while fetching the activities.</p>
                 </main>

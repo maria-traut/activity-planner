@@ -13,7 +13,11 @@ export default createGlobalStyle`
 *::after {
   box-sizing: border-box;
 }
-
+/*Places main under the header and over the navbar*/
+main{
+	margin-top: 20px;
+	margin-bottom: 50px;
+}
 /* Prevent font size inflation */
 html {
   -moz-text-size-adjust: none;
@@ -95,6 +99,17 @@ textarea:not([rows]) {
 	--gray-800: #333333;
 	--gray-900: #242424;
 
+
+	--main-100: hsl(52.1, 92.2%, 89.8%);
+	--main-200: hsl(52.1, 92.2%, 79.8%);
+	--main-300: hsl(52.1, 92.2%, 69.8%);
+	--main-400: hsl(52.1, 92.2%, 59.8%);
+	--main-500: hsl(52.1, 92.2%, 49.8%);
+	--main-600: hsl(52.1, 92.2%, 39.8%);
+	--main-700: hsl(52.1, 92.2%, 29.8%);
+	--main-800: hsl(52.1, 92.2%, 19.8%);
+	--main-900: hsl(52.1, 92.2%, 9.8%);
+	
 	--accent-link-100: hsl(240, 85%, 90%);
 	--accent-link-300: hsl(240, 85%, 70%);
 	--accent-link-500: hsl(240, 85%, 50%);
@@ -118,6 +133,7 @@ textarea:not([rows]) {
 	--text-font-family: ${inter.style.fontFamily};
 	--text-font-size-normal:16px;
 	--text-font-size-small:13px;
+	--text-font-size-xsmall: 10px; /* for tags */
 	--text-line-height:1.5em;
 
 	--headline-font-family: ${inter.style.fontFamily};
@@ -149,7 +165,7 @@ textarea:not([rows]) {
 
 	--border-small:var(--border-width-small) solid var(--border-color);
 
-	--card-image-height:200px;
+	--card-image-height:150px;
 	--detail-image-height:400px;
 
 	--detail-headline-background-color:#F5F5F5BB;
@@ -209,7 +225,7 @@ p {
 }
 
 header {
-	box-shadow: var(--box-shadow-large);
+	
 	padding: var(--spacing-normal);
 }
 

@@ -33,7 +33,7 @@ export default function ActivityCard({
                     <StyledCategoryList>
                         {categories.map((category) => (
                             <StyledCategoryTag key={category._id}>
-                                {category.name}
+                                {category.abbreviation}
                             </StyledCategoryTag>
                         ))}
                     </StyledCategoryList>
