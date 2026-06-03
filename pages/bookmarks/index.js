@@ -11,6 +11,7 @@ import ActivityList from "@/components/ActivityList";
 export default function Bookmarks({
     handleBookmarkToggle,
     bookmarkedActivityIds,
+    handleNavbarLocation,
 }) {
     const { data: activities, isLoading, error } = useSWR("/api/activities");
 
@@ -73,6 +74,7 @@ export default function Bookmarks({
                         activities={bookmarkedActivities}
                         handleBookmarkToggle={handleBookmarkToggle}
                         bookmarkedActivityIds={bookmarkedActivityIds}
+                        handleNavbarLocation={handleNavbarLocation}
                     />
                 ) : (
                     <p>

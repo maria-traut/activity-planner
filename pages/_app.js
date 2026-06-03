@@ -24,6 +24,9 @@ export default function App({ Component, pageProps }) {
             defaultValue: [],
         });
     const [navbarLocation, setNavbarLocation] = useState("/");
+    function handleNavbarLocation(location) {
+        setNavbarLocation((prev) => location);
+    }
     const [isCreateActivityMode, setIsCreateActivityMode] = useState(false);
     const [activityFormStatus, setActivityFormStatus] = useState({
         type: "",
@@ -53,6 +56,7 @@ export default function App({ Component, pageProps }) {
             <SWRConfig value={{ fetcher }}>
                 <Component
                     {...pageProps}
+                    handleNavbarLocation={handleNavbarLocation}
                     bookmarkedActivityIds={bookmarkedActivityIds}
                     handleBookmarkToggle={handleBookmarkToggle}
                     onBookmarkedActivityIdsDelete={
@@ -64,6 +68,7 @@ export default function App({ Component, pageProps }) {
                     setActivityFormStatus={setActivityFormStatus}
                 />
                 <Navbar
+                    onNavbarLocation={handleNavbarLocation}
                     navbarLocation={navbarLocation}
                     isCreateActivityMode={isCreateActivityMode}
                     setIsCreateActivityMode={setIsCreateActivityMode}

@@ -3,14 +3,15 @@ import {
     StyledHomeLink,
     StyledNavbarContainer,
     StyledNavbarEmpty,
-    StyledButton,
+    StyledAddActivityButton,
 } from "./Navigation.styled";
-import BeeIcon from "../BeeIcon";
 import NewBeeIcon from "../BeeIcon/newbee";
 import { scrollToTop } from "../Global";
+import { StyledButton } from "../Global/Global.styled";
 
 export default function Navbar({
     navbarLocation,
+    onNavbarLocation,
     isCreateActivityMode,
     setIsCreateActivityMode,
     setActivityFormStatus,
@@ -18,7 +19,7 @@ export default function Navbar({
     return (
         <StyledNavbarContainer>
             {navbarLocation === "/" ? (
-                <button
+                <StyledAddActivityButton
                     onClick={() => {
                         setIsCreateActivityMode(!isCreateActivityMode);
                         setActivityFormStatus({
@@ -29,20 +30,26 @@ export default function Navbar({
                     }}
                 >
                     ➕
-                </button>
+                </StyledAddActivityButton>
             ) : (
                 <StyledNavbarEmpty
                     onClick={() => console.log("empty has been clicked")}
                 />
             )}
-            <StyledNavbarEmpty
-                onClick={() => console.log("empty has been clicked")}
-            />
-            <StyledBookmarkLink aria-label="Go to Bookmarks" href="/bookmarks">
+
+            <StyledBookmarkLink
+                aria-label="Go to Bookmarks"
+                href="/bookmarks"
+                onClick={() => onNavbarLocation("/bookmarks")}
+            >
                 <NewBeeIcon size="40" rotation="30" />
                 <NewBeeIcon size="30" rotation="-50" />
             </StyledBookmarkLink>
-            <StyledHomeLink aria-label="Go to Homepage" href="/">
+            <StyledHomeLink
+                aria-label="Go to Homepage"
+                href="/"
+                onClick={() => onNavbarLocation("/")}
+            >
                 Home
             </StyledHomeLink>
         </StyledNavbarContainer>

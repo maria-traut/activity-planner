@@ -13,6 +13,7 @@ import {
 } from "@/components/Global/Global.styled";
 
 export default function HomePage({
+    handleNavbarLocation,
     handleBookmarkToggle,
     bookmarkedActivityIds,
     isCreateActivityMode,
@@ -203,6 +204,7 @@ export default function HomePage({
                 <SortButton onActivitySort={handleActivitySort} />
                 <ActivityList
                     activities={sortedActivities}
+                    handleNavbarLocation={handleNavbarLocation}
                     handleBookmarkToggle={handleBookmarkToggle}
                     bookmarkedActivityIds={bookmarkedActivityIds}
                 />
