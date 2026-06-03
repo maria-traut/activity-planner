@@ -20,7 +20,7 @@ export default function Bookmarks({
         bookmarkedActivityIds.includes(activity._id)
     );
 
-    const [activitySortOrder, setActivitySortOrder] = useState("newest");
+    const [activitySortOrder, setActivitySortOrder] = useState("");
 
     const sortedBookmarkedActivities = bookmarkedActivities
         ? [...bookmarkedActivities].sort((a, b) => {
@@ -112,7 +112,10 @@ export default function Bookmarks({
                 </StyledToolbarWrap>
                 {bookmarkedActivities.length > 0 ? (
                     <>
-                        <SortButton onActivitySort={handleActivitySort} />
+                        <SortButton
+                            onActivitySort={handleActivitySort}
+                            activitySortOrder={activitySortOrder}
+                        />
                         <ActivityList
                             activities={sortedBookmarkedActivities}
                             handleBookmarkToggle={handleBookmarkToggle}
