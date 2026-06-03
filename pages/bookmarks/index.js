@@ -20,7 +20,7 @@ export default function Bookmarks({
         bookmarkedActivityIds.includes(activity._id)
     );
 
-    const [activitySortOrder, setActivitySortOrder] = useState("");
+    const [activitySortOrder, setActivitySortOrder] = useState(null);
 
     const sortedBookmarkedActivities = bookmarkedActivities
         ? [...bookmarkedActivities].sort((a, b) => {
