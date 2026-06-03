@@ -6,7 +6,7 @@ export const StyledHeader = styled.header`
     align-items: center;
     gap: 1rem;
 
-    background-color: var(--gray-200);
+    background-color: var(--main-400);
 
     position: fixed;
     top: 0;
@@ -14,7 +14,7 @@ export const StyledHeader = styled.header`
     width: 100%;
     height: 50px;
 
-    z-index: 3;
+    z-index: 4;
 `;
 
 export const StyledHeading = styled.h1`

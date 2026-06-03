@@ -16,7 +16,7 @@ export const StyledFigure = styled.figure`
     width: 100%;
     margin: 0;
     height: 100%;
-    background-color: var(--gray-200);
+    background-color: var(--main-200);
 `;
 
 export const StyledCardImageWrapper = styled.div`

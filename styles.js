@@ -15,7 +15,7 @@ export default createGlobalStyle`
 }
 /*Places main under the header and over the navbar*/
 main{
-	margin-top: 20px;
+	margin-top: 18px;
 	margin-bottom: 50px;
 }
 /* Prevent font size inflation */
@@ -103,13 +103,13 @@ textarea:not([rows]) {
 	--main-100: hsl(52.1, 92.2%, 89.8%);
 	--main-200: hsl(52.1, 92.2%, 79.8%);
 	--main-300: hsl(52.1, 92.2%, 69.8%);
-	--main-400: hsl(52.1, 92.2%, 59.8%);
+	--main-400: hsl(52.1, 92.2%, 59.8%); /*color name: golden dream*/
 	--main-500: hsl(52.1, 92.2%, 49.8%);
 	--main-600: hsl(52.1, 92.2%, 39.8%);
 	--main-700: hsl(52.1, 92.2%, 29.8%);
 	--main-800: hsl(52.1, 92.2%, 19.8%);
 	--main-900: hsl(52.1, 92.2%, 9.8%);
-	
+
 	--accent-link-100: hsl(240, 85%, 90%);
 	--accent-link-300: hsl(240, 85%, 70%);
 	--accent-link-500: hsl(240, 85%, 50%);
@@ -232,7 +232,7 @@ header {
 main {
 	display:flex;
 	flex-direction:column;
-	gap:var(--spacing-large);
+	/* gap:var(--spacing-large); */
 	padding: var(--spacing-large) 0;
 }
 

@@ -2,7 +2,7 @@ import { StyledSVG } from "./BeeIcon.styled";
 export default function NewBeeIcon({
     className,
     size = 30,
-    bodyColor = "#ffcb1e",
+    bodyColor = "var(--main-500)",
     outlineColor = "#000",
     rotation = 25,
     isFavorite,
