@@ -20,7 +20,7 @@ export const StyledToolbarWrap = styled.section`
 
     position: sticky;
     top: 50px;
-    z-index: 3; /* Lower than header (3), but higher than other content */
+    z-index: 3;
 `;
 
 export const StyledToolbar = styled.div`

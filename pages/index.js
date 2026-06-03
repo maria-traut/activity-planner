@@ -21,19 +21,12 @@ export default function HomePage({
     activityFormStatus,
     setActivityFormStatus,
 }) {
-    // const [isCreateActivityMode, setIsCreateActivityMode] = useState(false);
-
     const {
         data: activities,
         isLoading,
         error,
         mutate,
     } = useSWR("/api/activities");
-
-    // const [activityFormStatus, setActivityFormStatus] = useState({
-    //     type: "",
-    //     message: "",
-    // });
 
     const [activitySortOrder, setActivitySortOrder] = useState("newest");
 
@@ -160,38 +153,6 @@ export default function HomePage({
             </Head>
             <Header />
             <main>
-                {/* {!isCreateActivityMode && (
-                    <StyledToolbarWrap>
-                        <StyledToolbar>
-                            <StyledButton
-                                onClick={() => {
-                                    setIsCreateActivityMode(
-                                        !isCreateActivityMode
-                                    );
-                                    setActivityFormStatus({
-                                        type: "",
-                                        message: "",
-                                    });
-                                }}
-                            >
-                                Create Activity
-                            </StyledButton>
-                        </StyledToolbar>
-                    </StyledToolbarWrap>
-                )} */}
-                {/* {!isCreateActivityMode && (
-                    <StyledButton
-                        onClick={() => {
-                            setIsCreateActivityMode(!isCreateActivityMode);
-                            setActivityFormStatus({
-                                type: "",
-                                message: "",
-                            });
-                        }}
-                    >
-                        ➕{" "}
-                    </StyledButton>
-                )} */}
                 {isCreateActivityMode && (
                     <ActivityForm
                         onSubmit={handleActivityCreate}

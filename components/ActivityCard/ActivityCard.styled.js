@@ -12,7 +12,6 @@ export const StyledLink = styled(Link)`
 `;
 
 export const StyledFigure = styled.figure`
-    /* border-radius: var(--border-radius-small);*/
     width: 100%;
     margin: 0;
     height: 100%;
@@ -46,19 +45,15 @@ export const StyledActivityHeadline = styled.h2`
 `;
 
 export const StyledCategoryList = styled.ul`
-    /* position: absolute; */
     list-style: none;
     display: flex;
     justify-content: flex-start;
 
     padding: 0;
     flex-wrap: wrap;
-    /* bottom: var(--spacing-local-small);
-    left: var(--spacing-local-small); */
 
     font-size: var(--text-font-size-small);
     gap: var(--spacing-local-small);
-    /* z-index: 2; */
 `;
 
 export const StyledCategoryTag = styled.li`
@@ -67,7 +62,6 @@ export const StyledCategoryTag = styled.li`
     border-radius: 20px;
     line-height: 1;
     padding: 4px 8px;
-    /* padding: var(--spacing-local-small) var(--spacing-local-small); */
     @media (prefers-color-scheme: dark) {
         background-color: var(--gray-800);
     }
