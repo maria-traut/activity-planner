@@ -60,9 +60,7 @@ export const StyledHomeLink = styled(Link)`
 export const StyledNavbarEmpty = styled.div`
     width: 80px;
     height: 60px;
-
-    background-color: red;
-
+    /* background-color: red; */
     grid-column: 2;
     grid-row: 1;
 `;
@@ -70,4 +68,10 @@ export const StyledNavbarEmpty = styled.div`
 export const StyledAddActivityButton = styled(StyledButton)`
     grid-column: 2;
     grid-row: 1;
+
+    &:hover {
+        border-style: none;
+        background-color: transparent;
+        color: transparent;
+    }
 `;
