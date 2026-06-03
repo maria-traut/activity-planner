@@ -7,6 +7,7 @@ import {
     StyledToolbarWrap,
 } from "@/components/Global/Global.styled";
 import ActivityList from "@/components/ActivityList";
+import SortButton from "@/components/SortButton";
 
 export default function Bookmarks({
     handleBookmarkToggle,
@@ -69,11 +70,14 @@ export default function Bookmarks({
                     </StyledToolbar>
                 </StyledToolbarWrap>
                 {bookmarkedActivities.length > 0 ? (
-                    <ActivityList
-                        activities={bookmarkedActivities}
-                        handleBookmarkToggle={handleBookmarkToggle}
-                        bookmarkedActivityIds={bookmarkedActivityIds}
-                    />
+                    <>
+                        <SortButton />
+                        <ActivityList
+                            activities={bookmarkedActivities}
+                            handleBookmarkToggle={handleBookmarkToggle}
+                            bookmarkedActivityIds={bookmarkedActivityIds}
+                        />
+                    </>
                 ) : (
                     <p>
                         No bookmarks yet. Tap the bee on any activity to save it
