@@ -5,10 +5,24 @@ export const StyledHeader = styled.header`
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
+
+    background-color: var(--gray-200);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+
+    z-index: 3;
 `;
 
 export const StyledHeading = styled.h1`
     text-align: center;
     display: block;
     margin: 0;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 `;
