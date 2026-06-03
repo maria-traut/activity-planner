@@ -1,16 +1,14 @@
 import { useState } from "react";
-import {
-    StyledToolbarWrap,
-    StyledToolbar,
-    StyledButton,
-} from "../Global/Global.styled";
+import { StyledToolbarWrap, StyledToolbar } from "../Global/Global.styled";
 import {
     StyledFormFieldset,
     StyledFormWrap,
     StyledFormSection,
+    StyledButton,
 } from "./SortButton.styled";
+import Image from "next/image";
 
-export default function SortButton({ onActivitySort }) {
+export default function SortButton({ onActivitySort, activitySortOrder }) {
     const [isSortActivityMode, setIsSortActivityMode] = useState(false);
     const [selectedSort, setSelectedSort] = useState("newest");
 
@@ -26,6 +24,23 @@ export default function SortButton({ onActivitySort }) {
         setIsSortActivityMode(false);
     }
 
+    function getSortLabel(order) {
+        switch (order) {
+            case "newest":
+                return "Newest";
+            case "oldest":
+                return "Oldest";
+            case "lastModified":
+                return "Recently Updated";
+            case "az":
+                return "A to Z";
+            case "za":
+                return "Z to A";
+            default:
+                return "Sort";
+        }
+    }
+
     return (
         <>
             <StyledToolbarWrap>
@@ -36,7 +51,13 @@ export default function SortButton({ onActivitySort }) {
                             setIsSortActivityMode(!isSortActivityMode)
                         }
                     >
-                        Sort{isSortActivityMode ? " ▲" : " ▼"}
+                        {getSortLabel(activitySortOrder)}
+                        <Image
+                            src="/sort.png"
+                            alt="sort"
+                            width={16}
+                            height={16}
+                        />
                     </StyledButton>
                 </StyledToolbar>
             </StyledToolbarWrap>
