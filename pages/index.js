@@ -183,7 +183,10 @@ export default function HomePage({
                         isCreateActivityMode={isCreateActivityMode}
                     />
                 )}
-                <SortButton onActivitySort={handleActivitySort} />
+                <SortButton
+                    onActivitySort={handleActivitySort}
+                    activitySortOrder={activitySortOrder}
+                />
                 <ActivityList
                     activities={sortedActivities}
                     handleBookmarkToggle={handleBookmarkToggle}

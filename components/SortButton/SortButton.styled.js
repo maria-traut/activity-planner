@@ -15,7 +15,7 @@ export const StyledFormSection = styled.section`
     gap: 0.5rem;
 `;
 
-export const StyledButton = styled.button`
+export const StyledSortButton = styled.button`
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -43,4 +43,8 @@ export const StyledButton = styled.button`
             color: var(--gray-700);
         }
     }
+`;
+
+export const StyledSortOption = styled.p`
+    all: unset;
 `;
