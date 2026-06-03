@@ -24,7 +24,7 @@ export default function BookmarkButton({
         >
             <NewBeeIcon
                 className={isAnimating ? "isAnimating" : ""}
-                bodyColor={isFavorite ? "#ffcb1e" : "grey"}
+                bodyColor={isFavorite ? "var(--main-500)" : "var(--gray-300"}
                 size="50"
                 isFavorite={isFavorite}
             />

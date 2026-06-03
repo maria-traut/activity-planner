@@ -6,6 +6,7 @@ export const StyledActivityInfoContainer = styled.section`
     flex-direction: column;
     justify-content: center;
     gap: var(--spacing-normal);
+    background-color: var(--main-200);
 `;
 
 export const StyledImageContainer = styled.div`

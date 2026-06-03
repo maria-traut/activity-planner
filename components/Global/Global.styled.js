@@ -13,7 +13,14 @@ export const KeyframesFadeOut = keyframes`
 
 export const StyledToolbarWrap = styled.section`
     padding: 0 var(--spacing-normal);
-    background-color: var(--gray-200);
+    background-color: var(--main-400);
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: var(--main-600);
+
+    position: sticky;
+    top: 50px;
+    z-index: 3; /* Lower than header (3), but higher than other content */
 `;
 
 export const StyledToolbar = styled.div`
