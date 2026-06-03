@@ -15,8 +15,12 @@ import {
 export default function HomePage({
     handleBookmarkToggle,
     bookmarkedActivityIds,
+    isCreateActivityMode,
+    setIsCreateActivityMode,
+    activityFormStatus,
+    setActivityFormStatus,
 }) {
-    const [isCreateActivityMode, setIsCreateActivityMode] = useState(false);
+    // const [isCreateActivityMode, setIsCreateActivityMode] = useState(false);
 
     const {
         data: activities,
@@ -25,10 +29,10 @@ export default function HomePage({
         mutate,
     } = useSWR("/api/activities");
 
-    const [activityFormStatus, setActivityFormStatus] = useState({
-        type: "",
-        message: "",
-    });
+    // const [activityFormStatus, setActivityFormStatus] = useState({
+    //     type: "",
+    //     message: "",
+    // });
 
     const [activitySortOrder, setActivitySortOrder] = useState("newest");
 
@@ -174,7 +178,7 @@ export default function HomePage({
                         </StyledToolbar>
                     </StyledToolbarWrap>
                 )} */}
-                {!isCreateActivityMode && (
+                {/* {!isCreateActivityMode && (
                     <StyledButton
                         onClick={() => {
                             setIsCreateActivityMode(!isCreateActivityMode);
@@ -186,7 +190,7 @@ export default function HomePage({
                     >
                         ➕{" "}
                     </StyledButton>
-                )}
+                )} */}
                 {isCreateActivityMode && (
                     <ActivityForm
                         onSubmit={handleActivityCreate}
