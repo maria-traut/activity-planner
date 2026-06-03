@@ -1,10 +1,15 @@
 import { useState } from "react";
-import { StyledToolbarWrap, StyledToolbar } from "../Global/Global.styled";
+import {
+    StyledToolbarWrap,
+    StyledToolbar,
+    StyledButton,
+} from "../Global/Global.styled";
 import {
     StyledFormFieldset,
     StyledFormWrap,
     StyledFormSection,
-    StyledButton,
+    StyledSortButton,
+    StyledSortOption,
 } from "./SortButton.styled";
 import Image from "next/image";
 
@@ -45,7 +50,7 @@ export default function SortButton({ onActivitySort, activitySortOrder }) {
         <>
             <StyledToolbarWrap>
                 <StyledToolbar>
-                    <StyledButton
+                    <StyledSortButton
                         type="button"
                         onClick={() =>
                             setIsSortActivityMode(!isSortActivityMode)
@@ -58,7 +63,7 @@ export default function SortButton({ onActivitySort, activitySortOrder }) {
                             width={16}
                             height={16}
                         />
-                    </StyledButton>
+                    </StyledSortButton>
                 </StyledToolbar>
             </StyledToolbarWrap>
             {isSortActivityMode && (
@@ -67,7 +72,9 @@ export default function SortButton({ onActivitySort, activitySortOrder }) {
                         <StyledFormFieldset>
                             <legend>Sort Activities by</legend>
                             <div>
-                                <p>Date</p>
+                                <StyledSortOption style={{ all: "unset" }}>
+                                    Date
+                                </StyledSortOption>
                                 <StyledFormSection>
                                     <label htmlFor="sort-newest">
                                         <input
@@ -79,7 +86,7 @@ export default function SortButton({ onActivitySort, activitySortOrder }) {
                                             onChange={() =>
                                                 setSelectedSort("newest")
                                             }
-                                        />
+                                        />{" "}
                                         Newest
                                     </label>
 
@@ -93,7 +100,7 @@ export default function SortButton({ onActivitySort, activitySortOrder }) {
                                             onChange={() =>
                                                 setSelectedSort("oldest")
                                             }
-                                        />
+                                        />{" "}
                                         Oldest
                                     </label>
                                     <label htmlFor="sort-lastModified">
@@ -108,13 +115,14 @@ export default function SortButton({ onActivitySort, activitySortOrder }) {
                                             onChange={() =>
                                                 setSelectedSort("lastModified")
                                             }
-                                        />
+                                        />{" "}
                                         Recently Updated
                                     </label>
                                 </StyledFormSection>
                             </div>
                             <div>
-                                <p>Title</p>
+                                <br />
+                                <StyledSortOption>Title</StyledSortOption>
                                 <StyledFormSection>
                                     <label htmlFor="sort-az">
                                         <input
@@ -126,7 +134,7 @@ export default function SortButton({ onActivitySort, activitySortOrder }) {
                                             onChange={() =>
                                                 setSelectedSort("az")
                                             }
-                                        />
+                                        />{" "}
                                         A to Z
                                     </label>
 
@@ -140,12 +148,12 @@ export default function SortButton({ onActivitySort, activitySortOrder }) {
                                             onChange={() =>
                                                 setSelectedSort("za")
                                             }
-                                        />
+                                        />{" "}
                                         Z to A
                                     </label>
                                 </StyledFormSection>
                             </div>
-
+                            <br />
                             <StyledToolbar>
                                 <StyledButton type="submit">Apply</StyledButton>
                                 <StyledButton
