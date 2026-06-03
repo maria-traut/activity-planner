@@ -3,7 +3,7 @@ export default function NewBeeIcon({
     className,
     size = 30,
     bodyColor = "var(--main-500)",
-    outlineColor = "#000",
+    outlineColor = "var(--main-900)",
     rotation = 25,
     isFavorite,
 }) {
