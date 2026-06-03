@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
+import { StyledButton } from "../Global/Global.styled";
 
 export const StyledNavbarContainer = styled.nav`
     width: 100%;
@@ -62,6 +63,11 @@ export const StyledNavbarEmpty = styled.div`
 
     background-color: red;
 
+    grid-column: 2;
+    grid-row: 1;
+`;
+
+export const StyledAddActivityButton = styled(StyledButton)`
     grid-column: 2;
     grid-row: 1;
 `;

@@ -9,9 +9,15 @@ import {
     StyledCategoryTag,
 } from "./ActivityCard.styled";
 
-export default function ActivityCard({ title, categories, image, id }) {
+export default function ActivityCard({
+    title,
+    categories,
+    image,
+    id,
+    onNavbarLocation,
+}) {
     return (
-        <StyledLink href={`/${id}`}>
+        <StyledLink href={`/${id}`} onClick={() => onNavbarLocation(`/${id}`)}>
             <StyledFigure>
                 <StyledCardImageWrapper>
                     <StyledCardImage
