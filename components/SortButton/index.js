@@ -15,7 +15,7 @@ import Image from "next/image";
 
 export default function SortButton({ onActivitySort, activitySortOrder }) {
     const [isSortActivityMode, setIsSortActivityMode] = useState(false);
-    const [selectedSort, setSelectedSort] = useState("newest");
+    const [selectedSort, setSelectedSort] = useState(null);
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -155,7 +155,12 @@ export default function SortButton({ onActivitySort, activitySortOrder }) {
                             </div>
                             <br />
                             <StyledToolbar>
-                                <StyledButton type="submit">Apply</StyledButton>
+                                <StyledButton
+                                    type="submit"
+                                    disabled={selectedSort === null}
+                                >
+                                    Apply
+                                </StyledButton>
                                 <StyledButton
                                     type="button"
                                     onClick={handleReset}
