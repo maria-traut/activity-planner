@@ -7,7 +7,6 @@ import {
 } from "./Navigation.styled";
 import NewBeeIcon from "../BeeIcon/newbee";
 import { scrollToTop } from "../Global";
-import { StyledButton } from "../Global/Global.styled";
 
 export default function Navbar({
     navbarLocation,
@@ -18,7 +17,7 @@ export default function Navbar({
 }) {
     return (
         <StyledNavbarContainer>
-            {navbarLocation === "/" ? (
+            {navbarLocation === "/" && !isCreateActivityMode ? (
                 <StyledAddActivityButton
                     onClick={() => {
                         setIsCreateActivityMode(!isCreateActivityMode);
