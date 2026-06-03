@@ -151,7 +151,6 @@ export default function Activity({
             <main>
                 <StyledToolbarWrap>
                     <StyledToolbar>
-                        {!isDeleteActivityMode && <BackButton />}
                         {!isEditActivityMode && !isDeleteActivityMode && (
                             <StyledButton
                                 onClick={() => {

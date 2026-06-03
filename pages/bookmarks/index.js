@@ -1,7 +1,6 @@
 import useSWR from "swr";
 import Head from "next/head";
 import Header from "@/components/Header";
-import BackButton from "@/components/BackButton";
 import {
     StyledToolbar,
     StyledToolbarWrap,
@@ -65,9 +64,7 @@ export default function Bookmarks({
             <Header title="Bookmarks" />
             <main>
                 <StyledToolbarWrap>
-                    <StyledToolbar>
-                        <BackButton />
-                    </StyledToolbar>
+                    <StyledToolbar></StyledToolbar>
                 </StyledToolbarWrap>
                 {bookmarkedActivities.length > 0 ? (
                     <ActivityList
