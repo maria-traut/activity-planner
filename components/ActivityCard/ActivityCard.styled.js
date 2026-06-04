@@ -59,10 +59,10 @@ export const StyledCategoryList = styled.ul`
 
 export const StyledCategoryTag = styled.li`
     display: inline-block;
-    background-color: var(--gray-300);
-    border-radius: 20px;
-    line-height: 1;
-    padding: 4px 8px;
+    background-color: var(--gray-200);
+    border-radius: var(--border-radius-rounded);
+    padding: var(--eight-grid__halfstep) var(--eight-grid__s);
+
     @media (prefers-color-scheme: dark) {
         background-color: var(--gray-800);
     }

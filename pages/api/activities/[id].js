@@ -1,5 +1,6 @@
 import dbConnect from "@/db/connect";
 import Activity from "@/db/models/Activity";
+import { isImageUrl } from "@/lib/imageUrlValidation";
 
 export default async function handler(request, response) {
     await dbConnect();
@@ -18,6 +19,19 @@ export default async function handler(request, response) {
 
         if (request.method === "PUT") {
             const updatedActivityData = request.body;
+
+            if (updatedActivityData?.imageUrl !== "") {
+                const isImage = updatedActivityData?.imageUrl
+                    ? await isImageUrl(updatedActivityData.imageUrl)
+                    : false;
+
+                if (!isImage) {
+                    return response.status(400).json({
+                        status: "Image URL is not linking to a valid image.",
+                    });
+                }
+            }
+
             await Activity.findByIdAndUpdate(id, updatedActivityData);
             return response
                 .status(200)
@@ -26,7 +40,9 @@ export default async function handler(request, response) {
 
         if (request.method === "DELETE") {
             await Activity.findByIdAndDelete(id);
-            response.status(200).json({ status: "Activity deleted." });
+            response
+                .status(200)
+                .json({ status: "Activity successfully deleted." });
         }
     } catch (error) {
         return response.status(500).json({ status: "Internal Server Error" });
