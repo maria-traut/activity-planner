@@ -11,6 +11,7 @@ import {
     StyledSortOption,
     StyledSortButton,
 } from "./SortButton.styled";
+import { scrollToTop } from "../Global";
 
 export default function SortButton({ onActivitySort, activitySortOrder }) {
     const [isSortActivityMode, setIsSortActivityMode] = useState(false);
@@ -52,14 +53,16 @@ export default function SortButton({ onActivitySort, activitySortOrder }) {
                     <StyledSortButton
                         type="button"
                         isActive={activitySortOrder !== null}
-                        onClick={() =>
-                            setIsSortActivityMode(!isSortActivityMode)
-                        }
+                        onClick={() => {
+                            setIsSortActivityMode(!isSortActivityMode);
+                            scrollToTop();
+                        }}
                     >
                         {getSortLabel(activitySortOrder)} &#8645;
                     </StyledSortButton>
                 </StyledToolbar>
             </StyledToolbarWrap>
+
             {isSortActivityMode && (
                 <StyledFormWrap>
                     <form onSubmit={handleSubmit}>

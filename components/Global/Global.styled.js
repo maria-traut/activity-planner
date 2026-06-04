@@ -12,21 +12,32 @@ export const KeyframesFadeOut = keyframes`
 `;
 
 export const StyledToolbarWrap = styled.section`
-    padding: 0 var(--spacing-normal);
+    padding: 0 var(--eight-grid__s);
+    background-color: var(--main-400);
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: var(--main-600);
+
+    position: sticky;
+    top: 50px;
+    width: 100%;
+    z-index: 3;
 `;
 
 export const StyledToolbar = styled.div`
     display: flex;
     flex-direction: row;
+    justify-content: flex-end;
     flex-wrap: wrap;
-    gap: var(--spacing-normal);
+    gap: var(--eight-grid__normal);
     align-items: center;
 `;
 
 export const StyledButton = styled.button`
     border-radius: var(--border-radius-normal);
     border: var(--border-small);
-    padding: var(--spacing-small) var(--spacing-normal);
+    padding: var(--eight-grid__s) var(--eight-grid__normal);
+    background-color: var(--gray-100);
 
     &:hover {
         background-color: var(--gray-200);
@@ -111,13 +122,13 @@ export const StyledStatusMessageWrap = styled.section`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: var(--spacing-normal);
-    padding: 0 var(--spacing-normal);
+    gap: var(--eight-grid__normal);
+    padding: var(--eight-grid__normal);
     align-items: center;
 `;
 
 export const StyledStatusMessage = styled.p`
-    padding: var(--spacing-small) 0em;
+    padding: var(--eight-grid__s) 0em;
     margin: 0;
 `;
 

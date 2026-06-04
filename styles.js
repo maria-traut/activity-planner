@@ -13,7 +13,11 @@ export default createGlobalStyle`
 *::after {
   box-sizing: border-box;
 }
-
+/*Places main under the header and over the navbar*/
+main{
+	margin-top: 18px;
+	margin-bottom: 50px;
+}
 /* Prevent font size inflation */
 html {
   -moz-text-size-adjust: none;
@@ -95,6 +99,18 @@ textarea:not([rows]) {
 	--gray-800: #333333;
 	--gray-900: #242424;
 
+	--app-background: #fcf6ee;
+
+	--main-100: hsl(52.1, 92.2%, 89.8%);
+	--main-200: hsl(52.1, 92.2%, 79.8%);
+	--main-300: hsl(52.1, 92.2%, 69.8%);
+	--main-400: hsl(52.1, 92.2%, 59.8%); 
+	--main-500: hsl(52.1, 92.2%, 49.8%);
+	--main-600: hsl(52.1, 92.2%, 39.8%);
+	--main-700: hsl(52.1, 92.2%, 29.8%);
+	--main-800: hsl(52.1, 92.2%, 19.8%);
+	--main-900: hsl(52.1, 92.2%, 9.8%);
+
 	--accent-link-100: hsl(240, 85%, 90%);
 	--accent-link-300: hsl(240, 85%, 70%);
 	--accent-link-500: hsl(240, 85%, 50%);
@@ -118,6 +134,7 @@ textarea:not([rows]) {
 	--text-font-family: ${inter.style.fontFamily};
 	--text-font-size-normal:16px;
 	--text-font-size-small:13px;
+	--text-font-size-xsmall: 10px; /* for tags */
 	--text-line-height:1.5em;
 
 	--headline-font-family: ${inter.style.fontFamily};
@@ -135,6 +152,17 @@ textarea:not([rows]) {
 	--spacing-normal:1rem;
 	--spacing-large:2rem;
 
+	/* design parser spacing grid rule */
+	--eight-grid__halfstep: 4px;
+	--eight-grid__s: 8px;
+	--eight-grid__normal: 16px;
+	--eight-grid__l: 24px;
+	--eight-grid__xl: 32px;
+	--eight-grid__xxl: 40px;
+
+
+
+
 	--spacing-local-small:0.5em;
 	--spacing-local-normal:1em;
 	--spacing-local-large:2em;
@@ -142,14 +170,16 @@ textarea:not([rows]) {
 	--border-radius-small:5px;
 	--border-radius-normal:10px;
 	--border-radius-large:20px;
+	--border-radius-rounded:9999px;
 
 	--border-width-small:1px;
 	--border-width-normal:2px;
 	--border-color:var(--gray-900);
 
 	--border-small:var(--border-width-small) solid var(--border-color);
+	--border-normal:var(--border-width-normal) solid var(--border-color);
 
-	--card-image-height:200px;
+	--card-image-height:150px;
 	--detail-image-height:400px;
 
 	--detail-headline-background-color:#F5F5F5BB;
@@ -174,8 +204,8 @@ body {
 	font-family:var(--text-font-family);
 	font-size:var(--text-font-size-normal);
 	line-height: var(--text-line-height);
-	color:var(--gray-900);
-	background-color:var(--gray-100);
+	color:var(--main-900);
+	background-color: var(--app-background);
 
 	@media (prefers-color-scheme: dark) {
 		color:var(--gray-100);
@@ -209,22 +239,21 @@ p {
 }
 
 header {
-	box-shadow: var(--box-shadow-large);
-	padding: var(--spacing-normal);
+	
+	padding: var(--eight-grid__normal);
 }
 
 main {
 	display:flex;
 	flex-direction:column;
-	gap:var(--spacing-large);
-	padding: var(--spacing-large) 0;
+	padding: var(--eight-grid__l) 0;
 }
 
-input[type="text"], input[type="password"], textarea {
+input[type="text"], input[type="password"], input[type="url"], textarea {
 	all:unset;
 	color:inherit;
 	box-shadow: none;
-	padding: var(--spacing-small) var(--spacing-normal);
+	padding: var(--eight-grid__s) var(--eight-grid__s);
 	border-radius: var(--border-radius-normal);
 	border: var(--border-small);
 	width:100%;
@@ -284,7 +313,7 @@ option {
 }
 
 
-input[type="text"], input[type="password"], textarea, select, option {
+input[type="text"], input[type="url"], input[type="password"], textarea, select, option {
 	@media (prefers-color-scheme: dark) {
     background-color: var(--gray-800);
 	}

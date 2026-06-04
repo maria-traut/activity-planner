@@ -5,19 +5,17 @@ import ActivityList from "@/components/ActivityList";
 import SortButton from "@/components/SortButton";
 import Head from "next/head";
 import Header from "@/components/Header";
-import {
-    StyledButton,
-    StyledToolbarWrap,
-    StyledToolbar,
-    StyledStatusMessageWrap,
-} from "@/components/Global/Global.styled";
+import { StyledStatusMessageWrap } from "@/components/Global/Global.styled";
 
 export default function HomePage({
+    handleNavbarLocation,
     handleBookmarkToggle,
     bookmarkedActivityIds,
+    isCreateActivityMode,
+    setIsCreateActivityMode,
+    activityFormStatus,
+    setActivityFormStatus,
 }) {
-    const [isCreateActivityMode, setIsCreateActivityMode] = useState(false);
-
     const {
         data: activities,
         isLoading,
@@ -101,17 +99,20 @@ export default function HomePage({
             body: JSON.stringify(activityData),
         });
 
+        const data = await response.json();
+
         if (response.ok) {
             mutate();
             event.target.reset();
             setActivityFormStatus({
                 type: "success",
-                message: "Activity has successfully been created!",
+                message: data?.status,
             });
         } else {
             setActivityFormStatus({
                 type: "error",
-                message: "Form could not be sent. Please try again.",
+                message:
+                    data?.status || "Form could not be sent. Please try again.",
             });
         }
     }
@@ -155,25 +156,6 @@ export default function HomePage({
             </Head>
             <Header />
             <main>
-                {!isCreateActivityMode && (
-                    <StyledToolbarWrap>
-                        <StyledToolbar>
-                            <StyledButton
-                                onClick={() => {
-                                    setIsCreateActivityMode(
-                                        !isCreateActivityMode
-                                    );
-                                    setActivityFormStatus({
-                                        type: "",
-                                        message: "",
-                                    });
-                                }}
-                            >
-                                Create Activity
-                            </StyledButton>
-                        </StyledToolbar>
-                    </StyledToolbarWrap>
-                )}
                 {isCreateActivityMode && (
                     <ActivityForm
                         onSubmit={handleActivityCreate}
@@ -189,6 +171,7 @@ export default function HomePage({
                 />
                 <ActivityList
                     activities={sortedActivities}
+                    handleNavbarLocation={handleNavbarLocation}
                     handleBookmarkToggle={handleBookmarkToggle}
                     bookmarkedActivityIds={bookmarkedActivityIds}
                 />

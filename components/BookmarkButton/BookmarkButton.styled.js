@@ -1,14 +1,15 @@
 import styled from "styled-components";
-import { StyledButton } from "../Global/Global.styled";
 
-export const StyledBookmarkButton = styled(StyledButton)`
+export const StyledBookmarkButton = styled.button`
+    all: unset;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: var(--eight-grid__s);
+    right: var(--eight-grid__halfstep);
     z-index: 2;
-    background: var(--bookmark-button-color1);
 
-    &:hover {
-        background-color: var(--bookmark-button-color2);
+    svg {
+        max-width: 80%;
+        height: auto;
+        /* display: block; */
     }
 `;
