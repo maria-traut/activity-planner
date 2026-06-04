@@ -1,5 +1,6 @@
 import dbConnect from "@/db/connect";
 import Activity from "@/db/models/Activity";
+import { isImageUrl } from "@/lib/imageUrlValidation";
 
 export default async function handler(request, response) {
     await dbConnect();
@@ -16,9 +17,23 @@ export default async function handler(request, response) {
         if (request.method === "POST") {
             const activityData = request.body;
 
+            if (activityData?.imageUrl !== "") {
+                const isImage = activityData?.imageUrl
+                    ? await isImageUrl(activityData.imageUrl)
+                    : false;
+
+                if (!isImage) {
+                    return response.status(400).json({
+                        status: "Image URL is not linking to a valid image.",
+                    });
+                }
+            }
+
             await Activity.create(activityData);
 
-            return response.status(201).json({ status: "Activity created" });
+            return response
+                .status(201)
+                .json({ status: "Activity successfully created." });
         }
     } catch (error) {
         return response.status(500).json({ status: "Internal Server Error" });
