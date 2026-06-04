@@ -101,9 +101,6 @@ export default function Bookmarks({
             </Head>
             <Header title="My ActivibeeHive" />
             <main>
-                <StyledToolbarWrap>
-                    <StyledToolbar />
-                </StyledToolbarWrap>
                 {bookmarkedActivities.length > 0 ? (
                     <>
                         <SortButton
@@ -118,10 +115,15 @@ export default function Bookmarks({
                         />
                     </>
                 ) : (
-                    <p>
-                        No bookmarks yet. Tap the bee on any activity to save it
-                        here.
-                    </p>
+                    <>
+                        <StyledToolbarWrap>
+                            <StyledToolbar />
+                        </StyledToolbarWrap>
+                        <p>
+                            No bookmarks yet. Tap the bee on any activity to
+                            save it here.
+                        </p>
+                    </>
                 )}
             </main>
         </>
