@@ -1,7 +1,7 @@
 import { SWRConfig } from "swr";
 import GlobalStyle from "../styles";
 import useLocalStorageState from "use-local-storage-state";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Navbar from "@/components/Navigation";
 
@@ -33,7 +33,16 @@ export default function App({ Component, pageProps }) {
         message: "",
     });
 
-    const [isLoadingSplashScreen, setisLoadingSplashScreen] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setIsLoading((s) => s + 1);
+        }, 2000);
+        return () => {
+            clearInterval(timer);
+        };
+    }, []);
 
     function handleBookmarkToggle(id) {
         setBookmarkedActivityIds((prevBookmarkedActivityIds) => {
