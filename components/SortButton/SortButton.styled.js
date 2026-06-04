@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { StyledButton } from "../Global/Global.styled";
 
 export const StyledFormFieldset = styled.fieldset`
-    padding: 1rem;
+    padding: var(--eight-grid__halfstep);
     border-radius: 10px;
 `;
 
@@ -17,11 +17,10 @@ export const StyledFormSection = styled.section`
 `;
 
 export const StyledSortButton = styled(StyledButton)`
-    top: var(--spacing-small);
-    right: var(--spacing-small);
+    top: var(--eight-grid__s);
+    right: var(--eight-grid__s);
     padding: 2px 4px;
     position: fixed;
-    top: 1rem;
-    right: 1rem;
-    z-index: 3;
+
+    z-index: 4;
 `;
