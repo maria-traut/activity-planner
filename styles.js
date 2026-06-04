@@ -151,6 +151,16 @@ textarea:not([rows]) {
 	--spacing-normal:1rem;
 	--spacing-large:2rem;
 
+	/* design parser spacing grid rule */
+	--eight-grid__s: 8px;
+	--eight-grid__normal: 16px;
+	--eight-grid__l: 24px;
+	--eight-grid__xl: 32px;
+	--eight-grid__xxl: 40px;
+
+
+
+
 	--spacing-local-small:0.5em;
 	--spacing-local-normal:1em;
 	--spacing-local-large:2em;
@@ -190,7 +200,7 @@ body {
 	font-family:var(--text-font-family);
 	font-size:var(--text-font-size-normal);
 	line-height: var(--text-line-height);
-	color:var(--gray-900);
+	color:var(--main-900);
 	background-color:var(--gray-100);
 
 	@media (prefers-color-scheme: dark) {
