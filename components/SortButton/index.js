@@ -52,7 +52,7 @@ export default function SortButton({ onActivitySort, activitySortOrder }) {
                 <StyledToolbar>
                     <StyledSortButton
                         type="button"
-                        isActive={activitySortOrder !== null}
+                        $isActive={activitySortOrder !== null}
                         onClick={() => {
                             setIsSortActivityMode(!isSortActivityMode);
                             scrollToTop();
