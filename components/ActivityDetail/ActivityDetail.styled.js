@@ -40,7 +40,7 @@ export const StyledActivityDetailTitle = styled.h2`
     background-color: var(--detail-headline-background-color);
     display: table;
     padding: var(--spacing-small) var(--spacing-normal);
-    border-radius: 999px;
+    border-radius: var(--border-radius-rounded);
 `;
 
 const StyledTagList = styled.ul`
@@ -55,7 +55,7 @@ const StyledTagList = styled.ul`
     li {
         text-align: center;
         background-color: var(--gray-200);
-        border-radius: 999px;
+        border-radius: var(--border-radius-rounded);
         padding: var(--spacing-local-small) var(--spacing-local-normal);
     }
 

@@ -142,12 +142,14 @@ textarea:not([rows]) {
 	--border-radius-small:5px;
 	--border-radius-normal:10px;
 	--border-radius-large:20px;
+	--border-radius-rounded:9999px;
 
 	--border-width-small:1px;
 	--border-width-normal:2px;
 	--border-color:var(--gray-900);
 
 	--border-small:var(--border-width-small) solid var(--border-color);
+	--border-normal:var(--border-width-normal) solid var(--border-color);
 
 	--card-image-height:200px;
 	--detail-image-height:400px;
@@ -220,7 +222,7 @@ main {
 	padding: var(--spacing-large) 0;
 }
 
-input[type="text"], input[type="password"], textarea {
+input[type="text"], input[type="password"], input[type="url"], textarea {
 	all:unset;
 	color:inherit;
 	box-shadow: none;
@@ -284,7 +286,7 @@ option {
 }
 
 
-input[type="text"], input[type="password"], textarea, select, option {
+input[type="text"], input[type="url"], input[type="password"], textarea, select, option {
 	@media (prefers-color-scheme: dark) {
     background-color: var(--gray-800);
 	}
