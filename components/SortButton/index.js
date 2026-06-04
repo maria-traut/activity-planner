@@ -15,7 +15,7 @@ import { scrollToTop } from "../Global";
 
 export default function SortButton({ onActivitySort, activitySortOrder }) {
     const [isSortActivityMode, setIsSortActivityMode] = useState(false);
-    const [selectedSort, setSelectedSort] = useState(null);
+    const [selectedSort, setSelectedSort] = useState(activitySortOrder);
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -69,7 +69,7 @@ export default function SortButton({ onActivitySort, activitySortOrder }) {
                         <StyledFormFieldset>
                             <legend>Sort Activities by</legend>
                             <div>
-                                <StyledSortOption style={{ all: "unset" }}>
+                                <StyledSortOption>
                                     Date
                                 </StyledSortOption>
                                 <StyledFormSection>
@@ -79,9 +79,6 @@ export default function SortButton({ onActivitySort, activitySortOrder }) {
                                             id="sort-newest"
                                             name="sort"
                                             value="newest"
-                                            style={{
-                                                backgroundColor: "yellow",
-                                            }}
                                             checked={selectedSort === "newest"}
                                             onChange={() =>
                                                 setSelectedSort("newest")
