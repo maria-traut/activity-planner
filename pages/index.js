@@ -30,7 +30,7 @@ export default function HomePage({
         message: "",
     });
 
-    const [activitySortOrder, setActivitySortOrder] = useState("newest");
+    const [activitySortOrder, setActivitySortOrder] = useState(null);
 
     const sortedActivities = activities
         ? [...activities].sort((a, b) => {

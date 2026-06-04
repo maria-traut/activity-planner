@@ -8,10 +8,9 @@ import {
     StyledFormFieldset,
     StyledFormWrap,
     StyledFormSection,
-    StyledSortButton,
     StyledSortOption,
+    StyledSortButton,
 } from "./SortButton.styled";
-import Image from "next/image";
 
 export default function SortButton({ onActivitySort, activitySortOrder }) {
     const [isSortActivityMode, setIsSortActivityMode] = useState(false);
@@ -24,8 +23,8 @@ export default function SortButton({ onActivitySort, activitySortOrder }) {
     }
 
     function handleReset() {
-        setSelectedSort("newest");
-        onActivitySort("newest");
+        setSelectedSort(null);
+        onActivitySort(null);
         setIsSortActivityMode(false);
     }
 
@@ -52,17 +51,12 @@ export default function SortButton({ onActivitySort, activitySortOrder }) {
                 <StyledToolbar>
                     <StyledSortButton
                         type="button"
+                        isActive={activitySortOrder !== null}
                         onClick={() =>
                             setIsSortActivityMode(!isSortActivityMode)
                         }
                     >
-                        {getSortLabel(activitySortOrder)}
-                        <Image
-                            src="/sort.png"
-                            alt="sort"
-                            width={16}
-                            height={16}
-                        />
+                        {getSortLabel(activitySortOrder)} &#8645;
                     </StyledSortButton>
                 </StyledToolbar>
             </StyledToolbarWrap>
@@ -82,6 +76,9 @@ export default function SortButton({ onActivitySort, activitySortOrder }) {
                                             id="sort-newest"
                                             name="sort"
                                             value="newest"
+                                            style={{
+                                                backgroundColor: "yellow",
+                                            }}
                                             checked={selectedSort === "newest"}
                                             onChange={() =>
                                                 setSelectedSort("newest")

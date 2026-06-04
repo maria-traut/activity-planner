@@ -15,14 +15,15 @@ export const StyledFormSection = styled.section`
     gap: 0.5rem;
 `;
 
-export const StyledSortButton = styled.button`
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+export const StyledSortOption = styled.p`
+    all: unset;
+`;
 
+export const StyledSortButton = styled.button`
     border-radius: var(--border-radius-normal);
     border: var(--border-small);
     padding: var(--spacing-small) var(--spacing-normal);
+    ${({ isActive }) => isActive && "background-color: lightgoldenrodyellow;"}
 
     &:hover {
         background-color: var(--gray-200);
@@ -34,6 +35,13 @@ export const StyledSortButton = styled.button`
     }
 
     @media (prefers-color-scheme: dark) {
+        ${({ isActive }) =>
+            isActive &&
+            `
+    background-color: transparent;
+    border-color: lightgoldenrodyellow;
+    color: lightgoldenrodyellow;
+`}
         &:hover {
             background-color: var(--gray-800);
         }
@@ -43,8 +51,4 @@ export const StyledSortButton = styled.button`
             color: var(--gray-700);
         }
     }
-`;
-
-export const StyledSortOption = styled.p`
-    all: unset;
 `;
