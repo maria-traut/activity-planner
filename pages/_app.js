@@ -1,6 +1,7 @@
 import { SWRConfig } from "swr";
 import GlobalStyle from "../styles";
 import useLocalStorageState from "use-local-storage-state";
+import { useState } from "react";
 
 import Navbar from "@/components/Navigation";
 
@@ -22,6 +23,15 @@ export default function App({ Component, pageProps }) {
         useLocalStorageState("bookmarkedActivityIds", {
             defaultValue: [],
         });
+    const [navbarLocation, setNavbarLocation] = useState("/");
+    function handleNavbarLocation(location) {
+        setNavbarLocation((prev) => location);
+    }
+    const [isCreateActivityMode, setIsCreateActivityMode] = useState(false);
+    const [activityFormStatus, setActivityFormStatus] = useState({
+        type: "",
+        message: "",
+    });
     function handleBookmarkToggle(id) {
         setBookmarkedActivityIds((prevBookmarkedActivityIds) => {
             const isAdded = prevBookmarkedActivityIds.includes(id);
@@ -34,6 +44,7 @@ export default function App({ Component, pageProps }) {
             return [...prevBookmarkedActivityIds, id];
         });
     }
+
     function handleBookmarkedActivityIdsDelete(id) {
         setBookmarkedActivityIds((prevBookmarkedActivityIds) =>
             prevBookmarkedActivityIds.filter((bookmarkId) => bookmarkId !== id)
@@ -45,13 +56,25 @@ export default function App({ Component, pageProps }) {
             <SWRConfig value={{ fetcher }}>
                 <Component
                     {...pageProps}
+                    handleNavbarLocation={handleNavbarLocation}
                     bookmarkedActivityIds={bookmarkedActivityIds}
                     handleBookmarkToggle={handleBookmarkToggle}
                     onBookmarkedActivityIdsDelete={
                         handleBookmarkedActivityIdsDelete
                     }
+                    isCreateActivityMode={isCreateActivityMode}
+                    setIsCreateActivityMode={setIsCreateActivityMode}
+                    activityFormStatus={activityFormStatus}
+                    setActivityFormStatus={setActivityFormStatus}
                 />
-                <Navbar />
+                <Navbar
+                    onNavbarLocation={handleNavbarLocation}
+                    navbarLocation={navbarLocation}
+                    isCreateActivityMode={isCreateActivityMode}
+                    setIsCreateActivityMode={setIsCreateActivityMode}
+                    activityFormStatus={activityFormStatus}
+                    setActivityFormStatus={setActivityFormStatus}
+                />
             </SWRConfig>
         </>
     );

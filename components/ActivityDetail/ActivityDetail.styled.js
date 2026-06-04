@@ -40,7 +40,7 @@ export const StyledActivityDetailTitle = styled.h2`
     background-color: var(--detail-headline-background-color);
     display: table;
     padding: var(--spacing-small) var(--spacing-normal);
-    border-radius: 999px;
+    border-radius: var(--border-radius-rounded);
 `;
 
 const StyledTagList = styled.ul`
@@ -48,6 +48,7 @@ const StyledTagList = styled.ul`
     padding: 0;
     margin: 0;
     display: flex;
+    flex-wrap: wrap;
 
     font-size: var(--text-font-size-small);
     gap: var(--spacing-local-normal);
@@ -55,7 +56,7 @@ const StyledTagList = styled.ul`
     li {
         text-align: center;
         background-color: var(--gray-200);
-        border-radius: 999px;
+        border-radius: var(--border-radius-rounded);
         padding: var(--spacing-local-small) var(--spacing-local-normal);
     }
 

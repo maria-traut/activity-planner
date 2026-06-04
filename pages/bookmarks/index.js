@@ -2,7 +2,6 @@ import useSWR from "swr";
 import { useState } from "react";
 import Head from "next/head";
 import Header from "@/components/Header";
-import BackButton from "@/components/BackButton";
 import {
     StyledToolbar,
     StyledToolbarWrap,
@@ -13,6 +12,7 @@ import SortButton from "@/components/SortButton";
 export default function Bookmarks({
     handleBookmarkToggle,
     bookmarkedActivityIds,
+    handleNavbarLocation,
 }) {
     const { data: activities, isLoading, error } = useSWR("/api/activities");
 
@@ -69,9 +69,7 @@ export default function Bookmarks({
                 <Header title="Bookmarks" />
                 <main>
                     <StyledToolbarWrap>
-                        <StyledToolbar>
-                            <BackButton />
-                        </StyledToolbar>
+                        <StyledToolbar />
                     </StyledToolbarWrap>
                     <p>Loading activities...</p>
                 </main>
@@ -88,9 +86,7 @@ export default function Bookmarks({
                 <Header title="Bookmarks" />
                 <main>
                     <StyledToolbarWrap>
-                        <StyledToolbar>
-                            <BackButton />
-                        </StyledToolbar>
+                        <StyledToolbar />
                     </StyledToolbarWrap>
                     <p>An error occurred while fetching the activities.</p>
                 </main>
@@ -103,12 +99,10 @@ export default function Bookmarks({
             <Head>
                 <title>My Bookmarks | Activity Planner</title>
             </Head>
-            <Header title="Bookmarks" />
+            <Header title="My ActivibeeHive" />
             <main>
                 <StyledToolbarWrap>
-                    <StyledToolbar>
-                        <BackButton />
-                    </StyledToolbar>
+                    <StyledToolbar />
                 </StyledToolbarWrap>
                 {bookmarkedActivities.length > 0 ? (
                     <>
@@ -120,6 +114,7 @@ export default function Bookmarks({
                             activities={sortedBookmarkedActivities}
                             handleBookmarkToggle={handleBookmarkToggle}
                             bookmarkedActivityIds={bookmarkedActivityIds}
+                            handleNavbarLocation={handleNavbarLocation}
                         />
                     </>
                 ) : (

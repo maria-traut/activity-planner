@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
 export const StyledFormFieldset = styled.fieldset`
+<<<<<<< HEAD
     padding: 1rem;
+=======
+    padding: var(--eight-grid__halfstep);
+>>>>>>> main
     border-radius: 10px;
 `;
 
@@ -20,6 +24,12 @@ export const StyledSortOption = styled.p`
 `;
 
 export const StyledSortButton = styled.button`
+    top: var(--eight-grid__s);
+    right: var(--eight-grid__s);
+    padding: 2px 4px;
+    position: fixed;
+
+    z-index: 5;
     border-radius: var(--border-radius-normal);
     border: var(--border-small);
     padding: var(--spacing-small) var(--spacing-normal);
