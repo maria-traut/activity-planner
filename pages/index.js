@@ -23,11 +23,6 @@ export default function HomePage({
         mutate,
     } = useSWR("/api/activities");
 
-    const [activityFormStatus, setActivityFormStatus] = useState({
-        type: "",
-        message: "",
-    });
-
     const [activitySortOrder, setActivitySortOrder] = useState(null);
 
     const sortedActivities = activities
