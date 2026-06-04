@@ -5,12 +5,7 @@ import ActivityList from "@/components/ActivityList";
 import SortButton from "@/components/SortButton";
 import Head from "next/head";
 import Header from "@/components/Header";
-import {
-    StyledButton,
-    StyledToolbarWrap,
-    StyledToolbar,
-    StyledStatusMessageWrap,
-} from "@/components/Global/Global.styled";
+import { StyledStatusMessageWrap } from "@/components/Global/Global.styled";
 
 export default function HomePage({
     handleNavbarLocation,

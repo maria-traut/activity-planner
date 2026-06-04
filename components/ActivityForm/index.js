@@ -13,6 +13,7 @@ import {
     StyledFormFieldset,
 } from "./ActivityForm.styled";
 import { handleImageUrlValiditation } from "@/lib/imageUrlValidation";
+import showToast from "../Toast";
 
 export default function ActivityForm({ onSubmit, status, heading, ...props }) {
     const {
@@ -177,29 +178,29 @@ export default function ActivityForm({ onSubmit, status, heading, ...props }) {
                                     Cancel
                                 </StyledButton>
                             )}
-                            {status.type === "error" && (
-                                <StyledStatusMessageError>
-                                    Error
-                                </StyledStatusMessageError>
+                            {/* {status.type === "error" && (
+                                // <StyledStatusMessageError>
+                                //     Error
+                                // </StyledStatusMessageError>
                             )}
                             {status.type === "success" && (
-                                <StyledStatusMessageSuccess>
-                                    Success
-                                </StyledStatusMessageSuccess>
-                            )}
+                                // <StyledStatusMessageSuccess>
+                                //     Success
+                                // </StyledStatusMessageSuccess>
+                            )} */}
                         </StyledToolbar>
                         {status.type !== "" && (
                             <StyledFormSection>
-                                {status.type === "error" && (
-                                    <StyledStatusMessageError>
-                                        {status.message}
-                                    </StyledStatusMessageError>
-                                )}
-                                {status.type === "success" && (
-                                    <StyledStatusMessageSuccess>
-                                        {status.message}
-                                    </StyledStatusMessageSuccess>
-                                )}
+                                {status.type === "error" &&
+                                    // <StyledStatusMessageError>
+                                    //     {status.message}
+                                    // </StyledStatusMessageError>
+                                    showToast(status.message, "danger")}
+                                {status.type === "success" &&
+                                    // <StyledStatusMessageSuccess>
+                                    //     {status.message}
+                                    // </StyledStatusMessageSuccess>
+                                    showToast(status.message)}
                             </StyledFormSection>
                         )}
                     </StyledFormFlex>
