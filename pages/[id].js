@@ -1,7 +1,6 @@
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import BackButton from "@/components/BackButton";
 import ActivityDetail from "@/components/ActivityDetail";
 import ActivityForm from "@/components/ActivityForm";
 import Head from "next/head";
@@ -16,6 +15,7 @@ import {
     StyledStatusMessageWrap,
 } from "@/components/Global/Global.styled";
 import Header from "@/components/Header";
+import showToast from "@/components/Toast";
 
 export default function Activity({
     handleBookmarkToggle,
@@ -220,7 +220,7 @@ export default function Activity({
                                         </StyledButton>
                                     </>
                                 )}
-                                {activityFormStatus.type === "error" && (
+                                {/* {activityFormStatus.type === "error" && (
                                     <StyledStatusMessageError>
                                         Error
                                     </StyledStatusMessageError>
@@ -229,7 +229,7 @@ export default function Activity({
                                     <StyledStatusMessageSuccess>
                                         Success
                                     </StyledStatusMessageSuccess>
-                                )}
+                                )} */}
                             </>
                         )}
                     </StyledToolbar>
@@ -237,16 +237,16 @@ export default function Activity({
                 {activityFormStatus.type !== "" && isDeleteActivityMode && (
                     <StyledFormSection>
                         <StyledStatusMessageWrap>
-                            {activityFormStatus.type === "error" && (
-                                <StyledStatusMessageError>
-                                    {activityFormStatus.message}
-                                </StyledStatusMessageError>
-                            )}
-                            {activityFormStatus.type === "success" && (
-                                <StyledStatusMessageSuccess>
-                                    {activityFormStatus.message}
-                                </StyledStatusMessageSuccess>
-                            )}
+                            {activityFormStatus.type === "error" &&
+                                // <StyledStatusMessageError>
+                                //     {activityFormStatus.message}
+                                // </StyledStatusMessageError>
+                                showToast(activityFormStatus.message, "danger")}
+                            {activityFormStatus.type === "success" &&
+                                // <StyledStatusMessageSuccess>
+                                //     {activityFormStatus.message}
+                                // </StyledStatusMessageSuccess>
+                                showToast(activityFormStatus.message)}
                         </StyledStatusMessageWrap>
                     </StyledFormSection>
                 )}
