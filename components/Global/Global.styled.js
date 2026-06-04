@@ -21,7 +21,7 @@ export const StyledToolbarWrap = styled.section`
     position: sticky;
     top: 50px;
     width: 100%;
-    z-index: 3;
+    z-index: 5;
 `;
 
 export const StyledToolbar = styled.div`
