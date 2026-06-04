@@ -1,11 +1,7 @@
 import styled from "styled-components";
 
 export const StyledFormFieldset = styled.fieldset`
-<<<<<<< HEAD
-    padding: 1rem;
-=======
     padding: var(--eight-grid__halfstep);
->>>>>>> main
     border-radius: 10px;
 `;
 
