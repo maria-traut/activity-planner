@@ -13,22 +13,20 @@ import {
 } from "@/components/Global/Global.styled";
 
 export default function HomePage({
+    handleNavbarLocation,
     handleBookmarkToggle,
     bookmarkedActivityIds,
+    isCreateActivityMode,
+    setIsCreateActivityMode,
+    activityFormStatus,
+    setActivityFormStatus,
 }) {
-    const [isCreateActivityMode, setIsCreateActivityMode] = useState(false);
-
     const {
         data: activities,
         isLoading,
         error,
         mutate,
     } = useSWR("/api/activities");
-
-    const [activityFormStatus, setActivityFormStatus] = useState({
-        type: "",
-        message: "",
-    });
 
     const [activitySortOrder, setActivitySortOrder] = useState("newest");
 
@@ -158,25 +156,6 @@ export default function HomePage({
             </Head>
             <Header />
             <main>
-                {!isCreateActivityMode && (
-                    <StyledToolbarWrap>
-                        <StyledToolbar>
-                            <StyledButton
-                                onClick={() => {
-                                    setIsCreateActivityMode(
-                                        !isCreateActivityMode
-                                    );
-                                    setActivityFormStatus({
-                                        type: "",
-                                        message: "",
-                                    });
-                                }}
-                            >
-                                Create Activity
-                            </StyledButton>
-                        </StyledToolbar>
-                    </StyledToolbarWrap>
-                )}
                 {isCreateActivityMode && (
                     <ActivityForm
                         onSubmit={handleActivityCreate}
@@ -189,6 +168,7 @@ export default function HomePage({
                 <SortButton onActivitySort={handleActivitySort} />
                 <ActivityList
                     activities={sortedActivities}
+                    handleNavbarLocation={handleNavbarLocation}
                     handleBookmarkToggle={handleBookmarkToggle}
                     bookmarkedActivityIds={bookmarkedActivityIds}
                 />

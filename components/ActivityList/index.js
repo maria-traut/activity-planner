@@ -7,6 +7,7 @@ import {
 
 export default function ActivityList({
     activities,
+    handleNavbarLocation,
     handleBookmarkToggle,
     bookmarkedActivityIds,
 }) {
@@ -20,6 +21,7 @@ export default function ActivityList({
                             title={activity.title}
                             categories={activity.categories}
                             id={activity._id}
+                            onNavbarLocation={handleNavbarLocation}
                         />
                         <BookmarkButton
                             onBookmarkToggle={handleBookmarkToggle}
