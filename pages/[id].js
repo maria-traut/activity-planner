@@ -89,7 +89,7 @@ export default function Activity({
     }
 
     async function handleActivityDelete() {
-        const response = await fetch(`api/activities/${id}`, {
+        const response = await fetch(`/api/activities/${id}`, {
             method: "DELETE",
         });
 

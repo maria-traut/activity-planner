@@ -71,7 +71,7 @@ export const StyledAddActivityButton = styled(StyledButton)`
     background-color: var(--main-500);
     border-color: var(--main-200);
 
-    &:hover {
+    &:active {
         border-style: none;
         background-color: transparent;
         color: transparent;

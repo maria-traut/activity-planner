@@ -22,5 +22,5 @@ export const StyledSortButton = styled(StyledButton)`
     padding: 2px 4px;
     position: fixed;
 
-    z-index: 4;
+    z-index: 5;
 `;

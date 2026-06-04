@@ -9,7 +9,7 @@ export default function BookmarkButton({
     const isFavorite = bookmarkedActivityIds?.includes(id);
     const [isAnimating, setIsAnimating] = useState(false);
 
-    function handleBookmarkButtonCLick(id) {
+    function handleBookmarkButtonClick(id) {
         onBookmarkToggle(id);
         setIsAnimating(true);
         setTimeout(() => {
@@ -20,11 +20,11 @@ export default function BookmarkButton({
     return (
         <StyledBookmarkButton
             aria-label={isFavorite ? "Remove bookmark" : "Add bookmark"}
-            onClick={() => handleBookmarkButtonCLick(id)}
+            onClick={() => handleBookmarkButtonClick(id)}
         >
             <NewBeeIcon
                 className={isAnimating ? "isAnimating" : ""}
-                bodyColor={isFavorite ? "var(--main-500)" : "var(--gray-300"}
+                bodyColor={isFavorite ? "var(--main-500)" : "var(--gray-300)"}
                 size="50"
                 isFavorite={isFavorite}
             />

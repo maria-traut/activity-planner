@@ -21,8 +21,7 @@ export const StyledFigure = styled.figure`
 export const StyledCardImageWrapper = styled.div`
     position: relative;
     width: 100%;
-    /* height: var(--card-image-height); */
-    height: 160px; /* 8x20 */
+    height: 160px; /*note: this still adheres to the 8pt grid system, keep in mind when adapting */
 `;
 
 export const StyledCardImage = styled(Image)`
@@ -33,7 +32,7 @@ export const StyledFigcaption = styled.figcaption`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: left;
+    align-items: flex-start;
     gap: var(--eight-grid__s);
 
     padding: var(--eight-grid__s);
