@@ -41,14 +41,15 @@ export const StyledSVG = styled.svg`
         opacity: ${(props) => (props.isFavorite ? 0 : 1)};
     }
 
-    &.isAnimating {
-        animation: ${shake} 0.15s linear infinite;
-        .wingsOpen {
-            animation: ${flap} 0.3s linear infinite;
-        }
-
-        .wingsClosed {
-            animation: ${flap} 0.3s linear infinite reverse;
+    @media (prefers-reduced-motion: no-preference) {
+        &.isAnimating {
+            animation: ${shake} 0.15s linear infinite;
+            .wingsOpen {
+                animation: ${flap} 0.3s linear infinite;
+            }
+            .wingsClosed {
+                animation: ${flap} 0.3s linear infinite reverse;
+            }
         }
     }
 `;

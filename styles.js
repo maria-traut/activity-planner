@@ -99,11 +99,12 @@ textarea:not([rows]) {
 	--gray-800: #333333;
 	--gray-900: #242424;
 
+	--app-background: #fcf6ee;
 
 	--main-100: hsl(52.1, 92.2%, 89.8%);
 	--main-200: hsl(52.1, 92.2%, 79.8%);
 	--main-300: hsl(52.1, 92.2%, 69.8%);
-	--main-400: hsl(52.1, 92.2%, 59.8%); /*color name: golden dream*/
+	--main-400: hsl(52.1, 92.2%, 59.8%); 
 	--main-500: hsl(52.1, 92.2%, 49.8%);
 	--main-600: hsl(52.1, 92.2%, 39.8%);
 	--main-700: hsl(52.1, 92.2%, 29.8%);
@@ -202,7 +203,7 @@ body {
 	font-size:var(--text-font-size-normal);
 	line-height: var(--text-line-height);
 	color:var(--main-900);
-	background-color:var(--gray-100);
+	background-color: var(--app-background);
 
 	@media (prefers-color-scheme: dark) {
 		color:var(--gray-100);
@@ -243,7 +244,6 @@ header {
 main {
 	display:flex;
 	flex-direction:column;
-	/* gap:var(--spacing-large); */
 	padding: var(--eight-grid__l) 0;
 }
 

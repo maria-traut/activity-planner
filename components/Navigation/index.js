@@ -31,9 +31,7 @@ export default function Navbar({
                     ➕
                 </StyledAddActivityButton>
             ) : (
-                <StyledNavbarEmpty
-                    onClick={() => console.log("empty has been clicked")}
-                />
+                <StyledNavbarEmpty />
             )}
 
             <StyledBookmarkLink
