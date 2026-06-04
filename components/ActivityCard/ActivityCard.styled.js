@@ -56,11 +56,14 @@ export const StyledCategoryList = styled.ul`
 
 export const StyledCategoryTag = styled.li`
     display: inline-block;
-    background-color: var(--gray-200);
+
+    background-color: ${({ $categoryColor }) =>
+        $categoryColor || "var(--gray-200)"};
     border-radius: var(--border-radius-rounded);
     padding: var(--spacing-local-small) var(--spacing-local-normal);
 
     @media (prefers-color-scheme: dark) {
-        background-color: var(--gray-800);
+        background-color: ${({ $categoryColor }) =>
+            $categoryColor || "var(--gray-800)"};
     }
 `;

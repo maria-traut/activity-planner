@@ -26,7 +26,10 @@ export default function ActivityCard({ title, categories, image, id }) {
                     <StyledActivityHeadline>{title}</StyledActivityHeadline>
                     <StyledCategoryList>
                         {categories.map((category) => (
-                            <StyledCategoryTag key={category._id}>
+                            <StyledCategoryTag
+                                key={category._id}
+                                $categoryColor={category.color}
+                            >
                                 {category.name}
                             </StyledCategoryTag>
                         ))}
