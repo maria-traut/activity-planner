@@ -74,16 +74,19 @@ export default function Activity({
             body: JSON.stringify(activityData),
         });
 
+        const data = await response.json();
+
         if (response.ok) {
             mutate();
             setActivityFormStatus({
                 type: "success",
-                message: "Activity has successfully been edited!",
+                message: data?.status,
             });
         } else {
             setActivityFormStatus({
                 type: "error",
-                message: "Form could not be sent. Please try again.",
+                message:
+                    data?.status || "Form could not be sent. Please try again.",
             });
         }
     }
@@ -93,10 +96,12 @@ export default function Activity({
             method: "DELETE",
         });
 
+        const data = await response.json();
+
         if (response.ok) {
             setActivityFormStatus({
                 type: "success",
-                message: "Activity has successfully been deleted!",
+                message: data?.status,
             });
             onBookmarkedActivityIdsDelete(id);
         } else {

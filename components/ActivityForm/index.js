@@ -12,6 +12,7 @@ import {
     StyledFormWrap,
     StyledFormFieldset,
 } from "./ActivityForm.styled";
+import { handleImageUrlValiditation } from "@/lib/imageUrlValidation";
 
 export default function ActivityForm({ onSubmit, status, heading, ...props }) {
     const {
@@ -72,6 +73,29 @@ export default function ActivityForm({ onSubmit, status, heading, ...props }) {
                                 maxLength={5000}
                                 defaultValue={activity?.description}
                             ></textarea>
+                        </StyledFormSection>
+                        <StyledFormSection>
+                            <label htmlFor="imageUrl">Image (URL)</label>
+                            <input
+                                type="url"
+                                id="imageUrl"
+                                name="imageUrl"
+                                onChange={(event) =>
+                                    event.target.validity.customError &&
+                                    handleImageUrlValiditation(event.target)
+                                }
+                                onBlur={(event) =>
+                                    handleImageUrlValiditation(event.target)
+                                }
+                                defaultValue={
+                                    activity?.imageUrl
+                                        ? activity?.imageUrl !==
+                                          "/placeholder.jpg"
+                                            ? activity?.imageUrl
+                                            : ""
+                                        : ""
+                                }
+                            />
                         </StyledFormSection>
                         <StyledFormSection>
                             <label htmlFor="categories">

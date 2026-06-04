@@ -99,17 +99,20 @@ export default function HomePage({
             body: JSON.stringify(activityData),
         });
 
+        const data = await response.json();
+
         if (response.ok) {
             mutate();
             event.target.reset();
             setActivityFormStatus({
                 type: "success",
-                message: "Activity has successfully been created!",
+                message: data?.status,
             });
         } else {
             setActivityFormStatus({
                 type: "error",
-                message: "Form could not be sent. Please try again.",
+                message:
+                    data?.status || "Form could not be sent. Please try again.",
             });
         }
     }
