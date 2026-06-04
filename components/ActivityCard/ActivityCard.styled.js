@@ -21,7 +21,8 @@ export const StyledFigure = styled.figure`
 export const StyledCardImageWrapper = styled.div`
     position: relative;
     width: 100%;
-    height: var(--card-image-height);
+    /* height: var(--card-image-height); */
+    height: 160px; /* 8x20 */
 `;
 
 export const StyledCardImage = styled(Image)`
@@ -33,9 +34,9 @@ export const StyledFigcaption = styled.figcaption`
     flex-direction: column;
     justify-content: space-between;
     align-items: left;
-    gap: var(--spacing-small);
+    gap: var(--eight-grid__s);
 
-    padding: var(--spacing-small);
+    padding: var(--eight-grid__s);
 `;
 
 export const StyledActivityHeadline = styled.h2`
@@ -53,7 +54,7 @@ export const StyledCategoryList = styled.ul`
     flex-wrap: wrap;
 
     font-size: var(--text-font-size-small);
-    gap: var(--spacing-local-small);
+    gap: var(--eight-grid__halfstep);
 `;
 
 export const StyledCategoryTag = styled.li`

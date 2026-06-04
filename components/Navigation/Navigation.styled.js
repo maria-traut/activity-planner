@@ -6,21 +6,21 @@ export const StyledNavbarContainer = styled.nav`
     width: 100%;
 
     display: grid;
-    grid-template-columns: repeat(2, 80px);
-    grid-template-rows: repeat(2, 60px);
+    grid-template-columns: repeat(2, 72px);
+    grid-template-rows: repeat(2, 72px);
 
     justify-content: space-between;
 
-    gap: 15px;
-    padding: 0 15px;
+    gap: var(--eight-grid__s);
+    padding: 0 var(--eight-grid__normal);
     bottom: 0;
     position: fixed;
     z-index: 3;
 `;
 
 export const StyledBookmarkLink = styled(Link)`
-    width: 80px;
-    height: 40px;
+    width: 72px;
+    height: 64px;
 
     background-color: var(--gray-100);
     border: 1px solid black;
@@ -38,9 +38,10 @@ export const StyledBookmarkLink = styled(Link)`
 `;
 
 export const StyledHomeLink = styled(Link)`
-    width: 80px;
-    height: 40px;
+    width: 72px;
+    height: 64px;
     text-transform: uppercase;
+    color: var(--main-900);
 
     background-color: var(--gray-100);
     border: 1px solid black;
@@ -58,9 +59,8 @@ export const StyledHomeLink = styled(Link)`
 `;
 
 export const StyledNavbarEmpty = styled.div`
-    width: 80px;
-    height: 60px;
-    /* background-color: red; */
+    width: 72px;
+    height: 64px;
     grid-column: 2;
     grid-row: 1;
 `;
@@ -68,6 +68,8 @@ export const StyledNavbarEmpty = styled.div`
 export const StyledAddActivityButton = styled(StyledButton)`
     grid-column: 2;
     grid-row: 1;
+    background-color: var(--main-500);
+    border-color: var(--main-200);
 
     &:hover {
         border-style: none;

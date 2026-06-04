@@ -152,6 +152,7 @@ textarea:not([rows]) {
 	--spacing-large:2rem;
 
 	/* design parser spacing grid rule */
+	--eight-grid__halfstep: 4px;
 	--eight-grid__s: 8px;
 	--eight-grid__normal: 16px;
 	--eight-grid__l: 24px;
@@ -236,21 +237,21 @@ p {
 
 header {
 	
-	padding: var(--spacing-normal);
+	padding: var(--eight-grid__normal);
 }
 
 main {
 	display:flex;
 	flex-direction:column;
 	/* gap:var(--spacing-large); */
-	padding: var(--spacing-large) 0;
+	padding: var(--eight-grid__l) 0;
 }
 
 input[type="text"], input[type="password"], textarea {
 	all:unset;
 	color:inherit;
 	box-shadow: none;
-	padding: var(--spacing-small) var(--spacing-normal);
+	padding: var(--eight-grid__s) var(--eight-grid__s);
 	border-radius: var(--border-radius-normal);
 	border: var(--border-small);
 	width:100%;
