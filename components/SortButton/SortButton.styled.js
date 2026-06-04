@@ -41,8 +41,8 @@ export const StyledSortButton = styled.button`
     }
 
     @media (prefers-color-scheme: dark) {
-        ${({ isActive }) =>
-            isActive &&
+        ${({ $isActive }) =>
+            $isActive &&
             `
     background-color: transparent;
     border-color: lightgoldenrodyellow;
