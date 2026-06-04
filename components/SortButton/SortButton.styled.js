@@ -29,7 +29,7 @@ export const StyledSortButton = styled.button`
     border-radius: var(--border-radius-normal);
     border: var(--border-small);
     padding: var(--spacing-small) var(--spacing-normal);
-    ${({ isActive }) => isActive && "background-color: lightgoldenrodyellow;"}
+    ${({ $isActive }) => $isActive && "background-color: lightgoldenrodyellow;"}
 
     &:hover {
         background-color: var(--gray-200);
