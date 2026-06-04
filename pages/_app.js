@@ -32,6 +32,9 @@ export default function App({ Component, pageProps }) {
         type: "",
         message: "",
     });
+
+    const [isLoadingSplashScreen, setisLoadingSplashScreen] = useState(true);
+
     function handleBookmarkToggle(id) {
         setBookmarkedActivityIds((prevBookmarkedActivityIds) => {
             const isAdded = prevBookmarkedActivityIds.includes(id);
