@@ -4,7 +4,7 @@ export const StyledActivityList = styled.ul`
     list-style: none;
     display: grid;
     gap: var(--eight-grid__normal);
-    padding: var(--eight-grid__s);
+    padding: var(--eight-grid__normal);
     margin: 0;
 
     grid-template-columns: repeat(2, 1fr);

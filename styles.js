@@ -246,7 +246,14 @@ header {
 main {
 	display:flex;
 	flex-direction:column;
-	padding: var(--eight-grid__l) 0;
+	padding: var(--eight-grid__xl) 0;
+
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(to right, #80808012 1px, transparent 1px),
+    linear-gradient(to bottom, #80808012 1px, transparent 1px);
+  background-size: 16px 16px;
 }
 
 input[type="text"], input[type="password"], input[type="url"], textarea {

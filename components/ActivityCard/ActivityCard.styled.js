@@ -15,7 +15,7 @@ export const StyledFigure = styled.figure`
     width: 100%;
     margin: 0;
     height: 100%;
-    background-color: var(--main-200);
+    /* background-color: var(--main-200); */
 `;
 
 export const StyledCardImageWrapper = styled.div`
@@ -33,9 +33,9 @@ export const StyledFigcaption = styled.figcaption`
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-    gap: var(--eight-grid__s);
+    gap: var(--eight-grid__halfstep);
 
-    padding: var(--eight-grid__s);
+    padding: var(--eight-grid__halfstep);
 `;
 
 export const StyledActivityHeadline = styled.h2`
