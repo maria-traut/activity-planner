@@ -54,8 +54,11 @@ export default function SortButton({ onActivitySort, activitySortOrder }) {
                         type="button"
                         $isActive={activitySortOrder !== null}
                         onClick={() => {
-                            setIsSortActivityMode(!isSortActivityMode);
-                            scrollToTop();
+                                if (isSortActivityMode) {
+                                     setSelectedSort(activitySortOrder);
+                                }
+                                setIsSortActivityMode(!isSortActivityMode);
+                                scrollToTop();
                         }}
                     >
                         {getSortLabel(activitySortOrder)} &#8645;
