@@ -22,14 +22,13 @@ export const StyledSortOption = styled.p`
 export const StyledSortButton = styled.button`
     top: var(--eight-grid__s);
     right: var(--eight-grid__s);
-    padding: 2px 4px;
     position: fixed;
 
     z-index: 5;
     border-radius: var(--border-radius-normal);
     border: var(--border-small);
     padding: var(--spacing-small) var(--spacing-normal);
-    ${({ isActive }) => isActive && "background-color: lightgoldenrodyellow;"}
+    ${({ $isActive }) => $isActive && "background-color: lightgoldenrodyellow;"}
 
     &:hover {
         background-color: var(--gray-200);
@@ -41,8 +40,8 @@ export const StyledSortButton = styled.button`
     }
 
     @media (prefers-color-scheme: dark) {
-        ${({ isActive }) =>
-            isActive &&
+        ${({ $isActive }) =>
+            $isActive &&
             `
     background-color: transparent;
     border-color: lightgoldenrodyellow;
