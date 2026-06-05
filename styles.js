@@ -179,7 +179,7 @@ textarea:not([rows]) {
 	--border-small:var(--border-width-small) solid var(--border-color);
 	--border-normal:var(--border-width-normal) solid var(--border-color);
 
-	--card-image-height:150px;
+	--card-image-height:144px;
 	--detail-image-height:400px;
 
 	--detail-headline-background-color:#F5F5F5BB;
@@ -248,12 +248,13 @@ main {
 	flex-direction:column;
 	padding: var(--eight-grid__xl) 0;
 
-  inset: 0;
-  height: 100%;
-  width: 100%;
-  background-image: linear-gradient(to right, #80808012 1px, transparent 1px),
+	/* checkered background */ 
+  	inset: 0;
+  	height: 100%;
+  	width: 100%;
+  	background-image: linear-gradient(to right, #80808012 1px, transparent 1px),
     linear-gradient(to bottom, #80808012 1px, transparent 1px);
-  background-size: 16px 16px;
+  	background-size: 16px 16px;
 }
 
 input[type="text"], input[type="password"], input[type="url"], textarea {

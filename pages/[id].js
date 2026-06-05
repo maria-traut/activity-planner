@@ -49,6 +49,9 @@ export default function Activity({
                     setIsDeleteActivityMode(false);
                     router.push("/");
                 }
+            } else if (activityFormStatus.type === "error") {
+                showToast(activityFormStatus.message, "danger");
+                setActivityFormStatus({ type: "", message: "" });
             }
         }, 500);
 
@@ -63,62 +66,76 @@ export default function Activity({
             ...Object.fromEntries(formData),
             categories: formData.getAll("categories"),
         };
-
-        const response = await fetch(`/api/activities/${id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(activityData),
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            mutate();
-            setActivityFormStatus({
-                type: "success",
-                message: data?.status,
+        try {
+            const response = await fetch(`/api/activiiiities/${id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(activityData),
             });
-        } else {
+
+            const data = await response.json();
+
+            if (response.ok) {
+                mutate();
+                setActivityFormStatus({
+                    type: "success",
+                    message: data?.status,
+                });
+            } else {
+                setActivityFormStatus({
+                    type: "error",
+                    message:
+                        data?.status ||
+                        "The activity could not be updated, please try again.",
+                });
+                showToast(
+                    activityFormStatus.message ||
+                        "The activity could not be updated, please try again.",
+                    "danger"
+                );
+            }
+        } catch {
             setActivityFormStatus({
                 type: "error",
-                message:
-                    data?.status ||
-                    "The activity could not be updated, please try again.",
+                message: "Something went wrong. Please try again.",
             });
-            showToast(
-                activityFormStatus.message ||
-                    "The activity could not be updated, please try again.",
-                "danger"
-            );
         }
     }
 
     async function handleActivityDelete() {
-        const response = await fetch(`/api/activities/${id}`, {
-            method: "DELETE",
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            setActivityFormStatus({
-                type: "success",
-                message: data?.status,
+        try {
+            const response = await fetch(`/api/activitiiies/${id}`, {
+                method: "DELETE",
             });
 
-            onBookmarkedActivityIdsDelete(id);
-        } else {
+            const data = await response.json();
+
+            if (response.ok) {
+                setActivityFormStatus({
+                    type: "success",
+                    message: data?.status,
+                });
+
+                onBookmarkedActivityIdsDelete(id);
+            } else {
+                setActivityFormStatus({
+                    type: "error",
+                    message:
+                        "The activity could not be deleted, please try again.",
+                });
+                showToast(
+                    activityFormStatus.message ||
+                        "The activity could not be deleted, please try again.",
+                    "danger"
+                );
+            }
+        } catch {
             setActivityFormStatus({
                 type: "error",
-                message: "The activity could not be deleted, please try again.",
+                message: "Something went wrong. Please try again.",
             });
-            showToast(
-                activityFormStatus.message ||
-                    "The activity could not be deleted, please try again.",
-                "danger"
-            );
         }
     }
 
@@ -240,6 +257,7 @@ export default function Activity({
                         activity={activity}
                         onSubmit={handleActivityEdit}
                         status={activityFormStatus}
+                        setStatus={setActivityFormStatus}
                         heading="Edit Activity"
                         setIsEditActivityMode={setIsEditActivityMode}
                         isEditActivityMode={isEditActivityMode}
