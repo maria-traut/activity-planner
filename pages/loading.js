@@ -1,3 +1,4 @@
+import BeeIcon from "@/components/BeeIcon";
 import NewBeeIcon from "@/components/BeeIcon/newbee";
 import styled from "styled-components";
 
