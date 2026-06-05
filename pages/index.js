@@ -5,12 +5,7 @@ import ActivityList from "@/components/ActivityList";
 import SortButton from "@/components/SortButton";
 import Head from "next/head";
 import Header from "@/components/Header";
-import {
-    StyledButton,
-    StyledToolbarWrap,
-    StyledToolbar,
-    StyledStatusMessageWrap,
-} from "@/components/Global/Global.styled";
+import { StyledStatusMessageWrap } from "@/components/Global/Global.styled";
 
 export default function HomePage({
     handleNavbarLocation,
@@ -28,7 +23,7 @@ export default function HomePage({
         mutate,
     } = useSWR("/api/activities");
 
-    const [activitySortOrder, setActivitySortOrder] = useState("newest");
+    const [activitySortOrder, setActivitySortOrder] = useState(null);
 
     const sortedActivities = activities
         ? [...activities].sort((a, b) => {
@@ -165,7 +160,10 @@ export default function HomePage({
                         isCreateActivityMode={isCreateActivityMode}
                     />
                 )}
-                <SortButton onActivitySort={handleActivitySort} />
+                <SortButton
+                    onActivitySort={handleActivitySort}
+                    activitySortOrder={activitySortOrder}
+                />
                 <ActivityList
                     activities={sortedActivities}
                     handleNavbarLocation={handleNavbarLocation}

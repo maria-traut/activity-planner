@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-
 import dns from "dns";
 
 const DNS_SERVERS = process.env.DNS_SERVERS?.split(",");
