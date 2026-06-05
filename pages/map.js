@@ -1,7 +1,11 @@
 import useSWR from "swr";
-import ActivityMap from "@/components/ActivityMap";
+import dynamic from "next/dynamic";
 
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
+
+const ActivityMap = dynamic(() => import("@/components/ActivityMap"), {
+    ssr: false,
+});
 
 export default function Map() {
     const { data: activities } = useSWR("/api/activities", fetcher);
