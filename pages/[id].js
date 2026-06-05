@@ -92,7 +92,7 @@ export default function Activity({
     }
 
     async function handleActivityDelete() {
-        const response = await fetch(`api/activities/${id}`, {
+        const response = await fetch(`/api/activities/${id}`, {
             method: "DELETE",
         });
 
@@ -152,11 +152,10 @@ export default function Activity({
             <Head>
                 <title>{activity?.title} | Activity Planner</title>
             </Head>
-            <Header />
+            <Header title={activity.title} />
             <main>
                 <StyledToolbarWrap>
                     <StyledToolbar>
-                        {!isDeleteActivityMode && <BackButton />}
                         {!isEditActivityMode && !isDeleteActivityMode && (
                             <StyledButton
                                 onClick={() => {

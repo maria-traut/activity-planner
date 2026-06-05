@@ -1,12 +1,54 @@
-import { StyledNavbarLink, StyledNavbarContainer } from "./Navigation.styled";
-import BeeIcon from "../BeeIcon";
+import {
+    StyledBookmarkLink,
+    StyledHomeLink,
+    StyledNavbarContainer,
+    StyledNavbarEmpty,
+    StyledAddActivityButton,
+} from "./Navigation.styled";
+import NewBeeIcon from "../BeeIcon/newbee";
+import { scrollToTop } from "../Global";
 
-export default function Navbar() {
+export default function Navbar({
+    navbarLocation,
+    onNavbarLocation,
+    isCreateActivityMode,
+    setIsCreateActivityMode,
+    setActivityFormStatus,
+}) {
     return (
         <StyledNavbarContainer>
-            <StyledNavbarLink aria-label="Go to Bookmarks" href="/bookmarks">
-                <BeeIcon size="50" rotation="30" />
-            </StyledNavbarLink>
+            {navbarLocation === "/" && !isCreateActivityMode ? (
+                <StyledAddActivityButton
+                    onClick={() => {
+                        setIsCreateActivityMode(!isCreateActivityMode);
+                        setActivityFormStatus({
+                            type: "",
+                            message: "",
+                        });
+                        scrollToTop();
+                    }}
+                >
+                    ➕
+                </StyledAddActivityButton>
+            ) : (
+                <StyledNavbarEmpty />
+            )}
+
+            <StyledBookmarkLink
+                aria-label="Go to Bookmarks"
+                href="/bookmarks"
+                onClick={() => onNavbarLocation("/bookmarks")}
+            >
+                <NewBeeIcon size="40" rotation="30" />
+                <NewBeeIcon size="30" rotation="-50" />
+            </StyledBookmarkLink>
+            <StyledHomeLink
+                aria-label="Go to Homepage"
+                href="/"
+                onClick={() => onNavbarLocation("/")}
+            >
+                Home
+            </StyledHomeLink>
         </StyledNavbarContainer>
     );
 }

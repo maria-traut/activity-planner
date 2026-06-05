@@ -12,17 +12,16 @@ export const StyledLink = styled(Link)`
 `;
 
 export const StyledFigure = styled.figure`
-    border-radius: var(--border-radius-small);
-    box-shadow: var(--box-shadow-normal);
     width: 100%;
     margin: 0;
     height: 100%;
+    background-color: var(--main-200);
 `;
 
 export const StyledCardImageWrapper = styled.div`
     position: relative;
     width: 100%;
-    height: var(--card-image-height);
+    height: 160px; /*note: this still adheres to the 8pt grid system, keep in mind when adapting */
 `;
 
 export const StyledCardImage = styled(Image)`
@@ -33,25 +32,28 @@ export const StyledFigcaption = styled.figcaption`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
-    gap: var(--spacing-normal);
-    padding: var(--spacing-normal);
+    align-items: flex-start;
+    gap: var(--eight-grid__s);
+
+    padding: var(--eight-grid__s);
 `;
 
 export const StyledActivityHeadline = styled.h2`
-    text-align: center;
+    text-align: left;
     margin: 0;
+    font-size: var(--text-font-size-normal);
 `;
 
 export const StyledCategoryList = styled.ul`
     list-style: none;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+
     padding: 0;
     flex-wrap: wrap;
 
     font-size: var(--text-font-size-small);
-    gap: var(--spacing-local-normal);
+    gap: var(--eight-grid__halfstep);
 `;
 
 export const StyledCategoryTag = styled.li`
@@ -60,7 +62,7 @@ export const StyledCategoryTag = styled.li`
     background-color: ${({ $categoryColor }) =>
         $categoryColor || "var(--gray-200)"};
     border-radius: var(--border-radius-rounded);
-    padding: var(--spacing-local-small) var(--spacing-local-normal);
+    padding: var(--eight-grid__halfstep) var(--eight-grid__s);
 
     @media (prefers-color-scheme: dark) {
         background-color: ${({ $categoryColor }) =>

@@ -5,19 +5,17 @@ import ActivityList from "@/components/ActivityList";
 import SortButton from "@/components/SortButton";
 import Head from "next/head";
 import Header from "@/components/Header";
-import {
-    StyledButton,
-    StyledToolbarWrap,
-    StyledToolbar,
-    StyledStatusMessageWrap,
-} from "@/components/Global/Global.styled";
+import { StyledStatusMessageWrap } from "@/components/Global/Global.styled";
 
 export default function HomePage({
+    handleNavbarLocation,
     handleBookmarkToggle,
     bookmarkedActivityIds,
+    isCreateActivityMode,
+    setIsCreateActivityMode,
+    activityFormStatus,
+    setActivityFormStatus,
 }) {
-    const [isCreateActivityMode, setIsCreateActivityMode] = useState(false);
-
     const {
         data: activities,
         isLoading,
@@ -25,12 +23,7 @@ export default function HomePage({
         mutate,
     } = useSWR("/api/activities");
 
-    const [activityFormStatus, setActivityFormStatus] = useState({
-        type: "",
-        message: "",
-    });
-
-    const [activitySortOrder, setActivitySortOrder] = useState("newest");
+    const [activitySortOrder, setActivitySortOrder] = useState(null);
 
     const sortedActivities = activities
         ? [...activities].sort((a, b) => {
@@ -158,25 +151,6 @@ export default function HomePage({
             </Head>
             <Header />
             <main>
-                {!isCreateActivityMode && (
-                    <StyledToolbarWrap>
-                        <StyledToolbar>
-                            <StyledButton
-                                onClick={() => {
-                                    setIsCreateActivityMode(
-                                        !isCreateActivityMode
-                                    );
-                                    setActivityFormStatus({
-                                        type: "",
-                                        message: "",
-                                    });
-                                }}
-                            >
-                                Create Activity
-                            </StyledButton>
-                        </StyledToolbar>
-                    </StyledToolbarWrap>
-                )}
                 {isCreateActivityMode && (
                     <ActivityForm
                         onSubmit={handleActivityCreate}
@@ -186,9 +160,13 @@ export default function HomePage({
                         isCreateActivityMode={isCreateActivityMode}
                     />
                 )}
-                <SortButton onActivitySort={handleActivitySort} />
+                <SortButton
+                    onActivitySort={handleActivitySort}
+                    activitySortOrder={activitySortOrder}
+                />
                 <ActivityList
                     activities={sortedActivities}
+                    handleNavbarLocation={handleNavbarLocation}
                     handleBookmarkToggle={handleBookmarkToggle}
                     bookmarkedActivityIds={bookmarkedActivityIds}
                 />
