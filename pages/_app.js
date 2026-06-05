@@ -2,8 +2,10 @@ import { SWRConfig } from "swr";
 import GlobalStyle from "../styles";
 import useLocalStorageState from "use-local-storage-state";
 import { useEffect, useState } from "react";
-
+import Loading from "./loading";
+import { KeyframesFadeOut } from "@/components/Global/Global.styled";
 import Navbar from "@/components/Navigation";
+import styled from "styled-components";
 
 const fetcher = async (resource, init) => {
     const result = await fetch(resource, init);
@@ -36,11 +38,11 @@ export default function App({ Component, pageProps }) {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const timer = setInterval(() => {
-            setIsLoading((s) => s + 1);
+        const splashScreenTimer = setTimeout(() => {
+            setIsLoading(false);
         }, 2000);
         return () => {
-            clearInterval(timer);
+            clearTimeout(splashScreenTimer);
         };
     }, []);
 
@@ -66,28 +68,53 @@ export default function App({ Component, pageProps }) {
         <>
             <GlobalStyle />
             <SWRConfig value={{ fetcher }}>
-                <Component
-                    {...pageProps}
-                    handleNavbarLocation={handleNavbarLocation}
-                    bookmarkedActivityIds={bookmarkedActivityIds}
-                    handleBookmarkToggle={handleBookmarkToggle}
-                    onBookmarkedActivityIdsDelete={
-                        handleBookmarkedActivityIdsDelete
-                    }
-                    isCreateActivityMode={isCreateActivityMode}
-                    setIsCreateActivityMode={setIsCreateActivityMode}
-                    activityFormStatus={activityFormStatus}
-                    setActivityFormStatus={setActivityFormStatus}
-                />
-                <Navbar
-                    onNavbarLocation={handleNavbarLocation}
-                    navbarLocation={navbarLocation}
-                    isCreateActivityMode={isCreateActivityMode}
-                    setIsCreateActivityMode={setIsCreateActivityMode}
-                    activityFormStatus={activityFormStatus}
-                    setActivityFormStatus={setActivityFormStatus}
-                />
+                {isLoading ? (
+                    <StyledLoading />
+                ) : (
+                    <StyledPageWrapper>
+                        <Component
+                            {...pageProps}
+                            handleNavbarLocation={handleNavbarLocation}
+                            bookmarkedActivityIds={bookmarkedActivityIds}
+                            handleBookmarkToggle={handleBookmarkToggle}
+                            onBookmarkedActivityIdsDelete={
+                                handleBookmarkedActivityIdsDelete
+                            }
+                            isCreateActivityMode={isCreateActivityMode}
+                            setIsCreateActivityMode={setIsCreateActivityMode}
+                            activityFormStatus={activityFormStatus}
+                            setActivityFormStatus={setActivityFormStatus}
+                        />
+                        <Navbar
+                            onNavbarLocation={handleNavbarLocation}
+                            navbarLocation={navbarLocation}
+                            isCreateActivityMode={isCreateActivityMode}
+                            setIsCreateActivityMode={setIsCreateActivityMode}
+                            activityFormStatus={activityFormStatus}
+                            setActivityFormStatus={setActivityFormStatus}
+                        />
+                    </StyledPageWrapper>
+                )}
             </SWRConfig>
         </>
     );
 }
+
+const StyledLoading = styled(Loading)`
+    opacity: 1;
+    animation: ${KeyframesFadeOut} 1s ease forwards;
+    animation-delay: 2s;
+`;
+
+const StyledPageWrapper = styled.div`
+    animation: fadeIn 0.5s ease forwards;
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+`;
