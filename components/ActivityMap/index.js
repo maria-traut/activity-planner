@@ -28,11 +28,18 @@ export default function ActivityMap({ activities }) {
             style={{ height: "500px", width: "100vw" }}
         >
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+            {activities.map((activity) => {
+                const position = coords[activity.country];
+                if (!position) return null;
+                return (
+                    <Marker key={activity._id} position={position}>
+                        <Popup>
+                            {activity.title}
+                            <br /> {activity.country}
+                        </Popup>
+                    </Marker>
+                );
+            })}
         </MapContainer>
     );
 }
-
-/*
-    {activities.map((activity) => (
-                <li key={activity._id}>{activity.country}</li>))}
-*/
