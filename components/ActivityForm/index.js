@@ -14,6 +14,7 @@ import {
 } from "./ActivityForm.styled";
 import { handleImageUrlValiditation } from "@/lib/imageUrlValidation";
 import showToast from "../Toast";
+import toast from "react-hot-toast";
 
 export default function ActivityForm({ onSubmit, status, heading, ...props }) {
     const {
@@ -178,29 +179,37 @@ export default function ActivityForm({ onSubmit, status, heading, ...props }) {
                                     Cancel
                                 </StyledButton>
                             )}
-                            {/* {status.type === "error" && (
-                                // <StyledStatusMessageError>
-                                //     Error
-                                // </StyledStatusMessageError>
+                            {status.type === "error" && (
+                                <StyledStatusMessageError>
+                                    Error
+                                </StyledStatusMessageError>
                             )}
                             {status.type === "success" && (
-                                // <StyledStatusMessageSuccess>
-                                //     Success
-                                // </StyledStatusMessageSuccess>
-                            )} */}
+                                <StyledStatusMessageSuccess>
+                                    Success
+                                </StyledStatusMessageSuccess>
+                            )}
                         </StyledToolbar>
                         {status.type !== "" && (
                             <StyledFormSection>
-                                {status.type === "error" &&
-                                    // <StyledStatusMessageError>
-                                    //     {status.message}
-                                    // </StyledStatusMessageError>
-                                    showToast(status.message, "danger")}
-                                {status.type === "success" &&
-                                    // <StyledStatusMessageSuccess>
-                                    //     {status.message}
-                                    // </StyledStatusMessageSuccess>
-                                    showToast(status.message)}
+                                {status.type === "error" && (
+                                    <>
+                                        <StyledStatusMessageError>
+                                            {status.message}
+                                        </StyledStatusMessageError>
+                                        {/* {showToast(status.message, "danger")} */}
+                                        {/* {toast(status.message)} */}
+                                    </>
+                                )}
+                                {status.type === "success" && (
+                                    <>
+                                        <StyledStatusMessageSuccess>
+                                            {status.message}
+                                        </StyledStatusMessageSuccess>
+                                        {/* {showToast(status.message)} */}
+                                        {/* {toast(status.message)} */}
+                                    </>
+                                )}
                             </StyledFormSection>
                         )}
                     </StyledFormFlex>
