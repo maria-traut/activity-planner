@@ -1,15 +1,62 @@
 import useSWR from "swr";
 import dynamic from "next/dynamic";
-
-const fetcher = (...args) => fetch(...args).then((response) => response.json());
+import Head from "next/head";
+import Header from "@/components/Header";
+import {
+    StyledToolbar,
+    StyledToolbarWrap,
+} from "@/components/Global/Global.styled";
 
 const ActivityMap = dynamic(() => import("@/components/ActivityMap"), {
     ssr: false,
 });
 
 export default function Map() {
-    const { data: activities } = useSWR("/api/activities", fetcher);
+    const { data: activities, isLoading, error } = useSWR("/api/activities");
 
-    if (!activities) return <p>Loading ...</p>;
-    return <ActivityMap activities={activities} />;
+    if (isLoading) {
+        return (
+            <div>
+                <Head>
+                    <title> Activity Planner</title>
+                </Head>
+                <Header title="Bookmarks" />
+                <main>
+                    <StyledToolbarWrap>
+                        <StyledToolbar />
+                    </StyledToolbarWrap>
+                    <p>Loading activity map...</p>
+                </main>
+            </div>
+        );
+    }
+
+    if (!activities || error) {
+        return (
+            <div>
+                <Head>
+                    <title> Activity Planner</title>
+                </Head>
+                <Header title="Bookmarks" />
+                <main>
+                    <StyledToolbarWrap>
+                        <StyledToolbar />
+                    </StyledToolbarWrap>
+                    <p>An error occurred while fetching the activity map.</p>
+                </main>
+            </div>
+        );
+    }
+
+    return (
+        <>
+            <Head>
+                <title>My Activity Map | Activity Planner</title>
+            </Head>
+            <Header title="My ActivibeeMap" />
+            <main>
+                <ActivityMap activities={activities} />
+            </main>
+        </>
+    );
 }
