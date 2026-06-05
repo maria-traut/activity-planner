@@ -1,13 +1,6 @@
 import styled from "styled-components";
-import SplashScreen from ".";
 import NewBeeIcon from "../BeeIcon/newbee";
 import { KeyframesFadeOut } from "../Global/Global.styled";
-
-export const StyledSplashScreen = styled(SplashScreen)`
-    opacity: 1;
-    animation: ${KeyframesFadeOut} 1s ease forwards;
-    animation-delay: 2s;
-`;
 
 export const StyledSplashContainer = styled.div`
     display: flex;
@@ -15,6 +8,9 @@ export const StyledSplashContainer = styled.div`
     align-items: center;
     justify-content: center;
     height: 100vh;
+    opacity: 1;
+    animation: ${KeyframesFadeOut} 1s ease forwards;
+    animation-delay: 2s;
 `;
 
 export const StyledBeeIcon = styled(NewBeeIcon)`

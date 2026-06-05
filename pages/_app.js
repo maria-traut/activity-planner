@@ -39,7 +39,7 @@ export default function App({ Component, pageProps }) {
     useEffect(() => {
         const splashScreenTimer = setTimeout(() => {
             setIsLoading(false);
-        }, 2000);
+        }, 3000);
         return () => {
             clearTimeout(splashScreenTimer);
         };
