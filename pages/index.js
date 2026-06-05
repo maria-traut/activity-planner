@@ -5,7 +5,14 @@ import ActivityList from "@/components/ActivityList";
 import SortButton from "@/components/SortButton";
 import Head from "next/head";
 import Header from "@/components/Header";
-import { StyledStatusMessageWrap } from "@/components/Global/Global.styled";
+import {
+    StyledButtonWithIcon,
+    StyledButtonIcon,
+    StyledStatusMessageWrap,
+    StyledToolbar,
+    StyledToolbarWrap,
+} from "@/components/Global/Global.styled";
+import ActivityFilter from "@/components/ActivityFilter";
 
 export default function HomePage({
     handleNavbarLocation,
@@ -59,6 +66,8 @@ export default function HomePage({
           })
         : [];
 
+    const [isActivityFilterMode, setIsActivityFilterMode] = useState(false);
+
     useEffect(() => {
         const successMessageTimer = setTimeout(() => {
             if (activityFormStatus.type === "success") {
@@ -75,6 +84,17 @@ export default function HomePage({
 
     function handleActivitySort(order) {
         setActivitySortOrder(order);
+    }
+
+    function handleActivityFilter(event) {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const filterData = {
+            ...Object.fromEntries(formData),
+        };
+
+        console.log("filterData", filterData);
     }
 
     async function handleActivityCreate(event) {
@@ -156,14 +176,37 @@ export default function HomePage({
                         onSubmit={handleActivityCreate}
                         status={activityFormStatus}
                         heading="Add Activity"
-                        setIsCreateActivityMode={setIsCreateActivityMode}
                         isCreateActivityMode={isCreateActivityMode}
+                        setIsCreateActivityMode={setIsCreateActivityMode}
                     />
                 )}
+
+                <StyledToolbarWrap>
+                    <StyledToolbar>
+                        <StyledButtonWithIcon
+                            onClick={() => {
+                                setIsActivityFilterMode(!isActivityFilterMode);
+                            }}
+                        >
+                            <StyledButtonIcon>
+                                <img src="/filters-2-svgrepo-com.svg" alt="" />
+                            </StyledButtonIcon>
+                            Filter
+                        </StyledButtonWithIcon>
+                    </StyledToolbar>
+                </StyledToolbarWrap>
                 <SortButton
                     onActivitySort={handleActivitySort}
                     activitySortOrder={activitySortOrder}
                 />
+                {isActivityFilterMode && (
+                    <ActivityFilter
+                        onSubmit={handleActivityFilter}
+                        heading="Filter Activities"
+                        isActivityFilterMode={isActivityFilterMode}
+                        setIsActivityFilterMode={setIsActivityFilterMode}
+                    />
+                )}
                 <ActivityList
                     activities={sortedActivities}
                     handleNavbarLocation={handleNavbarLocation}

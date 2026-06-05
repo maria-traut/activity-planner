@@ -118,6 +118,20 @@ export const StyledButtonGreen = styled(StyledButton)`
     }
 `;
 
+export const StyledButtonWithIcon = styled(StyledButton)`
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-small);
+    align-items: center;
+`;
+
+export const StyledButtonIcon = styled.span`
+    img {
+        height: 1rem;
+        width: auto;
+    }
+`;
+
 export const StyledStatusMessageWrap = styled.section`
     display: flex;
     flex-direction: row;
