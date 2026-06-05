@@ -29,13 +29,10 @@ export default async function handler(request, response) {
             }
 
             const createdActivity = await Activity.create(activityData);
-            console.log(createdActivity, "createdActivity");
-            return response
-                .status(201)
-                .json({
-                    status: "Activity successfully created.",
-                    _id: createdActivity._id,
-                });
+            return response.status(201).json({
+                status: "Activity successfully created.",
+                _id: createdActivity._id,
+            });
         }
     } catch (error) {
         return response.status(500).json({ status: "Internal Server Error" });

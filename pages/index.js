@@ -109,8 +109,6 @@ export default function HomePage({
 
         if (response.ok) {
             if (addToBookmarks && data?._id) {
-                console.log("data", data, response);
-                console.log("handle tooggle bookmark do it");
                 handleBookmarkToggle(data._id);
             }
 
