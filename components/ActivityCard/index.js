@@ -32,7 +32,10 @@ export default function ActivityCard({
                     <StyledActivityHeadline>{title}</StyledActivityHeadline>
                     <StyledCategoryList>
                         {categories.map((category) => (
-                            <StyledCategoryTag key={category._id}>
+                            <StyledCategoryTag
+                                key={category._id}
+                                $categoryColor={category.color}
+                            >
                                 {category.abbreviation}
                             </StyledCategoryTag>
                         ))}

@@ -11,8 +11,9 @@ import {
     StyledFormSection,
     StyledFormWrap,
     StyledFormFieldset,
+    StyledCheckboxAndLabelWrap,
 } from "./ActivityForm.styled";
-import { handleImageUrlValiditation } from "@/lib/imageUrlValidation";
+import { handleImageUrlValidation } from "@/lib/imageUrlValidation";
 
 export default function ActivityForm({ onSubmit, status, heading, ...props }) {
     const {
@@ -82,10 +83,10 @@ export default function ActivityForm({ onSubmit, status, heading, ...props }) {
                                 name="imageUrl"
                                 onChange={(event) =>
                                     event.target.validity.customError &&
-                                    handleImageUrlValiditation(event.target)
+                                    handleImageUrlValidation(event.target)
                                 }
                                 onBlur={(event) =>
-                                    handleImageUrlValiditation(event.target)
+                                    handleImageUrlValidation(event.target)
                                 }
                                 defaultValue={
                                     activity?.imageUrl
@@ -157,7 +158,20 @@ export default function ActivityForm({ onSubmit, status, heading, ...props }) {
                                 defaultValue={activity?.area}
                             />
                         </StyledFormSection>
-                        <StyledToolbar>
+                        {isCreateActivityMode && (
+                            <StyledCheckboxAndLabelWrap>
+                                <input
+                                    type="checkbox"
+                                    id="addToBookmarks"
+                                    name="addToBookmarks"
+                                    value="1"
+                                />
+                                <label htmlFor="addToBookmarks">
+                                    Add to my activity bookmarks
+                                </label>
+                            </StyledCheckboxAndLabelWrap>
+                        )}
+                        <StyledToolbar $isLast>
                             <StyledButton
                                 type="submit"
                                 disabled={status.type === "success"}

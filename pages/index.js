@@ -101,6 +101,10 @@ export default function HomePage({
         event.preventDefault();
 
         const formData = new FormData(event.target);
+
+        const addToBookmarks = formData.has("addToBookmarks");
+        formData.delete("addToBookmarks");
+
         const activityData = {
             ...Object.fromEntries(formData),
             categories: formData.getAll("categories"),
@@ -117,6 +121,10 @@ export default function HomePage({
         const data = await response.json();
 
         if (response.ok) {
+            if (addToBookmarks && data?._id) {
+                handleBookmarkToggle(data._id);
+            }
+
             mutate();
             event.target.reset();
             setActivityFormStatus({

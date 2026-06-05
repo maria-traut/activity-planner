@@ -52,18 +52,18 @@ const StyledTagList = styled.ul`
 
     font-size: var(--text-font-size-small);
     gap: var(--spacing-local-normal);
+`;
 
-    li {
-        text-align: center;
-        background-color: var(--gray-200);
-        border-radius: var(--border-radius-rounded);
-        padding: var(--spacing-local-small) var(--spacing-local-normal);
-    }
+export const StyledTagElement = styled.li`
+    text-align: center;
+    border-radius: var(--border-radius-rounded);
+    padding: var(--spacing-local-small) var(--spacing-local-normal);
+    background-color: ${({ $categoryColor }) =>
+        $categoryColor || "var(--gray-200)"};
 
     @media (prefers-color-scheme: dark) {
-        li {
-            background-color: var(--gray-800);
-        }
+        background-color: ${({ $categoryColor }) =>
+            $categoryColor || "var(--gray-800)"};
     }
 `;
 
