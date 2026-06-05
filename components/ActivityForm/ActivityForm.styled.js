@@ -20,3 +20,12 @@ export const StyledFormFieldset = styled.fieldset`
     padding: var(--spacing-normal);
     border-radius: var(--border-radius-normal);
 `;
+
+export const StyledCheckboxAndLabelWrap = styled.section`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--spacing-small);
+    align-items: center;
+    padding: var(--spacing-small) 0 0;
+`;

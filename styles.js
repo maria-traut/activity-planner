@@ -292,6 +292,11 @@ input[type="text"], input[type="url"], input[type="password"], textarea, select,
 	}
 }
 
+input[type="checkbox"] {
+	width:1.5rem;
+	height:1.5rem;
+}
+
 
 button,
 label {
