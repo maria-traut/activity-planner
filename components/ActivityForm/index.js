@@ -1,11 +1,6 @@
 import useSWR from "swr";
 import { getCountries } from "@/lib/countries";
-import {
-    StyledToolbar,
-    StyledButton,
-    StyledStatusMessageError,
-    StyledStatusMessageSuccess,
-} from "../Global/Global.styled";
+import { StyledToolbar, StyledButton } from "../Global/Global.styled";
 import {
     StyledFormFlex,
     StyledFormSection,

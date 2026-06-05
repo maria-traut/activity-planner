@@ -108,7 +108,8 @@ export default function HomePage({
             setActivityFormStatus({
                 type: "error",
                 message:
-                    data?.status || "Form could not be sent. Please try again.",
+                    data?.status ||
+                    "The form submission has failed, <br /> Please try again.",
             });
         }
     }
