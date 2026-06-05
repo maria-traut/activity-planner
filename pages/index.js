@@ -24,7 +24,7 @@ export default function HomePage({
         mutate,
     } = useSWR("/api/activities");
 
-    const [activitySortOrder, setActivitySortOrder] = useState("newest");
+    const [activitySortOrder, setActivitySortOrder] = useState(null);
 
     const sortedActivities = activities
         ? [...activities].sort((a, b) => {
@@ -83,6 +83,10 @@ export default function HomePage({
         event.preventDefault();
 
         const formData = new FormData(event.target);
+
+        const addToBookmarks = formData.has("addToBookmarks");
+        formData.delete("addToBookmarks");
+
         const activityData = {
             ...Object.fromEntries(formData),
             categories: formData.getAll("categories"),
@@ -99,6 +103,10 @@ export default function HomePage({
         const data = await response.json();
 
         if (response.ok) {
+            if (addToBookmarks && data?._id) {
+                handleBookmarkToggle(data._id);
+            }
+
             mutate();
             event.target.reset();
             setActivityFormStatus({
@@ -163,7 +171,10 @@ export default function HomePage({
                         isCreateActivityMode={isCreateActivityMode}
                     />
                 )}
-                <SortButton onActivitySort={handleActivitySort} />
+                <SortButton
+                    onActivitySort={handleActivitySort}
+                    activitySortOrder={activitySortOrder}
+                />
                 <ActivityList
                     activities={sortedActivities}
                     handleNavbarLocation={handleNavbarLocation}

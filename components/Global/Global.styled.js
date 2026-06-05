@@ -21,7 +21,7 @@ export const StyledToolbarWrap = styled.section`
     position: sticky;
     top: 50px;
     width: 100%;
-    z-index: 3;
+    z-index: 5;
 `;
 
 export const StyledToolbar = styled.div`
@@ -31,6 +31,7 @@ export const StyledToolbar = styled.div`
     flex-wrap: wrap;
     gap: var(--eight-grid__normal);
     align-items: center;
+    padding: ${({ $isLast }) => ($isLast ? "var(--spacing-normal) 0 0" : "0")};
 `;
 
 export const StyledButton = styled.button`

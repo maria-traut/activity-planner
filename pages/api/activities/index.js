@@ -16,7 +16,6 @@ export default async function handler(request, response) {
 
         if (request.method === "POST") {
             const activityData = request.body;
-
             if (activityData?.imageUrl !== "") {
                 const isImage = activityData?.imageUrl
                     ? await isImageUrl(activityData.imageUrl)
@@ -29,10 +28,10 @@ export default async function handler(request, response) {
                 }
             }
 
-            await Activity.create(activityData);
-
+            const createdActivity = await Activity.create(activityData);
             return response.status(201).json({
                 status: "The activity has been created successfully.",
+                _id: createdActivity._id,
             });
         }
     } catch (error) {
