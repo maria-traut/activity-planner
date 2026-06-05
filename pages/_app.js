@@ -1,9 +1,10 @@
 import { SWRConfig } from "swr";
 import GlobalStyle from "../styles";
 import useLocalStorageState from "use-local-storage-state";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
 import Navbar from "@/components/Navigation";
+import styled from "styled-components";
+import SplashScreen from "@/components/SplashScreen";
 
 const fetcher = async (resource, init) => {
     const result = await fetch(resource, init);
@@ -32,6 +33,18 @@ export default function App({ Component, pageProps }) {
         type: "",
         message: "",
     });
+
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const splashScreenTimer = setTimeout(() => {
+            setIsLoading(false);
+        }, 3000);
+        return () => {
+            clearTimeout(splashScreenTimer);
+        };
+    }, []);
+
     function handleBookmarkToggle(id) {
         setBookmarkedActivityIds((prevBookmarkedActivityIds) => {
             const isAdded = prevBookmarkedActivityIds.includes(id);
@@ -54,28 +67,47 @@ export default function App({ Component, pageProps }) {
         <>
             <GlobalStyle />
             <SWRConfig value={{ fetcher }}>
-                <Component
-                    {...pageProps}
-                    handleNavbarLocation={handleNavbarLocation}
-                    bookmarkedActivityIds={bookmarkedActivityIds}
-                    handleBookmarkToggle={handleBookmarkToggle}
-                    onBookmarkedActivityIdsDelete={
-                        handleBookmarkedActivityIdsDelete
-                    }
-                    isCreateActivityMode={isCreateActivityMode}
-                    setIsCreateActivityMode={setIsCreateActivityMode}
-                    activityFormStatus={activityFormStatus}
-                    setActivityFormStatus={setActivityFormStatus}
-                />
-                <Navbar
-                    onNavbarLocation={handleNavbarLocation}
-                    navbarLocation={navbarLocation}
-                    isCreateActivityMode={isCreateActivityMode}
-                    setIsCreateActivityMode={setIsCreateActivityMode}
-                    activityFormStatus={activityFormStatus}
-                    setActivityFormStatus={setActivityFormStatus}
-                />
+                {isLoading ? (
+                    <SplashScreen />
+                ) : (
+                    <StyledPageWrapper>
+                        <Component
+                            {...pageProps}
+                            handleNavbarLocation={handleNavbarLocation}
+                            bookmarkedActivityIds={bookmarkedActivityIds}
+                            handleBookmarkToggle={handleBookmarkToggle}
+                            onBookmarkedActivityIdsDelete={
+                                handleBookmarkedActivityIdsDelete
+                            }
+                            isCreateActivityMode={isCreateActivityMode}
+                            setIsCreateActivityMode={setIsCreateActivityMode}
+                            activityFormStatus={activityFormStatus}
+                            setActivityFormStatus={setActivityFormStatus}
+                        />
+                        <Navbar
+                            onNavbarLocation={handleNavbarLocation}
+                            navbarLocation={navbarLocation}
+                            isCreateActivityMode={isCreateActivityMode}
+                            setIsCreateActivityMode={setIsCreateActivityMode}
+                            activityFormStatus={activityFormStatus}
+                            setActivityFormStatus={setActivityFormStatus}
+                        />
+                    </StyledPageWrapper>
+                )}
             </SWRConfig>
         </>
     );
 }
+
+const StyledPageWrapper = styled.div`
+    animation: fadeIn 0.5s ease forwards;
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+`;
