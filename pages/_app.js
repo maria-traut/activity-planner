@@ -52,7 +52,14 @@ export default function App({ Component, pageProps }) {
     }
     return (
         <>
-            <Toaster position="bottom-center" reverseOrder={false} />
+            <Toaster
+                position="bottom-center"
+                reverseOrder={false}
+                gutter={12}
+                containerStyle={{
+                    bottom: 80,
+                }}
+            />
             <GlobalStyle />
             <SWRConfig value={{ fetcher }}>
                 <Component

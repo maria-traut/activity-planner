@@ -16,7 +16,12 @@ export default async function handler(request, response) {
             }
             return response.status(200).json(activity);
         }
-
+    } catch (error) {
+        return response.status(500).json({
+            status: "Internal Server error. ",
+        });
+    }
+    try {
         if (request.method === "PUT") {
             const updatedActivityData = request.body;
 
@@ -37,16 +42,21 @@ export default async function handler(request, response) {
                 status: "The activity has been updated successfully!",
             });
         }
-
+    } catch (error) {
+        return response.status(500).json({
+            status: "The activity could not have been updated, please try again! ",
+        });
+    }
+    try {
         if (request.method === "DELETE") {
             await Activity.findByIdAndDelete(id);
-            response.status(200).json({
+            return response.status(200).json({
                 status: "The activity has been deleted successfully!",
             });
         }
     } catch (error) {
         return response.status(500).json({
-            status: "Internal Server error.",
+            status: "The activity could not have been deleted, please try again! ",
         });
     }
 
