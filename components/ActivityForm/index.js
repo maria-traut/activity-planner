@@ -15,8 +15,13 @@ import {
 import { handleImageUrlValiditation } from "@/lib/imageUrlValidation";
 import showToast from "../Toast";
 import toast from "react-hot-toast";
+import { useEffect } from "react";
 
 export default function ActivityForm({ onSubmit, status, heading, ...props }) {
+    useEffect(() => {
+        status.type === "error" && toast(status.message);
+    });
+
     const {
         activity,
         isEditActivityMode,
@@ -179,7 +184,7 @@ export default function ActivityForm({ onSubmit, status, heading, ...props }) {
                                     Cancel
                                 </StyledButton>
                             )}
-                            {status.type === "error" && (
+                            {/* {status.type === "error" && (
                                 <StyledStatusMessageError>
                                     Error
                                 </StyledStatusMessageError>
@@ -188,30 +193,9 @@ export default function ActivityForm({ onSubmit, status, heading, ...props }) {
                                 <StyledStatusMessageSuccess>
                                     Success
                                 </StyledStatusMessageSuccess>
-                            )}
+                            )} */}
                         </StyledToolbar>
-                        {status.type !== "" && (
-                            <StyledFormSection>
-                                {status.type === "error" && (
-                                    <>
-                                        <StyledStatusMessageError>
-                                            {status.message}
-                                        </StyledStatusMessageError>
-                                        {/* {showToast(status.message, "danger")} */}
-                                        {/* {toast(status.message)} */}
-                                    </>
-                                )}
-                                {status.type === "success" && (
-                                    <>
-                                        <StyledStatusMessageSuccess>
-                                            {status.message}
-                                        </StyledStatusMessageSuccess>
-                                        {/* {showToast(status.message)} */}
-                                        {/* {toast(status.message)} */}
-                                    </>
-                                )}
-                            </StyledFormSection>
-                        )}
+                        {/* zwischenablage here */}
                     </StyledFormFlex>
                 </StyledFormFieldset>
             </form>
