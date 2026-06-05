@@ -42,10 +42,16 @@ export default function Navbar({
                 <NewBeeIcon size="40" rotation="30" />
                 <NewBeeIcon size="30" rotation="-50" />
             </StyledBookmarkLink>
+
             <StyledHomeLink
                 aria-label="Go to Homepage"
                 href="/"
-                onClick={() => onNavbarLocation("/")}
+                onClick={() => {
+                    isCreateActivityMode
+                        ? setIsCreateActivityMode(false)
+                        : setIsEditActivityMode(false);
+                    onNavbarLocation("/");
+                }}
             >
                 Home
             </StyledHomeLink>

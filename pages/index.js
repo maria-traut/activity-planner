@@ -166,6 +166,7 @@ export default function HomePage({
                     <ActivityForm
                         onSubmit={handleActivityCreate}
                         status={activityFormStatus}
+                        setStatus={setActivityFormStatus}
                         heading="Add Activity"
                         setIsCreateActivityMode={setIsCreateActivityMode}
                         isCreateActivityMode={isCreateActivityMode}

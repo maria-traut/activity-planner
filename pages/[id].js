@@ -37,7 +37,7 @@ export default function Activity({
     });
 
     useEffect(() => {
-        const formCLosingTimer = setTimeout(() => {
+        const formClosingTimer = setTimeout(() => {
             if (activityFormStatus.type === "success") {
                 showToast(activityFormStatus.message);
                 setActivityFormStatus({
@@ -52,7 +52,7 @@ export default function Activity({
             }
         }, 500);
 
-        return () => clearTimeout(formCLosingTimer);
+        return () => clearTimeout(formClosingTimer);
     }, [activityFormStatus]);
 
     async function handleActivityEdit(event) {
@@ -85,8 +85,13 @@ export default function Activity({
                 type: "error",
                 message:
                     data?.status ||
-                    "The form submission has failed, <br /> Please try again.",
+                    "The activity could not be updated, please try again.",
             });
+            showToast(
+                activityFormStatus.message ||
+                    "The activity could not be updated, please try again.",
+                "danger"
+            );
         }
     }
 
@@ -102,13 +107,18 @@ export default function Activity({
                 type: "success",
                 message: data?.status,
             });
+
             onBookmarkedActivityIdsDelete(id);
         } else {
             setActivityFormStatus({
                 type: "error",
-                message:
-                    "The activity could not be deleted, <br /> Please try again.",
+                message: "The activity could not be deleted, please try again.",
             });
+            showToast(
+                activityFormStatus.message ||
+                    "The activity could not be deleted, please try again.",
+                "danger"
+            );
         }
     }
 
