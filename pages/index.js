@@ -6,6 +6,7 @@ import SortButton from "@/components/SortButton";
 import Head from "next/head";
 import Header from "@/components/Header";
 import { StyledStatusMessageWrap } from "@/components/Global/Global.styled";
+import toast from "react-hot-toast";
 
 export default function HomePage({
     handleNavbarLocation,
@@ -62,6 +63,7 @@ export default function HomePage({
     useEffect(() => {
         const successMessageTimer = setTimeout(() => {
             if (activityFormStatus.type === "success") {
+                toast(activityFormStatus.message);
                 setActivityFormStatus({
                     type: "",
                     message: "",

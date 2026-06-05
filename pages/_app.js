@@ -2,7 +2,6 @@ import { SWRConfig } from "swr";
 import GlobalStyle from "../styles";
 import useLocalStorageState from "use-local-storage-state";
 import { useState } from "react";
-import { StyledToaster } from "@/components/Toast/Toast.styled";
 import Navbar from "@/components/Navigation";
 import { Toaster } from "react-hot-toast";
 
@@ -53,9 +52,9 @@ export default function App({ Component, pageProps }) {
     }
     return (
         <>
+            <Toaster position="bottom-center" reverseOrder={false} />
             <GlobalStyle />
             <SWRConfig value={{ fetcher }}>
-                <Toaster position="bottom-center" reverseOrder={false} />
                 <Component
                     {...pageProps}
                     handleNavbarLocation={handleNavbarLocation}

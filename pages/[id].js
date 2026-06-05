@@ -39,24 +39,6 @@ export default function Activity({
         message: "",
     });
 
-    useEffect(() => {
-        const successMessageTimer = setTimeout(() => {
-            if (activityFormStatus.type === "success") {
-                setActivityFormStatus({
-                    type: "",
-                    message: "",
-                });
-                setIsEditActivityMode(false);
-                if (isDeleteActivityMode) {
-                    setIsDeleteActivityMode(false);
-                    router.push("/");
-                }
-            }
-        }, 3000);
-
-        return () => clearTimeout(successMessageTimer);
-    }, [activityFormStatus]);
-
     async function handleActivityEdit(event) {
         event.preventDefault();
 
