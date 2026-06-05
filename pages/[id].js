@@ -39,6 +39,25 @@ export default function Activity({
         message: "",
     });
 
+    useEffect(() => {
+        const formCLosingTimer = setTimeout(() => {
+            if (activityFormStatus.type === "success") {
+                showToast(activityFormStatus.message);
+                setActivityFormStatus({
+                    type: "",
+                    message: "",
+                });
+                setIsEditActivityMode(false);
+                if (isDeleteActivityMode) {
+                    setIsDeleteActivityMode(false);
+                    router.push("/");
+                }
+            }
+        }, 500);
+
+        return () => clearTimeout(formCLosingTimer);
+    }, [activityFormStatus]);
+
     async function handleActivityEdit(event) {
         event.preventDefault();
 
@@ -216,22 +235,31 @@ export default function Activity({
                         )}
                     </StyledToolbar>
                 </StyledToolbarWrap>
-                {activityFormStatus.type !== "" && isDeleteActivityMode && (
+                {/* {activityFormStatus.type !== "" && isDeleteActivityMode && (
                     <StyledFormSection>
                         <StyledStatusMessageWrap>
-                            {activityFormStatus.type === "error" &&
-                                // <StyledStatusMessageError>
-                                //     {activityFormStatus.message}
-                                // </StyledStatusMessageError>
-                                showToast(activityFormStatus.message, "danger")}
-                            {activityFormStatus.type === "success" &&
-                                // <StyledStatusMessageSuccess>
-                                //     {activityFormStatus.message}
-                                // </StyledStatusMessageSuccess>
-                                showToast(activityFormStatus.message)}
+                            {activityFormStatus.type === "error" && (
+                                <>
+                                    {" "}
+                                    <StyledStatusMessageError>
+                                        {activityFormStatus.message}
+                                    </StyledStatusMessageError>
+                                    showToast(activityFormStatus.message,
+                                    "danger")
+                                </>
+                            )}
+                            {activityFormStatus.type === "success" && (
+                                <>
+                                    {" "}
+                                    <StyledStatusMessageSuccess>
+                                        {activityFormStatus.message}
+                                    </StyledStatusMessageSuccess>
+                                    showToast(activityFormStatus.message)
+                                </>
+                            )}
                         </StyledStatusMessageWrap>
                     </StyledFormSection>
-                )}
+                )} */}
                 {isEditActivityMode && (
                     <ActivityForm
                         activity={activity}
