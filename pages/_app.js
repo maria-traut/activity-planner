@@ -2,10 +2,9 @@ import { SWRConfig } from "swr";
 import GlobalStyle from "../styles";
 import useLocalStorageState from "use-local-storage-state";
 import { useEffect, useState } from "react";
-import Loading from "./loading";
-import { KeyframesFadeOut } from "@/components/Global/Global.styled";
 import Navbar from "@/components/Navigation";
 import styled from "styled-components";
+import SplashScreen from "@/components/SplashScreen";
 
 const fetcher = async (resource, init) => {
     const result = await fetch(resource, init);
@@ -69,7 +68,7 @@ export default function App({ Component, pageProps }) {
             <GlobalStyle />
             <SWRConfig value={{ fetcher }}>
                 {isLoading ? (
-                    <StyledLoading />
+                    <SplashScreen />
                 ) : (
                     <StyledPageWrapper>
                         <Component
@@ -99,12 +98,6 @@ export default function App({ Component, pageProps }) {
         </>
     );
 }
-
-const StyledLoading = styled(Loading)`
-    opacity: 1;
-    animation: ${KeyframesFadeOut} 1s ease forwards;
-    animation-delay: 2s;
-`;
 
 const StyledPageWrapper = styled.div`
     animation: fadeIn 0.5s ease forwards;
