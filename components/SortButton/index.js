@@ -8,11 +8,14 @@ import {
     StyledFormFieldset,
     StyledFormWrap,
     StyledFormSection,
+    StyledSortOption,
+    StyledSortButton,
 } from "./SortButton.styled";
+import { scrollToTop } from "../Global";
 
-export default function SortButton({ onActivitySort }) {
+export default function SortButton({ onActivitySort, activitySortOrder }) {
     const [isSortActivityMode, setIsSortActivityMode] = useState(false);
-    const [selectedSort, setSelectedSort] = useState("newest");
+    const [selectedSort, setSelectedSort] = useState(activitySortOrder);
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -21,32 +24,57 @@ export default function SortButton({ onActivitySort }) {
     }
 
     function handleReset() {
-        setSelectedSort("newest");
-        onActivitySort("newest");
+        setSelectedSort(null);
+        onActivitySort(null);
         setIsSortActivityMode(false);
+    }
+
+    function getSortLabel(order) {
+        switch (order) {
+            case "newest":
+                return "Newest";
+            case "oldest":
+                return "Oldest";
+            case "lastModified":
+                return "Recently Updated";
+            case "az":
+                return "A to Z";
+            case "za":
+                return "Z to A";
+            default:
+                return "Sort";
+        }
     }
 
     return (
         <>
             <StyledToolbarWrap>
                 <StyledToolbar>
-                    <StyledButton
+                    <StyledSortButton
                         type="button"
-                        onClick={() =>
-                            setIsSortActivityMode(!isSortActivityMode)
-                        }
+                        $isActive={activitySortOrder !== null}
+                        onClick={() => {
+                                if (isSortActivityMode) {
+                                     setSelectedSort(activitySortOrder);
+                                }
+                                setIsSortActivityMode(!isSortActivityMode);
+                                scrollToTop();
+                        }}
                     >
-                        Sort{isSortActivityMode ? " ▲" : " ▼"}
-                    </StyledButton>
+                        {getSortLabel(activitySortOrder)} &#8645;
+                    </StyledSortButton>
                 </StyledToolbar>
             </StyledToolbarWrap>
+
             {isSortActivityMode && (
                 <StyledFormWrap>
                     <form onSubmit={handleSubmit}>
                         <StyledFormFieldset>
                             <legend>Sort Activities by</legend>
                             <div>
-                                <p>Date</p>
+                                <StyledSortOption>
+                                    Date
+                                </StyledSortOption>
                                 <StyledFormSection>
                                     <label htmlFor="sort-newest">
                                         <input
@@ -58,7 +86,7 @@ export default function SortButton({ onActivitySort }) {
                                             onChange={() =>
                                                 setSelectedSort("newest")
                                             }
-                                        />
+                                        />{" "}
                                         Newest
                                     </label>
 
@@ -72,7 +100,7 @@ export default function SortButton({ onActivitySort }) {
                                             onChange={() =>
                                                 setSelectedSort("oldest")
                                             }
-                                        />
+                                        />{" "}
                                         Oldest
                                     </label>
                                     <label htmlFor="sort-lastModified">
@@ -87,13 +115,14 @@ export default function SortButton({ onActivitySort }) {
                                             onChange={() =>
                                                 setSelectedSort("lastModified")
                                             }
-                                        />
+                                        />{" "}
                                         Recently Updated
                                     </label>
                                 </StyledFormSection>
                             </div>
                             <div>
-                                <p>Title</p>
+                                <br />
+                                <StyledSortOption>Title</StyledSortOption>
                                 <StyledFormSection>
                                     <label htmlFor="sort-az">
                                         <input
@@ -105,7 +134,7 @@ export default function SortButton({ onActivitySort }) {
                                             onChange={() =>
                                                 setSelectedSort("az")
                                             }
-                                        />
+                                        />{" "}
                                         A to Z
                                     </label>
 
@@ -119,14 +148,19 @@ export default function SortButton({ onActivitySort }) {
                                             onChange={() =>
                                                 setSelectedSort("za")
                                             }
-                                        />
+                                        />{" "}
                                         Z to A
                                     </label>
                                 </StyledFormSection>
                             </div>
-
+                            <br />
                             <StyledToolbar>
-                                <StyledButton type="submit">Apply</StyledButton>
+                                <StyledButton
+                                    type="submit"
+                                    disabled={selectedSort === null}
+                                >
+                                    Apply
+                                </StyledButton>
                                 <StyledButton
                                     type="button"
                                     onClick={handleReset}
