@@ -1,3 +1,5 @@
+import { MapContainer, TitleLayer, Marker, Popup } from "react-leaflet";
+
 export default function ActivityMap({ activities }) {
     return (
         <>
