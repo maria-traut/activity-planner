@@ -1,12 +1,14 @@
 import {
     StyledBookmarkLink,
     StyledHomeLink,
+    StyledMapLink,
     StyledNavbarContainer,
     StyledNavbarEmpty,
     StyledAddActivityButton,
 } from "./Navigation.styled";
 import NewBeeIcon from "../BeeIcon/newbee";
 import { scrollToTop } from "../Global";
+import Link from "next/link";
 
 export default function Navbar({
     navbarLocation,
@@ -49,6 +51,15 @@ export default function Navbar({
             >
                 Home
             </StyledHomeLink>
+            <StyledMapLink
+                aria-label="Go to Map"
+                href="/map"
+                onClick={() => onNavbarLocation("/map")}
+                height="20px"
+                width="20px"
+            >
+                🌍
+            </StyledMapLink>
         </StyledNavbarContainer>
     );
 }
