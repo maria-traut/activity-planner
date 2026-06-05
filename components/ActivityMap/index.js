@@ -1,7 +1,26 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import { useState, useEffect } from "react";
 
 export default function ActivityMap({ activities }) {
+    const [coords, setCoords] = useState("");
+
+    useEffect(() => {
+        async function fetchCoords() {
+            const results = {};
+            for (const activity of activities) {
+                const response = await fetch(
+                    `https://restcountries.com/v3.1/alpha/${activity.country}`
+                );
+                if (!response.ok) continue;
+                const [data] = await response.json();
+                results[activity.country] = data.latlng;
+            }
+            setCoords(results);
+        }
+        fetchCoords();
+    }, [activities]);
+
     return (
         <MapContainer
             center={[20, 0]}
