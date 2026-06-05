@@ -87,7 +87,8 @@ export default function Activity({
             setActivityFormStatus({
                 type: "error",
                 message:
-                    data?.status || "Form could not be sent. Please try again.",
+                    data?.status ||
+                    "The form submission has failed, <br /> Please try again.",
             });
         }
     }
@@ -108,7 +109,8 @@ export default function Activity({
         } else {
             setActivityFormStatus({
                 type: "error",
-                message: "Activity could not be deleted. Please try again.",
+                message:
+                    "The activity could not be deleted, <br /> Please try again.",
             });
         }
     }

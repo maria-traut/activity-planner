@@ -31,12 +31,16 @@ export default async function handler(request, response) {
 
             await Activity.create(activityData);
 
-            return response
-                .status(201)
-                .json({ status: "Activity successfully created." });
+            return response.status(201).json({
+                status: "The activity has been created successfully.",
+            });
         }
     } catch (error) {
-        return response.status(500).json({ status: "Internal Server Error" });
+        return response
+            .status(500)
+            .json({
+                status: "The Activity could not have been created, please try again!",
+            });
     }
 
     response.status(405).json({ status: "Method not allowed" });

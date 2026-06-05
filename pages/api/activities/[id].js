@@ -33,19 +33,21 @@ export default async function handler(request, response) {
             }
 
             await Activity.findByIdAndUpdate(id, updatedActivityData);
-            return response
-                .status(200)
-                .json({ status: "Activity successfully updated." });
+            return response.status(200).json({
+                status: "The activity has been updated successfully!",
+            });
         }
 
         if (request.method === "DELETE") {
             await Activity.findByIdAndDelete(id);
-            response
-                .status(200)
-                .json({ status: "Activity successfully deleted." });
+            response.status(200).json({
+                status: "The activity has been deleted successfully!",
+            });
         }
     } catch (error) {
-        return response.status(500).json({ status: "Internal Server Error" });
+        return response.status(500).json({
+            status: "Internal Server error.",
+        });
     }
 
     response.status(405).json({ status: "Method not allowed" });
