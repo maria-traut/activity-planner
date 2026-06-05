@@ -6,7 +6,7 @@ const { Schema } = mongoose;
 const activitySchema = new Schema(
     {
         title: { type: String, required: true, minlength: 3 },
-        imageUrl: { type: String, required: true },
+        imageUrl: { type: String },
         categories: { type: [Schema.Types.ObjectId], ref: "Category" },
         description: { type: String },
         area: { type: String },
