@@ -21,6 +21,7 @@ export const StyledToolbar = styled.div`
     flex-wrap: wrap;
     gap: var(--spacing-normal);
     align-items: center;
+    padding: ${({ $isLast }) => ($isLast ? "var(--spacing-normal) 0 0" : "0")};
 `;
 
 export const StyledButton = styled.button`
