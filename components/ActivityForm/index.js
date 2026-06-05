@@ -8,14 +8,26 @@ import {
     StyledFormFieldset,
     StyledCheckboxAndLabelWrap,
 } from "./ActivityForm.styled";
-import { handleImageUrlValiditation } from "@/lib/imageUrlValidation";
+import { handleImageUrlValidation } from "@/lib/imageUrlValidation";
 import showToast from "../Toast";
 import { useEffect } from "react";
 
-export default function ActivityForm({ onSubmit, status, heading, ...props }) {
+export default function ActivityForm({
+    onSubmit,
+    status,
+    heading,
+    setStatus,
+    ...props
+}) {
     useEffect(() => {
-        status.type === "error" && showToast(status.message, "danger");
-    });
+        if (status.type === "error") {
+            showToast(status.message, "danger");
+            setStatus({
+                type: "",
+                message: "",
+            });
+        }
+    }, [status.type, status.message, setStatus]);
 
     const {
         activity,
