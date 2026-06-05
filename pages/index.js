@@ -61,7 +61,7 @@ export default function HomePage({
         : [];
 
     useEffect(() => {
-        const successMessageTimer = setTimeout(() => {
+        const formClosingTimer = setTimeout(() => {
             if (activityFormStatus.type === "success") {
                 toast(activityFormStatus.message);
                 setActivityFormStatus({
@@ -70,9 +70,9 @@ export default function HomePage({
                 });
                 setIsCreateActivityMode(false);
             }
-        }, 3000);
+        }, 500);
 
-        return () => clearTimeout(successMessageTimer);
+        return () => clearTimeout(formClosingTimer);
     }, [activityFormStatus]);
 
     function handleActivitySort(order) {
