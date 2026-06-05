@@ -69,6 +69,9 @@ export default function HomePage({
                     message: "",
                 });
                 setIsCreateActivityMode(false);
+            } else if (activityFormStatus.type === "error") {
+                showToast(activityFormStatus.message, "error");
+                setActivityFormStatus({ type: "", message: "" });
             }
         }, 500);
 
@@ -92,33 +95,40 @@ export default function HomePage({
             categories: formData.getAll("categories"),
         };
 
-        const response = await fetch(`/api/activities`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(activityData),
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            if (addToBookmarks && data?._id) {
-                handleBookmarkToggle(data._id);
-            }
-
-            mutate();
-            event.target.reset();
-            setActivityFormStatus({
-                type: "success",
-                message: data?.status,
+        try {
+            const response = await fetch(`/api/activities`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(activityData),
             });
-        } else {
+
+            const data = await response.json();
+
+            if (response.ok) {
+                if (addToBookmarks && data?._id) {
+                    handleBookmarkToggle(data._id);
+                }
+
+                mutate();
+                event.target.reset();
+                setActivityFormStatus({
+                    type: "success",
+                    message: data?.status,
+                });
+            } else {
+                setActivityFormStatus({
+                    type: "error",
+                    message:
+                        data?.status ||
+                        "The form submission has failed, please try again.",
+                });
+            }
+        } catch {
             setActivityFormStatus({
                 type: "error",
-                message:
-                    data?.status ||
-                    "The form submission has failed, <br /> Please try again.",
+                message: "Something went wrong. Please try again.",
             });
         }
     }

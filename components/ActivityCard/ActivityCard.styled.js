@@ -20,7 +20,7 @@ export const StyledFigure = styled.figure`
 
 export const StyledCardImageWrapper = styled.div`
     position: relative;
-    width: 100%;
+
     height: 160px; /*note: this still adheres to the 8pt grid system, keep in mind when adapting */
 `;
 
