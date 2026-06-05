@@ -4,14 +4,11 @@ import { useState, useEffect } from "react";
 import ActivityDetail from "@/components/ActivityDetail";
 import ActivityForm from "@/components/ActivityForm";
 import Head from "next/head";
-import { StyledFormSection } from "@/components/ActivityForm/ActivityForm.styled";
 import {
     StyledButton,
     StyledButtonRed,
     StyledToolbar,
     StyledToolbarWrap,
-    StyledStatusMessageError,
-    StyledStatusMessageSuccess,
     StyledStatusMessageWrap,
 } from "@/components/Global/Global.styled";
 import Header from "@/components/Header";
@@ -223,45 +220,11 @@ export default function Activity({
                                         </StyledButton>
                                     </>
                                 )}
-                                {/* {activityFormStatus.type === "error" && (
-                                    <StyledStatusMessageError>
-                                        Error
-                                    </StyledStatusMessageError>
-                                )}
-                                {activityFormStatus.type === "success" && (
-                                    <StyledStatusMessageSuccess>
-                                        Success
-                                    </StyledStatusMessageSuccess>
-                                )} */}
                             </>
                         )}
                     </StyledToolbar>
                 </StyledToolbarWrap>
-                {/* {activityFormStatus.type !== "" && isDeleteActivityMode && (
-                    <StyledFormSection>
-                        <StyledStatusMessageWrap>
-                            {activityFormStatus.type === "error" && (
-                                <>
-                                    {" "}
-                                    <StyledStatusMessageError>
-                                        {activityFormStatus.message}
-                                    </StyledStatusMessageError>
-                                    showToast(activityFormStatus.message,
-                                    "danger")
-                                </>
-                            )}
-                            {activityFormStatus.type === "success" && (
-                                <>
-                                    {" "}
-                                    <StyledStatusMessageSuccess>
-                                        {activityFormStatus.message}
-                                    </StyledStatusMessageSuccess>
-                                    showToast(activityFormStatus.message)
-                                </>
-                            )}
-                        </StyledStatusMessageWrap>
-                    </StyledFormSection>
-                )} */}
+
                 {isEditActivityMode && (
                     <ActivityForm
                         activity={activity}

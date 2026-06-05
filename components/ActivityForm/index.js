@@ -178,18 +178,7 @@ export default function ActivityForm({ onSubmit, status, heading, ...props }) {
                                     Cancel
                                 </StyledButton>
                             )}
-                            {/* {status.type === "error" && (
-                                <StyledStatusMessageError>
-                                    Error
-                                </StyledStatusMessageError>
-                            )}
-                            {status.type === "success" && (
-                                <StyledStatusMessageSuccess>
-                                    Success
-                                </StyledStatusMessageSuccess>
-                            )} */}
                         </StyledToolbar>
-                        {/* zwischenablage here */}
                     </StyledFormFlex>
                 </StyledFormFieldset>
             </form>
