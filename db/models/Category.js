@@ -2,7 +2,8 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const categorySchema = new Schema({
-    name: { type: String },
+    name: { type: String, required: true },
+    abbreviation: { type: String, required: true },
 });
 
 const Category =
