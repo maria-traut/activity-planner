@@ -159,19 +159,17 @@ export default function ActivityForm({ onSubmit, status, heading, ...props }) {
                             />
                         </StyledFormSection>
                         {isCreateActivityMode && (
-                            <StyledFormSection>
-                                <StyledCheckboxAndLabelWrap>
-                                    <input
-                                        type="checkbox"
-                                        id="addToBookmarks"
-                                        name="addToBookmarks"
-                                        value="1"
-                                    />
-                                    <label htmlFor="addToBookmarks">
-                                        Add to my activity bookmarks
-                                    </label>
-                                </StyledCheckboxAndLabelWrap>
-                            </StyledFormSection>
+                            <StyledCheckboxAndLabelWrap>
+                                <input
+                                    type="checkbox"
+                                    id="addToBookmarks"
+                                    name="addToBookmarks"
+                                    value="1"
+                                />
+                                <label htmlFor="addToBookmarks">
+                                    Add to my activity bookmarks
+                                </label>
+                            </StyledCheckboxAndLabelWrap>
                         )}
                         <StyledToolbar $isLast>
                             <StyledButton
