@@ -67,7 +67,7 @@ export default function Activity({
             categories: formData.getAll("categories"),
         };
         try {
-            const response = await fetch(`/api/activiiiities/${id}`, {
+            const response = await fetch(`/api/activities/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -106,7 +106,7 @@ export default function Activity({
 
     async function handleActivityDelete() {
         try {
-            const response = await fetch(`/api/activitiiies/${id}`, {
+            const response = await fetch(`/api/activities/${id}`, {
                 method: "DELETE",
             });
 
