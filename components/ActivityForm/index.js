@@ -14,12 +14,11 @@ import {
 } from "./ActivityForm.styled";
 import { handleImageUrlValiditation } from "@/lib/imageUrlValidation";
 import showToast from "../Toast";
-import toast from "react-hot-toast";
 import { useEffect } from "react";
 
 export default function ActivityForm({ onSubmit, status, heading, ...props }) {
     useEffect(() => {
-        status.type === "error" && toast(status.message);
+        status.type === "error" && showToast(status.message, "danger");
     });
 
     const {
