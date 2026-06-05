@@ -8,6 +8,7 @@ import {
     StyledImageLayerBottom,
     StyledActivityDetailTitle,
     StyledActivityDetailDescriptionWrap,
+    StyledTagElement,
 } from "./ActivityDetail.styled";
 import BookmarkButton from "../BookmarkButton";
 import { getCountryName } from "@/lib/countries";
@@ -35,9 +36,15 @@ export default function ActivityDetail({
                     <StyledImageLayerTop>
                         {(activity.area || activity.country) && (
                             <StyledLocations>
-                                {activity.area && <li>{activity.area}</li>}
+                                {activity.area && (
+                                    <StyledTagElement>
+                                        {activity.area}
+                                    </StyledTagElement>
+                                )}
                                 {activity.country && (
-                                    <li>{getCountryName(activity.country)}</li>
+                                    <StyledTagElement>
+                                        {getCountryName(activity.country)}
+                                    </StyledTagElement>
                                 )}
                             </StyledLocations>
                         )}
@@ -47,9 +54,12 @@ export default function ActivityDetail({
                             <StyledCategories>
                                 {activity.categories.map((category) => {
                                     return (
-                                        <li key={category._id}>
+                                        <StyledTagElement
+                                            key={category._id}
+                                            $categoryColor={category.color}
+                                        >
                                             {category.name}
-                                        </li>
+                                        </StyledTagElement>
                                     );
                                 })}
                             </StyledCategories>
