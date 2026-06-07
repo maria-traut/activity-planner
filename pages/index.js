@@ -17,6 +17,7 @@ export default function HomePage({
     activityFormStatus,
     setActivityFormStatus,
 }) {
+    handleNavbarLocation("/");
     const {
         data: activities,
         isLoading,
