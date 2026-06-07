@@ -1,9 +1,15 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import MarkerClusterGroup from "react-leaflet-cluster";
 import { useState, useEffect } from "react";
+import {
+    StyledPopupTitle,
+    StyledPopupCountry,
+    StyledPopupLink,
+} from "./ActivityMap.styled";
 
-export default function ActivityMap({ activities }) {
+export default function ActivityMap({ activities, onNavbarLocation }) {
     const [coords, setCoords] = useState("");
 
     const customIcon = L.icon({
@@ -11,6 +17,14 @@ export default function ActivityMap({ activities }) {
         iconSize: [40, 40],
         iconAnchor: [20, 40],
     });
+
+    const createClusterCustomIcon = (cluster) => {
+        return L.divIcon({
+            html: `<img src="/Activibeepin_6-6-2026.svg" width="40" height="40" /><span>${cluster.getChildCount()}</span>`,
+            className: "custom-marker-cluster",
+            iconSize: L.point(60, 40),
+        });
+    };
 
     useEffect(() => {
         async function fetchCoords() {
@@ -21,7 +35,10 @@ export default function ActivityMap({ activities }) {
                 );
                 if (!response.ok) continue;
                 const [data] = await response.json();
-                results[activity.country] = data.latlng;
+                results[activity.country] = {
+                    latlng: data.latlng,
+                    name: data.name.common,
+                };
             }
             setCoords(results);
         }
@@ -35,22 +52,38 @@ export default function ActivityMap({ activities }) {
             style={{ height: "100vh", width: "100vw", zIndex: 1 }}
         >
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-            {activities.map((activity) => {
-                const position = coords[activity.country];
-                if (!position) return null;
-                return (
-                    <Marker
-                        key={activity._id}
-                        position={position}
-                        icon={customIcon}
-                    >
-                        <Popup>
-                            {activity.title}
-                            <br /> {activity.country}
-                        </Popup>
-                    </Marker>
-                );
-            })}
+            <MarkerClusterGroup iconCreateFunction={createClusterCustomIcon}>
+                {activities.map((activity) => {
+                    const position = coords[activity.country]?.latlng;
+                    if (!activity.country || !position) return null;
+                    return (
+                        <Marker
+                            key={activity._id}
+                            position={position}
+                            icon={customIcon}
+                        >
+                            <Popup>
+                                <StyledPopupTitle>
+                                    {activity.title}
+                                </StyledPopupTitle>
+                                <br />
+                                <StyledPopupCountry>
+                                    {coords[activity.country]?.name}
+                                </StyledPopupCountry>
+                                <br />
+                                <StyledPopupLink
+                                    href={`/${activity._id}`}
+                                    onClick={() =>
+                                        onNavbarLocation(`/${activity._id}`)
+                                    }
+                                >
+                                    Go to ActiviBee
+                                </StyledPopupLink>
+                            </Popup>
+                        </Marker>
+                    );
+                })}
+            </MarkerClusterGroup>
         </MapContainer>
     );
 }
