@@ -9,7 +9,7 @@ import { StyledStatusMessageWrap } from "@/components/Global/Global.styled";
 import showToast from "@/components/Toast";
 
 export default function HomePage({
-    handleNavbarLocation,
+    onNavbarLocation,
     handleBookmarkToggle,
     bookmarkedActivityIds,
     isCreateActivityMode,
@@ -17,7 +17,7 @@ export default function HomePage({
     activityFormStatus,
     setActivityFormStatus,
 }) {
-    handleNavbarLocation("/");
+    onNavbarLocation("/");
     const {
         data: activities,
         isLoading,
@@ -189,7 +189,6 @@ export default function HomePage({
                 />
                 <ActivityList
                     activities={sortedActivities}
-                    handleNavbarLocation={handleNavbarLocation}
                     handleBookmarkToggle={handleBookmarkToggle}
                     bookmarkedActivityIds={bookmarkedActivityIds}
                 />

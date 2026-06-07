@@ -18,12 +18,11 @@ export default function Activity({
     handleBookmarkToggle,
     bookmarkedActivityIds,
     onBookmarkedActivityIdsDelete,
-    handleNavbarLocation,
+    onNavbarLocation,
 }) {
-    handleNavbarLocation();
     const router = useRouter();
     const { id } = router.query;
-    handleNavbarLocation(`/${id}`);
+    onNavbarLocation(`/${id}`);
 
     const {
         data: activity,

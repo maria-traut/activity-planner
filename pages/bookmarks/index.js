@@ -12,11 +12,10 @@ import SortButton from "@/components/SortButton";
 export default function Bookmarks({
     handleBookmarkToggle,
     bookmarkedActivityIds,
-    handleNavbarLocation,
+    onNavbarLocation,
 }) {
-    {
-        handleNavbarLocation("/bookmarks");
-    }
+    onNavbarLocation("/bookmarks");
+
     const { data: activities, isLoading, error } = useSWR("/api/activities");
 
     const bookmarkedActivities = activities?.filter((activity) =>
@@ -114,7 +113,7 @@ export default function Bookmarks({
                             activities={sortedBookmarkedActivities}
                             handleBookmarkToggle={handleBookmarkToggle}
                             bookmarkedActivityIds={bookmarkedActivityIds}
-                            handleNavbarLocation={handleNavbarLocation}
+                            handleNavbarLocation={onNavbarLocation}
                         />
                     </>
                 ) : (
