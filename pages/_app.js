@@ -32,6 +32,7 @@ export default function App({ Component, pageProps }) {
         type: "",
         message: "",
     });
+
     function handleBookmarkToggle(id) {
         setBookmarkedActivityIds((prevBookmarkedActivityIds) => {
             const isAdded = prevBookmarkedActivityIds.includes(id);

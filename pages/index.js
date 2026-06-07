@@ -1,18 +1,28 @@
-import useSWR from "swr";
 import { useState, useEffect } from "react";
+import Head from "next/head";
+import useSWR from "swr";
+
+import { scrollToTop } from "@/components/Global";
+import Header from "@/components/Header";
 import ActivityForm from "@/components/ActivityForm";
 import ActivityList from "@/components/ActivityList";
-import SortButton from "@/components/SortButton";
-import Head from "next/head";
-import Header from "@/components/Header";
+import ActivityFilter from "@/components/ActivityFilter";
+import ActivitySort from "@/components/ActivitySort";
+
 import {
     StyledButtonWithIcon,
     StyledButtonIcon,
     StyledStatusMessageWrap,
     StyledToolbar,
-    StyledToolbarWrap,
+    StyledStatusMessage,
 } from "@/components/Global/Global.styled";
-import ActivityFilter from "@/components/ActivityFilter";
+
+import { defaultActivityFilterConfiguration } from "@/lib/activityFilter";
+import {
+    defaultActivitySortConfiguration,
+    getActivitySortLabel,
+    getSortedActivities,
+} from "@/lib/activitySort";
 
 export default function HomePage({
     handleNavbarLocation,
@@ -23,50 +33,39 @@ export default function HomePage({
     activityFormStatus,
     setActivityFormStatus,
 }) {
+    const [activityFilterConfiguration, setActivityFilterConfiguration] =
+        useState(defaultActivityFilterConfiguration);
+
+    const filterQuery = new URLSearchParams({
+        ...activityFilterConfiguration,
+        categories: activityFilterConfiguration?.categories.join(","),
+        country: activityFilterConfiguration?.country.join(","),
+    }).toString();
+
     const {
         data: activities,
-        isLoading,
-        error,
-        mutate,
-    } = useSWR("/api/activities");
+        isLoading: activitiesLoading,
+        error: activitiesError,
+        mutate: activitiesMutate,
+    } = useSWR(`/api/activities?${filterQuery}`);
 
-    const [activitySortOrder, setActivitySortOrder] = useState(null);
+    const isLoading = activitiesLoading;
+    const hasError = activitiesError;
 
-    const sortedActivities = activities
-        ? [...activities].sort((a, b) => {
-              if (activitySortOrder === "az") {
-                  if (a.title.toUpperCase() > b.title.toUpperCase()) return 1;
-                  if (a.title.toUpperCase() < b.title.toUpperCase()) return -1;
-                  return 0;
-              }
-              if (activitySortOrder === "za") {
-                  if (b.title.toUpperCase() > a.title.toUpperCase()) return 1;
-                  if (b.title.toUpperCase() < a.title.toUpperCase()) return -1;
-                  return 0;
-              }
-              if (activitySortOrder === "lastModified") {
-                  return (
-                      new Date(b.updatedAt).getTime() -
-                      new Date(a.updatedAt).getTime()
-                  );
-              }
-              if (activitySortOrder === "newest") {
-                  return (
-                      new Date(b.createdAt).getTime() -
-                      new Date(a.createdAt).getTime()
-                  );
-              }
-              if (activitySortOrder === "oldest") {
-                  return (
-                      new Date(a.createdAt).getTime() -
-                      new Date(b.createdAt).getTime()
-                  );
-              }
-              return 0;
-          })
-        : [];
+    const [activitySortConfiguration, setActivitySortConfiguration] = useState(
+        defaultActivitySortConfiguration
+    );
 
-    const [isActivityFilterMode, setIsActivityFilterMode] = useState(false);
+    const sortedActivities = getSortedActivities(
+        activities,
+        activitySortConfiguration
+    );
+
+    const [isActivityFilterOpen, setIsActivityFilterOpen] = useState(false);
+    const [isActivityFiltered, setIsActivityFiltered] = useState(false);
+
+    const [isActivitySortOpen, setIsActivitySortOpen] = useState(false);
+    const [isActivitySorted, setIsActivitySorted] = useState(false);
 
     useEffect(() => {
         const successMessageTimer = setTimeout(() => {
@@ -82,19 +81,52 @@ export default function HomePage({
         return () => clearTimeout(successMessageTimer);
     }, [activityFormStatus]);
 
-    function handleActivitySort(order) {
-        setActivitySortOrder(order);
-    }
-
-    function handleActivityFilter(event) {
+    function handleActivityFilterApply(event) {
         event.preventDefault();
 
         const formData = new FormData(event.target);
         const filterData = {
             ...Object.fromEntries(formData),
+            categories: formData.getAll("categories"),
+            country: formData.getAll("country"),
         };
 
-        console.log("filterData", filterData);
+        setActivityFilterConfiguration({
+            ...activityFilterConfiguration,
+            title: filterData.title,
+            categories: filterData.categories,
+            country: filterData.country,
+            area: filterData.area,
+            categoriesEvery: formData.has("categoriesEvery"),
+        });
+        setIsActivityFilterOpen(false);
+        setIsActivityFiltered(true);
+    }
+
+    function handleActivityFilterReset() {
+        setIsActivityFilterOpen(false);
+        setIsActivityFiltered(false);
+
+        setActivityFilterConfiguration(defaultActivityFilterConfiguration);
+    }
+
+    function handleActivitySortApply(event) {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const sortData = Object.fromEntries(formData);
+
+        setActivitySortConfiguration(sortData.order);
+
+        setIsActivitySortOpen(false);
+        setIsActivitySorted(true);
+    }
+
+    function handleActivitySortReset(order) {
+        setIsActivitySorted(false);
+        setIsActivitySortOpen(false);
+
+        setActivitySortConfiguration(defaultActivitySortConfiguration);
     }
 
     async function handleActivityCreate(event) {
@@ -125,7 +157,7 @@ export default function HomePage({
                 handleBookmarkToggle(data._id);
             }
 
-            mutate();
+            activitiesMutate();
             event.target.reset();
             setActivityFormStatus({
                 type: "success",
@@ -144,28 +176,32 @@ export default function HomePage({
         return (
             <>
                 <Head>
-                    <title>Home | Activity Planner</title>
+                    <title>Home | ActiviBee</title>
                 </Head>
                 <Header />
                 <main>
                     <StyledStatusMessageWrap>
-                        <p>Loading activities...</p>
+                        <StyledStatusMessage>
+                            Loading activities...
+                        </StyledStatusMessage>
                     </StyledStatusMessageWrap>
                 </main>
             </>
         );
     }
 
-    if (!activities || error) {
+    if (hasError) {
         return (
             <>
                 <Head>
-                    <title>Home | Activity Planner</title>
+                    <title>Home | ActiviBee</title>
                 </Head>
                 <Header />
                 <main>
                     <StyledStatusMessageWrap>
-                        <p>An error occured while fetching the activities.</p>
+                        <StyledStatusMessage>
+                            Activities could not be loaded.
+                        </StyledStatusMessage>
                     </StyledStatusMessageWrap>
                 </main>
             </>
@@ -175,48 +211,78 @@ export default function HomePage({
     return (
         <>
             <Head>
-                <title>Home | Activity Planner</title>
+                <title>Home | ActiviBee</title>
             </Head>
-            <Header />
+            <Header>
+                <StyledToolbar $alignRight>
+                    <StyledButtonWithIcon
+                        type="button"
+                        $isOpen={isActivityFilterOpen}
+                        $isActive={isActivityFiltered}
+                        onClick={() => {
+                            setIsActivitySortOpen(false);
+                            setIsCreateActivityMode(false);
+                            setIsActivityFilterOpen(!isActivityFilterOpen);
+                            scrollToTop();
+                        }}
+                    >
+                        <StyledButtonIcon>
+                            <img src="/filter.svg" alt="" />
+                        </StyledButtonIcon>
+                        Filter
+                        {isActivityFiltered && <> ({activities.length})</>}
+                    </StyledButtonWithIcon>
+                    <StyledButtonWithIcon
+                        type="button"
+                        $isOpen={isActivitySortOpen}
+                        $isActive={isActivitySorted}
+                        onClick={() => {
+                            setIsActivityFilterOpen(false);
+                            setIsCreateActivityMode(false);
+                            setIsActivitySortOpen(!isActivitySortOpen);
+                            scrollToTop();
+                        }}
+                    >
+                        <StyledButtonIcon>&#8645;</StyledButtonIcon>
+                        {isActivitySorted
+                            ? getActivitySortLabel(activitySortConfiguration)
+                            : "Sort"}
+                    </StyledButtonWithIcon>
+                </StyledToolbar>
+            </Header>
             <main>
                 {isCreateActivityMode && (
                     <ActivityForm
                         onSubmit={handleActivityCreate}
                         status={activityFormStatus}
-                        heading="Add Activity"
+                        heading="Create Activity"
+                        submitLabel="Create"
                         isCreateActivityMode={isCreateActivityMode}
                         setIsCreateActivityMode={setIsCreateActivityMode}
                     />
                 )}
-
-                <StyledToolbarWrap>
-                    <StyledToolbar>
-                        <StyledButtonWithIcon
-                            onClick={() => {
-                                setIsActivityFilterMode(!isActivityFilterMode);
-                            }}
-                        >
-                            <StyledButtonIcon>
-                                <img src="/filters-2-svgrepo-com.svg" alt="" />
-                            </StyledButtonIcon>
-                            Filter
-                        </StyledButtonWithIcon>
-                    </StyledToolbar>
-                </StyledToolbarWrap>
-                <SortButton
-                    onActivitySort={handleActivitySort}
-                    activitySortOrder={activitySortOrder}
-                />
-                {isActivityFilterMode && (
+                {isActivityFilterOpen && !isActivitySortOpen && (
                     <ActivityFilter
-                        onSubmit={handleActivityFilter}
-                        heading="Filter Activities"
-                        isActivityFilterMode={isActivityFilterMode}
-                        setIsActivityFilterMode={setIsActivityFilterMode}
+                        onActivityFilterApply={handleActivityFilterApply}
+                        onActivityFilterReset={handleActivityFilterReset}
+                        heading="Filter Options"
+                        activityFilterConfiguration={
+                            activityFilterConfiguration
+                        }
+                    />
+                )}
+                {isActivitySortOpen && !isActivityFilterOpen && (
+                    <ActivitySort
+                        onActivitySortApply={handleActivitySortApply}
+                        onActivitySortReset={handleActivitySortReset}
+                        activitySortConfiguration={activitySortConfiguration}
+                        isActivitySortOpen={isActivitySortOpen}
+                        setIsActivitySortOpen={setIsActivitySortOpen}
                     />
                 )}
                 <ActivityList
                     activities={sortedActivities}
+                    isActivityFiltered={isActivityFiltered}
                     handleNavbarLocation={handleNavbarLocation}
                     handleBookmarkToggle={handleBookmarkToggle}
                     bookmarkedActivityIds={bookmarkedActivityIds}
