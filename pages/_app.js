@@ -82,7 +82,7 @@ export default function App({ Component, pageProps }) {
                     <StyledPageWrapper>
                         <Component
                             {...pageProps}
-                            handleNavbarLocation={handleNavbarLocation}
+                            onNavbarLocation={handleNavbarLocation}
                             bookmarkedActivityIds={bookmarkedActivityIds}
                             handleBookmarkToggle={handleBookmarkToggle}
                             onBookmarkedActivityIdsDelete={
