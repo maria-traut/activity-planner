@@ -11,7 +11,7 @@ const ActivityMap = dynamic(() => import("@/components/ActivityMap"), {
     ssr: false,
 });
 
-export default function Map() {
+export default function Map({ handleNavbarLocation }) {
     const { data: activities, isLoading, error } = useSWR("/api/activities");
 
     if (isLoading) {
@@ -20,7 +20,7 @@ export default function Map() {
                 <Head>
                     <title> Activity Planner</title>
                 </Head>
-                <Header title="Bookmarks" />
+                <Header title="My ActiviBee Map" />
                 <main>
                     <StyledToolbarWrap>
                         <StyledToolbar />
@@ -37,7 +37,7 @@ export default function Map() {
                 <Head>
                     <title> Activity Planner</title>
                 </Head>
-                <Header title="Bookmarks" />
+                <Header title="My ActiviBee Map" />
                 <main>
                     <StyledToolbarWrap>
                         <StyledToolbar />
@@ -53,9 +53,12 @@ export default function Map() {
             <Head>
                 <title>My Activity Map | Activity Planner</title>
             </Head>
-            <Header title="My ActivibeeMap" />
+            <Header title="My ActiviBee Map" />
             <main>
-                <ActivityMap activities={activities} />
+                <ActivityMap
+                    activities={activities}
+                    onNavbarLocation={handleNavbarLocation}
+                />
             </main>
         </>
     );
