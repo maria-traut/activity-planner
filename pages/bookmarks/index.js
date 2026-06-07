@@ -14,6 +14,9 @@ export default function Bookmarks({
     bookmarkedActivityIds,
     handleNavbarLocation,
 }) {
+    {
+        handleNavbarLocation("/bookmarks");
+    }
     const { data: activities, isLoading, error } = useSWR("/api/activities");
 
     const bookmarkedActivities = activities?.filter((activity) =>
