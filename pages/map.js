@@ -18,7 +18,7 @@ export default function Map({ handleNavbarLocation }) {
         return (
             <div>
                 <Head>
-                    <title> Activity Planner</title>
+                    <title>My Activity Map | Activity Planner</title>
                 </Head>
                 <Header title="My ActiviBee Map" />
                 <main>
@@ -35,7 +35,7 @@ export default function Map({ handleNavbarLocation }) {
         return (
             <div>
                 <Head>
-                    <title> Activity Planner</title>
+                    <title>My Activity Map | Activity Planner</title>
                 </Head>
                 <Header title="My ActiviBee Map" />
                 <main>
