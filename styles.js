@@ -1,7 +1,9 @@
 import { createGlobalStyle } from "styled-components";
 import { Inter } from "@next/font/google";
+import { Fauna_One } from "@next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
+const fauna = Fauna_One({ subsets: ["latin"], weight: "400" });
 
 export default createGlobalStyle`
 
@@ -142,6 +144,8 @@ textarea:not([rows]) {
 	--headline-font-size-2:1.25rem;
 	--headline-line-height:1.3em;
 	--headline-letter-spacing:0.04em;
+
+	--accent-font-family: ${fauna.style.fontFamily};
 
 	--box-shadow-color:var(--gray-400);
 	--box-shadow-normal:0px 0px 5px 0px var(--box-shadow-color);
