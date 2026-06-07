@@ -41,6 +41,8 @@ export const StyledFigcaption = styled.figcaption`
 export const StyledActivityHeadline = styled.h2`
     text-align: left;
     margin: 0;
+    font-family: var(--accent-font-family);
+    font-weight: 500;
     font-size: var(--text-font-size-normal);
 `;
 
