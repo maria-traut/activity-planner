@@ -1,9 +1,16 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useState, useEffect } from "react";
 
 export default function ActivityMap({ activities }) {
     const [coords, setCoords] = useState("");
+
+    const customIcon = L.icon({
+        iconUrl: "/Activibeepin_6-6-2026.svg",
+        iconSize: [40, 40],
+        iconAnchor: [20, 40],
+    });
 
     useEffect(() => {
         async function fetchCoords() {
@@ -25,14 +32,18 @@ export default function ActivityMap({ activities }) {
         <MapContainer
             center={[20, 0]}
             zoom={2}
-            style={{ height: "500px", width: "100vw" }}
+            style={{ height: "100vh", width: "100vw", zIndex: 1 }}
         >
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             {activities.map((activity) => {
                 const position = coords[activity.country];
                 if (!position) return null;
                 return (
-                    <Marker key={activity._id} position={position}>
+                    <Marker
+                        key={activity._id}
+                        position={position}
+                        icon={customIcon}
+                    >
                         <Popup>
                             {activity.title}
                             <br /> {activity.country}
