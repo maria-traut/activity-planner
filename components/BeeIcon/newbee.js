@@ -11,8 +11,8 @@ export default function NewBeeIcon({
         <StyledSVG
             className={className}
             size={size}
-            rotation={rotation}
-            isFavorite={isFavorite}
+            $rotation={rotation}
+            $isFavorite={isFavorite}
             viewBox="0 0 202 267"
         >
             <g id="Main">

@@ -12,22 +12,13 @@ export const KeyframesFadeOut = keyframes`
 `;
 
 export const StyledToolbarWrap = styled.section`
-    padding: 0 var(--eight-grid__s);
-    background-color: var(--main-400);
-    border-bottom: solid;
-    border-width: 1px;
-    border-color: var(--main-600);
-
-    position: sticky;
-    top: 50px;
-    width: 100%;
-    z-index: 5;
+    padding: 0 var(--spacing-normal);
 `;
 
 export const StyledToolbar = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: ${({ $alignRight }) => ($alignRight ? "right" : "left")};
     flex-wrap: wrap;
     gap: var(--eight-grid__normal);
     align-items: center;
@@ -39,6 +30,9 @@ export const StyledButton = styled.button`
     border: var(--border-small);
     padding: var(--eight-grid__s) var(--eight-grid__normal);
     background-color: var(--gray-100);
+    background-color: ${({ $categoryColor }) => $categoryColor};
+    background-color: ${({ $isActive }) => $isActive && "lightgoldenrodyellow"};
+    background-color: ${({ $isOpen }) => $isOpen && "lightgray"};
 
     &:hover {
         background-color: var(--gray-200);

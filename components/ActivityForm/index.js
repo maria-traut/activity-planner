@@ -15,7 +15,13 @@ import {
 } from "./ActivityForm.styled";
 import { handleImageUrlValidation } from "@/lib/imageUrlValidation";
 
-export default function ActivityForm({ onSubmit, status, heading, ...props }) {
+export default function ActivityForm({
+    onSubmit,
+    status,
+    heading,
+    submitLabel,
+    ...props
+}) {
     const {
         activity,
         isEditActivityMode,
@@ -23,27 +29,39 @@ export default function ActivityForm({ onSubmit, status, heading, ...props }) {
         isCreateActivityMode,
         setIsCreateActivityMode,
     } = props;
-    const { data: categories, isLoading, error } = useSWR("/api/categories");
+
+    const {
+        data: categories,
+        isLoading: categoriesLoading,
+        error: categoriesError,
+    } = useSWR("/api/categories");
+
+    const isLoading = categoriesLoading;
+    const hasError = categoriesError;
 
     if (isLoading) {
         return (
-            <form>
-                <StyledFormFieldset>
-                    <legend>{heading}</legend>
-                    <p>Loading categories...</p>
-                </StyledFormFieldset>
-            </form>
+            <StyledFormWrap>
+                <form>
+                    <StyledFormFieldset>
+                        <legend>{heading}</legend>
+                        <p>Loading categories...</p>
+                    </StyledFormFieldset>
+                </form>
+            </StyledFormWrap>
         );
     }
 
-    if (!categories || error) {
+    if (hasError) {
         return (
-            <form>
-                <StyledFormFieldset>
-                    <legend>{heading}</legend>
-                    <p>An error occured while fetching categories.</p>
-                </StyledFormFieldset>
-            </form>
+            <StyledFormWrap>
+                <form>
+                    <StyledFormFieldset>
+                        <legend>{heading}</legend>
+                        <p>An error occured while fetching categories.</p>
+                    </StyledFormFieldset>
+                </form>
+            </StyledFormWrap>
         );
     }
 
@@ -171,12 +189,12 @@ export default function ActivityForm({ onSubmit, status, heading, ...props }) {
                                 </label>
                             </StyledCheckboxAndLabelWrap>
                         )}
-                        <StyledToolbar $isLast>
+                        <StyledToolbar $isLast $alignRight>
                             <StyledButton
                                 type="submit"
                                 disabled={status.type === "success"}
                             >
-                                Submit
+                                {submitLabel}
                             </StyledButton>
                             {(isCreateActivityMode || isEditActivityMode) && (
                                 <StyledButton

@@ -7,7 +7,36 @@ export default async function handler(request, response) {
 
     try {
         if (request.method === "GET") {
-            const activities = await Activity.find()
+            const { title, area, categories, country, categoriesEvery } =
+                request.query;
+            const filter = {};
+            const isCategoriesEveryChecked = categoriesEvery === "true";
+
+            if (title) {
+                filter.title = { $regex: title, $options: "i" };
+            }
+
+            if (area) {
+                filter.area = { $regex: area, $options: "i" };
+            }
+
+            if (country) {
+                filter.country = {
+                    $in: country.split(","),
+                };
+            }
+
+            if (categories) {
+                const categoryArray = categories.split(",");
+
+                if (isCategoriesEveryChecked) {
+                    filter.categories = { $all: categoryArray };
+                } else {
+                    filter.categories = { $in: categoryArray };
+                }
+            }
+
+            const activities = await Activity.find(filter)
                 .populate("categories")
                 .sort({ _id: -1 });
 
