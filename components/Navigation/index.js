@@ -1,6 +1,7 @@
 import {
     StyledBookmarkLink,
     StyledHomeLink,
+    StyledMapLink,
     StyledNavbarContainer,
     StyledNavbarEmpty,
     StyledAddActivityButton,
@@ -55,6 +56,13 @@ export default function Navbar({
             >
                 Home
             </StyledHomeLink>
+            <StyledMapLink
+                aria-label="Go to Map"
+                href="/map"
+                onClick={() => onNavbarLocation("/map")}
+            >
+                🌍
+            </StyledMapLink>
         </StyledNavbarContainer>
     );
 }
