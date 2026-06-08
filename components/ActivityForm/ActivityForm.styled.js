@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const StyledFormWrap = styled.section`
     padding: 0 var(--eight-grid__normal);
@@ -20,13 +20,29 @@ export const StyledFormFlex = styled.div`
 export const StyledFormFieldset = styled.fieldset`
     padding: var(--eight-grid__s);
     border-radius: var(--border-radius-normal);
+    ${({ $isHidden }) =>
+        $isHidden &&
+        css`
+            display: none;
+        `}
+`;
+
+export const StyledFormFieldsetCleanedUp = styled.fieldset`
+    border: none;
+    padding-left: 0;
 `;
 
 export const StyledCheckboxAndLabelWrap = styled.section`
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     gap: var(--spacing-small);
-    align-items: center;
+    align-items: normal;
     padding: var(--spacing-small) 0 0;
+
+    input[type="checkbox"] {
+        flex-shrink: 0;
+    }
+    label {
+        padding-top: 0.25rem;
+    }
 `;

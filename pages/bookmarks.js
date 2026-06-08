@@ -1,22 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Head from "next/head";
 import useSWR from "swr";
 
 import { scrollToTop } from "@/components/Global";
 import Header from "@/components/Header";
-import ActivityForm from "@/components/ActivityForm";
 import ActivityList from "@/components/ActivityList";
 import ActivityFilter from "@/components/ActivityFilter";
 import ActivitySort from "@/components/ActivitySort";
-import showToast from "@/components/Toast";
 
 import {
     StyledButtonWithIcon,
     StyledButtonWithIconIcon,
     StyledButtonWithIconText,
+    StyledStatusMessage,
     StyledStatusMessageWrap,
     StyledToolbar,
-    StyledStatusMessage,
 } from "@/components/Global/Global.styled";
 
 import { defaultActivityFilterConfiguration } from "@/lib/activityFilter";
@@ -26,15 +24,13 @@ import {
     getSortedActivities,
 } from "@/lib/activitySort";
 
-export default function HomePage({
-    onNavbarLocation,
+export default function Bookmarks({
     handleBookmarkToggle,
     bookmarkedActivityIds,
-    isCreateActivityMode,
-    setIsCreateActivityMode,
-    activityFormStatus,
-    setActivityFormStatus,
+    onNavbarLocation,
 }) {
+    onNavbarLocation("/bookmarks");
+
     const [activityFilterConfiguration, setActivityFilterConfiguration] =
         useState(defaultActivityFilterConfiguration);
 
@@ -44,23 +40,25 @@ export default function HomePage({
         country: activityFilterConfiguration?.country.join(","),
     }).toString();
 
-    onNavbarLocation("/");
     const {
         data: activities,
         isLoading: activitiesLoading,
         error: activitiesError,
-        mutate: activitiesMutate,
     } = useSWR(`/api/activities?${filterQuery}`);
 
     const isLoading = activitiesLoading;
     const hasError = activitiesError;
 
+    const bookmarkedActivities = activities?.filter((activity) =>
+        bookmarkedActivityIds.includes(activity._id)
+    );
+
     const [activitySortConfiguration, setActivitySortConfiguration] = useState(
         defaultActivitySortConfiguration
     );
 
-    const sortedActivities = getSortedActivities(
-        activities,
+    const sortedBookmarkedActivities = getSortedActivities(
+        bookmarkedActivities,
         activitySortConfiguration
     );
 
@@ -69,24 +67,6 @@ export default function HomePage({
 
     const [isActivitySortOpen, setIsActivitySortOpen] = useState(false);
     const [isActivitySorted, setIsActivitySorted] = useState(false);
-
-    useEffect(() => {
-        const formClosingTimer = setTimeout(() => {
-            if (activityFormStatus.type === "success") {
-                showToast(activityFormStatus.message);
-                setActivityFormStatus({
-                    type: "",
-                    message: "",
-                });
-                setIsCreateActivityMode(false);
-            } else if (activityFormStatus.type === "error") {
-                showToast(activityFormStatus.message, "error");
-                setActivityFormStatus({ type: "", message: "" });
-            }
-        }, 500);
-
-        return () => clearTimeout(formClosingTimer);
-    }, [activityFormStatus]);
 
     function handleActivityFilterApply(event) {
         event.preventDefault();
@@ -129,71 +109,20 @@ export default function HomePage({
         setIsActivitySorted(true);
     }
 
-    function handleActivitySortReset(order) {
+    function handleActivitySortReset() {
         setIsActivitySorted(false);
         setIsActivitySortOpen(false);
 
         setActivitySortConfiguration(defaultActivitySortConfiguration);
     }
 
-    async function handleActivityCreate(event) {
-        event.preventDefault();
-
-        const formData = new FormData(event.target);
-
-        const addToBookmarks = formData.has("addToBookmarks");
-        formData.delete("addToBookmarks");
-
-        const activityData = {
-            ...Object.fromEntries(formData),
-            categories: formData.getAll("categories"),
-        };
-
-        try {
-            const response = await fetch(`/api/activities`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(activityData),
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                if (addToBookmarks && data?._id) {
-                    handleBookmarkToggle(data._id);
-                }
-
-                activitiesMutate();
-                event.target.reset();
-                setActivityFormStatus({
-                    type: "success",
-                    message: data?.status,
-                });
-            } else {
-                setActivityFormStatus({
-                    type: "error",
-                    message:
-                        data?.status ||
-                        "The form submission has failed, please try again.",
-                });
-            }
-        } catch {
-            setActivityFormStatus({
-                type: "error",
-                message: "Something went wrong. Please try again.",
-            });
-        }
-    }
-
     if (isLoading) {
         return (
             <>
                 <Head>
-                    <title>Home | ActiviBee</title>
+                    <title>My ActivibeeHive | ActiviBee</title>
                 </Head>
-                <Header />
+                <Header title="My ActivibeeHive" />
                 <main>
                     <StyledStatusMessageWrap>
                         <StyledStatusMessage>
@@ -209,9 +138,9 @@ export default function HomePage({
         return (
             <>
                 <Head>
-                    <title>Home | ActiviBee</title>
+                    <title>My ActivibeeHive | ActiviBee</title>
                 </Head>
-                <Header />
+                <Header title="My ActivibeeHive" />
                 <main>
                     <StyledStatusMessageWrap>
                         <StyledStatusMessage>
@@ -226,9 +155,9 @@ export default function HomePage({
     return (
         <>
             <Head>
-                <title>Home | ActiviBee</title>
+                <title>My ActivibeeHive | ActiviBee</title>
             </Head>
-            <Header>
+            <Header title="My ActivibeeHive">
                 <StyledToolbar $alignRight>
                     <StyledButtonWithIcon
                         type="button"
@@ -236,7 +165,6 @@ export default function HomePage({
                         $isActive={isActivityFiltered}
                         onClick={() => {
                             setIsActivitySortOpen(false);
-                            setIsCreateActivityMode(false);
                             setIsActivityFilterOpen(!isActivityFilterOpen);
                             scrollToTop();
                         }}
@@ -246,7 +174,9 @@ export default function HomePage({
                         </StyledButtonWithIconIcon>
                         <StyledButtonWithIconText>
                             Filter
-                            {isActivityFiltered && <> ({activities.length})</>}
+                            {isActivityFiltered && (
+                                <> ({bookmarkedActivities.length})</>
+                            )}
                         </StyledButtonWithIconText>
                     </StyledButtonWithIcon>
                     <StyledButtonWithIcon
@@ -255,7 +185,6 @@ export default function HomePage({
                         $isActive={isActivitySorted}
                         onClick={() => {
                             setIsActivityFilterOpen(false);
-                            setIsCreateActivityMode(false);
                             setIsActivitySortOpen(!isActivitySortOpen);
                             scrollToTop();
                         }}
@@ -274,17 +203,6 @@ export default function HomePage({
                 </StyledToolbar>
             </Header>
             <main>
-                {isCreateActivityMode && (
-                    <ActivityForm
-                        onSubmit={handleActivityCreate}
-                        status={activityFormStatus}
-                        heading="Create Activity"
-                        submitLabel="Create"
-                        setStatus={setActivityFormStatus}
-                        isCreateActivityMode={isCreateActivityMode}
-                        setIsCreateActivityMode={setIsCreateActivityMode}
-                    />
-                )}
                 {isActivityFilterOpen && !isActivitySortOpen && (
                     <ActivityFilter
                         onActivityFilterApply={handleActivityFilterApply}
@@ -303,11 +221,12 @@ export default function HomePage({
                     />
                 )}
                 <ActivityList
-                    activities={sortedActivities}
+                    activities={sortedBookmarkedActivities}
+                    noActivitiesFoundMessage="No bookmarks yet. Tap the bee on any activity to save it here."
                     isActivityFiltered={isActivityFiltered}
-                    handleNavbarLocation={onNavbarLocation}
                     handleBookmarkToggle={handleBookmarkToggle}
                     bookmarkedActivityIds={bookmarkedActivityIds}
+                    handleNavbarLocation={onNavbarLocation}
                 />
             </main>
         </>
