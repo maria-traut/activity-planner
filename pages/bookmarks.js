@@ -109,7 +109,7 @@ export default function Bookmarks({
         setIsActivitySorted(true);
     }
 
-    function handleActivitySortReset(order) {
+    function handleActivitySortReset() {
         setIsActivitySorted(false);
         setIsActivitySortOpen(false);
 
@@ -218,8 +218,6 @@ export default function Bookmarks({
                         onActivitySortApply={handleActivitySortApply}
                         onActivitySortReset={handleActivitySortReset}
                         activitySortConfiguration={activitySortConfiguration}
-                        isActivitySortOpen={isActivitySortOpen}
-                        setIsActivitySortOpen={setIsActivitySortOpen}
                     />
                 )}
                 <ActivityList
