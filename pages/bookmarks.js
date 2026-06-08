@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import useSWR from "swr";
 
@@ -29,8 +29,6 @@ export default function Bookmarks({
     bookmarkedActivityIds,
     onNavbarLocation,
 }) {
-    onNavbarLocation("/bookmarks");
-
     const [activityFilterConfiguration, setActivityFilterConfiguration] =
         useState(defaultActivityFilterConfiguration);
 
@@ -67,6 +65,10 @@ export default function Bookmarks({
 
     const [isActivitySortOpen, setIsActivitySortOpen] = useState(false);
     const [isActivitySorted, setIsActivitySorted] = useState(false);
+
+    useEffect(() => {
+        onNavbarLocation(`/bookmarks`);
+    });
 
     function handleActivityFilterApply(event) {
         event.preventDefault();
