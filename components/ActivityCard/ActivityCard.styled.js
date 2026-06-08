@@ -64,7 +64,7 @@ export const StyledCategoryTag = styled.li`
     background-color: ${({ $categoryColor }) =>
         $categoryColor || "var(--gray-200)"};
     border-radius: var(--border-radius-rounded);
-    padding: var(--eight-grid__halfstep) var(--eight-grid__s);
+    padding: 1px var(--eight-grid__s);
 
     @media (prefers-color-scheme: dark) {
         background-color: ${({ $categoryColor }) =>
