@@ -34,6 +34,7 @@ export const StyledFigcaption = styled.figcaption`
     gap: var(--eight-grid__halfstep);
 
     padding: var(--eight-grid__halfstep);
+    margin-bottom: var(--eight-grid__s);
 `;
 
 export const StyledActivityHeadline = styled.h2`
