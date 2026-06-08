@@ -1,4 +1,4 @@
-import { StyledButtonBlue } from "../Global/Global.styled";
+import { StyledButtonBlue } from "@/components/Global/Global.styled";
 import Link from "next/link";
 
 export default function BackButton() {

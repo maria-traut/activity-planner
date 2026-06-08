@@ -1,5 +1,5 @@
 import { SWRConfig } from "swr";
-import GlobalStyle from "../styles";
+import GlobalStyle from "@/styles";
 import useLocalStorageState from "use-local-storage-state";
 import { useEffect, useState } from "react";
 import styled from "styled-components";

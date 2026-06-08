@@ -1,5 +1,5 @@
 import ActivityCard from "@/components/ActivityCard";
-import BookmarkButton from "../BookmarkButton";
+import BookmarkButton from "@/components/buttons/BookmarkButton";
 import {
     StyledActivityList,
     StyledActivityCardContainer,
@@ -7,7 +7,7 @@ import {
 import {
     StyledStatusMessage,
     StyledStatusMessageWrap,
-} from "../Global/Global.styled";
+} from "@/components/Global/Global.styled";
 
 export default function ActivityList({
     activities,

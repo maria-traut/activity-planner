@@ -6,9 +6,9 @@ import {
     StyledNavbarEmpty,
     StyledAddActivityButton,
 } from "./Navigation.styled";
-import { scrollToTop } from "../Global";
-import BookmarkIcon from "../BookmarkIcon";
-import MapIcon from "../MapIcon";
+import { scrollToTop } from "@/components/Global";
+import BookmarkIcon from "@/components/icons/BookmarkIcon";
+import MapIcon from "@/components/icons/MapIcon";
 
 export default function Navbar({
     navbarLocation,
