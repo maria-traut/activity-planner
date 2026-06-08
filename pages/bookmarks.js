@@ -174,7 +174,9 @@ export default function Bookmarks({
                         </StyledButtonWithIconIcon>
                         <StyledButtonWithIconText>
                             Filter
-                            {isActivityFiltered && <> ({activities.length})</>}
+                            {isActivityFiltered && (
+                                <> ({bookmarkedActivities.length})</>
+                            )}
                         </StyledButtonWithIconText>
                     </StyledButtonWithIcon>
                     <StyledButtonWithIcon
