@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Navbar from "@/components/Navigation";
 import styled from "styled-components";
 import SplashScreen from "@/components/SplashScreen";
+import { Toaster } from "react-hot-toast";
 
 const fetcher = async (resource, init) => {
     const result = await fetch(resource, init);
@@ -65,6 +66,14 @@ export default function App({ Component, pageProps }) {
     }
     return (
         <>
+            <Toaster
+                position="bottom-center"
+                reverseOrder={false}
+                gutter={12}
+                containerStyle={{
+                    bottom: 80,
+                }}
+            />
             <GlobalStyle />
             <SWRConfig value={{ fetcher }}>
                 {isLoading ? (
@@ -73,7 +82,7 @@ export default function App({ Component, pageProps }) {
                     <StyledPageWrapper>
                         <Component
                             {...pageProps}
-                            handleNavbarLocation={handleNavbarLocation}
+                            onNavbarLocation={handleNavbarLocation}
                             bookmarkedActivityIds={bookmarkedActivityIds}
                             handleBookmarkToggle={handleBookmarkToggle}
                             onBookmarkedActivityIdsDelete={

@@ -30,12 +30,16 @@ export default async function handler(request, response) {
 
             const createdActivity = await Activity.create(activityData);
             return response.status(201).json({
-                status: "Activity successfully created.",
+                status: "The activity has been created successfully.",
                 _id: createdActivity._id,
             });
         }
     } catch (error) {
-        return response.status(500).json({ status: "Internal Server Error" });
+        return response
+            .status(500)
+            .json({
+                status: "The Activity could not have been created, please try again!",
+            });
     }
 
     response.status(405).json({ status: "Method not allowed" });

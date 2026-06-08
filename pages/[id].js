@@ -1,29 +1,28 @@
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import BackButton from "@/components/BackButton";
 import ActivityDetail from "@/components/ActivityDetail";
 import ActivityForm from "@/components/ActivityForm";
 import Head from "next/head";
-import { StyledFormSection } from "@/components/ActivityForm/ActivityForm.styled";
 import {
     StyledButton,
     StyledButtonRed,
     StyledToolbar,
     StyledToolbarWrap,
-    StyledStatusMessageError,
-    StyledStatusMessageSuccess,
     StyledStatusMessageWrap,
 } from "@/components/Global/Global.styled";
 import Header from "@/components/Header";
+import showToast from "@/components/Toast";
 
 export default function Activity({
     handleBookmarkToggle,
     bookmarkedActivityIds,
     onBookmarkedActivityIdsDelete,
+    onNavbarLocation,
 }) {
     const router = useRouter();
     const { id } = router.query;
+    onNavbarLocation(`/${id}`);
 
     const {
         data: activity,
@@ -40,8 +39,9 @@ export default function Activity({
     });
 
     useEffect(() => {
-        const successMessageTimer = setTimeout(() => {
+        const formClosingTimer = setTimeout(() => {
             if (activityFormStatus.type === "success") {
+                showToast(activityFormStatus.message);
                 setActivityFormStatus({
                     type: "",
                     message: "",
@@ -51,10 +51,13 @@ export default function Activity({
                     setIsDeleteActivityMode(false);
                     router.push("/");
                 }
+            } else if (activityFormStatus.type === "error") {
+                showToast(activityFormStatus.message, "danger");
+                setActivityFormStatus({ type: "", message: "" });
             }
-        }, 3000);
+        }, 500);
 
-        return () => clearTimeout(successMessageTimer);
+        return () => clearTimeout(formClosingTimer);
     }, [activityFormStatus]);
 
     async function handleActivityEdit(event) {
@@ -65,49 +68,75 @@ export default function Activity({
             ...Object.fromEntries(formData),
             categories: formData.getAll("categories"),
         };
-
-        const response = await fetch(`/api/activities/${id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(activityData),
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            mutate();
-            setActivityFormStatus({
-                type: "success",
-                message: data?.status,
+        try {
+            const response = await fetch(`/api/activities/${id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(activityData),
             });
-        } else {
+
+            const data = await response.json();
+
+            if (response.ok) {
+                mutate();
+                setActivityFormStatus({
+                    type: "success",
+                    message: data?.status,
+                });
+            } else {
+                setActivityFormStatus({
+                    type: "error",
+                    message:
+                        data?.status ||
+                        "The activity could not be updated, please try again.",
+                });
+                showToast(
+                    activityFormStatus.message ||
+                        "The activity could not be updated, please try again.",
+                    "danger"
+                );
+            }
+        } catch {
             setActivityFormStatus({
                 type: "error",
-                message:
-                    data?.status || "Form could not be sent. Please try again.",
+                message: "Something went wrong. Please try again.",
             });
         }
     }
 
     async function handleActivityDelete() {
-        const response = await fetch(`/api/activities/${id}`, {
-            method: "DELETE",
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            setActivityFormStatus({
-                type: "success",
-                message: data?.status,
+        try {
+            const response = await fetch(`/api/activities/${id}`, {
+                method: "DELETE",
             });
-            onBookmarkedActivityIdsDelete(id);
-        } else {
+
+            const data = await response.json();
+
+            if (response.ok) {
+                setActivityFormStatus({
+                    type: "success",
+                    message: data?.status,
+                });
+
+                onBookmarkedActivityIdsDelete(id);
+            } else {
+                setActivityFormStatus({
+                    type: "error",
+                    message:
+                        "The activity could not be deleted, please try again.",
+                });
+                showToast(
+                    activityFormStatus.message ||
+                        "The activity could not be deleted, please try again.",
+                    "danger"
+                );
+            }
+        } catch {
             setActivityFormStatus({
                 type: "error",
-                message: "Activity could not be deleted. Please try again.",
+                message: "Something went wrong. Please try again.",
             });
         }
     }
@@ -220,41 +249,17 @@ export default function Activity({
                                         </StyledButton>
                                     </>
                                 )}
-                                {activityFormStatus.type === "error" && (
-                                    <StyledStatusMessageError>
-                                        Error
-                                    </StyledStatusMessageError>
-                                )}
-                                {activityFormStatus.type === "success" && (
-                                    <StyledStatusMessageSuccess>
-                                        Success
-                                    </StyledStatusMessageSuccess>
-                                )}
                             </>
                         )}
                     </StyledToolbar>
                 </StyledToolbarWrap>
-                {activityFormStatus.type !== "" && isDeleteActivityMode && (
-                    <StyledFormSection>
-                        <StyledStatusMessageWrap>
-                            {activityFormStatus.type === "error" && (
-                                <StyledStatusMessageError>
-                                    {activityFormStatus.message}
-                                </StyledStatusMessageError>
-                            )}
-                            {activityFormStatus.type === "success" && (
-                                <StyledStatusMessageSuccess>
-                                    {activityFormStatus.message}
-                                </StyledStatusMessageSuccess>
-                            )}
-                        </StyledStatusMessageWrap>
-                    </StyledFormSection>
-                )}
+
                 {isEditActivityMode && (
                     <ActivityForm
                         activity={activity}
                         onSubmit={handleActivityEdit}
                         status={activityFormStatus}
+                        setStatus={setActivityFormStatus}
                         heading="Edit Activity"
                         setIsEditActivityMode={setIsEditActivityMode}
                         isEditActivityMode={isEditActivityMode}

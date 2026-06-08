@@ -16,7 +16,12 @@ export default async function handler(request, response) {
             }
             return response.status(200).json(activity);
         }
-
+    } catch (error) {
+        return response.status(500).json({
+            status: "Internal Server error. ",
+        });
+    }
+    try {
         if (request.method === "PUT") {
             const updatedActivityData = request.body;
 
@@ -33,19 +38,26 @@ export default async function handler(request, response) {
             }
 
             await Activity.findByIdAndUpdate(id, updatedActivityData);
-            return response
-                .status(200)
-                .json({ status: "Activity successfully updated." });
-        }
-
-        if (request.method === "DELETE") {
-            await Activity.findByIdAndDelete(id);
-            response
-                .status(200)
-                .json({ status: "Activity successfully deleted." });
+            return response.status(200).json({
+                status: "The activity has been updated successfully!",
+            });
         }
     } catch (error) {
-        return response.status(500).json({ status: "Internal Server Error" });
+        return response.status(500).json({
+            status: "The activity could not have been updated, please try again! ",
+        });
+    }
+    try {
+        if (request.method === "DELETE") {
+            await Activity.findByIdAndDelete(id);
+            return response.status(200).json({
+                status: "The activity has been deleted successfully!",
+            });
+        }
+    } catch (error) {
+        return response.status(500).json({
+            status: "The activity could not have been deleted, please try again! ",
+        });
     }
 
     response.status(405).json({ status: "Method not allowed" });
