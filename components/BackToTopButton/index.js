@@ -17,7 +17,7 @@ export default function BackToTopButton() {
         <StyledTopButton
             type="button"
             aria-label="Scroll back to top"
-            onClick={() => scrollToTop()}
+            onClick={scrollToTop}
         >
             &#128285;
         </StyledTopButton>
