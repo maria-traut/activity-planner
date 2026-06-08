@@ -53,9 +53,11 @@ export default createGlobalStyle`
 	--bookmark-button-color1:hsl(208, 100%, 95%);
 	--bookmark-button-color2:hsl(208, 100%, 85%);
 
+	font-size:14px;
+
 	--text-font-family: ${inter.style.fontFamily};
-	--text-font-size-normal:16px;
-	--text-font-size-small:13px;
+	--text-font-size-normal:1rem;
+	--text-font-size-small:10px;
 	--text-font-size-xsmall: 10px; /* for tags */
 	--text-line-height:1.5em;
 
@@ -63,7 +65,7 @@ export default createGlobalStyle`
 	--headline-font-size-1:1.75rem;
 	--headline-font-size-2:1.25rem;
 	--headline-line-height:1.3em;
-	--headline-letter-spacing:0.04em;
+	--headline-letter-spacing:0.02em;
 
 	--box-shadow-color:var(--gray-400);
 	--box-shadow-normal:0px 0px 5px 0px var(--box-shadow-color);
