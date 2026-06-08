@@ -9,7 +9,6 @@ import ActivityList from "@/components/ActivityList";
 import ActivityFilter from "@/components/ActivityFilter";
 import ActivitySort from "@/components/ActivitySort";
 import showToast from "@/components/Toast";
-import BookmarkIcon from "@/components/BookmarkIcon";
 
 import {
     StyledButtonWithIcon,
