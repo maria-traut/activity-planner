@@ -1,5 +1,5 @@
 import { scrollToTop } from "@/components/Global";
-import { StyledTopButton } from "./BackToTopButton.styled";
+import { StyledBackToTopButton } from "./BackToTopButton.styled";
 import { useEffect, useState } from "react";
 
 export default function BackToTopButton() {
@@ -15,12 +15,12 @@ export default function BackToTopButton() {
     }, []);
 
     return isVisible ? (
-        <StyledTopButton
+        <StyledBackToTopButton
             type="button"
             aria-label="Scroll back to top"
             onClick={scrollToTop}
         >
-            &#128285;
-        </StyledTopButton>
+            <img src="/icons/arrow.svg" alt="" width={24} height={24} />
+        </StyledBackToTopButton>
     ) : null;
 }

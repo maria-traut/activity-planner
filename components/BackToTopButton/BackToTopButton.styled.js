@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { StyledButton } from "../Global/Global.styled";
 
-export const StyledTopButton = styled(StyledButton)`
+export const StyledBackToTopButton = styled(StyledButton)`
     position: fixed;
     bottom: 160px;
     right: 20px;
@@ -10,4 +10,8 @@ export const StyledTopButton = styled(StyledButton)`
     width: 45px;
     height: 45px;
     padding: 0;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
