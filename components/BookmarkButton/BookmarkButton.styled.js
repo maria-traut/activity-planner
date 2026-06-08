@@ -6,10 +6,12 @@ export const StyledBookmarkButton = styled.button`
     top: var(--eight-grid__s);
     right: var(--eight-grid__halfstep);
     z-index: 2;
+    cursor: pointer;
 
     svg {
         max-width: 80%;
         height: auto;
-        /* display: block; */
+        display: block;
+        margin: 0 auto;
     }
 `;
