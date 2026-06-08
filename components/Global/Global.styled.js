@@ -29,10 +29,12 @@ export const StyledButton = styled.button`
     border-radius: var(--border-radius-normal);
     border: var(--border-small);
     padding: var(--eight-grid__s) var(--eight-grid__normal);
-    background-color: var(--gray-100);
-    background-color: ${({ $categoryColor }) => $categoryColor};
-    background-color: ${({ $isActive }) => $isActive && "lightgoldenrodyellow"};
-    background-color: ${({ $isOpen }) => $isOpen && "lightgray"};
+    background-color: ${({ $isOpen, $isActive, $categoryColor }) =>
+        $isOpen
+            ? "lightgray"
+            : $isActive
+              ? "lightgoldenrodyellow"
+              : $categoryColor || "var(--gray-100)"};
 
     &:hover {
         background-color: var(--gray-200);
