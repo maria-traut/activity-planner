@@ -154,9 +154,9 @@ export default function Activity({
                 <Header />
                 <main>
                     <StyledStatusMessageWrap>
-                        <pStyledStatusMessage>
+                        <StyledStatusMessage>
                             Loading activity...
-                        </pStyledStatusMessage>
+                        </StyledStatusMessage>
                     </StyledStatusMessageWrap>
                 </main>
             </>
