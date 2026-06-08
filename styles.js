@@ -13,7 +13,7 @@ export default createGlobalStyle`
 
 
 :root {
-	--gray-100: #F5F5F5;
+	/* --gray-100: #F5F5F5;
 	--gray-200: #E6E6E6;
 	--gray-300: #D4D4D4;
 	--gray-400: #A3A3A3;
@@ -21,9 +21,22 @@ export default createGlobalStyle`
 	--gray-600: #575757;
 	--gray-700: #444444;
 	--gray-800: #333333;
-	--gray-900: #242424;
+	--gray-900: #242424; */
+
+	/* new gray testing  */
+    --gray-900: hsl(30, 21%, 14%);
+	--gray-800: hsl(30, 21%, 24%);
+	--gray-700: hsl(30, 21%, 34%);
+	--gray-600: hsl(30, 21%, 44%);
+	--gray-500: hsl(30, 21%, 54%);
+	--gray-400: hsl(30, 21%, 64%);
+	--gray-300: hsl(30, 21%, 74%);
+	--gray-200: hsl(30, 21%, 84%);
+	--gray-100: hsl(30, 21%, 94%);
+	
 
 	--app-background: #fcf6ee;
+
 
 	--main-100: hsl(52.1, 92.2%, 89.8%);
 	--main-200: hsl(52.1, 92.2%, 79.8%);
