@@ -238,7 +238,7 @@ h1 {
 
 h2 {
 	font-size:var(--headline-font-size-2);
-	line-height: 20px;
+	line-height: 16px;
 }
 
 p {

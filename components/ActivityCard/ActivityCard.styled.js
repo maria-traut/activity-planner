@@ -14,8 +14,6 @@ export const StyledLink = styled(Link)`
 export const StyledFigure = styled.figure`
     width: 100%;
     margin: 0;
-    height: 100%;
-    /* background-color: var(--main-200); */
 `;
 
 export const StyledCardImageWrapper = styled.div`
@@ -49,7 +47,6 @@ export const StyledActivityHeadline = styled.h2`
 export const StyledCategoryList = styled.ul`
     list-style: none;
     display: flex;
-    justify-content: flex-start;
 
     padding: 0;
     flex-wrap: wrap;
