@@ -8,6 +8,7 @@ import ActivityForm from "@/components/ActivityForm";
 import ActivityList from "@/components/ActivityList";
 import ActivityFilter from "@/components/ActivityFilter";
 import ActivitySort from "@/components/ActivitySort";
+import BackToTopButton from "@/components/BackToTopButton";
 import showToast from "@/components/Toast";
 
 import {
@@ -309,6 +310,7 @@ export default function HomePage({
                     handleBookmarkToggle={handleBookmarkToggle}
                     bookmarkedActivityIds={bookmarkedActivityIds}
                 />
+                <BackToTopButton />
             </main>
         </>
     );
