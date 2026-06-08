@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import NewBeeIcon from "../BeeIcon/newbee";
-import { KeyframesFadeOut } from "../Global/Global.styled";
+import NewBeeIcon from "@/components/icons/BeeIcon/newbee";
+import { KeyframesFadeOut } from "@/components/Global/Global.styled";
 
 export const StyledSplashContainer = styled.div`
     display: flex;
