@@ -1,11 +1,6 @@
 import useSWR from "swr";
 import { getCountries } from "@/lib/countries";
-import {
-    StyledToolbar,
-    StyledButton,
-    StyledStatusMessageError,
-    StyledStatusMessageSuccess,
-} from "../Global/Global.styled";
+import { StyledToolbar, StyledButton } from "../Global/Global.styled";
 import {
     StyledFormFlex,
     StyledFormSection,
@@ -14,8 +9,26 @@ import {
     StyledCheckboxAndLabelWrap,
 } from "./ActivityForm.styled";
 import { handleImageUrlValidation } from "@/lib/imageUrlValidation";
+import showToast from "../Toast";
+import { useEffect } from "react";
 
-export default function ActivityForm({ onSubmit, status, heading, ...props }) {
+export default function ActivityForm({
+    onSubmit,
+    status,
+    heading,
+    setStatus,
+    ...props
+}) {
+    useEffect(() => {
+        if (status.type === "error") {
+            showToast(status.message, "danger");
+            setStatus({
+                type: "",
+                message: "",
+            });
+        }
+    }, [status.type, status.message, setStatus]);
+
     const {
         activity,
         isEditActivityMode,
@@ -191,31 +204,7 @@ export default function ActivityForm({ onSubmit, status, heading, ...props }) {
                                     Cancel
                                 </StyledButton>
                             )}
-                            {status.type === "error" && (
-                                <StyledStatusMessageError>
-                                    Error
-                                </StyledStatusMessageError>
-                            )}
-                            {status.type === "success" && (
-                                <StyledStatusMessageSuccess>
-                                    Success
-                                </StyledStatusMessageSuccess>
-                            )}
                         </StyledToolbar>
-                        {status.type !== "" && (
-                            <StyledFormSection>
-                                {status.type === "error" && (
-                                    <StyledStatusMessageError>
-                                        {status.message}
-                                    </StyledStatusMessageError>
-                                )}
-                                {status.type === "success" && (
-                                    <StyledStatusMessageSuccess>
-                                        {status.message}
-                                    </StyledStatusMessageSuccess>
-                                )}
-                            </StyledFormSection>
-                        )}
                     </StyledFormFlex>
                 </StyledFormFieldset>
             </form>
