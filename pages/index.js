@@ -8,6 +8,7 @@ import ActivityForm from "@/components/ActivityForm";
 import ActivityList from "@/components/ActivityList";
 import ActivityFilter from "@/components/ActivityFilter";
 import ActivitySort from "@/components/ActivitySort";
+import showToast from "@/components/Toast";
 
 import {
     StyledButtonWithIcon,
@@ -26,7 +27,7 @@ import {
 } from "@/lib/activitySort";
 
 export default function HomePage({
-    handleNavbarLocation,
+    onNavbarLocation,
     handleBookmarkToggle,
     bookmarkedActivityIds,
     isCreateActivityMode,
@@ -43,6 +44,7 @@ export default function HomePage({
         country: activityFilterConfiguration?.country.join(","),
     }).toString();
 
+    onNavbarLocation("/");
     const {
         data: activities,
         isLoading: activitiesLoading,
@@ -69,17 +71,21 @@ export default function HomePage({
     const [isActivitySorted, setIsActivitySorted] = useState(false);
 
     useEffect(() => {
-        const successMessageTimer = setTimeout(() => {
+        const formClosingTimer = setTimeout(() => {
             if (activityFormStatus.type === "success") {
+                showToast(activityFormStatus.message);
                 setActivityFormStatus({
                     type: "",
                     message: "",
                 });
                 setIsCreateActivityMode(false);
+            } else if (activityFormStatus.type === "error") {
+                showToast(activityFormStatus.message, "error");
+                setActivityFormStatus({ type: "", message: "" });
             }
-        }, 3000);
+        }, 500);
 
-        return () => clearTimeout(successMessageTimer);
+        return () => clearTimeout(formClosingTimer);
     }, [activityFormStatus]);
 
     function handleActivityFilterApply(event) {
@@ -143,32 +149,40 @@ export default function HomePage({
             categories: formData.getAll("categories"),
         };
 
-        const response = await fetch(`/api/activities`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(activityData),
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            if (addToBookmarks && data?._id) {
-                handleBookmarkToggle(data._id);
-            }
-
-            activitiesMutate();
-            event.target.reset();
-            setActivityFormStatus({
-                type: "success",
-                message: data?.status,
+        try {
+            const response = await fetch(`/api/activities`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(activityData),
             });
-        } else {
+
+            const data = await response.json();
+
+            if (response.ok) {
+                if (addToBookmarks && data?._id) {
+                    handleBookmarkToggle(data._id);
+                }
+
+                activitiesMutate();
+                event.target.reset();
+                setActivityFormStatus({
+                    type: "success",
+                    message: data?.status,
+                });
+            } else {
+                setActivityFormStatus({
+                    type: "error",
+                    message:
+                        data?.status ||
+                        "The form submission has failed, please try again.",
+                });
+            }
+        } catch {
             setActivityFormStatus({
                 type: "error",
-                message:
-                    data?.status || "Form could not be sent. Please try again.",
+                message: "Something went wrong. Please try again.",
             });
         }
     }
@@ -266,6 +280,7 @@ export default function HomePage({
                         status={activityFormStatus}
                         heading="Create Activity"
                         submitLabel="Create"
+                        setStatus={setActivityFormStatus}
                         isCreateActivityMode={isCreateActivityMode}
                         setIsCreateActivityMode={setIsCreateActivityMode}
                     />
@@ -292,7 +307,7 @@ export default function HomePage({
                 <ActivityList
                     activities={sortedActivities}
                     isActivityFiltered={isActivityFiltered}
-                    handleNavbarLocation={handleNavbarLocation}
+                    handleNavbarLocation={onNavbarLocation}
                     handleBookmarkToggle={handleBookmarkToggle}
                     bookmarkedActivityIds={bookmarkedActivityIds}
                 />

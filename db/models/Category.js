@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const categorySchema = new Schema({
     name: { type: String, required: true },
     color: { type: String, required: true },
-    abbreviation: { type: String, required: true },
+    abbreviation: { type: String, required: true, minlength: 4 },
 });
 
 const Category =

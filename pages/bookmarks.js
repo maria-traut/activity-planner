@@ -27,8 +27,10 @@ import {
 export default function Bookmarks({
     handleBookmarkToggle,
     bookmarkedActivityIds,
-    handleNavbarLocation,
+    onNavbarLocation,
 }) {
+    onNavbarLocation("/bookmarks");
+
     const [activityFilterConfiguration, setActivityFilterConfiguration] =
         useState(defaultActivityFilterConfiguration);
 
@@ -224,7 +226,7 @@ export default function Bookmarks({
                     isActivityFiltered={isActivityFiltered}
                     handleBookmarkToggle={handleBookmarkToggle}
                     bookmarkedActivityIds={bookmarkedActivityIds}
-                    handleNavbarLocation={handleNavbarLocation}
+                    handleNavbarLocation={onNavbarLocation}
                 />
             </main>
         </>
