@@ -16,9 +16,27 @@ export default function ActivityForm({
     onSubmit,
     status,
     heading,
+    submitLabel,
     setStatus,
     ...props
 }) {
+    const {
+        activity,
+        isEditActivityMode,
+        setIsEditActivityMode,
+        isCreateActivityMode,
+        setIsCreateActivityMode,
+    } = props;
+
+    const {
+        data: categories,
+        isLoading: categoriesLoading,
+        error: categoriesError,
+    } = useSWR("/api/categories");
+
+    const isLoading = categoriesLoading;
+    const hasError = categoriesError;
+
     useEffect(() => {
         if (status.type === "error") {
             showToast(status.message, "danger");
@@ -29,34 +47,29 @@ export default function ActivityForm({
         }
     }, [status.type, status.message, setStatus]);
 
-    const {
-        activity,
-        isEditActivityMode,
-        setIsEditActivityMode,
-        isCreateActivityMode,
-        setIsCreateActivityMode,
-    } = props;
-    const { data: categories, isLoading, error } = useSWR("/api/categories");
-
     if (isLoading) {
         return (
-            <form>
-                <StyledFormFieldset>
-                    <legend>{heading}</legend>
-                    <p>Loading categories...</p>
-                </StyledFormFieldset>
-            </form>
+            <StyledFormWrap>
+                <form>
+                    <StyledFormFieldset>
+                        <legend>{heading}</legend>
+                        <p>Loading categories...</p>
+                    </StyledFormFieldset>
+                </form>
+            </StyledFormWrap>
         );
     }
 
-    if (!categories || error) {
+    if (hasError) {
         return (
-            <form>
-                <StyledFormFieldset>
-                    <legend>{heading}</legend>
-                    <p>An error occured while fetching categories.</p>
-                </StyledFormFieldset>
-            </form>
+            <StyledFormWrap>
+                <form>
+                    <StyledFormFieldset>
+                        <legend>{heading}</legend>
+                        <p>An error occured while fetching categories.</p>
+                    </StyledFormFieldset>
+                </form>
+            </StyledFormWrap>
         );
     }
 
@@ -184,12 +197,12 @@ export default function ActivityForm({
                                 </label>
                             </StyledCheckboxAndLabelWrap>
                         )}
-                        <StyledToolbar $isLast>
+                        <StyledToolbar $isLast $alignRight>
                             <StyledButton
                                 type="submit"
                                 disabled={status.type === "success"}
                             >
-                                Submit
+                                {submitLabel}
                             </StyledButton>
                             {(isCreateActivityMode || isEditActivityMode) && (
                                 <StyledButton

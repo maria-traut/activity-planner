@@ -12,22 +12,13 @@ export const KeyframesFadeOut = keyframes`
 `;
 
 export const StyledToolbarWrap = styled.section`
-    padding: 0 var(--eight-grid__s);
-    background-color: var(--main-400);
-    border-bottom: solid;
-    border-width: 1px;
-    border-color: var(--main-600);
-
-    position: sticky;
-    top: 50px;
-    width: 100%;
-    z-index: 5;
+    padding: 0 var(--spacing-normal);
 `;
 
 export const StyledToolbar = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: ${({ $alignRight }) => ($alignRight ? "right" : "left")};
     flex-wrap: wrap;
     gap: var(--eight-grid__normal);
     align-items: center;
@@ -38,7 +29,12 @@ export const StyledButton = styled.button`
     border-radius: var(--border-radius-normal);
     border: var(--border-small);
     padding: var(--eight-grid__s) var(--eight-grid__normal);
-    background-color: var(--gray-100);
+    background-color: ${({ $isOpen, $isActive, $categoryColor }) =>
+        $isOpen
+            ? "lightgray"
+            : $isActive
+              ? "lightgoldenrodyellow"
+              : $categoryColor || "var(--gray-100)"};
 
     &:hover {
         background-color: var(--gray-200);
@@ -116,6 +112,51 @@ export const StyledButtonGreen = styled(StyledButton)`
         &:hover {
             background-color: var(--accent-success-800);
         }
+    }
+`;
+
+export const StyledButtonWithIcon = styled(StyledButton)`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+
+    gap: 0;
+    aspect-ratio: 1 / 1;
+    padding: var(--eight-grid__s);
+
+    @media only screen and (min-width: 600px) {
+        gap: var(--spacing-small);
+        aspect-ratio: auto;
+        padding: var(--eight-grid__s) var(--eight-grid__normal);
+    }
+`;
+
+export const StyledButtonWithIconText = styled.div`
+    display: none;
+
+    @media only screen and (min-width: 600px) {
+        display: block;
+    }
+`;
+
+export const StyledButtonWithIconIcon = styled.span`
+    height: var(--text-line-height);
+    display: flex;
+    align-items: center;
+
+    img {
+        height: 100%;
+        width: auto;
+
+        @media only screen and (min-width: 600px) {
+            height: 1em;
+        }
+    }
+    span {
+        font-size: var(--text-font-size-normal);
+        line-height: 1.5em;
+        width: auto;
     }
 `;
 

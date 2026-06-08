@@ -6,7 +6,7 @@ export const StyledHeader = styled.header`
     align-items: center;
     gap: 1rem;
     background-color: var(--main-400);
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     width: 100%;

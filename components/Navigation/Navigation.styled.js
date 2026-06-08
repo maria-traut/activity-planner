@@ -16,6 +16,11 @@ export const StyledNavbarContainer = styled.nav`
     bottom: 0;
     position: fixed;
     z-index: 3;
+
+    pointer-events: none;
+    > * {
+        pointer-events: auto;
+    }
 `;
 
 export const StyledBookmarkLink = styled(Link)`
@@ -35,6 +40,8 @@ export const StyledBookmarkLink = styled(Link)`
 
     text-decoration: none;
     font-weight: bold;
+
+    overflow: hidden;
 `;
 
 export const StyledHomeLink = styled(Link)`
@@ -56,6 +63,28 @@ export const StyledHomeLink = styled(Link)`
 
     text-decoration: none;
     font-weight: bold;
+`;
+
+export const StyledMapLink = styled(Link)`
+    width: 72px;
+    height: 64px;
+    text-transform: uppercase;
+    color: var(--main-900);
+
+    background-color: var(--gray-100);
+    border: 1px solid black;
+    border-radius: 10px;
+
+    grid-column: 1;
+    grid-row: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 2rem;
 `;
 
 export const StyledNavbarEmpty = styled.div`

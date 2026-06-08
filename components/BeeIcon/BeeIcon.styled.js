@@ -30,15 +30,15 @@ export const StyledSVG = styled.svg`
     stroke-linejoin: round;
     stroke-miterlimit: 2;
 
-    transform: rotate(${(props) => props.rotation}deg);
+    transform: rotate(${(props) => props.$rotation}deg);
     transform-origin: center;
 
     .wingsOpen {
-        opacity: ${(props) => (props.isFavorite ? 1 : 0)};
+        opacity: ${(props) => (props.$isFavorite ? 1 : 0)};
     }
 
     .wingsClosed {
-        opacity: ${(props) => (props.isFavorite ? 0 : 1)};
+        opacity: ${(props) => (props.$isFavorite ? 0 : 1)};
     }
 
     @media (prefers-reduced-motion: no-preference) {

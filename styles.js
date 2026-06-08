@@ -8,85 +8,7 @@ const fauna = Fauna_One({ subsets: ["latin"], weight: "400" });
 export default createGlobalStyle`
 
 /** CSS Reset https://piccalil.li/blog/a-more-modern-css-reset/ */
-
-/* Box sizing rules */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-/*Places main under the header and over the navbar*/
-main{
-	margin-top: 18px;
-	margin-bottom: 50px;
-}
-/* Prevent font size inflation */
-html {
-  -moz-text-size-adjust: none;
-  -webkit-text-size-adjust: none;
-  text-size-adjust: none;
-}
-
-/* Remove default margin in favour of better control in authored CSS */
-body, h1, h2, h3, h4, p,
-figure, blockquote, dl, dd {
-  margin-block-end: 0;
-}
-
-/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
-ul[role='list'],
-ol[role='list'] {
-  list-style: none;
-}
-
-/* Set core body defaults */
-body {
-  min-height: 100vh;
-  line-height: 1.5;
-}
-
-/* Set shorter line heights on headings and interactive elements */
-h1, h2, h3, h4,
-button, input, label {
-  line-height: 1.1;
-}
-
-/* Balance text wrapping on headings */
-h1, h2,
-h3, h4 {
-  text-wrap: balance;
-}
-
-/* A elements that don't have a class get default styles */
-a:not([class]) {
-  text-decoration-skip-ink: auto;
-  color: currentColor;
-}
-
-/* Make images easier to work with */
-img,
-picture {
-  max-width: 100%;
-  display: block;
-}
-
-/* Inherit fonts for inputs and buttons */
-input, button,
-textarea, select {
-  font-family: inherit;
-  font-size: inherit;
-}
-
-/* Make sure textareas without a rows attribute are not tiny */
-textarea:not([rows]) {
-  min-height: 10em;
-}
-
-/* Anything that has been anchored to should have extra scroll margin */
-:target {
-  scroll-margin-block: 5ex;
-}
-
+*,::after,::before{box-sizing:border-box}html{-moz-text-size-adjust:none;-webkit-text-size-adjust:none;text-size-adjust:none}blockquote,body,dd,dl,figure,h1,h2,h3,h4,p{margin-block-end:0}ol[role=list],ul[role=list]{list-style:none}body{min-height:100vh;line-height:1.5}button,h1,h2,h3,h4,input,label{line-height:1.1}h1,h2,h3,h4{text-wrap:balance}a:not([class]){text-decoration-skip-ink:auto;color:currentColor}img,picture{max-width:100%;display:block}button,input,select,textarea{font-family:inherit;font-size:inherit}textarea:not([rows]){min-height:10em}:target{scroll-margin-block:5ex}
 /** end of CSS Reset */
 
 
@@ -133,9 +55,11 @@ textarea:not([rows]) {
 	--bookmark-button-color1:hsl(208, 100%, 95%);
 	--bookmark-button-color2:hsl(208, 100%, 85%);
 
+	font-size:14px;
+
 	--text-font-family: ${inter.style.fontFamily};
-	--text-font-size-normal:16px;
-	--text-font-size-small:13px;
+	--text-font-size-normal:1rem;
+	--text-font-size-small:10px;
 	--text-font-size-xsmall: 10px; /* for tags */
 	--text-line-height:1.5em;
 
@@ -143,7 +67,7 @@ textarea:not([rows]) {
 	--headline-font-size-1:1.75rem;
 	--headline-font-size-2:1.25rem;
 	--headline-line-height:1.3em;
-	--headline-letter-spacing:0.04em;
+	--headline-letter-spacing:0.02em;
 
 	--accent-font-family: ${fauna.style.fontFamily};
 
@@ -277,6 +201,11 @@ input[type="text"], input[type="password"], input[type="url"], textarea {
 
 
     background-color: var(--gray-200);
+
+	&:focus,
+	&:hover {
+    	background-color: var(--gray-300);
+	}
 }
 
 textarea {
