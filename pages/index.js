@@ -300,8 +300,6 @@ export default function HomePage({
                         onActivitySortApply={handleActivitySortApply}
                         onActivitySortReset={handleActivitySortReset}
                         activitySortConfiguration={activitySortConfiguration}
-                        isActivitySortOpen={isActivitySortOpen}
-                        setIsActivitySortOpen={setIsActivitySortOpen}
                     />
                 )}
                 <ActivityList
