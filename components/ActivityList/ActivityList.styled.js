@@ -6,7 +6,9 @@ export const StyledActivityList = styled.ul`
     gap: var(--eight-grid__normal);
     padding: var(--eight-grid__normal);
     margin: 0;
-
+    & li {
+        height: round(up, auto, 16px);
+    }
     grid-template-columns: repeat(2, 1fr);
     @media (min-width: 768px) {
         grid-template-columns: repeat(3, 1fr);
