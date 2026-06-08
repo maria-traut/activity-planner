@@ -13,14 +13,14 @@ export default function ActivityMap({ activities, onNavbarLocation }) {
     const [coords, setCoords] = useState("");
 
     const customIcon = L.icon({
-        iconUrl: "/Activibeepin_6-6-2026.svg",
+        iconUrl: "/icons/activibeePin.svg",
         iconSize: [40, 40],
         iconAnchor: [20, 40],
     });
 
     const createClusterCustomIcon = (cluster) => {
         return L.divIcon({
-            html: `<img src="/Activibeepin_6-6-2026.svg" width="40" height="40" /><span>${cluster.getChildCount()}</span>`,
+            html: `<img src="/icons/activibeePin.svg" width="40" height="40" /><span>${cluster.getChildCount()}</span>`,
             className: "custom-marker-cluster",
             iconSize: L.point(60, 40),
         });
