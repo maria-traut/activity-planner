@@ -11,7 +11,8 @@ import ActivitySort from "@/components/ActivitySort";
 
 import {
     StyledButtonWithIcon,
-    StyledButtonIcon,
+    StyledButtonWithIconIcon,
+    StyledButtonWithIconText,
     StyledStatusMessageWrap,
     StyledToolbar,
     StyledStatusMessage,
@@ -226,11 +227,13 @@ export default function HomePage({
                             scrollToTop();
                         }}
                     >
-                        <StyledButtonIcon>
-                            <img src="/filter.svg" alt="" />
-                        </StyledButtonIcon>
-                        Filter
-                        {isActivityFiltered && <> ({activities.length})</>}
+                        <StyledButtonWithIconIcon>
+                            <img src="/icons/filter.svg" alt="" />
+                        </StyledButtonWithIconIcon>
+                        <StyledButtonWithIconText>
+                            Filter
+                            {isActivityFiltered && <> ({activities.length})</>}
+                        </StyledButtonWithIconText>
                     </StyledButtonWithIcon>
                     <StyledButtonWithIcon
                         type="button"
@@ -243,10 +246,16 @@ export default function HomePage({
                             scrollToTop();
                         }}
                     >
-                        <StyledButtonIcon>&#8645;</StyledButtonIcon>
-                        {isActivitySorted
-                            ? getActivitySortLabel(activitySortConfiguration)
-                            : "Sort"}
+                        <StyledButtonWithIconIcon>
+                            <img src="/icons/sort.svg" alt="" />
+                        </StyledButtonWithIconIcon>
+                        <StyledButtonWithIconText>
+                            {isActivitySorted
+                                ? getActivitySortLabel(
+                                      activitySortConfiguration
+                                  )
+                                : "Sort"}
+                        </StyledButtonWithIconText>
                     </StyledButtonWithIcon>
                 </StyledToolbar>
             </Header>

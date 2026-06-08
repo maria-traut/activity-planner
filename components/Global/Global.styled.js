@@ -116,13 +116,44 @@ export const StyledButtonGreen = styled(StyledButton)`
 export const StyledButtonWithIcon = styled(StyledButton)`
     display: flex;
     flex-direction: row;
-    gap: var(--spacing-small);
     align-items: center;
+    flex-wrap: nowrap;
+
+    gap: 0;
+    aspect-ratio: 1 / 1;
+    padding: var(--eight-grid__s);
+
+    @media only screen and (min-width: 600px) {
+        gap: var(--spacing-small);
+        aspect-ratio: auto;
+        padding: var(--eight-grid__s) var(--eight-grid__normal);
+    }
 `;
 
-export const StyledButtonIcon = styled.span`
+export const StyledButtonWithIconText = styled.div`
+    display: none;
+
+    @media only screen and (min-width: 600px) {
+        display: block;
+    }
+`;
+
+export const StyledButtonWithIconIcon = styled.span`
+    height: var(--text-line-height);
+    display: flex;
+    align-items: center;
+
     img {
-        height: 1rem;
+        height: 100%;
+        width: auto;
+
+        @media only screen and (min-width: 600px) {
+            height: 1em;
+        }
+    }
+    span {
+        font-size: var(--text-font-size-normal);
+        line-height: 1.5em;
         width: auto;
     }
 `;
