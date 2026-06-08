@@ -6,8 +6,9 @@ import {
     StyledNavbarEmpty,
     StyledAddActivityButton,
 } from "./Navigation.styled";
-import NewBeeIcon from "../BeeIcon/newbee";
 import { scrollToTop } from "../Global";
+import BookmarkIcon from "../BookmarkIcon";
+import MapIcon from "../MapIcon";
 
 export default function Navbar({
     navbarLocation,
@@ -40,8 +41,7 @@ export default function Navbar({
                 href="/bookmarks"
                 onClick={() => onNavbarLocation("/bookmarks")}
             >
-                <NewBeeIcon size="40" rotation="30" />
-                <NewBeeIcon size="30" rotation="-50" />
+                <BookmarkIcon />
             </StyledBookmarkLink>
 
             <StyledHomeLink
@@ -61,7 +61,7 @@ export default function Navbar({
                 href="/map"
                 onClick={() => onNavbarLocation("/map")}
             >
-                🌍
+                <MapIcon />
             </StyledMapLink>
         </StyledNavbarContainer>
     );
