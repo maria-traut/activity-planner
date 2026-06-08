@@ -16,6 +16,11 @@ export const StyledNavbarContainer = styled.nav`
     bottom: 0;
     position: fixed;
     z-index: 3;
+
+    pointer-events: none;
+    > * {
+        pointer-events: auto;
+    }
 `;
 
 export const StyledBookmarkLink = styled(Link)`
@@ -35,6 +40,8 @@ export const StyledBookmarkLink = styled(Link)`
 
     text-decoration: none;
     font-weight: bold;
+
+    overflow: hidden;
 `;
 
 export const StyledHomeLink = styled(Link)`

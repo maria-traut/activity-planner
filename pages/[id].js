@@ -10,6 +10,7 @@ import {
     StyledToolbar,
     StyledToolbarWrap,
     StyledStatusMessageWrap,
+    StyledStatusMessage,
 } from "@/components/Global/Global.styled";
 import Header from "@/components/Header";
 import showToast from "@/components/Toast";
@@ -26,10 +27,13 @@ export default function Activity({
 
     const {
         data: activity,
-        isLoading,
-        error,
-        mutate,
+        isLoading: activityLoading,
+        error: activityError,
+        mutate: activityMutate,
     } = useSWR(`/api/activities/${id}`);
+
+    const isLoading = activityLoading;
+    const hasError = activityError;
 
     const [isEditActivityMode, setIsEditActivityMode] = useState(false);
     const [isDeleteActivityMode, setIsDeleteActivityMode] = useState(false);
@@ -60,7 +64,7 @@ export default function Activity({
         return () => clearTimeout(formClosingTimer);
     }, [activityFormStatus]);
 
-    async function handleActivityEdit(event) {
+    async function handleActivityUpdate(event) {
         event.preventDefault();
 
         const formData = new FormData(event.target);
@@ -80,7 +84,7 @@ export default function Activity({
             const data = await response.json();
 
             if (response.ok) {
-                mutate();
+                activityMutate();
                 setActivityFormStatus({
                     type: "success",
                     message: data?.status,
@@ -145,31 +149,32 @@ export default function Activity({
         return (
             <>
                 <Head>
-                    <title>{activity?.title} | Activity Planner</title>
+                    <title>{activity?.title} | ActiviBee</title>
                 </Head>
                 <Header />
                 <main>
                     <StyledStatusMessageWrap>
-                        <p>Loading activity...</p>
+                        <StyledStatusMessage>
+                            Loading activity...
+                        </StyledStatusMessage>
                     </StyledStatusMessageWrap>
                 </main>
             </>
         );
     }
 
-    if (!activity || error) {
+    if (hasError) {
         return (
             <>
                 <Head>
-                    <title>{activity?.title} | Activity Planner</title>
+                    <title>{activity?.title} | ActiviBee</title>
                 </Head>
                 <Header />
                 <main>
                     <StyledStatusMessageWrap>
-                        <p>
-                            Sorry, we could not load this item. <br />
-                            Please try again later
-                        </p>
+                        <StyledStatusMessage>
+                            Activity could not be loaded.
+                        </StyledStatusMessage>
                     </StyledStatusMessageWrap>
                 </main>
             </>
@@ -179,12 +184,12 @@ export default function Activity({
     return (
         <>
             <Head>
-                <title>{activity?.title} | Activity Planner</title>
+                <title>{activity?.title} | ActiviBee</title>
             </Head>
             <Header title={activity.title} />
             <main>
                 <StyledToolbarWrap>
-                    <StyledToolbar>
+                    <StyledToolbar $alignRight>
                         {!isEditActivityMode && !isDeleteActivityMode && (
                             <StyledButton
                                 onClick={() => {
@@ -257,10 +262,11 @@ export default function Activity({
                 {isEditActivityMode && (
                     <ActivityForm
                         activity={activity}
-                        onSubmit={handleActivityEdit}
+                        onSubmit={handleActivityUpdate}
                         status={activityFormStatus}
                         setStatus={setActivityFormStatus}
                         heading="Edit Activity"
+                        submitLabel="Update"
                         setIsEditActivityMode={setIsEditActivityMode}
                         isEditActivityMode={isEditActivityMode}
                     />
