@@ -177,7 +177,7 @@ header {
 main {
 	display:flex;
 	flex-direction:column;
-	padding: var(--eight-grid__xl) 0;
+	padding: 0;
 
 	/* checkered background */ 
   	inset: 0;

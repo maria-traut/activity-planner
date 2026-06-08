@@ -45,7 +45,6 @@ export default function HomePage({
         country: activityFilterConfiguration?.country.join(","),
     }).toString();
 
-    onNavbarLocation("/");
     const {
         data: activities,
         isLoading: activitiesLoading,
@@ -70,7 +69,9 @@ export default function HomePage({
 
     const [isActivitySortOpen, setIsActivitySortOpen] = useState(false);
     const [isActivitySorted, setIsActivitySorted] = useState(false);
-
+    useEffect(() => {
+        onNavbarLocation(`/`);
+    });
     useEffect(() => {
         const formClosingTimer = setTimeout(() => {
             if (activityFormStatus.type === "success") {
