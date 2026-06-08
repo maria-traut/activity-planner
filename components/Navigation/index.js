@@ -6,7 +6,6 @@ import {
     StyledNavbarEmpty,
     StyledAddActivityButton,
 } from "./Navigation.styled";
-import NewBeeIcon from "../BeeIcon/newbee";
 import { scrollToTop } from "../Global";
 import BookmarkIcon from "../BookmarkIcon";
 import MapIcon from "../MapIcon";
