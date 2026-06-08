@@ -14,8 +14,6 @@ export const StyledLink = styled(Link)`
 export const StyledFigure = styled.figure`
     width: 100%;
     margin: 0;
-    height: 100%;
-    /* background-color: var(--main-200); */
 `;
 
 export const StyledCardImageWrapper = styled.div`
@@ -36,6 +34,7 @@ export const StyledFigcaption = styled.figcaption`
     gap: var(--eight-grid__halfstep);
 
     padding: var(--eight-grid__halfstep);
+    margin-bottom: var(--eight-grid__s);
 `;
 
 export const StyledActivityHeadline = styled.h2`
@@ -49,7 +48,6 @@ export const StyledActivityHeadline = styled.h2`
 export const StyledCategoryList = styled.ul`
     list-style: none;
     display: flex;
-    justify-content: flex-start;
 
     padding: 0;
     flex-wrap: wrap;
@@ -64,7 +62,7 @@ export const StyledCategoryTag = styled.li`
     background-color: ${({ $categoryColor }) =>
         $categoryColor || "var(--gray-200)"};
     border-radius: var(--border-radius-rounded);
-    padding: var(--eight-grid__halfstep) var(--eight-grid__s);
+    padding: 1px var(--eight-grid__s);
 
     @media (prefers-color-scheme: dark) {
         background-color: ${({ $categoryColor }) =>
