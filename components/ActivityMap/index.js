@@ -42,7 +42,6 @@ export default function ActivityMap({ activities, onNavbarLocation }) {
                 };
             }
             setCoords(results);
-            console.log("test", coords);
         }
         fetchCoords();
     }, [activities]);
