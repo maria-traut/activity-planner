@@ -13,11 +13,16 @@ export default async function handler(request, response) {
             const isCategoriesEveryChecked = categoriesEvery === "true";
 
             if (title) {
-                filter.title = { $regex: title, $options: "i" };
+                const escapedTitle = title.replace(
+                    /[.*+?^${}()|[\]\\]/g,
+                    "\\$&"
+                );
+                filter.title = { $regex: escapedTitle, $options: "i" };
             }
 
             if (area) {
-                filter.area = { $regex: area, $options: "i" };
+                const escapedArea = area.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+                filter.area = { $regex: escapedArea, $options: "i" };
             }
 
             if (country) {
@@ -64,11 +69,9 @@ export default async function handler(request, response) {
             });
         }
     } catch (error) {
-        return response
-            .status(500)
-            .json({
-                status: "The Activity could not have been created, please try again!",
-            });
+        return response.status(500).json({
+            status: "The Activity could not have been created, please try again!",
+        });
     }
 
     response.status(405).json({ status: "Method not allowed" });
