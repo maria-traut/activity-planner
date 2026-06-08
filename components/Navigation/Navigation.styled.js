@@ -65,6 +65,28 @@ export const StyledHomeLink = styled(Link)`
     font-weight: bold;
 `;
 
+export const StyledMapLink = styled(Link)`
+    width: 72px;
+    height: 64px;
+    text-transform: uppercase;
+    color: var(--main-900);
+
+    background-color: var(--gray-100);
+    border: 1px solid black;
+    border-radius: 10px;
+
+    grid-column: 1;
+    grid-row: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 2rem;
+`;
+
 export const StyledNavbarEmpty = styled.div`
     width: 72px;
     height: 64px;
