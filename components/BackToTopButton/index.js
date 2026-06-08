@@ -10,6 +10,7 @@ export default function BackToTopButton() {
             setIsVisible(window.scrollY > 300);
         }
         window.addEventListener("scroll", handleScroll);
+        handleScroll();
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
