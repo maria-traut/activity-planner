@@ -30,6 +30,7 @@ export default function ActivityMap({ activities, onNavbarLocation }) {
         async function fetchCoords() {
             const results = {};
             for (const activity of activities) {
+                if (!activity.country) continue;
                 const response = await fetch(
                     `https://restcountries.com/v3.1/alpha/${activity.country}`
                 );
@@ -41,6 +42,7 @@ export default function ActivityMap({ activities, onNavbarLocation }) {
                 };
             }
             setCoords(results);
+            console.log("test", coords);
         }
         fetchCoords();
     }, [activities]);
