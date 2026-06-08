@@ -227,7 +227,7 @@ button, input, label {
 
 h1, h2 {
 	font-family:var(--headline-font-family);
-	line-height:var(--headline-line-height);
+	line-height: 20px;
 	letter-spacing: var(--headline-letter-spacing);
 	word-break: break-word;
 }
@@ -238,6 +238,7 @@ h1 {
 
 h2 {
 	font-size:var(--headline-font-size-2);
+	line-height: 20px;
 }
 
 p {
@@ -256,8 +257,8 @@ main {
 
 	/* checkered background */ 
   	inset: 0;
-  	height: 100%;
-  	width: 100%;
+  	height: round(down, 100%, 16px);
+  	width: round(down, 100%, 16px);
   	background-image: linear-gradient(to right, #80808012 1px, transparent 1px),
     linear-gradient(to bottom, #80808012 1px, transparent 1px);
   	background-size: 16px 16px;
