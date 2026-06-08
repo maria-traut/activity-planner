@@ -1,7 +1,9 @@
 import { createGlobalStyle } from "styled-components";
 import { Inter } from "@next/font/google";
+import { Fauna_One } from "@next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
+const fauna = Fauna_One({ subsets: ["latin"], weight: "400" });
 
 export default createGlobalStyle`
 
@@ -67,6 +69,8 @@ export default createGlobalStyle`
 	--headline-line-height:1.3em;
 	--headline-letter-spacing:0.02em;
 
+	--accent-font-family: ${fauna.style.fontFamily};
+
 	--box-shadow-color:var(--gray-400);
 	--box-shadow-normal:0px 0px 5px 0px var(--box-shadow-color);
 	--box-shadow-large:0px 0px 10px 0px var(--box-shadow-color);
@@ -103,11 +107,12 @@ export default createGlobalStyle`
 	--border-small:var(--border-width-small) solid var(--border-color);
 	--border-normal:var(--border-width-normal) solid var(--border-color);
 
-	--card-image-height:150px;
+	--card-image-height:144px;
 	--detail-image-height:400px;
 
 	--detail-headline-background-color:#F5F5F5BB;
 	--detail-headline-box-shadow-large:0px 0px 10px 0px var(--detail-headline-background-color);
+	    
 }
 
 @media (prefers-color-scheme: dark) {
@@ -116,6 +121,7 @@ export default createGlobalStyle`
 		--box-shadow-color:var(--gray-600);
 		--border-color:var(--gray-100);
 		--detail-headline-background-color:#242424BB;
+		
 	}
 }
 
@@ -170,9 +176,15 @@ header {
 main {
 	display:flex;
 	flex-direction:column;
-	padding: var(--eight-grid__l) 0;
-	margin-top: 0;
-	margin-bottom: 50px;
+	padding: var(--eight-grid__xl) 0;
+
+	/* checkered background */ 
+  	inset: 0;
+  	height: 100%;
+  	width: 100%;
+  	background-image: linear-gradient(to right, #80808012 1px, transparent 1px),
+    linear-gradient(to bottom, #80808012 1px, transparent 1px);
+  	background-size: 16px 16px;
 }
 
 input[type="text"], input[type="password"], input[type="url"], textarea {

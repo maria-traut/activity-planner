@@ -12,7 +12,6 @@ import {
 export default function ActivityList({
     activities,
     isActivityFiltered,
-    handleNavbarLocation,
     handleBookmarkToggle,
     bookmarkedActivityIds,
     noActivitiesFoundMessage = "No activities found.",
@@ -47,7 +46,6 @@ export default function ActivityList({
                             title={activity.title}
                             categories={activity.categories}
                             id={activity._id}
-                            onNavbarLocation={handleNavbarLocation}
                         />
                         <BookmarkButton
                             onBookmarkToggle={handleBookmarkToggle}
