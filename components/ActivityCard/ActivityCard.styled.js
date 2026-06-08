@@ -15,12 +15,12 @@ export const StyledFigure = styled.figure`
     width: 100%;
     margin: 0;
     height: 100%;
-    background-color: var(--main-200);
+    /* background-color: var(--main-200); */
 `;
 
 export const StyledCardImageWrapper = styled.div`
     position: relative;
-    width: 100%;
+
     height: 160px; /*note: this still adheres to the 8pt grid system, keep in mind when adapting */
 `;
 
@@ -33,14 +33,16 @@ export const StyledFigcaption = styled.figcaption`
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-    gap: var(--eight-grid__s);
+    gap: var(--eight-grid__halfstep);
 
-    padding: var(--eight-grid__s);
+    padding: var(--eight-grid__halfstep);
 `;
 
 export const StyledActivityHeadline = styled.h2`
     text-align: left;
     margin: 0;
+    font-family: var(--accent-font-family);
+    font-weight: 500;
     font-size: var(--text-font-size-normal);
 `;
 
