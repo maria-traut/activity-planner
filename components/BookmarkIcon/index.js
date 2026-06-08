@@ -1,7 +1,7 @@
 export default function BookmarkIcon({
     size = 50,
-    bodyColor = "#ffcb1e",
-    outlineColor = "#000",
+    bodyColor = "var(--main-500)",
+    outlineColor = "var(--main-900)",
 }) {
     return (
         <svg
