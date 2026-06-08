@@ -70,4 +70,8 @@ export const StyledCategoryTag = styled.li`
         background-color: ${({ $categoryColor }) =>
             $categoryColor || "var(--gray-800)"};
     }
+    html.dark:not(.system) & {
+        background-color: ${({ $categoryColor }) =>
+            $categoryColor || "var(--gray-800)"};
+    }
 `;

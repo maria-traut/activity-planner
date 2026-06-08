@@ -9,18 +9,28 @@ import {
     StyledPopupLink,
 } from "./ActivityMap.styled";
 
-export default function ActivityMap({ activities, onNavbarLocation }) {
+export default function ActivityMap({
+    activities,
+    onNavbarLocation,
+    bookmarkedActivityIds,
+}) {
     const [coords, setCoords] = useState("");
 
-    const customIcon = L.icon({
-        iconUrl: "/icons/activibeePin.svg",
+    const activityPin = L.icon({
+        iconUrl: "/icons/activibee-pin.svg",
+        iconSize: [40, 40],
+        iconAnchor: [20, 40],
+    });
+
+    const bookmarkedActivityPin = L.icon({
+        iconUrl: "/icons/activibee-pin--bookmarked.svg",
         iconSize: [40, 40],
         iconAnchor: [20, 40],
     });
 
     const createClusterCustomIcon = (cluster) => {
         return L.divIcon({
-            html: `<img src="/icons/activibeePin.svg" width="40" height="40" /><span>${cluster.getChildCount()}</span>`,
+            html: `<img src="/icons/activibee-pin.svg" width="40" height="40" /><span>${cluster.getChildCount()}</span>`,
             className: "custom-marker-cluster",
             iconSize: L.point(60, 40),
         });
@@ -50,18 +60,27 @@ export default function ActivityMap({ activities, onNavbarLocation }) {
         <MapContainer
             center={[20, 0]}
             zoom={2}
-            style={{ height: "100vh", width: "100vw", zIndex: 1 }}
+            style={{ flexGrow: 1, height: "100%", width: "100vw", zIndex: 1 }}
         >
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <MarkerClusterGroup iconCreateFunction={createClusterCustomIcon}>
                 {activities.map((activity) => {
                     const position = coords[activity.country]?.latlng;
+
+                    const isBookmarked = bookmarkedActivityIds.includes(
+                        activity._id
+                    );
+
                     if (!activity.country || !position) return null;
                     return (
                         <Marker
                             key={activity._id}
                             position={position}
-                            icon={customIcon}
+                            icon={
+                                isBookmarked
+                                    ? bookmarkedActivityPin
+                                    : activityPin
+                            }
                         >
                             <Popup>
                                 <StyledPopupTitle>

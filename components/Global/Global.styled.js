@@ -12,7 +12,7 @@ export const KeyframesFadeOut = keyframes`
 `;
 
 export const StyledToolbarWrap = styled.section`
-    padding: 0 var(--spacing-normal);
+    padding: var(--spacing-normal);
 `;
 
 export const StyledToolbar = styled.div`
@@ -55,6 +55,16 @@ export const StyledButton = styled.button`
             color: var(--gray-700);
         }
     }
+    html.dark:not(.system) & {
+        &:hover {
+            background-color: var(--gray-800);
+        }
+
+        &:disabled {
+            border-color: var(--gray-700);
+            color: var(--gray-700);
+        }
+    }
 `;
 
 export const StyledButtonBlue = styled(StyledButton)`
@@ -66,6 +76,14 @@ export const StyledButtonBlue = styled(StyledButton)`
     }
 
     @media (prefers-color-scheme: dark) {
+        color: var(--accent-link-300);
+        border-color: var(--accent-link-300);
+
+        &:hover {
+            background-color: var(--accent-link-800);
+        }
+    }
+    html.dark:not(.system) & {
         color: var(--accent-link-300);
         border-color: var(--accent-link-300);
 
@@ -91,6 +109,14 @@ export const StyledButtonRed = styled(StyledButton)`
             background-color: var(--accent-error-800);
         }
     }
+    html.dark:not(.system) & {
+        color: var(--accent-error-300);
+        border-color: var(--accent-error-300);
+
+        &:hover {
+            background-color: var(--accent-error-800);
+        }
+    }
 `;
 
 export const StyledButtonGreen = styled(StyledButton)`
@@ -106,6 +132,14 @@ export const StyledButtonGreen = styled(StyledButton)`
     animation-delay: 2s;
 
     @media (prefers-color-scheme: dark) {
+        color: var(--accent-success-300);
+        border-color: var(--accent-success-300);
+
+        &:hover {
+            background-color: var(--accent-success-800);
+        }
+    }
+    html.dark:not(.system) & {
         color: var(--accent-success-300);
         border-color: var(--accent-success-300);
 

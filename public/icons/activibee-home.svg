@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg
+	width="100%"
+	height="100%"
+	viewBox="0 0 423 401"
+	version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" 
+	style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"
+>
+	<path
+		d="M211,6l167,98l-1,193l-168,96l-167,-98l1,-193l168,-96Z"
+		fill="#49494d"
+	/>
+	<path
+		id="EyeR"
+		d="M343,236c-9,30 -33,51 -60,50c-35,-1 -62,-35 -61,-77c1,-42 29,-75 64,-75c22,0 40,14 51,34c-5,-3 -11,-5 -17,-5c-21,-0 -38,18 -38,40c-0,22 16,41 37,41c9,0 18,-3 25,-10Z"
+		fill="#ebebeb"
+	/>
+	<path
+		id="EyelL"
+		d="M198,236c-9,30 -33,51 -60,50c-35,-1 -62,-35 -61,-77c1,-42 29,-75 64,-75c22,0 40,14 51,34c-5,-3 -11,-5 -17,-5c-21,-0 -38,18 -38,40c-0,22 16,41 37,41c9,0 18,-3 25,-10Z"
+		fill="#ebebeb"
+	/>
+</svg>
