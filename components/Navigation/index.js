@@ -9,6 +9,7 @@ import {
 import NewBeeIcon from "../BeeIcon/newbee";
 import { scrollToTop } from "../Global";
 import BookmarkIcon from "../BookmarkIcon";
+import MapIcon from "../MapIcon";
 
 export default function Navbar({
     navbarLocation,
@@ -61,7 +62,7 @@ export default function Navbar({
                 href="/map"
                 onClick={() => onNavbarLocation("/map")}
             >
-                🌍
+                <MapIcon />
             </StyledMapLink>
         </StyledNavbarContainer>
     );
