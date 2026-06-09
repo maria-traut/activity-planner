@@ -112,14 +112,9 @@ export default createGlobalStyle`
 
 	--detail-headline-background-color:#F5F5F5BB;
 	--detail-headline-box-shadow-large:0px 0px 10px 0px var(--detail-headline-background-color);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-		--box-shadow-color:var(--gray-600);
-		--border-color:var(--gray-100);
-		--detail-headline-background-color:#242424BB;
-  }
+
+    --map-tiles-filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
 }
 
 html.dark:not(.system) {
@@ -140,11 +135,7 @@ body {
 	color:var(--main-900);
 	background-color: var(--app-background);
 
-	@media (prefers-color-scheme: dark) {
-		color: var(--gray-100);
-		background-color: var(--gray-900);
-	}
-	html.dark:not(.system) & {
+	html.dark & {
 		color: var(--gray-100);
 		background-color: var(--gray-900);
 	}
@@ -246,16 +237,7 @@ select[multiple] {
 		background-color:var(--gray-300);
 	}
 
-	@media (prefers-color-scheme: dark) {
-		option:checked {
-			background-color:var(--gray-600);
-		}
-
-		option:not(:checked):hover {
-			background-color:var(--gray-700);
-		}
-	}
-	html.dark:not(.system) & {
+	html.dark & {
 		option:checked {
 			background-color:var(--gray-600);
 		}
@@ -274,10 +256,7 @@ option {
 
 
 input[type="text"], input[type="url"], input[type="password"], textarea, select, option {
-	@media (prefers-color-scheme: dark) {
-    	background-color: var(--gray-800);
-	}
-	html.dark:not(.system) & {
+	html.dark & {
     	background-color: var(--gray-800);
 	}
 }
@@ -305,5 +284,14 @@ button {
         cursor: not-allowed;
     }
 }
+
+
+
+.map-tiles {
+	html.dark & {
+		filter:var(--map-tiles-filter, none);
+	}
+}
+
 
 `;

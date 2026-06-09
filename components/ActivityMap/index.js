@@ -62,7 +62,10 @@ export default function ActivityMap({
             zoom={2}
             style={{ flexGrow: 1, height: "100%", width: "100vw", zIndex: 1 }}
         >
-            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+            <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                className="map-tiles"
+            />
             <MarkerClusterGroup iconCreateFunction={createClusterCustomIcon}>
                 {activities.map((activity) => {
                     const position = coords[activity.country]?.latlng;

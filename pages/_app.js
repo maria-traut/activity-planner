@@ -35,13 +35,25 @@ export default function App({ Component, pageProps }) {
         message: "",
     });
 
-    const [themeToggle, setThemeToggle] = useLocalStorageState("theme", {
+    const [theme, setTheme] = useLocalStorageState("theme", {
         defaultValue: "",
     });
 
-    const [theme, setTheme] = useLocalStorageState("theme", {
-        defaultValue: "system",
-    });
+    useEffect(() => {
+        if (theme === "") {
+            const prefersDark = window.matchMedia(
+                "(prefers-color-scheme: dark)"
+            ).matches;
+            if (prefersDark) {
+                setTheme("dark");
+            } else {
+                setTheme("light");
+            }
+        } else {
+            document.documentElement.classList.remove("dark", "light");
+            document.documentElement.classList.add(theme);
+        }
+    }, [theme]);
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -73,71 +85,6 @@ export default function App({ Component, pageProps }) {
         );
     }
 
-    useEffect(() => {
-        const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-
-        const applyTheme = () => {
-            const root = document.documentElement;
-
-            root.classList.remove("dark", "light", "system");
-
-            switch (theme) {
-                case "dark":
-                    root.classList.add("dark");
-                    break;
-
-                case "light":
-                    root.classList.add("light");
-                    break;
-
-                case "system":
-                    root.classList.add("system");
-
-                    // Optional: also add the resolved theme
-                    root.classList.add(mediaQuery.matches ? "dark" : "light");
-                    break;
-            }
-        };
-
-        applyTheme();
-
-        const handleChange = () => {
-            if (theme === "system") {
-                applyTheme();
-            }
-        };
-
-        mediaQuery.addEventListener("change", handleChange);
-
-        return () => {
-            mediaQuery.removeEventListener("change", handleChange);
-        };
-    }, [theme]);
-
-    function handleThemeToggle() {
-        console.log("handleThemeToggle");
-
-        const prefersDark = window.matchMedia(
-            "(prefers-color-scheme: dark)"
-        ).matches;
-
-        setTheme((currentTheme) => {
-            switch (currentTheme) {
-                case "dark":
-                    return prefersDark ? "light" : "system";
-
-                case "light":
-                    return prefersDark ? "system" : "dark";
-
-                case "system":
-                    return prefersDark ? "light" : "dark";
-
-                default:
-                    return "system";
-            }
-        });
-    }
-
     return (
         <>
             <Toaster
@@ -167,14 +114,13 @@ export default function App({ Component, pageProps }) {
                             activityFormStatus={activityFormStatus}
                             setActivityFormStatus={setActivityFormStatus}
                         />
-                        <NavigationBar onThemeToggle={handleThemeToggle} />
+                        <NavigationBar theme={theme} setTheme={setTheme} />
                     </StyledPageWrapper>
                 )}
             </SWRConfig>
         </>
     );
 }
-
 const StyledPageWrapper = styled.div`
     min-height: 100vh;
     display: flex;

@@ -19,8 +19,4 @@ export const StyledHeading = styled.h1`
     text-align: center;
     display: block;
     margin: 0;
-
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 `;
