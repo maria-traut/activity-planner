@@ -6,7 +6,6 @@ export const StyledBackToTopButton = styled(StyledButton)`
     bottom: 85px;
     right: 20px;
     z-index: 10; */
-
     font-size: 1.2rem;
     width: 45px;
     height: 45px;
