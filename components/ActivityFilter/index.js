@@ -7,8 +7,8 @@ import {
     StyledFormFlex,
     StyledFormSection,
     StyledFormWrap,
-} from "../ActivityForm/ActivityForm.styled";
-import { StyledButton, StyledToolbar } from "../Global/Global.styled";
+} from "@/components/ActivityForm/ActivityForm.styled";
+import { StyledButton, StyledToolbar } from "@/components/Global/Global.styled";
 import { activityFilterLabels } from "@/lib/activityFilter";
 
 export default function ActivityFilter({

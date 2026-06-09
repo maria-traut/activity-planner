@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
-import { StyledButton } from "../Global/Global.styled";
+import { StyledButton } from "@/components/Global/Global.styled";
 
 export const StyledNavbarContainer = styled.nav`
     width: 100%;

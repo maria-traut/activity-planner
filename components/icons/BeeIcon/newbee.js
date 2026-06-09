@@ -1,4 +1,5 @@
 import { StyledSVG } from "./BeeIcon.styled";
+
 export default function NewBeeIcon({
     className,
     size = 30,
