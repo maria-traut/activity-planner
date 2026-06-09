@@ -3,7 +3,7 @@ import { StyledButton } from "@/components/Global/Global.styled";
 
 export const StyledBackToTopButton = styled(StyledButton)`
     position: fixed;
-    bottom: 160px;
+    bottom: 85px;
     right: 20px;
     z-index: 10;
     font-size: 1.2rem;

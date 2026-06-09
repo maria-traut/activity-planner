@@ -1,9 +1,11 @@
 import { createGlobalStyle } from "styled-components";
 import { Inter } from "@next/font/google";
 import { Fauna_One } from "@next/font/google";
+import { Nunito } from "@next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 const fauna = Fauna_One({ subsets: ["latin"], weight: "400" });
+const nunito = Nunito({ subsets: ["latin"] });
 
 export default createGlobalStyle`
 
@@ -63,12 +65,16 @@ export default createGlobalStyle`
 
 	font-size:14px;
 
+	
+
 	--text-font-family: ${inter.style.fontFamily};
 	--text-font-size-normal:1rem;
 	--text-font-size-small:10px;
 	--text-font-size-xsmall: 10px; /* for tags */
 	--text-line-height:1.5em;
 
+
+	--headline-font-family-new: ${nunito.style.fontFamily};
 	--headline-font-family: ${inter.style.fontFamily};
 	--headline-font-size-1:1.75rem;
 	--headline-font-size-2:1.25rem;

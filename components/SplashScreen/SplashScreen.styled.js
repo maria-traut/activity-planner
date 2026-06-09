@@ -23,4 +23,6 @@ export const StyledBeeIcon = styled(NewBeeIcon)`
 
 export const StyledSplashText = styled.p`
     font-size: 2rem;
+    font-family: var(--headline-font-family-new);
+    font-weight: 850;
 `;
