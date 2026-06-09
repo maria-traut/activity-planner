@@ -18,6 +18,10 @@ export const StyledToast = styled.div`
             ? "var(--accent-error-300)"
             : "var(--accent-success-100)"};
 
+    html.dark & {
+        color: var(--gray-900);
+    }
+
     border-radius: var(--border-radius-small);
     border: var(--border-small);
     padding: var(--eight-grid__s) var(--eight-grid__normal);

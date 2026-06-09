@@ -15,22 +15,28 @@ export default createGlobalStyle`
 
 
 :root {
-	--gray-100: #F5F5F5;
-	--gray-200: #E6E6E6;
-	--gray-300: #D4D4D4;
-	--gray-400: #A3A3A3;
-	--gray-500: #737373;
-	--gray-600: #575757;
-	--gray-700: #444444;
-	--gray-800: #333333;
-	--gray-900: #242424;
+
+    --gray-900: hsl(30, 21%, 14%);
+	--gray-800: hsl(30, 21%, 24%);
+	--gray-700: hsl(30, 21%, 34%);
+	--gray-600: hsl(30, 21%, 44%);
+	--gray-500: hsl(30, 21%, 54%);
+	--gray-400: hsl(30, 21%, 64%);
+	--gray-300: hsl(30, 21%, 74%);
+	--gray-200: hsl(30, 21%, 84%);
+	--gray-100: hsl(30, 21%, 94%);
+	
 
 	--app-background: #fcf6ee;
+
+	--complimentary-yellow: #f5e28d;
+
+
 
 	--main-100: hsl(52.1, 92.2%, 89.8%);
 	--main-200: hsl(52.1, 92.2%, 79.8%);
 	--main-300: hsl(52.1, 92.2%, 69.8%);
-	--main-400: hsl(52.1, 92.2%, 59.8%); 
+	--main-400: hsl(52, 92%, 60%); 
 	--main-500: hsl(52.1, 92.2%, 49.8%);
 	--main-600: hsl(52.1, 92.2%, 39.8%);
 	--main-700: hsl(52.1, 92.2%, 29.8%);
@@ -118,17 +124,19 @@ export default createGlobalStyle`
 
 	--detail-headline-background-color:#F5F5F5BB;
 	--detail-headline-box-shadow-large:0px 0px 10px 0px var(--detail-headline-background-color);
-	    
+	
+	    --map-tiles-filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
+
 }
 
-@media (prefers-color-scheme: dark) {
-	:root {
+html.dark {
+	 
 
 		--box-shadow-color:var(--gray-600);
 		--border-color:var(--gray-100);
 		--detail-headline-background-color:#242424BB;
 		
-	}
+	
 }
 
 body {
@@ -143,7 +151,7 @@ body {
 	color:var(--main-900);
 	background-color: var(--app-background);
 
-	@media (prefers-color-scheme: dark) {
+	html.dark & {
 		color:var(--gray-100);
 		background-color:var(--gray-900);
 	}
@@ -168,7 +176,7 @@ h1 {
 
 h2 {
 	font-size:var(--headline-font-size-2);
-	line-height: var(--headline-line-height)
+	line-height: var(--headline-line-height);
 }
 
 p {
@@ -183,7 +191,9 @@ header {
 main {
 	display:flex;
 	flex-direction:column;
-	padding: var(--eight-grid__xl) 0;
+	padding: 0;
+	    flex-grow: 1;
+
 
 	/* checkered background */ 
   	inset: 0;
@@ -245,7 +255,7 @@ select[multiple] {
 		background-color:var(--gray-300);
 	}
 
-	@media (prefers-color-scheme: dark) {
+	html.dark & {
 		option:checked {
 			background-color:var(--gray-600);
 		}
@@ -264,7 +274,7 @@ option {
 
 
 input[type="text"], input[type="url"], input[type="password"], textarea, select, option {
-	@media (prefers-color-scheme: dark) {
+	html.dark & {
     background-color: var(--gray-800);
 	}
 }
@@ -292,5 +302,12 @@ button {
         cursor: not-allowed;
     }
 }
+
+.map-tiles {
+	html.dark & {
+		filter:var(--map-tiles-filter, none);
+	}
+}
+
 
 `;

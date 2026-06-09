@@ -1,5 +1,5 @@
 import { StyledBookmarkButton } from "./BookmarkButton.styled";
-import NewBeeIcon from "../BeeIcon/newbee";
+import NewBeeIcon from "@/components/icons/BeeIcon/newbee";
 import { useState } from "react";
 export default function BookmarkButton({
     onBookmarkToggle,

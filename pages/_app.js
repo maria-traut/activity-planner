@@ -1,11 +1,11 @@
 import { SWRConfig } from "swr";
-import GlobalStyle from "../styles";
+import GlobalStyle from "@/styles";
 import useLocalStorageState from "use-local-storage-state";
 import { useEffect, useState } from "react";
-import Navbar from "@/components/Navigation";
 import styled from "styled-components";
 import SplashScreen from "@/components/SplashScreen";
 import { Toaster } from "react-hot-toast";
+import NavigationBar from "@/components/NavigationBar";
 
 const fetcher = async (resource, init) => {
     const result = await fetch(resource, init);
@@ -34,6 +34,26 @@ export default function App({ Component, pageProps }) {
         type: "",
         message: "",
     });
+
+    const [theme, setTheme] = useLocalStorageState("theme", {
+        defaultValue: "",
+    });
+
+    useEffect(() => {
+        if (theme === "") {
+            const prefersDark = window.matchMedia(
+                "(prefers-color-scheme: dark)"
+            ).matches;
+            if (prefersDark) {
+                setTheme("dark");
+            } else {
+                setTheme("light");
+            }
+        } else {
+            document.documentElement.classList.remove("dark", "light");
+            document.documentElement.classList.add(theme);
+        }
+    }, [theme]);
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -64,6 +84,7 @@ export default function App({ Component, pageProps }) {
             prevBookmarkedActivityIds.filter((bookmarkId) => bookmarkId !== id)
         );
     }
+
     return (
         <>
             <Toaster
@@ -93,22 +114,18 @@ export default function App({ Component, pageProps }) {
                             activityFormStatus={activityFormStatus}
                             setActivityFormStatus={setActivityFormStatus}
                         />
-                        <Navbar
-                            onNavbarLocation={handleNavbarLocation}
-                            navbarLocation={navbarLocation}
-                            isCreateActivityMode={isCreateActivityMode}
-                            setIsCreateActivityMode={setIsCreateActivityMode}
-                            activityFormStatus={activityFormStatus}
-                            setActivityFormStatus={setActivityFormStatus}
-                        />
+                        <NavigationBar theme={theme} setTheme={setTheme} />
                     </StyledPageWrapper>
                 )}
             </SWRConfig>
         </>
     );
 }
-
 const StyledPageWrapper = styled.div`
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
     animation: fadeIn 0.5s ease forwards;
 
     @keyframes fadeIn {

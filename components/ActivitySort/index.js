@@ -6,7 +6,7 @@ import {
     StyledFormFieldset,
     StyledFormFlex,
     StyledFormFieldsetCleanedUp,
-} from "../ActivityForm/ActivityForm.styled";
+} from "@/components/ActivityForm/ActivityForm.styled";
 import { activitySortOptions } from "@/lib/activitySort";
 
 export default function ActivitySort({

@@ -11,7 +11,7 @@ const ActivityMap = dynamic(() => import("@/components/ActivityMap"), {
     ssr: false,
 });
 
-export default function Map({ handleNavbarLocation }) {
+export default function Map({ handleNavbarLocation, bookmarkedActivityIds }) {
     const { data: activities, isLoading, error } = useSWR("/api/activities");
 
     if (isLoading) {
@@ -57,6 +57,7 @@ export default function Map({ handleNavbarLocation }) {
             <main>
                 <ActivityMap
                     activities={activities}
+                    bookmarkedActivityIds={bookmarkedActivityIds}
                     onNavbarLocation={handleNavbarLocation}
                 />
             </main>
