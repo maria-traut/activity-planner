@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import NewBeeIcon from "../BeeIcon/newbee";
-import { KeyframesFadeOut } from "../Global/Global.styled";
+import NewBeeIcon from "@/components/icons/BeeIcon/newbee";
+import { KeyframesFadeOut } from "@/components/Global/Global.styled";
 
 export const StyledSplashContainer = styled.div`
     display: flex;
@@ -16,7 +16,7 @@ export const StyledSplashContainer = styled.div`
 export const StyledBeeIcon = styled(NewBeeIcon)`
     width: 150px;
     height: 150px;
-    @media (prefers-color-scheme: dark) {
+    html.dark & {
         filter: drop-shadow(0 0 8px #f8edcb);
     }
 `;

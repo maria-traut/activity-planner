@@ -5,7 +5,8 @@ export const StyledHeader = styled.header`
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    background-color: var(--main-400);
+
+    background-color: var(--complimentary-yellow);
     width: 100%;
     height: 60px;
     position: sticky;
@@ -25,6 +26,9 @@ export const StyledHeading = styled.h1`
     font-family: var(--headline-font-family-new);
     line-height: var(--headline-line-height);
     font-weight: 850;
+    html.dark & {
+        color: var(--gray-900);
+    }
 `;
 
 export const StyledStickyToolbar = styled.div`

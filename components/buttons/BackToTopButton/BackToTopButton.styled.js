@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { StyledButton } from "../Global/Global.styled";
+import { StyledButton } from "@/components/Global/Global.styled";
 
 export const StyledBackToTopButton = styled(StyledButton)`
     position: fixed;

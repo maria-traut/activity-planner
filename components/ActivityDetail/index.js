@@ -10,7 +10,7 @@ import {
     StyledActivityDetailDescriptionWrap,
     StyledTagElement,
 } from "./ActivityDetail.styled";
-import BookmarkButton from "../BookmarkButton";
+import BookmarkButton from "@/components/buttons/BookmarkButton";
 import { getCountryName } from "@/lib/countries";
 
 export default function ActivityDetail({

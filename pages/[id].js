@@ -23,7 +23,6 @@ export default function Activity({
 }) {
     const router = useRouter();
     const { id } = router.query;
-    onNavbarLocation(`/${id}`);
 
     const {
         data: activity,
@@ -40,6 +39,10 @@ export default function Activity({
     const [activityFormStatus, setActivityFormStatus] = useState({
         type: "",
         message: "",
+    });
+
+    useEffect(() => {
+        onNavbarLocation(`/${id}`);
     });
 
     useEffect(() => {
