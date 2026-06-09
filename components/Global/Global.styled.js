@@ -185,10 +185,3 @@ export const StyledStatusMessageSuccess = styled(StyledStatusMessage)`
 export const StyledStatusMessageError = styled(StyledStatusMessage)`
     color: var(--accent-error-500);
 `;
-
-export const StyledStickyToolbar = styled.div`
-    position: sticky;
-    top: 0;
-    z-index: 4;
-    background-color: var(--main-400);
-`;
