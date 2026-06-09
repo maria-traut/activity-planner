@@ -12,7 +12,7 @@ export const KeyframesFadeOut = keyframes`
 `;
 
 export const StyledToolbarWrap = styled.section`
-    padding: 0 var(--spacing-normal);
+    padding: var(--spacing-normal);
 `;
 
 export const StyledToolbar = styled.div`
@@ -44,8 +44,7 @@ export const StyledButton = styled.button`
         border-color: var(--gray-300);
         color: var(--gray-300);
     }
-
-    @media (prefers-color-scheme: dark) {
+    html.dark & {
         &:hover {
             background-color: var(--gray-800);
         }
@@ -65,7 +64,7 @@ export const StyledButtonBlue = styled(StyledButton)`
         background-color: var(--accent-link-100);
     }
 
-    @media (prefers-color-scheme: dark) {
+    html.dark & {
         color: var(--accent-link-300);
         border-color: var(--accent-link-300);
 
@@ -82,8 +81,7 @@ export const StyledButtonRed = styled(StyledButton)`
     &:hover {
         background-color: var(--accent-error-100);
     }
-
-    @media (prefers-color-scheme: dark) {
+    html.dark & {
         color: var(--accent-error-300);
         border-color: var(--accent-error-300);
 
@@ -105,7 +103,7 @@ export const StyledButtonGreen = styled(StyledButton)`
     animation: ${KeyframesFadeOut} 1s ease forwards;
     animation-delay: 2s;
 
-    @media (prefers-color-scheme: dark) {
+    html.dark & {
         color: var(--accent-success-300);
         border-color: var(--accent-success-300);
 

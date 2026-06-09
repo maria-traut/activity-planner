@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import { getCountries } from "@/lib/countries";
-import { StyledToolbar, StyledButton } from "../Global/Global.styled";
+import { StyledToolbar, StyledButton } from "@/components/Global/Global.styled";
 import {
     StyledFormFlex,
     StyledFormSection,
@@ -9,7 +9,7 @@ import {
     StyledCheckboxAndLabelWrap,
 } from "./ActivityForm.styled";
 import { handleImageUrlValidation } from "@/lib/imageUrlValidation";
-import showToast from "../Toast";
+import showToast from "@/components/Toast";
 import { useEffect } from "react";
 
 export default function ActivityForm({

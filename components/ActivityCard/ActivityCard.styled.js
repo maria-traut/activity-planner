@@ -64,7 +64,7 @@ export const StyledCategoryTag = styled.li`
     border-radius: var(--border-radius-rounded);
     padding: 1px var(--eight-grid__s);
 
-    @media (prefers-color-scheme: dark) {
+    html.dark & {
         background-color: ${({ $categoryColor }) =>
             $categoryColor || "var(--gray-800)"};
     }
