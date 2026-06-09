@@ -26,6 +26,9 @@ export const StyledHeading = styled.h1`
     font-family: var(--headline-font-family-new);
     line-height: var(--headline-line-height);
     font-weight: 850;
+    html.dark & {
+        color: var(--gray-900);
+    }
 `;
 
 export const StyledStickyToolbar = styled.div`
