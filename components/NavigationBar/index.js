@@ -5,6 +5,8 @@ import {
     StyledNavigationLink,
 } from "./NavigationBar.styled";
 
+import Image from "next/image";
+
 import HomeIcon from "@/components/icons/HomeIcon";
 import MapIcon from "@/components/icons/MapIcon";
 import BookmarkIcon from "@/components/icons/BookmarkIcon";
@@ -21,7 +23,7 @@ export default function NavigationBar({ theme, setTheme }) {
                         href="/"
                         aria-label="Home"
                     >
-                        <MapIcon />
+                        <HomeIcon />
                     </StyledNavigationLink>
                 </li>
                 <li>
@@ -51,9 +53,11 @@ export default function NavigationBar({ theme, setTheme }) {
                             )
                         }
                     >
-                        <img
+                        <Image
                             src="/icons/light-dark-switch.svg"
                             alt="switch between light and dark mode"
+                            width={30}
+                            height={30}
                         />
                     </StyledNavigationLink>
                 </li>

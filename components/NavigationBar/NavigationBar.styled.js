@@ -7,8 +7,8 @@ export const StyledNavigationBar = styled.nav`
     bottom: 0;
     left: 0px;
     width: 100%;
-    background: var(--main-400);
-    padding: var(--eight-grid__normal);
+    background: var(--complimentary-yellow);
+    padding: var(--eight-grid__s);
 `;
 
 export const StyledNavigation = styled.ul`
@@ -28,9 +28,8 @@ export const StyledNavigationLink = styled(Link)`
     display: block;
 
     padding: var(--eight-grid__s) var(--eight-grid__l);
-    background: var(--gray-100);
+
     border-radius: var(--border-radius-rounded);
-    border: var(--border-normal);
 
     background-color: ${({ $isActive }) =>
         $isActive ? "var(--gray-100)" : "transparent"};
@@ -41,7 +40,7 @@ export const StyledNavigationLink = styled(Link)`
 
     img,
     svg {
-        height: var(--text-line-height);
+        height: 32px;
         display: block;
     }
 `;
