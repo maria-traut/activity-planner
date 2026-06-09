@@ -67,9 +67,8 @@ export default createGlobalStyle`
 	--text-font-size-xsmall: 10px; /* for tags */
 	--text-line-height:1.5em;
 
-	// testing new font
-	--header-font-family: ${nunito.style.fontFamily};
 
+	--headline-font-family-new: ${nunito.style.fontFamily};
 	--headline-font-family: ${inter.style.fontFamily};
 	--headline-font-size-1:1.75rem;
 	--headline-font-size-2:1.25rem;
