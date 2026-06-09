@@ -213,3 +213,15 @@ export const StyledStatusMessageSuccess = styled(StyledStatusMessage)`
 export const StyledStatusMessageError = styled(StyledStatusMessage)`
     color: var(--accent-error-500);
 `;
+
+export const StyledTopAndCreateButtonContainer = styled.div`
+    position: fixed;
+    z-index: 50;
+    bottom: 80px;
+    right: var(--eight-grid__normal);
+    display: flex;
+    flex-direction: column;
+    /* justify-content: flex-start; */
+    align-items: flex-end;
+    gap: var(--eight-grid__s);
+`;

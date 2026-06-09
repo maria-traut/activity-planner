@@ -10,6 +10,7 @@ import ActivityFilter from "@/components/ActivityFilter";
 import ActivitySort from "@/components/ActivitySort";
 import BackToTopButton from "@/components/buttons/BackToTopButton";
 import showToast from "@/components/Toast";
+import CreateButton from "@/components/buttons/CreateButton";
 
 import {
     StyledButtonWithIcon,
@@ -18,6 +19,7 @@ import {
     StyledStatusMessageWrap,
     StyledToolbar,
     StyledStatusMessage,
+    StyledTopAndCreateButtonContainer,
 } from "@/components/Global/Global.styled";
 
 import { defaultActivityFilterConfiguration } from "@/lib/activityFilter";
@@ -29,6 +31,7 @@ import {
 
 export default function HomePage({
     onNavbarLocation,
+    navbarLocation,
     handleBookmarkToggle,
     bookmarkedActivityIds,
     isCreateActivityMode,
@@ -311,7 +314,15 @@ export default function HomePage({
                     handleBookmarkToggle={handleBookmarkToggle}
                     bookmarkedActivityIds={bookmarkedActivityIds}
                 />
-                <BackToTopButton />
+                <StyledTopAndCreateButtonContainer>
+                    <BackToTopButton />
+                    <CreateButton
+                        navbarLocation={navbarLocation}
+                        isCreateActivityMode={isCreateActivityMode}
+                        setIsCreateActivityMode={setIsCreateActivityMode}
+                        setActivityFormStatus={setActivityFormStatus}
+                    />
+                </StyledTopAndCreateButtonContainer>
             </main>
         </>
     );
