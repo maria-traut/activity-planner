@@ -5,7 +5,10 @@ import { Nunito } from "@next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 const fauna = Fauna_One({ subsets: ["latin"], weight: "400" });
-const nunito = Nunito({ subsets: ["latin"] });
+const nunito = Nunito({
+    subsets: ["latin"],
+    display: "swap",
+});
 
 export default createGlobalStyle`
 
