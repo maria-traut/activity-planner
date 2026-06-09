@@ -1,5 +1,5 @@
 export default function BookmarkIcon({
-    size = 50,
+    size = 30,
     bodyColor = "var(--main-500)",
     outlineColor = "var(--main-900)",
 }) {
