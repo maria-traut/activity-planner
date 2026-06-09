@@ -61,11 +61,7 @@ export const StyledTagElement = styled.li`
     background-color: ${({ $categoryColor }) =>
         $categoryColor || "var(--gray-200)"};
 
-    @media (prefers-color-scheme: dark) {
-        background-color: ${({ $categoryColor }) =>
-            $categoryColor || "var(--gray-800)"};
-    }
-    html.dark:not(.system) & {
+    html.dark & {
         background-color: ${({ $categoryColor }) =>
             $categoryColor || "var(--gray-800)"};
     }

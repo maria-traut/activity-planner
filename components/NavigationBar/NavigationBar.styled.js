@@ -23,6 +23,7 @@ export const StyledNavigation = styled.ul`
 
 export const StyledNavigationLink = styled(Link)`
     all: unset;
+    display: block;
     cursor: pointer;
     display: block;
 
@@ -38,7 +39,9 @@ export const StyledNavigationLink = styled(Link)`
         border-color: var(--main-900);
     }
 
-    img {
+    img,
+    svg {
         height: var(--text-line-height);
+        display: block;
     }
 `;
