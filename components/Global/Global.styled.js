@@ -45,6 +45,13 @@ export const StyledButton = styled.button`
         color: var(--gray-300);
     }
     html.dark & {
+        background-color: ${({ $isOpen, $isActive, $categoryColor }) =>
+            $isOpen
+                ? "var(--gray-200)"
+                : $isActive
+                  ? "var(--main-300)"
+                  : $categoryColor || "var(--gray-900)"};
+
         &:hover {
             background-color: var(--gray-800);
         }
@@ -128,6 +135,24 @@ export const StyledButtonWithIcon = styled(StyledButton)`
         aspect-ratio: auto;
         padding: var(--eight-grid__s) var(--eight-grid__normal);
     }
+    html.dark & {
+        color: var(--gray-100);
+        background-color: ${({ $isOpen, $isActive, $categoryColor }) =>
+            $isOpen
+                ? "var(--gray-200)"
+                : $isActive
+                  ? "var(--main-300)"
+                  : $categoryColor || "var(--gray-900)"};
+
+        &:hover {
+            background-color: var(--gray-800);
+        }
+
+        &:disabled {
+            border-color: var(--gray-700);
+            color: var(--gray-700);
+        }
+    }
 `;
 
 export const StyledButtonWithIconText = styled.div`
@@ -155,6 +180,11 @@ export const StyledButtonWithIconIcon = styled.span`
         font-size: var(--text-font-size-normal);
         line-height: 1.5em;
         width: auto;
+    }
+    html.dark & {
+        img {
+            filter: invert(1);
+        }
     }
 `;
 
