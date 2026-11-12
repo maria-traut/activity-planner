@@ -63,24 +63,6 @@ export const StyledButton = styled.button`
 	}
 `;
 
-export const StyledButtonBlue = styled(StyledButton)`
-	color: var(--accent-link-500);
-	border-color: var(--accent-link-500);
-
-	&:hover {
-		background-color: var(--accent-link-100);
-	}
-
-	html.dark & {
-		color: var(--accent-link-300);
-		border-color: var(--accent-link-300);
-
-		&:hover {
-			background-color: var(--accent-link-800);
-		}
-	}
-`;
-
 export const StyledButtonRed = styled(StyledButton)`
 	color: var(--accent-error-500);
 	border-color: var(--accent-error-500);
