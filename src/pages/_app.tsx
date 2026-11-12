@@ -53,7 +53,7 @@ export default function App({ Component, pageProps }: AppProps) {
 			document.documentElement.classList.remove("dark", "light");
 			document.documentElement.classList.add(theme);
 		}
-	}, [theme]);
+	}, [theme, setTheme]);
 
 	const [isLoading, setIsLoading] = useState(true);
 

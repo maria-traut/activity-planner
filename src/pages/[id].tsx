@@ -67,7 +67,7 @@ export default function Activity({
 		}, 500);
 
 		return () => clearTimeout(formClosingTimer);
-	}, [activityFormStatus]);
+	}, [activityFormStatus, isDeleteActivityMode, router]);
 
 	async function handleActivityUpdate(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();

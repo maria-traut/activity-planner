@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 import { scrollToTop } from "@/components/Global";
@@ -18,7 +19,7 @@ export default function BackToTopButton() {
 
 	return isVisible ? (
 		<StyledBackToTopButton type="button" aria-label="Scroll back to top" onClick={scrollToTop}>
-			<img src="/icons/arrow.svg" alt="" width={24} height={24} />
+			<Image src="/icons/arrow.svg" alt="" width={24} height={24} />
 		</StyledBackToTopButton>
 	) : null;
 }
