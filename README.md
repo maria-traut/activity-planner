@@ -2,21 +2,24 @@
 
 ### Local Development
 
-To work locally, please install the dependencies using `npm i` first.
+To work locally, please install the dependencies using `pnpm install` first.
 
-Run `npm run dev` to start a development server and open the displayed URL in a browser.
-
-Use `npm run test` to run the tests.
+Run `pnpm dev` to start a development server and open the displayed URL in a browser.
 
 ### Scripts
 
 You can use the following commands:
 
-- `npm run dev` to start a development server
-- `npm run build` to build the project
-- `npm run start` to start a production server
-- `npm run test` to run the tests
-- `npm run lint` to run the linter
+- `pnpm dev` to start a development server
+- `pnpm build` to build the project
+- `pnpm start` to start a production server
+- `pnpm lint` to run ESLint (`pnpm lint:fix` to fix what it can)
+- `pnpm format` to format all files with Prettier (`pnpm format:check` to only check)
+- `pnpm typecheck` to check the types with TypeScript
+- `pnpm test` to run the tests with Vitest
+- `pnpm check` to run lint, the format check and the type check
+- `pnpm sync` to switch to main, pull and install dependencies
+- `pnpm sync:branch` to merge main into the current branch (without committing) and install dependencies
 
 # Activity Planner
 

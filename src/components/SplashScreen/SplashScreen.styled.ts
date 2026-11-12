@@ -1,0 +1,29 @@
+import styled from "styled-components";
+
+import { KeyframesFadeOut } from "@/components/Global/Global.styled";
+import NewBeeIcon from "@/components/icons/BeeIcon/newbee";
+
+export const StyledSplashContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	opacity: 1;
+	animation: ${KeyframesFadeOut} 1s ease forwards;
+	animation-delay: 2s;
+`;
+
+export const StyledBeeIcon = styled(NewBeeIcon)`
+	width: 150px;
+	height: 150px;
+	html.dark & {
+		filter: drop-shadow(0 0 8px #f8edcb);
+	}
+`;
+
+export const StyledSplashText = styled.p`
+	font-size: 2rem;
+	font-family: var(--headline-font-family-new);
+	font-weight: 850;
+`;
