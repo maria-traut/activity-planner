@@ -14,7 +14,7 @@ export default async function handler(request, response) {
 			}
 			return response.status(200).json(activity);
 		}
-	} catch (error) {
+	} catch {
 		return response.status(500).json({
 			status: "Internal Server error. ",
 		});
@@ -40,7 +40,7 @@ export default async function handler(request, response) {
 				status: "The activity has been updated successfully!",
 			});
 		}
-	} catch (error) {
+	} catch {
 		return response.status(500).json({
 			status: "The activity could not have been updated, please try again! ",
 		});
@@ -52,7 +52,7 @@ export default async function handler(request, response) {
 				status: "The activity has been deleted successfully!",
 			});
 		}
-	} catch (error) {
+	} catch {
 		return response.status(500).json({
 			status: "The activity could not have been deleted, please try again! ",
 		});

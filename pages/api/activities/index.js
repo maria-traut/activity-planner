@@ -62,7 +62,7 @@ export default async function handler(request, response) {
 				_id: createdActivity._id,
 			});
 		}
-	} catch (error) {
+	} catch {
 		return response.status(500).json({
 			status: "The Activity could not have been created, please try again!",
 		});

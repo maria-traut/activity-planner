@@ -10,7 +10,7 @@ export default async function handler(request, response) {
 
 			return response.status(200).json(category);
 		}
-	} catch (error) {
+	} catch {
 		return response.status(500).json({ status: "Internal Server Error" });
 	}
 

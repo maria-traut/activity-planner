@@ -3,7 +3,6 @@ import { getCountryName } from "@/lib/countries";
 
 import {
 	StyledActivityDetailDescriptionWrap,
-	StyledActivityDetailTitle,
 	StyledActivityInfoContainer,
 	StyledCategories,
 	StyledImage,

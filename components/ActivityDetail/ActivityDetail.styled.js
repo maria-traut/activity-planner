@@ -35,14 +35,6 @@ export const StyledImageLayerBottom = styled.div`
 	z-index: 1;
 `;
 
-export const StyledActivityDetailTitle = styled.h2`
-	box-shadow: var(--detail-headline-box-shadow-large);
-	background-color: var(--detail-headline-background-color);
-	display: table;
-	padding: var(--spacing-small) var(--spacing-normal);
-	border-radius: var(--border-radius-rounded);
-`;
-
 const StyledTagList = styled.ul`
 	list-style: none;
 	padding: 0;

@@ -1,8 +1,8 @@
 import L from "leaflet";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import MarkerClusterGroup from "react-leaflet-cluster";
 import { useEffect, useState } from "react";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import MarkerClusterGroup from "react-leaflet-cluster";
 
 import { StyledPopupCountry, StyledPopupLink, StyledPopupTitle } from "./ActivityMap.styled";
 
