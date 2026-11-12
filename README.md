@@ -13,7 +13,11 @@ You can use the following commands:
 - `pnpm dev` to start a development server
 - `pnpm build` to build the project
 - `pnpm start` to start a production server
-- `pnpm lint` to run the linter
+- `pnpm lint` to run ESLint (`pnpm lint:fix` to fix what it can)
+- `pnpm format` to format all files with Prettier (`pnpm format:check` to only check)
+- `pnpm check` to run lint and the format check
+- `pnpm sync` to switch to main, pull and install dependencies
+- `pnpm sync:branch` to merge main into the current branch (without committing) and install dependencies
 
 # Activity Planner
 
