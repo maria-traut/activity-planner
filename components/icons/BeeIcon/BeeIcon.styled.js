@@ -23,33 +23,33 @@ const shake = keyframes`
 `;
 
 export const StyledSVG = styled.svg`
-    width: ${(props) => props.size}px;
-    height: ${(props) => props.size}px;
-    fill-rule: evenodd;
-    clip-rule: evenodd;
-    stroke-linejoin: round;
-    stroke-miterlimit: 2;
+	width: ${(props) => props.size}px;
+	height: ${(props) => props.size}px;
+	fill-rule: evenodd;
+	clip-rule: evenodd;
+	stroke-linejoin: round;
+	stroke-miterlimit: 2;
 
-    transform: rotate(${(props) => props.$rotation}deg);
-    transform-origin: center;
+	transform: rotate(${(props) => props.$rotation}deg);
+	transform-origin: center;
 
-    .wingsOpen {
-        opacity: ${(props) => (props.$isFavorite ? 1 : 0)};
-    }
+	.wingsOpen {
+		opacity: ${(props) => (props.$isFavorite ? 1 : 0)};
+	}
 
-    .wingsClosed {
-        opacity: ${(props) => (props.$isFavorite ? 0 : 1)};
-    }
+	.wingsClosed {
+		opacity: ${(props) => (props.$isFavorite ? 0 : 1)};
+	}
 
-    @media (prefers-reduced-motion: no-preference) {
-        &.isAnimating {
-            animation: ${shake} 0.15s linear infinite;
-            .wingsOpen {
-                animation: ${flap} 0.3s linear infinite;
-            }
-            .wingsClosed {
-                animation: ${flap} 0.3s linear infinite reverse;
-            }
-        }
-    }
+	@media (prefers-reduced-motion: no-preference) {
+		&.isAnimating {
+			animation: ${shake} 0.15s linear infinite;
+			.wingsOpen {
+				animation: ${flap} 0.3s linear infinite;
+			}
+			.wingsClosed {
+				animation: ${flap} 0.3s linear infinite reverse;
+			}
+		}
+	}
 `;

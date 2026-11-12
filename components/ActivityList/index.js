@@ -1,60 +1,51 @@
 import ActivityCard from "@/components/ActivityCard";
 import BookmarkButton from "@/components/buttons/BookmarkButton";
-import {
-    StyledActivityList,
-    StyledActivityCardContainer,
-} from "./ActivityList.styled";
-import {
-    StyledStatusMessage,
-    StyledStatusMessageWrap,
-} from "@/components/Global/Global.styled";
+import { StyledStatusMessage, StyledStatusMessageWrap } from "@/components/Global/Global.styled";
+
+import { StyledActivityCardContainer, StyledActivityList } from "./ActivityList.styled";
 
 export default function ActivityList({
-    activities,
-    isActivityFiltered,
-    handleBookmarkToggle,
-    bookmarkedActivityIds,
-    noActivitiesFoundMessage = "No activities found.",
-    noFilteredActivitiesFoundMessage = "No activities found for the selected filters.",
+	activities,
+	isActivityFiltered,
+	handleBookmarkToggle,
+	bookmarkedActivityIds,
+	noActivitiesFoundMessage = "No activities found.",
+	noFilteredActivitiesFoundMessage = "No activities found for the selected filters.",
 }) {
-    if (activities.length < 1 && isActivityFiltered) {
-        return (
-            <StyledStatusMessageWrap>
-                <StyledStatusMessage>
-                    {noFilteredActivitiesFoundMessage}
-                </StyledStatusMessage>
-            </StyledStatusMessageWrap>
-        );
-    }
-    if (activities.length < 1) {
-        return (
-            <StyledStatusMessageWrap>
-                <StyledStatusMessage>
-                    {noActivitiesFoundMessage}
-                </StyledStatusMessage>
-            </StyledStatusMessageWrap>
-        );
-    }
+	if (activities.length < 1 && isActivityFiltered) {
+		return (
+			<StyledStatusMessageWrap>
+				<StyledStatusMessage>{noFilteredActivitiesFoundMessage}</StyledStatusMessage>
+			</StyledStatusMessageWrap>
+		);
+	}
+	if (activities.length < 1) {
+		return (
+			<StyledStatusMessageWrap>
+				<StyledStatusMessage>{noActivitiesFoundMessage}</StyledStatusMessage>
+			</StyledStatusMessageWrap>
+		);
+	}
 
-    return (
-        <StyledActivityList>
-            {activities.map((activity) => (
-                <li key={activity._id}>
-                    <StyledActivityCardContainer>
-                        <ActivityCard
-                            image={activity.imageUrl}
-                            title={activity.title}
-                            categories={activity.categories}
-                            id={activity._id}
-                        />
-                        <BookmarkButton
-                            onBookmarkToggle={handleBookmarkToggle}
-                            id={activity._id}
-                            bookmarkedActivityIds={bookmarkedActivityIds}
-                        />
-                    </StyledActivityCardContainer>
-                </li>
-            ))}
-        </StyledActivityList>
-    );
+	return (
+		<StyledActivityList>
+			{activities.map((activity) => (
+				<li key={activity._id}>
+					<StyledActivityCardContainer>
+						<ActivityCard
+							image={activity.imageUrl}
+							title={activity.title}
+							categories={activity.categories}
+							id={activity._id}
+						/>
+						<BookmarkButton
+							onBookmarkToggle={handleBookmarkToggle}
+							id={activity._id}
+							bookmarkedActivityIds={bookmarkedActivityIds}
+						/>
+					</StyledActivityCardContainer>
+				</li>
+			))}
+		</StyledActivityList>
+	);
 }

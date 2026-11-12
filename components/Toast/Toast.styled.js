@@ -13,24 +13,20 @@ const slideUp = keyframes`
 `;
 
 export const StyledToast = styled.div`
-    background: ${(props) =>
-        props.$color === "danger"
-            ? "var(--accent-error-300)"
-            : "var(--accent-success-100)"};
+	background: ${(props) =>
+		props.$color === "danger" ? "var(--accent-error-300)" : "var(--accent-success-100)"};
 
-    html.dark & {
-        color: var(--gray-900);
-    }
+	html.dark & {
+		color: var(--gray-900);
+	}
 
-    border-radius: var(--border-radius-small);
-    border: var(--border-small);
-    padding: var(--eight-grid__s) var(--eight-grid__normal);
-    border-color: ${(props) =>
-        props.$color === "danger"
-            ? "var(--accent-error-500)"
-            : "var(--accent-success-300)"};
+	border-radius: var(--border-radius-small);
+	border: var(--border-small);
+	padding: var(--eight-grid__s) var(--eight-grid__normal);
+	border-color: ${(props) =>
+		props.$color === "danger" ? "var(--accent-error-500)" : "var(--accent-success-300)"};
 
-    font-weight: bold;
+	font-weight: bold;
 
-    animation: ${slideUp} 0.3s ease-out;
+	animation: ${slideUp} 0.3s ease-out;
 `;

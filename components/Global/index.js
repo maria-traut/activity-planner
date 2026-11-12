@@ -1,7 +1,7 @@
 export default function Global() {
-    return;
+	return;
 }
 
 export function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+	window.scrollTo({ top: 0, behavior: "smooth" });
 }

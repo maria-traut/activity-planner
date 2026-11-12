@@ -1,71 +1,69 @@
-import styled from "styled-components";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import styled from "styled-components";
 
 export const StyledLink = styled(Link)`
-    text-decoration: none;
-    color: inherit;
+	text-decoration: none;
+	color: inherit;
 
-    &:visited {
-        color: inherit;
-    }
+	&:visited {
+		color: inherit;
+	}
 `;
 
 export const StyledFigure = styled.figure`
-    width: 100%;
-    margin: 0;
+	width: 100%;
+	margin: 0;
 `;
 
 export const StyledCardImageWrapper = styled.div`
-    position: relative;
+	position: relative;
 
-    height: 160px; /*note: this still adheres to the 8pt grid system, keep in mind when adapting */
+	height: 160px; /*note: this still adheres to the 8pt grid system, keep in mind when adapting */
 `;
 
 export const StyledCardImage = styled(Image)`
-    object-fit: cover;
+	object-fit: cover;
 `;
 
 export const StyledFigcaption = styled.figcaption`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: var(--eight-grid__halfstep);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: var(--eight-grid__halfstep);
 
-    padding: var(--eight-grid__halfstep);
-    margin-bottom: var(--eight-grid__s);
+	padding: var(--eight-grid__halfstep);
+	margin-bottom: var(--eight-grid__s);
 `;
 
 export const StyledActivityHeadline = styled.h2`
-    text-align: left;
-    margin: 0;
-    font-family: var(--accent-font-family);
-    font-weight: 500;
-    font-size: var(--text-font-size-normal);
+	text-align: left;
+	margin: 0;
+	font-family: var(--accent-font-family);
+	font-weight: 500;
+	font-size: var(--text-font-size-normal);
 `;
 
 export const StyledCategoryList = styled.ul`
-    list-style: none;
-    display: flex;
+	list-style: none;
+	display: flex;
 
-    padding: 0;
-    flex-wrap: wrap;
+	padding: 0;
+	flex-wrap: wrap;
 
-    font-size: var(--text-font-size-small);
-    gap: var(--eight-grid__halfstep);
+	font-size: var(--text-font-size-small);
+	gap: var(--eight-grid__halfstep);
 `;
 
 export const StyledCategoryTag = styled.li`
-    display: inline-block;
+	display: inline-block;
 
-    background-color: ${({ $categoryColor }) =>
-        $categoryColor || "var(--gray-200)"};
-    border-radius: var(--border-radius-rounded);
-    padding: 1px var(--eight-grid__s);
+	background-color: ${({ $categoryColor }) => $categoryColor || "var(--gray-200)"};
+	border-radius: var(--border-radius-rounded);
+	padding: 1px var(--eight-grid__s);
 
-    html.dark & {
-        background-color: ${({ $categoryColor }) =>
-            $categoryColor || "var(--gray-800)"};
-    }
+	html.dark & {
+		background-color: ${({ $categoryColor }) => $categoryColor || "var(--gray-800)"};
+	}
 `;

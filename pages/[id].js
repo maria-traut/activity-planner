@@ -1,285 +1,275 @@
-import useSWR from "swr";
+import Head from "next/head";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import useSWR from "swr";
+
 import ActivityDetail from "@/components/ActivityDetail";
 import ActivityForm from "@/components/ActivityForm";
-import Head from "next/head";
 import {
-    StyledButton,
-    StyledButtonRed,
-    StyledToolbar,
-    StyledToolbarWrap,
-    StyledStatusMessageWrap,
-    StyledStatusMessage,
+	StyledButton,
+	StyledButtonRed,
+	StyledStatusMessage,
+	StyledStatusMessageWrap,
+	StyledToolbar,
+	StyledToolbarWrap,
 } from "@/components/Global/Global.styled";
 import Header from "@/components/Header";
 import showToast from "@/components/Toast";
 
 export default function Activity({
-    handleBookmarkToggle,
-    bookmarkedActivityIds,
-    onBookmarkedActivityIdsDelete,
-    onNavbarLocation,
+	handleBookmarkToggle,
+	bookmarkedActivityIds,
+	onBookmarkedActivityIdsDelete,
+	onNavbarLocation,
 }) {
-    const router = useRouter();
-    const { id } = router.query;
+	const router = useRouter();
+	const { id } = router.query;
 
-    const {
-        data: activity,
-        isLoading: activityLoading,
-        error: activityError,
-        mutate: activityMutate,
-    } = useSWR(`/api/activities/${id}`);
+	const {
+		data: activity,
+		isLoading: activityLoading,
+		error: activityError,
+		mutate: activityMutate,
+	} = useSWR(`/api/activities/${id}`);
 
-    const isLoading = activityLoading;
-    const hasError = activityError;
+	const isLoading = activityLoading;
+	const hasError = activityError;
 
-    const [isEditActivityMode, setIsEditActivityMode] = useState(false);
-    const [isDeleteActivityMode, setIsDeleteActivityMode] = useState(false);
-    const [activityFormStatus, setActivityFormStatus] = useState({
-        type: "",
-        message: "",
-    });
+	const [isEditActivityMode, setIsEditActivityMode] = useState(false);
+	const [isDeleteActivityMode, setIsDeleteActivityMode] = useState(false);
+	const [activityFormStatus, setActivityFormStatus] = useState({
+		type: "",
+		message: "",
+	});
 
-    useEffect(() => {
-        onNavbarLocation(`/${id}`);
-    });
+	useEffect(() => {
+		onNavbarLocation(`/${id}`);
+	});
 
-    useEffect(() => {
-        const formClosingTimer = setTimeout(() => {
-            if (activityFormStatus.type === "success") {
-                showToast(activityFormStatus.message);
-                setActivityFormStatus({
-                    type: "",
-                    message: "",
-                });
-                setIsEditActivityMode(false);
-                if (isDeleteActivityMode) {
-                    setIsDeleteActivityMode(false);
-                    router.push("/");
-                }
-            } else if (activityFormStatus.type === "error") {
-                showToast(activityFormStatus.message, "danger");
-                setActivityFormStatus({ type: "", message: "" });
-            }
-        }, 500);
+	useEffect(() => {
+		const formClosingTimer = setTimeout(() => {
+			if (activityFormStatus.type === "success") {
+				showToast(activityFormStatus.message);
+				setActivityFormStatus({
+					type: "",
+					message: "",
+				});
+				setIsEditActivityMode(false);
+				if (isDeleteActivityMode) {
+					setIsDeleteActivityMode(false);
+					router.push("/");
+				}
+			} else if (activityFormStatus.type === "error") {
+				showToast(activityFormStatus.message, "danger");
+				setActivityFormStatus({ type: "", message: "" });
+			}
+		}, 500);
 
-        return () => clearTimeout(formClosingTimer);
-    }, [activityFormStatus]);
+		return () => clearTimeout(formClosingTimer);
+	}, [activityFormStatus]);
 
-    async function handleActivityUpdate(event) {
-        event.preventDefault();
+	async function handleActivityUpdate(event) {
+		event.preventDefault();
 
-        const formData = new FormData(event.target);
-        const activityData = {
-            ...Object.fromEntries(formData),
-            categories: formData.getAll("categories"),
-        };
-        try {
-            const response = await fetch(`/api/activities/${id}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(activityData),
-            });
+		const formData = new FormData(event.target);
+		const activityData = {
+			...Object.fromEntries(formData),
+			categories: formData.getAll("categories"),
+		};
+		try {
+			const response = await fetch(`/api/activities/${id}`, {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(activityData),
+			});
 
-            const data = await response.json();
+			const data = await response.json();
 
-            if (response.ok) {
-                activityMutate();
-                setActivityFormStatus({
-                    type: "success",
-                    message: data?.status,
-                });
-            } else {
-                setActivityFormStatus({
-                    type: "error",
-                    message:
-                        data?.status ||
-                        "The activity could not be updated, please try again.",
-                });
-                showToast(
-                    activityFormStatus.message ||
-                        "The activity could not be updated, please try again.",
-                    "danger"
-                );
-            }
-        } catch {
-            setActivityFormStatus({
-                type: "error",
-                message: "Something went wrong. Please try again.",
-            });
-        }
-    }
+			if (response.ok) {
+				activityMutate();
+				setActivityFormStatus({
+					type: "success",
+					message: data?.status,
+				});
+			} else {
+				setActivityFormStatus({
+					type: "error",
+					message: data?.status || "The activity could not be updated, please try again.",
+				});
+				showToast(
+					activityFormStatus.message ||
+						"The activity could not be updated, please try again.",
+					"danger",
+				);
+			}
+		} catch {
+			setActivityFormStatus({
+				type: "error",
+				message: "Something went wrong. Please try again.",
+			});
+		}
+	}
 
-    async function handleActivityDelete() {
-        try {
-            const response = await fetch(`/api/activities/${id}`, {
-                method: "DELETE",
-            });
+	async function handleActivityDelete() {
+		try {
+			const response = await fetch(`/api/activities/${id}`, {
+				method: "DELETE",
+			});
 
-            const data = await response.json();
+			const data = await response.json();
 
-            if (response.ok) {
-                setActivityFormStatus({
-                    type: "success",
-                    message: data?.status,
-                });
+			if (response.ok) {
+				setActivityFormStatus({
+					type: "success",
+					message: data?.status,
+				});
 
-                onBookmarkedActivityIdsDelete(id);
-            } else {
-                setActivityFormStatus({
-                    type: "error",
-                    message:
-                        "The activity could not be deleted, please try again.",
-                });
-                showToast(
-                    activityFormStatus.message ||
-                        "The activity could not be deleted, please try again.",
-                    "danger"
-                );
-            }
-        } catch {
-            setActivityFormStatus({
-                type: "error",
-                message: "Something went wrong. Please try again.",
-            });
-        }
-    }
+				onBookmarkedActivityIdsDelete(id);
+			} else {
+				setActivityFormStatus({
+					type: "error",
+					message: "The activity could not be deleted, please try again.",
+				});
+				showToast(
+					activityFormStatus.message ||
+						"The activity could not be deleted, please try again.",
+					"danger",
+				);
+			}
+		} catch {
+			setActivityFormStatus({
+				type: "error",
+				message: "Something went wrong. Please try again.",
+			});
+		}
+	}
 
-    if (isLoading) {
-        return (
-            <>
-                <Head>
-                    <title>{activity?.title} | ActiviBee</title>
-                </Head>
-                <Header />
-                <main>
-                    <StyledStatusMessageWrap>
-                        <StyledStatusMessage>
-                            Loading activity...
-                        </StyledStatusMessage>
-                    </StyledStatusMessageWrap>
-                </main>
-            </>
-        );
-    }
+	if (isLoading) {
+		return (
+			<>
+				<Head>
+					<title>{activity?.title} | ActiviBee</title>
+				</Head>
+				<Header />
+				<main>
+					<StyledStatusMessageWrap>
+						<StyledStatusMessage>Loading activity...</StyledStatusMessage>
+					</StyledStatusMessageWrap>
+				</main>
+			</>
+		);
+	}
 
-    if (hasError) {
-        return (
-            <>
-                <Head>
-                    <title>{activity?.title} | ActiviBee</title>
-                </Head>
-                <Header />
-                <main>
-                    <StyledStatusMessageWrap>
-                        <StyledStatusMessage>
-                            Activity could not be loaded.
-                        </StyledStatusMessage>
-                    </StyledStatusMessageWrap>
-                </main>
-            </>
-        );
-    }
+	if (hasError) {
+		return (
+			<>
+				<Head>
+					<title>{activity?.title} | ActiviBee</title>
+				</Head>
+				<Header />
+				<main>
+					<StyledStatusMessageWrap>
+						<StyledStatusMessage>Activity could not be loaded.</StyledStatusMessage>
+					</StyledStatusMessageWrap>
+				</main>
+			</>
+		);
+	}
 
-    return (
-        <>
-            <Head>
-                <title>{activity?.title} | ActiviBee</title>
-            </Head>
-            <Header title={activity.title} />
-            <main>
-                <StyledToolbarWrap>
-                    <StyledToolbar $alignRight>
-                        {!isEditActivityMode && !isDeleteActivityMode && (
-                            <StyledButton
-                                onClick={() => {
-                                    setIsEditActivityMode(!isEditActivityMode);
-                                    setActivityFormStatus({
-                                        type: "",
-                                        message: "",
-                                    });
-                                }}
-                            >
-                                Edit
-                            </StyledButton>
-                        )}
-                        {!isDeleteActivityMode && !isEditActivityMode && (
-                            <StyledButtonRed
-                                type="button"
-                                aria-label="delete button"
-                                onClick={() => {
-                                    setIsDeleteActivityMode(
-                                        !isDeleteActivityMode
-                                    );
-                                    setActivityFormStatus({
-                                        type: "",
-                                        message: "",
-                                    });
-                                }}
-                            >
-                                Delete
-                            </StyledButtonRed>
-                        )}
-                        {isDeleteActivityMode && (
-                            <>
-                                {activityFormStatus.type !== "success" && (
-                                    <>
-                                        <span>Delete?</span>
-                                        <StyledButtonRed
-                                            type="button"
-                                            aria-label="confirm button"
-                                            onClick={handleActivityDelete}
-                                        >
-                                            Confirm
-                                        </StyledButtonRed>
-                                        <StyledButton
-                                            type="button"
-                                            onClick={() =>
-                                                setIsDeleteActivityMode(
-                                                    !isDeleteActivityMode
-                                                )
-                                            }
-                                        >
-                                            Cancel
-                                        </StyledButton>
-                                    </>
-                                )}
-                                {activityFormStatus.type === "success" && (
-                                    <>
-                                        <StyledButton type="button" disabled>
-                                            Confirm
-                                        </StyledButton>
-                                        <StyledButton type="button" disabled>
-                                            Cancel
-                                        </StyledButton>
-                                    </>
-                                )}
-                            </>
-                        )}
-                    </StyledToolbar>
-                </StyledToolbarWrap>
+	return (
+		<>
+			<Head>
+				<title>{activity?.title} | ActiviBee</title>
+			</Head>
+			<Header title={activity.title} />
+			<main>
+				<StyledToolbarWrap>
+					<StyledToolbar $alignRight>
+						{!isEditActivityMode && !isDeleteActivityMode && (
+							<StyledButton
+								onClick={() => {
+									setIsEditActivityMode(!isEditActivityMode);
+									setActivityFormStatus({
+										type: "",
+										message: "",
+									});
+								}}
+							>
+								Edit
+							</StyledButton>
+						)}
+						{!isDeleteActivityMode && !isEditActivityMode && (
+							<StyledButtonRed
+								type="button"
+								aria-label="delete button"
+								onClick={() => {
+									setIsDeleteActivityMode(!isDeleteActivityMode);
+									setActivityFormStatus({
+										type: "",
+										message: "",
+									});
+								}}
+							>
+								Delete
+							</StyledButtonRed>
+						)}
+						{isDeleteActivityMode && (
+							<>
+								{activityFormStatus.type !== "success" && (
+									<>
+										<span>Delete?</span>
+										<StyledButtonRed
+											type="button"
+											aria-label="confirm button"
+											onClick={handleActivityDelete}
+										>
+											Confirm
+										</StyledButtonRed>
+										<StyledButton
+											type="button"
+											onClick={() =>
+												setIsDeleteActivityMode(!isDeleteActivityMode)
+											}
+										>
+											Cancel
+										</StyledButton>
+									</>
+								)}
+								{activityFormStatus.type === "success" && (
+									<>
+										<StyledButton type="button" disabled>
+											Confirm
+										</StyledButton>
+										<StyledButton type="button" disabled>
+											Cancel
+										</StyledButton>
+									</>
+								)}
+							</>
+						)}
+					</StyledToolbar>
+				</StyledToolbarWrap>
 
-                {isEditActivityMode && (
-                    <ActivityForm
-                        activity={activity}
-                        onSubmit={handleActivityUpdate}
-                        status={activityFormStatus}
-                        setStatus={setActivityFormStatus}
-                        heading="Edit Activity"
-                        submitLabel="Update"
-                        setIsEditActivityMode={setIsEditActivityMode}
-                        isEditActivityMode={isEditActivityMode}
-                    />
-                )}
-                <ActivityDetail
-                    activity={activity}
-                    handleBookmarkToggle={handleBookmarkToggle}
-                    bookmarkedActivityIds={bookmarkedActivityIds}
-                />
-            </main>
-        </>
-    );
+				{isEditActivityMode && (
+					<ActivityForm
+						activity={activity}
+						onSubmit={handleActivityUpdate}
+						status={activityFormStatus}
+						setStatus={setActivityFormStatus}
+						heading="Edit Activity"
+						submitLabel="Update"
+						setIsEditActivityMode={setIsEditActivityMode}
+						isEditActivityMode={isEditActivityMode}
+					/>
+				)}
+				<ActivityDetail
+					activity={activity}
+					handleBookmarkToggle={handleBookmarkToggle}
+					bookmarkedActivityIds={bookmarkedActivityIds}
+				/>
+			</main>
+		</>
+	);
 }
