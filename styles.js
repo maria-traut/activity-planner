@@ -1,7 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { Inter } from "@next/font/google";
-import { Fauna_One } from "@next/font/google";
-import { Nunito } from "@next/font/google";
+import { Fauna_One, Inter, Nunito } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 const fauna = Fauna_One({ subsets: ["latin"], weight: "400" });
