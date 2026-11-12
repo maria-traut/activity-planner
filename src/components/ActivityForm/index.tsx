@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { type Dispatch, type FormEvent, type SetStateAction, useEffect } from "react";
 import useSWR from "swr";
 
 import { StyledButton, StyledToolbar } from "@/components/Global/Global.styled";
 import showToast from "@/components/Toast";
 import { getCountries } from "@/lib/countries";
 import { handleImageUrlValidation } from "@/lib/imageUrlValidation";
+import type { Activity, ActivityFormStatus, Category } from "@/types";
 
 import {
 	StyledCheckboxAndLabelWrap,
@@ -14,27 +15,36 @@ import {
 	StyledFormWrap,
 } from "./ActivityForm.styled";
 
+interface Props {
+	onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+	status: ActivityFormStatus;
+	heading: string;
+	submitLabel: string;
+	setStatus: Dispatch<SetStateAction<ActivityFormStatus>>;
+	activity?: Activity;
+	isEditActivityMode?: boolean;
+	setIsEditActivityMode?: Dispatch<SetStateAction<boolean>>;
+	isCreateActivityMode?: boolean;
+	setIsCreateActivityMode?: Dispatch<SetStateAction<boolean>>;
+}
+
 export default function ActivityForm({
 	onSubmit,
 	status,
 	heading,
 	submitLabel,
 	setStatus,
-	...props
-}) {
-	const {
-		activity,
-		isEditActivityMode,
-		setIsEditActivityMode,
-		isCreateActivityMode,
-		setIsCreateActivityMode,
-	} = props;
-
+	activity,
+	isEditActivityMode,
+	setIsEditActivityMode,
+	isCreateActivityMode,
+	setIsCreateActivityMode,
+}: Props) {
 	const {
 		data: categories,
 		isLoading: categoriesLoading,
 		error: categoriesError,
-	} = useSWR("/api/categories");
+	} = useSWR<Category[]>("/api/categories");
 
 	const isLoading = categoriesLoading;
 	const hasError = categoriesError;
@@ -62,7 +72,7 @@ export default function ActivityForm({
 		);
 	}
 
-	if (hasError) {
+	if (hasError || !categories) {
 		return (
 			<StyledFormWrap>
 				<form>
@@ -195,8 +205,8 @@ export default function ActivityForm({
 									type="button"
 									onClick={() =>
 										isCreateActivityMode
-											? setIsCreateActivityMode(false)
-											: setIsEditActivityMode(false)
+											? setIsCreateActivityMode?.(false)
+											: setIsEditActivityMode?.(false)
 									}
 									disabled={status.type === "success"}
 								>

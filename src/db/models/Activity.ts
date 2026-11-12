@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { type InferSchemaType, type Model } from "mongoose";
 import "./Category";
 
 const { Schema } = mongoose;
@@ -15,6 +15,7 @@ const activitySchema = new Schema(
 	{ timestamps: true },
 );
 
-const Activity = mongoose.models.Activity || mongoose.model("Activity", activitySchema);
+const Activity: Model<InferSchemaType<typeof activitySchema>> =
+	mongoose.models.Activity || mongoose.model("Activity", activitySchema);
 
 export default Activity;

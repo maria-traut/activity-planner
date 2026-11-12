@@ -7,11 +7,18 @@ export default function NewBeeIcon({
 	outlineColor = "var(--main-900)",
 	rotation = 25,
 	isFavorite,
+}: {
+	className?: string;
+	size?: number;
+	bodyColor?: string;
+	outlineColor?: string;
+	rotation?: number;
+	isFavorite?: boolean;
 }) {
 	return (
 		<StyledSVG
 			className={className}
-			size={size}
+			$size={size}
 			$rotation={rotation}
 			$isFavorite={isFavorite}
 			viewBox="0 0 202 267"

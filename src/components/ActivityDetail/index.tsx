@@ -1,5 +1,6 @@
 import BookmarkButton from "@/components/buttons/BookmarkButton";
 import { getCountryName } from "@/lib/countries";
+import type { Activity } from "@/types";
 
 import {
 	StyledActivityDetailDescriptionWrap,
@@ -13,7 +14,17 @@ import {
 	StyledTagElement,
 } from "./ActivityDetail.styled";
 
-export default function ActivityDetail({ activity, handleBookmarkToggle, bookmarkedActivityIds }) {
+interface Props {
+	activity: Activity;
+	handleBookmarkToggle: (id: string) => void;
+	bookmarkedActivityIds: string[];
+}
+
+export default function ActivityDetail({
+	activity,
+	handleBookmarkToggle,
+	bookmarkedActivityIds,
+}: Props) {
 	return (
 		<>
 			<StyledActivityInfoContainer>

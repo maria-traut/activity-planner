@@ -257,13 +257,7 @@ export function getCountries() {
 	return countries;
 }
 
-export function getCountryCode(name) {
-	if (name === undefined) return "";
-	const country = countries.find((country) => country.name === name);
-	return country ? country.code : "";
-}
-
-export function getCountryName(code) {
+export function getCountryName(code: string | undefined) {
 	if (code === undefined) return "";
 	const country = countries.find((country) => country.code === code);
 	return country ? country.name : "";

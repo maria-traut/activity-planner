@@ -1,14 +1,18 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+
 import dbConnect from "@/db/connect";
 import Activity from "@/db/models/Activity";
 import { isImageUrl } from "@/lib/imageUrlValidation";
 
-export default async function handler(request, response) {
+export default async function handler(request: NextApiRequest, response: NextApiResponse) {
 	await dbConnect();
 
 	try {
 		if (request.method === "GET") {
-			const { title, area, categories, country, categoriesEvery } = request.query;
-			const filter = {};
+			const { title, area, categories, country, categoriesEvery } = request.query as Partial<
+				Record<string, string>
+			>;
+			const filter: Record<string, unknown> = {};
 			const isCategoriesEveryChecked = categoriesEvery === "true";
 
 			if (title) {

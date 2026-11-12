@@ -1,8 +1,10 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+
 import dbConnect from "@/db/connect";
 import Activity from "@/db/models/Activity";
 import { isImageUrl } from "@/lib/imageUrlValidation";
 
-export default async function handler(request, response) {
+export default async function handler(request: NextApiRequest, response: NextApiResponse) {
 	await dbConnect();
 	const { id } = request.query;
 

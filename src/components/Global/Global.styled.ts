@@ -15,7 +15,7 @@ export const StyledToolbarWrap = styled.section`
 	padding: var(--spacing-normal);
 `;
 
-export const StyledToolbar = styled.div`
+export const StyledToolbar = styled.div<{ $alignRight?: boolean; $isLast?: boolean }>`
 	display: flex;
 	flex-direction: row;
 	justify-content: ${({ $alignRight }) => ($alignRight ? "right" : "left")};
@@ -25,7 +25,11 @@ export const StyledToolbar = styled.div`
 	padding: ${({ $isLast }) => ($isLast ? "var(--spacing-normal) 0 0" : "0")};
 `;
 
-export const StyledButton = styled.button`
+export const StyledButton = styled.button<{
+	$isOpen?: boolean;
+	$isActive?: boolean;
+	$categoryColor?: string;
+}>`
 	border-radius: var(--border-radius-normal);
 	border: var(--border-small);
 	padding: var(--eight-grid__s) var(--eight-grid__normal);

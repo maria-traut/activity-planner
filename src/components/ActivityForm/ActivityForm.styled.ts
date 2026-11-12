@@ -17,7 +17,7 @@ export const StyledFormFlex = styled.div`
 	gap: var(--eight-grid__normal);
 `;
 
-export const StyledFormFieldset = styled.fieldset`
+export const StyledFormFieldset = styled.fieldset<{ $isHidden?: boolean }>`
 	padding: var(--eight-grid__s);
 	border-radius: var(--border-radius-normal);
 	${({ $isHidden }) =>

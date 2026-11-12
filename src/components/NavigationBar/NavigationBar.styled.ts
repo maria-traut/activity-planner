@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const StyledNavigationBar = styled.nav`
 	position: sticky;
@@ -21,7 +21,7 @@ export const StyledNavigation = styled.ul`
 	margin: 0;
 `;
 
-export const StyledNavigationLink = styled(Link)`
+const navigationItemStyles = css<{ $isActive?: boolean }>`
 	all: unset;
 	display: block;
 	cursor: pointer;
@@ -42,4 +42,12 @@ export const StyledNavigationLink = styled(Link)`
 		height: 32px;
 		display: block;
 	}
+`;
+
+export const StyledNavigationLink = styled(Link)<{ $isActive?: boolean }>`
+	${navigationItemStyles}
+`;
+
+export const StyledNavigationButton = styled.button<{ $isActive?: boolean }>`
+	${navigationItemStyles}
 `;

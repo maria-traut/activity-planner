@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
+import type { Dispatch, SetStateAction } from "react";
 
 import BookmarkIcon from "@/components/icons/BookmarkIcon";
 import HomeIcon from "@/components/icons/HomeIcon";
@@ -8,10 +9,15 @@ import MapIcon from "@/components/icons/MapIcon";
 import {
 	StyledNavigation,
 	StyledNavigationBar,
+	StyledNavigationButton,
 	StyledNavigationLink,
 } from "./NavigationBar.styled";
 
-export default function NavigationBar({ theme, setTheme }) {
+interface Props {
+	setTheme: Dispatch<SetStateAction<string>>;
+}
+
+export default function NavigationBar({ setTheme }: Props) {
 	const router = useRouter();
 
 	return (
@@ -45,8 +51,8 @@ export default function NavigationBar({ theme, setTheme }) {
 					</StyledNavigationLink>
 				</li>
 				<li>
-					<StyledNavigationLink
-						as="button"
+					<StyledNavigationButton
+						type="button"
 						onClick={() => setTheme((prev) => (prev === "dark" ? "light" : "dark"))}
 					>
 						<Image
@@ -55,7 +61,7 @@ export default function NavigationBar({ theme, setTheme }) {
 							width={30}
 							height={30}
 						/>
-					</StyledNavigationLink>
+					</StyledNavigationButton>
 				</li>
 			</StyledNavigation>
 		</StyledNavigationBar>

@@ -1,3 +1,4 @@
+import type { AppProps } from "next/app";
 import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import styled from "styled-components";
@@ -7,33 +8,31 @@ import useLocalStorageState from "use-local-storage-state";
 import NavigationBar from "@/components/NavigationBar";
 import SplashScreen from "@/components/SplashScreen";
 import GlobalStyle from "@/styles";
+import type { ActivityFormStatus } from "@/types";
 
-const fetcher = async (resource, init) => {
-	const result = await fetch(resource, init);
+const fetcher = async (resource: string) => {
+	const result = await fetch(resource);
 
 	if (!result.ok) {
-		const error = new Error("An error occurred while fetching the data.");
-		error.info = await result.json();
-		error.status = result.status;
-		throw error;
+		throw new Error("An error occurred while fetching the data.");
 	}
 
 	return result.json();
 };
 
-export default function App({ Component, pageProps }) {
-	const [bookmarkedActivityIds, setBookmarkedActivityIds] = useLocalStorageState(
+export default function App({ Component, pageProps }: AppProps) {
+	const [bookmarkedActivityIds, setBookmarkedActivityIds] = useLocalStorageState<string[]>(
 		"bookmarkedActivityIds",
 		{
 			defaultValue: [],
 		},
 	);
 	const [navbarLocation, setNavbarLocation] = useState("/");
-	function handleNavbarLocation(location) {
-		setNavbarLocation((prev) => location);
+	function handleNavbarLocation(location: string) {
+		setNavbarLocation(location);
 	}
 	const [isCreateActivityMode, setIsCreateActivityMode] = useState(false);
-	const [activityFormStatus, setActivityFormStatus] = useState({
+	const [activityFormStatus, setActivityFormStatus] = useState<ActivityFormStatus>({
 		type: "",
 		message: "",
 	});
@@ -67,7 +66,7 @@ export default function App({ Component, pageProps }) {
 		};
 	}, []);
 
-	function handleBookmarkToggle(id) {
+	function handleBookmarkToggle(id: string) {
 		setBookmarkedActivityIds((prevBookmarkedActivityIds) => {
 			const isAdded = prevBookmarkedActivityIds.includes(id);
 			if (isAdded) {
@@ -78,7 +77,7 @@ export default function App({ Component, pageProps }) {
 		});
 	}
 
-	function handleBookmarkedActivityIdsDelete(id) {
+	function handleBookmarkedActivityIdsDelete(id: string) {
 		setBookmarkedActivityIds((prevBookmarkedActivityIds) =>
 			prevBookmarkedActivityIds.filter((bookmarkId) => bookmarkId !== id),
 		);
@@ -112,7 +111,7 @@ export default function App({ Component, pageProps }) {
 							activityFormStatus={activityFormStatus}
 							setActivityFormStatus={setActivityFormStatus}
 						/>
-						<NavigationBar theme={theme} setTheme={setTheme} />
+						<NavigationBar setTheme={setTheme} />
 					</StyledPageWrapper>
 				)}
 			</SWRConfig>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { type FormEvent, useState } from "react";
 
 import {
 	StyledFormFieldset,
@@ -8,13 +8,19 @@ import {
 	StyledFormWrap,
 } from "@/components/ActivityForm/ActivityForm.styled";
 import { StyledButton, StyledToolbar } from "@/components/Global/Global.styled";
-import { activitySortOptions } from "@/lib/activitySort";
+import { activitySortOptions, type ActivitySortOrder } from "@/lib/activitySort";
+
+interface Props {
+	onActivitySortApply: (event: FormEvent<HTMLFormElement>) => void;
+	onActivitySortReset: () => void;
+	activitySortConfiguration: ActivitySortOrder;
+}
 
 export default function ActivitySort({
 	onActivitySortApply,
 	onActivitySortReset,
 	activitySortConfiguration,
-}) {
+}: Props) {
 	const [temporaryActivitySortConfiguration, setTemporaryActivitySortConfiguration] =
 		useState(activitySortConfiguration);
 

@@ -8,23 +8,23 @@ const IMAGE_MIME_TYPES = [
 	"image/webp", // WebP
 ];
 
-export async function isImageUrl(url) {
+export async function isImageUrl(url: string) {
 	try {
-		let response = await fetch(url, {
+		const response = await fetch(url, {
 			method: "HEAD",
 			redirect: "follow",
 		});
 
 		const contentType = response.headers.get("content-type");
 
-		return IMAGE_MIME_TYPES.includes(contentType) ?? false;
+		return contentType !== null && IMAGE_MIME_TYPES.includes(contentType);
 	} catch {
 		return false;
 	}
 }
 
-export async function handleImageUrlValidation(input) {
-	const inputValue = input?.value;
+export async function handleImageUrlValidation(input: HTMLInputElement) {
+	const inputValue = input.value;
 
 	if (inputValue !== "") {
 		const isImage = inputValue ? await isImageUrl(inputValue) : false;

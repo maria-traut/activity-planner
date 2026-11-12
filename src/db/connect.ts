@@ -1,13 +1,18 @@
 import dns from "dns";
 import mongoose from "mongoose";
 
+declare global {
+	var mongooseCache:
+		{ conn: typeof mongoose | null; promise: Promise<typeof mongoose> | null } | undefined;
+}
+
 const DNS_SERVERS = process.env.DNS_SERVERS?.split(",");
 
 if (DNS_SERVERS?.length) {
 	dns.setServers(DNS_SERVERS);
 }
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI ?? "";
 
 if (!MONGODB_URI) {
 	throw new Error("Please define the MONGODB_URI environment variable inside .env.local");
@@ -18,11 +23,7 @@ if (!MONGODB_URI) {
  * in development. This prevents connections growing exponentially
  * during API Route usage.
  */
-let cached = global.mongoose;
-
-if (!cached) {
-	cached = global.mongoose = { conn: null, promise: null };
-}
+const cached = (global.mongooseCache ??= { conn: null, promise: null });
 
 async function dbConnect() {
 	if (cached.conn) {
@@ -34,9 +35,7 @@ async function dbConnect() {
 			bufferCommands: false,
 		};
 
-		cached.promise = mongoose.connect(MONGODB_URI || "", opts).then((mongoose) => {
-			return mongoose;
-		});
+		cached.promise = mongoose.connect(MONGODB_URI, opts);
 	}
 
 	try {

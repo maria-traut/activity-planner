@@ -1,3 +1,5 @@
+import type { Category } from "@/types";
+
 import {
 	StyledActivityHeadline,
 	StyledCardImage,
@@ -9,7 +11,14 @@ import {
 	StyledLink,
 } from "./ActivityCard.styled";
 
-export default function ActivityCard({ title, categories, image, id }) {
+interface Props {
+	title: string;
+	categories: Category[];
+	image?: string;
+	id: string;
+}
+
+export default function ActivityCard({ title, categories, image, id }: Props) {
 	return (
 		<StyledLink href={`/${id}`}>
 			<StyledFigure>

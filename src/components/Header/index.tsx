@@ -1,6 +1,13 @@
+import type { ReactNode } from "react";
+
 import { StyledHeader, StyledHeading, StyledStickyToolbar } from "./Header.styled";
 
-export default function Header({ title = "ActiviBee", children }) {
+interface Props {
+	title?: string;
+	children?: ReactNode;
+}
+
+export default function Header({ title = "ActiviBee", children }: Props) {
 	return (
 		<>
 			<StyledHeader>

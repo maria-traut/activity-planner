@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { type FormEvent, useEffect, useState } from "react";
 import useSWR from "swr";
 
 import ActivityFilter from "@/components/ActivityFilter";
@@ -17,31 +17,35 @@ import {
 import Header from "@/components/Header";
 import { defaultActivityFilterConfiguration } from "@/lib/activityFilter";
 import {
+	type ActivitySortOrder,
 	defaultActivitySortConfiguration,
 	getActivitySortLabel,
 	getSortedActivities,
 } from "@/lib/activitySort";
+import type { Activity, AppPageProps } from "@/types";
 
 export default function Bookmarks({
 	handleBookmarkToggle,
 	bookmarkedActivityIds,
 	onNavbarLocation,
-}) {
+}: AppPageProps) {
 	const [activityFilterConfiguration, setActivityFilterConfiguration] = useState(
 		defaultActivityFilterConfiguration,
 	);
 
 	const filterQuery = new URLSearchParams({
-		...activityFilterConfiguration,
-		categories: activityFilterConfiguration?.categories.join(","),
-		country: activityFilterConfiguration?.country.join(","),
+		title: activityFilterConfiguration.title,
+		area: activityFilterConfiguration.area,
+		categories: activityFilterConfiguration.categories.join(","),
+		country: activityFilterConfiguration.country.join(","),
+		categoriesEvery: String(activityFilterConfiguration.categoriesEvery),
 	}).toString();
 
 	const {
 		data: activities,
 		isLoading: activitiesLoading,
 		error: activitiesError,
-	} = useSWR(`/api/activities?${filterQuery}`);
+	} = useSWR<Activity[]>(`/api/activities?${filterQuery}`);
 
 	const isLoading = activitiesLoading;
 	const hasError = activitiesError;
@@ -50,7 +54,7 @@ export default function Bookmarks({
 		bookmarkedActivityIds.includes(activity._id),
 	);
 
-	const [activitySortConfiguration, setActivitySortConfiguration] = useState(
+	const [activitySortConfiguration, setActivitySortConfiguration] = useState<ActivitySortOrder>(
 		defaultActivitySortConfiguration,
 	);
 
@@ -69,22 +73,16 @@ export default function Bookmarks({
 		onNavbarLocation(`/bookmarks`);
 	});
 
-	function handleActivityFilterApply(event) {
+	function handleActivityFilterApply(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 
-		const formData = new FormData(event.target);
-		const filterData = {
-			...Object.fromEntries(formData),
-			categories: formData.getAll("categories"),
-			country: formData.getAll("country"),
-		};
+		const formData = new FormData(event.currentTarget);
 
 		setActivityFilterConfiguration({
-			...activityFilterConfiguration,
-			title: filterData.title,
-			categories: filterData.categories,
-			country: filterData.country,
-			area: filterData.area,
+			title: String(formData.get("title") ?? ""),
+			categories: formData.getAll("categories").map(String),
+			country: formData.getAll("country").map(String),
+			area: String(formData.get("area") ?? ""),
 			categoriesEvery: formData.has("categoriesEvery"),
 		});
 		setIsActivityFilterOpen(false);
@@ -98,13 +96,12 @@ export default function Bookmarks({
 		setActivityFilterConfiguration(defaultActivityFilterConfiguration);
 	}
 
-	function handleActivitySortApply(event) {
+	function handleActivitySortApply(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 
-		const formData = new FormData(event.target);
-		const sortData = Object.fromEntries(formData);
+		const formData = new FormData(event.currentTarget);
 
-		setActivitySortConfiguration(sortData.order);
+		setActivitySortConfiguration(formData.get("order") as ActivitySortOrder);
 
 		setIsActivitySortOpen(false);
 		setIsActivitySorted(true);
@@ -171,7 +168,7 @@ export default function Bookmarks({
 						</StyledButtonWithIconIcon>
 						<StyledButtonWithIconText>
 							Filter
-							{isActivityFiltered && <> ({bookmarkedActivities.length})</>}
+							{isActivityFiltered && <> ({sortedBookmarkedActivities.length})</>}
 						</StyledButtonWithIconText>
 					</StyledButtonWithIcon>
 					<StyledButtonWithIcon
@@ -217,7 +214,6 @@ export default function Bookmarks({
 					isActivityFiltered={isActivityFiltered}
 					handleBookmarkToggle={handleBookmarkToggle}
 					bookmarkedActivityIds={bookmarkedActivityIds}
-					handleNavbarLocation={onNavbarLocation}
 				/>
 			</main>
 		</>

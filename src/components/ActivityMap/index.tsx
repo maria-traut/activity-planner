@@ -1,13 +1,27 @@
-import L from "leaflet";
+import L, { type LatLngTuple } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useEffect, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
 
+import type { Activity } from "@/types";
+
 import { StyledPopupCountry, StyledPopupLink, StyledPopupTitle } from "./ActivityMap.styled";
 
-export default function ActivityMap({ activities, onNavbarLocation, bookmarkedActivityIds }) {
-	const [coords, setCoords] = useState("");
+interface Props {
+	activities: Activity[];
+	onNavbarLocation: (location: string) => void;
+	bookmarkedActivityIds: string[];
+}
+
+type CountryCoords = Record<string, { latlng: LatLngTuple; name: string }>;
+
+export default function ActivityMap({
+	activities,
+	onNavbarLocation,
+	bookmarkedActivityIds,
+}: Props) {
+	const [coords, setCoords] = useState<CountryCoords>({});
 
 	const activityPin = L.icon({
 		iconUrl: "/icons/activibee-pin.svg",
@@ -21,7 +35,7 @@ export default function ActivityMap({ activities, onNavbarLocation, bookmarkedAc
 		iconAnchor: [20, 40],
 	});
 
-	const createClusterCustomIcon = (cluster) => {
+	const createClusterCustomIcon = (cluster: { getChildCount: () => number }) => {
 		return L.divIcon({
 			html: `<img src="/icons/activibee-pin.svg" width="40" height="40" /><span>${cluster.getChildCount()}</span>`,
 			className: "custom-marker-cluster",
@@ -31,7 +45,7 @@ export default function ActivityMap({ activities, onNavbarLocation, bookmarkedAc
 
 	useEffect(() => {
 		async function fetchCoords() {
-			const results = {};
+			const results: CountryCoords = {};
 			for (const activity of activities) {
 				if (!activity.country) continue;
 				const response = await fetch(
@@ -61,11 +75,11 @@ export default function ActivityMap({ activities, onNavbarLocation, bookmarkedAc
 			/>
 			<MarkerClusterGroup iconCreateFunction={createClusterCustomIcon}>
 				{activities.map((activity) => {
+					if (!activity.country) return null;
 					const position = coords[activity.country]?.latlng;
+					if (!position) return null;
 
 					const isBookmarked = bookmarkedActivityIds.includes(activity._id);
-
-					if (!activity.country || !position) return null;
 					return (
 						<Marker
 							key={activity._id}

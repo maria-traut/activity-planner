@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { type FormEvent, useEffect, useState } from "react";
 import useSWR from "swr";
 
 import ActivityFilter from "@/components/ActivityFilter";
@@ -22,10 +22,12 @@ import Header from "@/components/Header";
 import showToast from "@/components/Toast";
 import { defaultActivityFilterConfiguration } from "@/lib/activityFilter";
 import {
+	type ActivitySortOrder,
 	defaultActivitySortConfiguration,
 	getActivitySortLabel,
 	getSortedActivities,
 } from "@/lib/activitySort";
+import type { Activity, AppPageProps } from "@/types";
 
 export default function HomePage({
 	onNavbarLocation,
@@ -36,15 +38,17 @@ export default function HomePage({
 	setIsCreateActivityMode,
 	activityFormStatus,
 	setActivityFormStatus,
-}) {
+}: AppPageProps) {
 	const [activityFilterConfiguration, setActivityFilterConfiguration] = useState(
 		defaultActivityFilterConfiguration,
 	);
 
 	const filterQuery = new URLSearchParams({
-		...activityFilterConfiguration,
-		categories: activityFilterConfiguration?.categories.join(","),
-		country: activityFilterConfiguration?.country.join(","),
+		title: activityFilterConfiguration.title,
+		area: activityFilterConfiguration.area,
+		categories: activityFilterConfiguration.categories.join(","),
+		country: activityFilterConfiguration.country.join(","),
+		categoriesEvery: String(activityFilterConfiguration.categoriesEvery),
 	}).toString();
 
 	const {
@@ -52,12 +56,12 @@ export default function HomePage({
 		isLoading: activitiesLoading,
 		error: activitiesError,
 		mutate: activitiesMutate,
-	} = useSWR(`/api/activities?${filterQuery}`);
+	} = useSWR<Activity[]>(`/api/activities?${filterQuery}`);
 
 	const isLoading = activitiesLoading;
 	const hasError = activitiesError;
 
-	const [activitySortConfiguration, setActivitySortConfiguration] = useState(
+	const [activitySortConfiguration, setActivitySortConfiguration] = useState<ActivitySortOrder>(
 		defaultActivitySortConfiguration,
 	);
 
@@ -81,7 +85,7 @@ export default function HomePage({
 				});
 				setIsCreateActivityMode(false);
 			} else if (activityFormStatus.type === "error") {
-				showToast(activityFormStatus.message, "error");
+				showToast(activityFormStatus.message, "danger");
 				setActivityFormStatus({ type: "", message: "" });
 			}
 		}, 500);
@@ -89,22 +93,16 @@ export default function HomePage({
 		return () => clearTimeout(formClosingTimer);
 	}, [activityFormStatus]);
 
-	function handleActivityFilterApply(event) {
+	function handleActivityFilterApply(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 
-		const formData = new FormData(event.target);
-		const filterData = {
-			...Object.fromEntries(formData),
-			categories: formData.getAll("categories"),
-			country: formData.getAll("country"),
-		};
+		const formData = new FormData(event.currentTarget);
 
 		setActivityFilterConfiguration({
-			...activityFilterConfiguration,
-			title: filterData.title,
-			categories: filterData.categories,
-			country: filterData.country,
-			area: filterData.area,
+			title: String(formData.get("title") ?? ""),
+			categories: formData.getAll("categories").map(String),
+			country: formData.getAll("country").map(String),
+			area: String(formData.get("area") ?? ""),
 			categoriesEvery: formData.has("categoriesEvery"),
 		});
 		setIsActivityFilterOpen(false);
@@ -118,29 +116,29 @@ export default function HomePage({
 		setActivityFilterConfiguration(defaultActivityFilterConfiguration);
 	}
 
-	function handleActivitySortApply(event) {
+	function handleActivitySortApply(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 
-		const formData = new FormData(event.target);
-		const sortData = Object.fromEntries(formData);
+		const formData = new FormData(event.currentTarget);
 
-		setActivitySortConfiguration(sortData.order);
+		setActivitySortConfiguration(formData.get("order") as ActivitySortOrder);
 
 		setIsActivitySortOpen(false);
 		setIsActivitySorted(true);
 	}
 
-	function handleActivitySortReset(order) {
+	function handleActivitySortReset() {
 		setIsActivitySorted(false);
 		setIsActivitySortOpen(false);
 
 		setActivitySortConfiguration(defaultActivitySortConfiguration);
 	}
 
-	async function handleActivityCreate(event) {
+	async function handleActivityCreate(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 
-		const formData = new FormData(event.target);
+		const form = event.currentTarget;
+		const formData = new FormData(form);
 
 		const addToBookmarks = formData.has("addToBookmarks");
 		formData.delete("addToBookmarks");
@@ -167,7 +165,7 @@ export default function HomePage({
 				}
 
 				activitiesMutate();
-				event.target.reset();
+				form.reset();
 				setActivityFormStatus({
 					type: "success",
 					message: data?.status,
@@ -241,7 +239,7 @@ export default function HomePage({
 						</StyledButtonWithIconIcon>
 						<StyledButtonWithIconText>
 							Filter
-							{isActivityFiltered && <> ({activities.length})</>}
+							{isActivityFiltered && <> ({sortedActivities.length})</>}
 						</StyledButtonWithIconText>
 					</StyledButtonWithIcon>
 					<StyledButtonWithIcon
@@ -296,7 +294,6 @@ export default function HomePage({
 				<ActivityList
 					activities={sortedActivities}
 					isActivityFiltered={isActivityFiltered}
-					handleNavbarLocation={onNavbarLocation}
 					handleBookmarkToggle={handleBookmarkToggle}
 					bookmarkedActivityIds={bookmarkedActivityIds}
 				/>

@@ -4,13 +4,14 @@ import useSWR from "swr";
 
 import { StyledToolbar, StyledToolbarWrap } from "@/components/Global/Global.styled";
 import Header from "@/components/Header";
+import type { Activity, AppPageProps } from "@/types";
 
 const ActivityMap = dynamic(() => import("@/components/ActivityMap"), {
 	ssr: false,
 });
 
-export default function Map({ handleNavbarLocation, bookmarkedActivityIds }) {
-	const { data: activities, isLoading, error } = useSWR("/api/activities");
+export default function Map({ onNavbarLocation, bookmarkedActivityIds }: AppPageProps) {
+	const { data: activities, isLoading, error } = useSWR<Activity[]>("/api/activities");
 
 	if (isLoading) {
 		return (
@@ -56,7 +57,7 @@ export default function Map({ handleNavbarLocation, bookmarkedActivityIds }) {
 				<ActivityMap
 					activities={activities}
 					bookmarkedActivityIds={bookmarkedActivityIds}
-					onNavbarLocation={handleNavbarLocation}
+					onNavbarLocation={onNavbarLocation}
 				/>
 			</main>
 		</>

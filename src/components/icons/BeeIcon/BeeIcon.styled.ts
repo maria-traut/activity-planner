@@ -22,9 +22,9 @@ const shake = keyframes`
   100% { transform: rotate(25deg); }
 `;
 
-export const StyledSVG = styled.svg`
-	width: ${(props) => props.size}px;
-	height: ${(props) => props.size}px;
+export const StyledSVG = styled.svg<{ $size: number; $rotation: number; $isFavorite?: boolean }>`
+	width: ${(props) => props.$size}px;
+	height: ${(props) => props.$size}px;
 	fill-rule: evenodd;
 	clip-rule: evenodd;
 	stroke-linejoin: round;

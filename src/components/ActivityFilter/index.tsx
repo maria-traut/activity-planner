@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { type FormEvent, useState } from "react";
 import useSWR from "swr";
 
 import {
@@ -9,29 +9,37 @@ import {
 	StyledFormWrap,
 } from "@/components/ActivityForm/ActivityForm.styled";
 import { StyledButton, StyledToolbar } from "@/components/Global/Global.styled";
-import { activityFilterLabels } from "@/lib/activityFilter";
+import { type ActivityFilterConfiguration, activityFilterLabels } from "@/lib/activityFilter";
 import { getCountries } from "@/lib/countries";
+import type { Activity, Category } from "@/types";
+
+interface Props {
+	onActivityFilterApply: (event: FormEvent<HTMLFormElement>) => void;
+	onActivityFilterReset: () => void;
+	heading: string;
+	activityFilterConfiguration: ActivityFilterConfiguration;
+}
 
 export default function ActivityFilter({
 	onActivityFilterApply,
 	onActivityFilterReset,
 	heading,
 	activityFilterConfiguration,
-}) {
+}: Props) {
 	const [openedActivityFilterOption, setOpenedActivityFilterOption] = useState("");
 
 	const {
 		data: activities,
 		isLoading: activitiesLoading,
 		error: activitiesError,
-	} = useSWR(`/api/activities`);
+	} = useSWR<Activity[]>(`/api/activities`);
 	const uniqueCountriesUsed = new Set((activities || []).map((activity) => activity.country));
 
 	const {
 		data: categories,
 		isLoading: categoriesLoading,
 		error: categoriesError,
-	} = useSWR("/api/categories");
+	} = useSWR<Category[]>("/api/categories");
 
 	const isLoading = activitiesLoading || categoriesLoading;
 	const hasError = activitiesError || categoriesError;
@@ -39,7 +47,7 @@ export default function ActivityFilter({
 	const [temporaryActivityFilterConfiguration, setTemporaryActivityFilterConfiguration] =
 		useState(activityFilterConfiguration);
 
-	function isFilterActive(value) {
+	function isFilterActive(value: string | string[] | boolean) {
 		if (Array.isArray(value)) return value.length > 0;
 		if (typeof value === "boolean") return value;
 		return value !== "";
@@ -49,7 +57,7 @@ export default function ActivityFilter({
 		return <StyledFormWrap>Loading categories...</StyledFormWrap>;
 	}
 
-	if (hasError) {
+	if (hasError || !categories) {
 		return <StyledFormWrap>Data could not be loaded.</StyledFormWrap>;
 	}
 

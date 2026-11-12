@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+import mongoose, { type InferSchemaType, type Model } from "mongoose";
+
 const { Schema } = mongoose;
 
 const categorySchema = new Schema({
@@ -7,6 +8,7 @@ const categorySchema = new Schema({
 	abbreviation: { type: String, required: true, minlength: 4 },
 });
 
-const Category = mongoose.models.Category || mongoose.model("Category", categorySchema);
+const Category: Model<InferSchemaType<typeof categorySchema>> =
+	mongoose.models.Category || mongoose.model("Category", categorySchema);
 
 export default Category;

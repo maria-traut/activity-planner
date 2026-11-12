@@ -46,7 +46,7 @@ const StyledTagList = styled.ul`
 	gap: var(--spacing-local-normal);
 `;
 
-export const StyledTagElement = styled.li`
+export const StyledTagElement = styled.li<{ $categoryColor?: string }>`
 	text-align: center;
 	border-radius: var(--border-radius-rounded);
 	padding: var(--spacing-local-small) var(--spacing-local-normal);

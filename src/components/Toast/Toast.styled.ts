@@ -12,7 +12,7 @@ const slideUp = keyframes`
   }
 `;
 
-export const StyledToast = styled.div`
+export const StyledToast = styled.div<{ $color: "success" | "danger" }>`
 	background: ${(props) =>
 		props.$color === "danger" ? "var(--accent-error-300)" : "var(--accent-success-100)"};
 

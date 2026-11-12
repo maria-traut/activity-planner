@@ -1,7 +1,9 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+
 import dbConnect from "@/db/connect";
 import Category from "@/db/models/Category";
 
-export default async function handler(request, response) {
+export default async function handler(request: NextApiRequest, response: NextApiResponse) {
 	await dbConnect();
 
 	try {

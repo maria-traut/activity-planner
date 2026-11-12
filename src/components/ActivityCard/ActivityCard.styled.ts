@@ -56,7 +56,7 @@ export const StyledCategoryList = styled.ul`
 	gap: var(--eight-grid__halfstep);
 `;
 
-export const StyledCategoryTag = styled.li`
+export const StyledCategoryTag = styled.li<{ $categoryColor?: string }>`
 	display: inline-block;
 
 	background-color: ${({ $categoryColor }) => $categoryColor || "var(--gray-200)"};

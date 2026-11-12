@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { type FormEvent, useEffect, useState } from "react";
 import useSWR from "swr";
 
 import ActivityDetail from "@/components/ActivityDetail";
@@ -15,29 +15,30 @@ import {
 } from "@/components/Global/Global.styled";
 import Header from "@/components/Header";
 import showToast from "@/components/Toast";
+import type { Activity as ActivityType, ActivityFormStatus, AppPageProps } from "@/types";
 
 export default function Activity({
 	handleBookmarkToggle,
 	bookmarkedActivityIds,
 	onBookmarkedActivityIdsDelete,
 	onNavbarLocation,
-}) {
+}: AppPageProps) {
 	const router = useRouter();
-	const { id } = router.query;
+	const id = String(router.query.id);
 
 	const {
 		data: activity,
 		isLoading: activityLoading,
 		error: activityError,
 		mutate: activityMutate,
-	} = useSWR(`/api/activities/${id}`);
+	} = useSWR<ActivityType>(`/api/activities/${id}`);
 
 	const isLoading = activityLoading;
 	const hasError = activityError;
 
 	const [isEditActivityMode, setIsEditActivityMode] = useState(false);
 	const [isDeleteActivityMode, setIsDeleteActivityMode] = useState(false);
-	const [activityFormStatus, setActivityFormStatus] = useState({
+	const [activityFormStatus, setActivityFormStatus] = useState<ActivityFormStatus>({
 		type: "",
 		message: "",
 	});
@@ -68,10 +69,10 @@ export default function Activity({
 		return () => clearTimeout(formClosingTimer);
 	}, [activityFormStatus]);
 
-	async function handleActivityUpdate(event) {
+	async function handleActivityUpdate(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 
-		const formData = new FormData(event.target);
+		const formData = new FormData(event.currentTarget);
 		const activityData = {
 			...Object.fromEntries(formData),
 			categories: formData.getAll("categories"),
@@ -162,7 +163,7 @@ export default function Activity({
 		);
 	}
 
-	if (hasError) {
+	if (hasError || !activity) {
 		return (
 			<>
 				<Head>
