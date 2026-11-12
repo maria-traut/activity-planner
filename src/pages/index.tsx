@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Image from "next/image";
 import { type FormEvent, useEffect, useState } from "react";
 import useSWR from "swr";
 
@@ -91,7 +92,7 @@ export default function HomePage({
 		}, 500);
 
 		return () => clearTimeout(formClosingTimer);
-	}, [activityFormStatus]);
+	}, [activityFormStatus, setActivityFormStatus, setIsCreateActivityMode]);
 
 	function handleActivityFilterApply(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
@@ -235,7 +236,7 @@ export default function HomePage({
 						}}
 					>
 						<StyledButtonWithIconIcon>
-							<img src="/icons/filter.svg" alt="" />
+							<Image src="/icons/filter.svg" alt="" width={24} height={24} />
 						</StyledButtonWithIconIcon>
 						<StyledButtonWithIconText>
 							Filter
@@ -254,7 +255,7 @@ export default function HomePage({
 						}}
 					>
 						<StyledButtonWithIconIcon>
-							<img src="/icons/sort.svg" alt="" />
+							<Image src="/icons/sort.svg" alt="" width={24} height={24} />
 						</StyledButtonWithIconIcon>
 						<StyledButtonWithIconText>
 							{isActivitySorted
