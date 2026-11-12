@@ -15,7 +15,8 @@ You can use the following commands:
 - `pnpm start` to start a production server
 - `pnpm lint` to run ESLint (`pnpm lint:fix` to fix what it can)
 - `pnpm format` to format all files with Prettier (`pnpm format:check` to only check)
-- `pnpm check` to run lint and the format check
+- `pnpm typecheck` to check the types with TypeScript
+- `pnpm check` to run lint, the format check and the type check
 - `pnpm sync` to switch to main, pull and install dependencies
 - `pnpm sync:branch` to merge main into the current branch (without committing) and install dependencies
 
