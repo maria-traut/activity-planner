@@ -1,9 +1,9 @@
-import L, { type LatLngTuple } from "leaflet";
+import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { useEffect, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
 
+import { getCountryLatLng, getCountryName } from "@/lib/countries";
 import type { Activity } from "@/types";
 
 import { StyledPopupCountry, StyledPopupLink, StyledPopupTitle } from "./ActivityMap.styled";
@@ -14,15 +14,11 @@ interface Props {
 	bookmarkedActivityIds: string[];
 }
 
-type CountryCoords = Record<string, { latlng: LatLngTuple; name: string }>;
-
 export default function ActivityMap({
 	activities,
 	onNavbarLocation,
 	bookmarkedActivityIds,
 }: Props) {
-	const [coords, setCoords] = useState<CountryCoords>({});
-
 	const activityPin = L.icon({
 		iconUrl: "/icons/activibee-pin.svg",
 		iconSize: [40, 40],
@@ -43,26 +39,6 @@ export default function ActivityMap({
 		});
 	};
 
-	useEffect(() => {
-		async function fetchCoords() {
-			const results: CountryCoords = {};
-			for (const activity of activities) {
-				if (!activity.country) continue;
-				const response = await fetch(
-					`https://restcountries.com/v3.1/alpha/${activity.country}`,
-				);
-				if (!response.ok) continue;
-				const [data] = await response.json();
-				results[activity.country] = {
-					latlng: data.latlng,
-					name: data.name.common,
-				};
-			}
-			setCoords(results);
-		}
-		fetchCoords();
-	}, [activities]);
-
 	return (
 		<MapContainer
 			center={[20, 0]}
@@ -76,7 +52,7 @@ export default function ActivityMap({
 			<MarkerClusterGroup iconCreateFunction={createClusterCustomIcon}>
 				{activities.map((activity) => {
 					if (!activity.country) return null;
-					const position = coords[activity.country]?.latlng;
+					const position = getCountryLatLng(activity.country);
 					if (!position) return null;
 
 					const isBookmarked = bookmarkedActivityIds.includes(activity._id);
@@ -90,7 +66,7 @@ export default function ActivityMap({
 								<StyledPopupTitle>{activity.title}</StyledPopupTitle>
 								<br />
 								<StyledPopupCountry>
-									{coords[activity.country]?.name}
+									{getCountryName(activity.country)}
 								</StyledPopupCountry>
 								<br />
 								<StyledPopupLink
