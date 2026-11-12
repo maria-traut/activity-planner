@@ -6,8 +6,6 @@ To work locally, please install the dependencies using `pnpm install` first.
 
 Run `pnpm dev` to start a development server and open the displayed URL in a browser.
 
-Use `pnpm test` to run the tests.
-
 ### Scripts
 
 You can use the following commands:
@@ -15,7 +13,6 @@ You can use the following commands:
 - `pnpm dev` to start a development server
 - `pnpm build` to build the project
 - `pnpm start` to start a production server
-- `pnpm test` to run the tests
 - `pnpm lint` to run the linter
 
 # Activity Planner
